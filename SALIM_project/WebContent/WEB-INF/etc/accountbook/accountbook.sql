@@ -93,7 +93,7 @@ no Number primary key,
 member_id varchar2(50) constraint sch_mem_fk references member not null,
 schedule varchar2(50) not null,  --일정제목
 schedule_date Date not null,  --날짜
-cotent Varchar2(300) not null  --상세내용
+content Varchar2(300) not null  --상세내용
 );
 
 drop table schedule;
