@@ -27,7 +27,7 @@ drop table collection;
 
 create table member_collection(--회원그룹
 member_id varchar2(50) constraint mco_col_fk references collection,
-collection_id number constraint mco_mem_fk references member,
+collection_id Number constraint mco_mem_fk references member,
 grant_id varchar2(300) not null,--권한자id
 constraint mc_pk primary key(member_id,collection_id)
 );
