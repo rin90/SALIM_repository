@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="free">
+	
+	<insert id="freeInsert" parameterType="freeboard">
+		<selectKey keyProperty="no" resultType="_int" order="BEFORE">
+			select seq_free.nextval from dual
+		</selectKey>
+		insert into free_board values(#{no},#{title},#{content},#{fileRoot},#{click},#{good},#{category},#{memberId}) 		
+	</insert>
+	
+	<update id="freeUpdate" parameterType="freeboard">
+		update free_board
+		set title=#{title},
+			content=#{content},
+			category=#{category},
+			file_root=#{fileRoot}
+		where no=#{no}
+	</update>
+	
+	<delete id="freeDelete" parameterType="freeboard">
+		delete from free_board
+		where no=#{no}
+	</delete>
+
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tip">
+	<insert id="tipInsert">
+		<selectKey keyProperty="no" resultType="_int" order="BEFORE">
+			select seq_tip.nextval from dual
+		</selectKey>
+		insert into tip_board values(#{no},#{title},#{content},#{fileRoot},#{category},#{click},#{good},#{classification},#{memberId})
+	</insert>
+	
+	<update id="tipUpdate" parameterType="tipboard">
+		update tip_board 
+		set title=#{title},
+			content=#{content},
+			file_root=#{fileRoot},
+			category=#{category},
+			classification=#{classification}
+		where no=#{no}
+	</update>
+	
+	<delete id="tipDelete" parameterType="tipboard">
+		delete from tip_board
+		where no=#{no}
+	</delete>
+	
+	
+	
+</mapper>

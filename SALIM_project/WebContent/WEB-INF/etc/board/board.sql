@@ -26,9 +26,10 @@ create table tip_board(  --tip게시판
 	title varchar2(3000) not null,
 	content varchar2(4000) not null,
 	file_root varchar2(4000),  -- 파일 경로
-	category varchar2(50) not null,
+	category varchar2(50) not null, -- 카테고리
 	click number not null,   -- 조회수 
 	good number not null,   -- 좋아요
+	classification varchar2(20) not null, --분류
 	member_id varchar2(50) constraint tip_mem_fk references member not null--inline방식
 );
 
