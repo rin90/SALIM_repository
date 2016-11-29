@@ -15,6 +15,8 @@ create table free_board( --자유게시판
 
 drop table free_board;
 
+
+
 create sequence seq_tip--sequence생성
 select seq_tip.nextval from dual  -- 조회 
 drop sequence seq_tip--삭제
@@ -32,6 +34,9 @@ create table tip_board(  --tip게시판
 
 drop table tip_board;
 
+
+
+
 create sequence seq_com--sequence생성
 select seq_com.nextval from dual  -- 조회 
 drop sequence seq_com--삭제
@@ -46,6 +51,9 @@ create table comments(  --댓글
 );
 
 drop table comments;
+
+
+
 
 create sequence seq_qaa--sequence생성
 select seq_qaa.nextval from dual  -- 조회 

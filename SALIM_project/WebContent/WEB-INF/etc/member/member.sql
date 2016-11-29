@@ -1,4 +1,3 @@
-
 create table member(  --회원
  member_id varchar2(50) primary key,
  name varchar2(20) not null,
@@ -9,28 +8,32 @@ create table member(  --회원
 
 drop table member;
 
+
+
 create sequence seq_col--sequence생성
-select seq_sch.nextval from dual  -- 조회 
+select seq_col.nextval from dual  -- 조회 
 drop sequence seq_col--삭제
 
 create table collection(--그룹
-collection_id Number not null,--그룹id
+collection_id Number primary key,--그룹id
 collection_name varchar2(50) not null,--그룹이름
 collection_intro varchar2(300)--그룹소개
-
 );
+
 drop table collection;
 
 
 
-create sequence seq_mco--sequence생성
-select seq_sch.nextval from dual  -- 조회 
-drop sequence seq_mco--삭제
 
-create table membercollection(--membercollection
-member_id varchar2(50) not null,--회원id
-collection_id Number not null,--그룹id
-grant_id varchar2(300) not null--권한자id
+create table member_collection(--회원그룹
+member_id varchar2(50) constraint mco_col_fk references collection,
+collection_id number constraint mco_mem_fk references member,
+grant_id varchar2(300) not null,--권한자id
+constraint mc_pk primary key(member_id,collection_id)
 );
-drop table membercollection;
+
+
+drop table member_collection;
+
+
 

@@ -12,6 +12,9 @@ create table notes(  --메모
 drop table notes;
 
 
+
+
+
 create sequence seq_exp--sequence생성
 select seq_exp.nextval from dual  -- 조회 
 drop sequence seq_exp--삭제
@@ -30,6 +33,7 @@ card_type Varchar2(20)  --카드종류
 drop table expense;
 
 
+
 create sequence seq_inc--sequence생성
 select seq_inc.nextval from dual  -- 조회 
 drop sequence seq_inc--삭제
@@ -44,6 +48,10 @@ income_money Number not null --수입금액
 );
 
 drop table income;
+
+
+
+
 
 
 create sequence seq_bud--sequence생성
@@ -73,6 +81,9 @@ unclassified number not null --미분류
 drop table budget;
 
 
+
+
+
 create sequence seq_sch--sequence생성
 select seq_sch.nextval from dual  -- 조회 
 drop sequence seq_sch--삭제
@@ -85,28 +96,27 @@ schedule_date Date not null,  --날짜
 cotent Varchar2(300) not null  --상세내용
 );
 
+drop table schedule;
+
+
+
+
+
 create sequence seq_goa--sequence생성
-select seq_sch.nextval from dual  -- 조회 
+select seq_goa.nextval from dual  -- 조회 
 drop sequence seq_goa--삭제
 
 create table goals(--목표
-target number not null,--목표번호
+target number primary key,--목표번호
 y_m Date not null,--목표달
 gool varchar2(1000) not null,--내용
-member_id varchar2(50) not null--회원id
+member_id varchar2(50) constraint goa_mem_fk references member not null--회원id
 );
 
 drop table goals;
 
-create sequence seq_cod--sequence생성
-select seq_sch.nextval from dual  -- 조회 
-drop sequence seq_cod--삭제
 
-create table code(--분류&카테고리&수입&지출카테고리
-id Number not null,--기본키
-collection varchar2(50) not null,--그룹
-code varchar2(300)not null--코드
 
-drop table code;
 
-);
+
+
