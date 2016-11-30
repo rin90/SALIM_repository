@@ -32,7 +32,7 @@
 	</update>
 	
 	<!-- 수입 delete -->
-	<delete id="deleteIncomeId" parameterType="_int">
+	<delete id="deleteIncome" parameterType="_int">
 		delete from income 
 		where income_id=#{incomeId}
 	</delete>
