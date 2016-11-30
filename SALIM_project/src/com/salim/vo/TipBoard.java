@@ -1,14 +1,17 @@
 package com.salim.vo;
 
+import java.util.Date;
+
 public class TipBoard {
 	private int no;
 	private String title;
 	private String content;
 	private String fileRoot;
 	private String category;
-	private int click;
-	private int good;
+	private int click =0;
+	private int good =0;
 	private String classification;//분류
+	private Date registerTime =new Date(); //작성일
 	private String memberId;
 	
 	

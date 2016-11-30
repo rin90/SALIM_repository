@@ -10,6 +10,7 @@ create table free_board( --자유게시판
  click	number not null,  --조회수
  good number not null,  --좋아요
  category varchar2(20) not null,
+ register_time date not null, --작성일
  member_id varchar2(50) constraint fre_mem_fk references member not null--inline방식
 );
 
@@ -30,6 +31,7 @@ create table tip_board(  --tip게시판
 	click number not null,   -- 조회수 
 	good number not null,   -- 좋아요
 	classification varchar2(20) not null, --분류
+	register_time date not null, -- 작성일
 	member_id varchar2(50) constraint tip_mem_fk references member not null--inline방식
 );
 
