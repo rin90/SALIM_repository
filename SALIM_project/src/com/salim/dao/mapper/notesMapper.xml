@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace = "notesMapper">
+	<!-- 
+		메모 insert
+		메모 update
+		메모 select
+	 -->
+	 
+	 <!-- 메모 insert -->
+	 <insert id="insertNotes" parameterType="notes">
+	 	<selectKey keyProperty="no" resultType="_int" order="BEFORE">
+	 		select seq_nts.nextval from dual
+	 	</selectKey>
+	 	insert into notes
+	 	values(#{no}, #{dayDate}, #{content}, #{memberId})
+	 </insert>
+	 
+	 <!-- 메모 update -->
+	 <update id="updateNotes" parameterType="notes">
+	 	update notes
+	 	<set>
+	 		content=#{content}
+	 	</set>
+	 	where member_id=#{memberId}
+	 	and no=#{no}
+	 	and day_date=#{dayDate}
+	 </update>
+	 
+	 <!-- 메모 select -->
+	 <select id="selectNotes" parameterMap="map" resultType="notes">
+	 	select no, day_date, content, member_id
+	 	from notes
+	 	where member_id=#{memberId}
+	 	and day_date=#{dayDate}
+	 </select>
+	 
+</mapper>

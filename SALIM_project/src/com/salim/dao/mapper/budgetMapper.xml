@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace = "budgetMapper">
+	
+	<!-- 
+		예산 insert
+		예산 update 
+		예산 select
+	 -->
+	 
+	 <!-- 예산 insert -->
+	 <insert id="insertBudget" parameterType="budget">
+	 	<selectKey keyProperty="num" resultType="_int" order="BEFORE">
+	 		select seq_bud.nextval from dual
+	 	</selectKey>
+	 	insert into budget
+	 	values(#{num}, #{member_id}, #{budget_date}, #{budget}, #{food_expenses}, #{dwelling_communication}, #{householdgoods}, #{cloth_beauty}, 
+	 					#{health_culture}, #{education_parenting}, #{traffic_vehicle}, #{holiday_dues}, #{tax_interest}, #{pinmoney_etc}, 
+	 					#{saving_insurance}, #{credit_card}, #{unclassified})
+	 </insert>
+	 
+	 <!-- 예산 update -->
+	 <update id="updateBudget" parameterType="budget">
+	 	update budget
+	 	<set>
+	 		budget_date=#{budgetDate},
+	 		budget=#{budget},
+	 		food_expenses=#{foodExpenses},
+	 		dwelling_communication=#{dwellingCommunication},
+	 		householdgoods=#{householdgoods},
+	 		cloth_beauty=#{clothBeauty},
+	 		health_culture=#{healthCulture},
+	 		education_parenting=#{educationParenting},
+	 		traffic_vehicle=#{trafficVehicle},
+	 		holiday_dues=#{holidayDues},
+	 		tax_interest=#{taxInterest},
+	 		pinmoney_etc=#{pinmoneyEtc},
+	 		saving_insurance=#{savingInsurance},
+	 		credit_card=#{creditCard},
+	 		unclassified=#{unclassified}	
+	 	</set>
+	 	where member_id=#{memberId}
+	 	and num=#{num}
+	 </update>
+	 
+	 <!-- 예산 select -->
+	 <resultMap type="budget" id="budget-resultMap">
+	 	<id column="num" property="num"/>
+	 	<result column="member_id" property="memberId"/>
+	 	<result column="budget_date" property="budgetDate"/>
+	 	<result column="budget" property="budget"/>
+	 	<result column="food_expenses" property="foodExpenses"/>
+	 	<result column="dwelling_communication" property="dwellingCommunication"/>
+	 	<result column="householdgoods" property="householdgoods"/>
+	 	<result column="cloth_beauty" property="clothBeauty"/>
+	 	<result column="health_culture" property="healthCulture"/>
+	 	<result column="education_parenting" property="educationParenting"/>
+	 	<result column="traffic_vehicle" property="trafficVehicle"/>
+	 	<result column="holiday_dues" property="holidayDues"/>
+	 	<result column="tax_interest" property="taxInterest"/>
+	 	<result column="pinmoney_etc" property="pinmoneyEtc"/>
+	 	<result column="saving_insurance" property="savingInsurance"/>
+	 	<result column="credit_card" property="creditCard"/>
+	 	<result column="unclassified" property="unclassified"/>
+	 </resultMap>
+	 
+	 <select id="selectBudget" parameterType="map" resultMap="budget-resultMap">
+	 	select *
+	 	from budget
+	 	where member_id=#{member_id}
+	 	and budget_date=#{budgetDate}
+	 </select>
+	 
+	 
+</mapper>

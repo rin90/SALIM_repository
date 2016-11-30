@@ -5,16 +5,58 @@
 	
 	<!-- 
 		수입 insert
-		수입 select - 해당 날짜에 저장되있는 것 모두 조회 - 순서는 입력순 - seq로 정렬
+		수입 select - 해당 날짜에 저장되있는 것 모두 조회 - 순서는 입력순 - seq로 정렬 -> 페이징처리
 		수입 update - 회원id에 해당하는 아이, 작성번호
 		수입 delete - 선택된 것의 no를 조회해서 그것을 삭제
 	 -->
 	
 	<!-- 수입 insert -->
 	<insert id="insertIncome" parameterType="income">
-		insert into income (income_id, member_id, code_id, income_date, explanation, income_money)
-					values (#{incomeId}, #{memberId}, #{codeId}, #{incomeDate}, #{explanation}, #{incomeMoney})
+		<selectKey keyProperty="incomeId" resultType="_int" order="BEFORE">
+			select seq_inc.nextval from dual
+		</selectKey>
+		insert into income 
+		values (#{incomeId}, #{memberId}, #{codeId}, #{incomeDate}, #{explanation}, #{incomeMoney})
 	</insert>
+	
+	<!-- 수입 update -->
+	<update id="updateIncome" parameterType="income">
+		update income
+		<set> 
+			code_id=#{codeId},
+			income_date=#{incomeDate},
+			explanation=#{explanation},
+			income_money=#{incomeMoney}
+		</set>
+		where income_id=#{incomeId} 
+			and member_id=#{memberId}
+	</update>
+	
+	<!-- 수입 delete -->
+	<delete id="deleteIncomeId" parameterType="map">
+		delete from income 
+		where member_id=#{memberId} 
+		and income_id=#{incomeId}
+	</delete>
+	
+	
+	<!-- resultMap -->
+	<resultMap type="income" id="income-resultMap">
+		<id column="income_id" property="incomeId"/>
+		<result column="member_id" property="memberId"/>
+		<result column="code_id" property="codeId"/>
+		<result column="income_date" property="incomeDate"/>
+		<result column="explanation" property="explanation"/>
+		<result column="income_money" property="incomeMoney"/>
+	</resultMap>
+	
+	<!-- 수입 select 날짜로 조회-->
+	<select id="selectIncomeDate" parameterType="date" resultMap="income-resultMap">
+		select income_id, member_id, code_id, income_date, explanation, income_money
+		from income
+		where income_date=#{incomeDate}
+		order by income_id asc
+	</select>
 	
 	
 	

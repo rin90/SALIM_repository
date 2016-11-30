@@ -7,7 +7,6 @@ insert into code values(seq_cod.nextval,'free','보험');
 insert into code values(seq_cod.nextval,'free','생활');
 
 
-
 --code테이블 Q&A게시판 분류 insert
 insert into code values(seq_cod.nextval,'Q&A','로그인');
 insert into code values(seq_cod.nextval,'Q&A','홈페이지');
