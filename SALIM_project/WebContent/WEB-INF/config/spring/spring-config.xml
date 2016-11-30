@@ -42,7 +42,7 @@
 	
 	<!-- mybatis 연동 설정 -->
 	<!-- BasicDataSource -->
-	<bean name="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
+	<bean name="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" 
 			p:driverClassName="oracle.jdbc.driver.OracleDriver"
 	 			p:url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
 	 			p:username="salim" p:password="salim"
