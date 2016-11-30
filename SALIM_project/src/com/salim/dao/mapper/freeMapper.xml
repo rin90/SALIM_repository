@@ -8,7 +8,7 @@
 		<selectKey keyProperty="no" resultType="_int" order="BEFORE">
 			select seq_free.nextval from dual
 		</selectKey>
-		insert into free_board values(#{no},#{title},#{content},#{fileRoot},#{click},#{good},#{category},#{memberId}) 		
+		insert into free_board values(#{no},#{title},#{content},#{fileRoot},#{click},#{good},#{category},#{registerTime},#{memberId}) 		
 	</insert>
 	
 	<!-- 자유게시판 글수정 -->
@@ -51,7 +51,8 @@
 	<select id="selectCurrentPage" parameterType="map" resultType="freeboard">
 		select no, title,member_id memberId,register_time registerTime,click,good 
 		from(
-				select ceil(no/#{current}), title,member_id,register_time,click,good from free_board
+				select ceil(no/#{current}) page, title,member_id,register_time,click,good 
+				from free_board
 		)
 		where page=#{page}
 	</select>
@@ -70,10 +71,11 @@
 		where no=#{no}
 	</select>
 	
-	<!-- 글의 댓글 개수 (상세화면)-->
-	<select id="selectCommentTotal" resultType="_int">
+	<!-- 글의 총댓글 개수 (상세화면)-->
+	<select id="selectCommentTotal" parameterType="_int" resultType="_int">
 	select count(no)
 	from comment
+	where font_no =#{value}
 	</select>
 	
 	

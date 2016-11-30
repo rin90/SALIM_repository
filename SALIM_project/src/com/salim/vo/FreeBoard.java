@@ -1,13 +1,16 @@
 package com.salim.vo;
 
+import java.util.Date;
+
 public class FreeBoard {
  private int no;
  private String title;
  private String content;
  private String fileRoot;
- private int click;
- private int good;
+ private int click =0;
+ private int good = 0;
  private String category;
+ private Date registerTime = new Date();
  private String memberId;
  
 public FreeBoard() {
