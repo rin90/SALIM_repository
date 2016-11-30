@@ -56,7 +56,8 @@
 	 <!-- SqlSessionTemplate 생성 - 생성자로 sqlSessionFactoryBean을 주입 -->
 	<bean name="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
 		      c:sqlSessionFactory-ref="sqlSessionFactory"/>
-		      
+	
+	
 		      
 	<!-- Transaction 처리 -->
 	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"

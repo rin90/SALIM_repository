@@ -23,7 +23,7 @@ insert into CODE values(seq_cod.nextval,'카테고리','자유게시판');
 insert into code values(seq_cod.nextval,'카테고리','Tip게시판');
 
 
-
+	
 
 
 

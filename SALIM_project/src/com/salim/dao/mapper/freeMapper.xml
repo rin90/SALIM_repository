@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="free">
+<mapper namespace="freeMapper">
 	
 	
 	<!-- 자유게시판 글쓰기 (등록) -->
@@ -73,8 +73,8 @@
 	
 	<!-- 글의 총댓글 개수 (상세화면)-->
 	<select id="selectCommentTotal" parameterType="_int" resultType="_int">
-	select count(no)
-	from comment
+	select count(id)
+	from comments
 	where font_no =#{value}
 	</select>
 	

@@ -3,6 +3,7 @@ package com.salim.dao.impl;
 import java.util.HashMap;
 import java.util.List;
 
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,11 +15,13 @@ import com.salim.vo.FreeBoard;
 @Repository
 public class FreeBoardDaoImpl implements FreeBoardDao{
 	
+	
 	@Autowired
 	private SqlSessionTemplate session;
 	
+	
 	public String make(String id){
-		return "free."+id;
+		return "freeMapper."+id;
 	}
 	@Override
 	public void insertFree(FreeBoard freeBoard) {
@@ -70,7 +73,25 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 
 	@Override
 	public int selectCommentTotal(int no) {
-		return session.selectOne(make("selectCommentTotal"));
+		return session.selectOne(make("selectCommentTotal"),no);
 	}
-
+	public SqlSessionTemplate getSession(){
+		return session;
+	}
+	public static void main(String [] args){
+		 
+		FreeBoardDaoImpl test = new FreeBoardDaoImpl();
+		System.out.println("session:"+test.getSession());
+		System.out.println(test);
+		System.out.println(test.selectCommentTotal(101));
+//		System.out.println(test.insertFree(freeBoard));
+//		System.out.println(test.updateFree(freeBoard));
+//		System.out.println(test.updateClick(freeBoard));
+//		System.out.println(test.updateGood(freeBoard));
+//		System.out.println(test.deleteFree(no));
+//		System.out.println(test.selectTotal());
+//		System.out.println(test.selectByNo(no));
+//		System.out.println(test.selectByTitle(title));
+//		System.out.println(test.selectCurrentPage(page));
+	}
 }
