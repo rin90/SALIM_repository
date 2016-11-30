@@ -53,6 +53,7 @@ insert into MEMBER values('id-'||seq_dummy.nextval,'이재찬'||seq_dummy.nextva
 insert into MEMBER values('id-'||seq_dummy.nextval,'이재찬'||seq_dummy.nextval,19,'1998-09-25','q123456');
 
 
+
 --자유게시판
 insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
 insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);

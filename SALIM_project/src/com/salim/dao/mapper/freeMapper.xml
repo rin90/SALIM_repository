@@ -61,11 +61,11 @@
 	<select id="selectByTitle" parameterType="string" resultType="freeboard">
 		select no,title,member_id memberId,register_time registerTime,click,good
 		from free_board
-		where title like #{value}
+		where title like '%'||#{value}||'%'
 	</select>
 	
 	<!-- 글 번호로 글 찾기(상세화면) -->
-	<select id="selectByNo" parameterType="_int">
+	<select id="selectByNo" parameterType="_int" resultType="freeboard">
 		select no,title,member_id memberId,register_time registerTime,click,good,content,file_root fileRoot
 		from free_board
 		where no=#{no}
