@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="tip">
+	
+	<!-- tip게시판 글 등록( 글 쓰기) -->
 	<insert id="tipInsert">
 		<selectKey keyProperty="no" resultType="_int" order="BEFORE">
 			select seq_tip.nextval from dual
 		</selectKey>
-		insert into tip_board values(#{no},#{title},#{content},#{fileRoot},#{category},#{click},#{good},#{classification},#{memberId})
+		insert into tip_board values(#{no},#{title},#{content},#{fileRoot},#{category},#{click},#{good},#{classification},#{memberId},#{registerTime})
 	</insert>
 	
+	<!-- 글수정  -->
 	<update id="tipUpdate" parameterType="tipboard">
 		update tip_board 
 		set title=#{title},
@@ -18,11 +21,55 @@
 		where no=#{no}
 	</update>
 	
+	<!-- 조회수 증가 -->
+	<update id="clickUpdate" parameterType="tipboard">
+		update tip_board
+		set click=#{click}
+		where no=#{no}
+	</update>
+	
+	<!-- 좋아용 증가 -->
+	<update id="goodUpdate" parameterType="tipboard">
+		update tip_board
+		set good=#{good}
+		where no=#{no}
+	</update>
+	
+	<!-- 글 삭제 -->
 	<delete id="tipDelete" parameterType="tipboard">
 		delete from tip_board
 		where no=#{no}
 	</delete>
 	
+	<!-- page처리를 위한 글 총 개수 -->
+	<select id="selectTotal" resultType="_int">
+		select count(no)
+		from tip_board
+	</select>	
+	
+	<!-- page처리를 위한 현재 페이지 -->
+	<select id="selectCurrentPage" parameterType="map" resultType="tipboard">
+		select classification,no,title,member_id memberId,register_time registerTime,click,good
+		from (
+			select ceil(no/#{currentPage}) page,classification,title,member_id,register_time,click,good
+			from tip_board
+		)
+		where page=#{page} 
+	</select>
+	
+	<!-- no로 글 찾기(상세화면)  -->
+	<select id="selectByNo" parameterType="_int" resultType="tipboard">
+		select classification,title,register_time registerTime, member_id memberId,file_root fileRoot,content,click
+		from tip_board
+		where no=#{no}
+	</select>
+	
+	<!-- 글에 대한 댓글 총 개수 -->
+	<select id="selectCommentTotal" parameterType="_int" resultType="_int">
+		select count(no)
+		from comment
+		where font_no=#{value}
+	</select>
 	
 	
 </mapper>
