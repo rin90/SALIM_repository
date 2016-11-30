@@ -28,15 +28,13 @@
 			explanation=#{explanation},
 			income_money=#{incomeMoney}
 		</set>
-		where income_id=#{incomeId} 
-			and member_id=#{memberId}
+		where income_id=#{incomeId}
 	</update>
 	
 	<!-- 수입 delete -->
-	<delete id="deleteIncomeId" parameterType="map">
+	<delete id="deleteIncomeId" parameterType="_int">
 		delete from income 
-		where member_id=#{memberId} 
-		and income_id=#{incomeId}
+		where income_id=#{incomeId}
 	</delete>
 	
 	
@@ -51,10 +49,11 @@
 	</resultMap>
 	
 	<!-- 수입 select 날짜로 조회-->
-	<select id="selectIncomeDate" parameterType="date" resultMap="income-resultMap">
+	<select id="selectIncomeDate" parameterType="map" resultMap="income-resultMap">
 		select income_id, member_id, code_id, income_date, explanation, income_money
 		from income
-		where income_date=#{incomeDate}
+		where member_id=#{memberId}
+		and income_date=#{incomeDate}
 		order by income_id asc
 	</select>
 	

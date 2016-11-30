@@ -31,14 +31,12 @@
 			card_type=#{cardType}
 		</set>
 		where expense_id=#{expenseId}
-		and member_id=#{memberId}
 	</update>
 	
 	<!-- 지출 delete -->
-	<delete id="deleteExpense" parameterType="map">
+	<delete id="deleteExpense" parameterType="_int">
 		delete from expense
-		where member_id=#{memberId}
-		and expense_id=#{expenseId}
+		where expense_id=#{expenseId}
 	</delete>
 	
 	<!-- 지출 select -->
@@ -54,10 +52,11 @@
 	</resultMap>
 	
 	<!-- 지출 select -->
-	<select id="selectExpenseDate" parameterType="date" resultMap="expense-resultMap">
+	<select id="selectExpenseDate" parameterType="map" resultMap="expense-resultMap">
 		select expense_id, member_id, code_id, expense_date, expense_explain, cash_expense, card_expense, card_type
 		from expense 
-		where expense_date=#{expenseDate}
+		where member_id=#{memberId}
+		and expense_date=#{expenseDate}
 		order by expense_id asc
 	</select>
 	

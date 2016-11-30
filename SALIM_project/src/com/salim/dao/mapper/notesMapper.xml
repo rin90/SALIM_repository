@@ -23,9 +23,7 @@
 	 	<set>
 	 		content=#{content}
 	 	</set>
-	 	where member_id=#{memberId}
-	 	and no=#{no}
-	 	and day_date=#{dayDate}
+	 	where no=#{no}
 	 </update>
 	 
 	 <!-- 메모 select -->

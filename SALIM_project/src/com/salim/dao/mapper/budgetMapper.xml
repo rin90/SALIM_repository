@@ -40,8 +40,7 @@
 	 		credit_card=#{creditCard},
 	 		unclassified=#{unclassified}	
 	 	</set>
-	 	where member_id=#{memberId}
-	 	and num=#{num}
+	 	where num=#{num}
 	 </update>
 	 
 	 <!-- 예산 select -->
