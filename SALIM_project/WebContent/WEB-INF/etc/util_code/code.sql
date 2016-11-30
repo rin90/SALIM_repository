@@ -10,11 +10,13 @@ code varchar2(300)not null--코드
 drop table code;
 
 --수입, 지출 코드
+insert into CODE values(seq_cod.nextval, '수입', '미분류');
 insert into CODE values(seq_cod.nextval, '수입', '주수입');
 insert into CODE values(seq_cod.nextval, '수입', '부수입');
 insert into CODE values(seq_cod.nextval, '수입', '전월이월');
 insert into CODE values(seq_cod.nextval, '수입', '저축/보험');
 
+insert into CODE values(seq_cod.nextval, '지출', '미분류');
 insert into CODE values(seq_cod.nextval, '지출', '식비');
 insert into CODE values(seq_cod.nextval, '지출', '주거/통신');
 insert into CODE values(seq_cod.nextval, '지출', '생활용품');
@@ -116,4 +118,5 @@ insert into CODE values(seq_cod.nextval, '저출/보험', '기타');
 
 --카드/통장 등록하면 뜨게 하기
 
+select * from CODE;
 

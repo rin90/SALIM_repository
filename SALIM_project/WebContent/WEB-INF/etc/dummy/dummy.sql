@@ -23,9 +23,6 @@ insert into code values(seq_cod.nextval,'카테고리','Tip게시판');
 
 
 
-
-
-
 create sequence seq_dummy; 
 drop sequence seq_dummy;
 --member테이블 
