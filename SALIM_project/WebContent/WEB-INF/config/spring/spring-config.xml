@@ -34,7 +34,7 @@
 	<mvc:view-controller path="/graph.do" view-name="body/graph.tiles"/>
 	
 	<mvc:view-controller path="/body/income.do" view-name="body/income.tiles"/>
-	
+
 
 	<!-- ViewResolver등록 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>

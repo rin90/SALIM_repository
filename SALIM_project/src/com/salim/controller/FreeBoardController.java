@@ -20,7 +20,7 @@ public class FreeBoardController {
 	@RequestMapping("list")
 	public ModelAndView list(int page){
 		Map map =service.getFreeBoardList(page);
-		return new ModelAndView("/body/free_board_list.jsp",map);
+		return new ModelAndView("body/free_board_list.tiles",map);
 	}
 	
 	/*//글 등록 메소드

@@ -19,7 +19,9 @@
 				<td>좋아요</td>
 			</tr>
 		</thead>
+		
 		<tbody>
+			<!--  목록 뿌리기 -->
 			<c:forEach items="${requestScope.list }" var="freeBoard">
 				<tr>
 					<td>${freeBoard.no }${freeBoard.title }</td>
@@ -29,8 +31,44 @@
 					<td>${freeBoard.good }</td>
 				</tr>
 			</c:forEach>
+			
 		</tbody>	
 	</table>
+			
+			
+			
+			<!-- 이전페이지 -->
+			<c:choose>
+				<c:when test="${requestScope.pageBean.previousGroup }">
+					<a href="${initParam.rootPath }/free/list.do?page=${requestScope.pageBean.beginPage-1}">◀&nbsp;</a>
+				</c:when>
+				<c:otherwise>
+					◀&nbsp;
+				</c:otherwise>
+			</c:choose>
+			
+			<!-- 페이지 뿌리기 -->
+			<c:forEach begin="${requestScope.pageBean.beginPage }" end="${requestScope.pageBean.endPage }" var="page">
+				<c:choose>
+					<c:when test="${requestScope.pageBean.page == page }">
+						[${page }]
+					</c:when>
+					<c:otherwise>
+						<a href="${initParam.rootPath }/free/list.do?page=${page }">${page }</a>				
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<!-- 다음페이지 -->
+			<c:choose>
+				<c:when test="${requestScope.pageBean.nextGroup }">
+					<a href="${initParam.rootPath }/free/list.do?page=${requestScope.pageBean.endPage+1 }">&nbsp;▶</a>
+				</c:when>
+				<c:otherwise>
+					&nbsp;▶				
+				</c:otherwise>
+			</c:choose>
+			
+		
 
 </body>
 </html>
