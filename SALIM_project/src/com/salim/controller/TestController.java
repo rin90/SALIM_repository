@@ -13,7 +13,7 @@ public class TestController {
 	@Autowired
 	private TestServiceImpl service;
 	
-	@RequestMapping("/time.do")
+	@RequestMapping("/time")
 	public String testTime(ModelMap map){
 		String time = service.time();
 		map.addAttribute("time", time);

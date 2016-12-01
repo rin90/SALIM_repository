@@ -35,13 +35,13 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	}
 
 	@Override
-	public void updateClick(FreeBoard freeBoard) {
-		session.update(make("clickUpdate"),freeBoard);
+	public void updateClick(int no) {
+		session.update(make("clickUpdate"),no);
 	}
 
 	@Override
-	public void updateGood(FreeBoard freeBoard) {
-		session.update(make("goodUpdate"),freeBoard);
+	public void updateGood(int no) {
+		session.update(make("goodUpdate"),no);
 	}
 
 	@Override

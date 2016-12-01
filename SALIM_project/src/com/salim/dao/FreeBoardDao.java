@@ -13,10 +13,10 @@ public interface FreeBoardDao {
 	void updateFree(FreeBoard freeBoard);
 	
 	//글 조회수 증가
-	void updateClick(FreeBoard freeBoard);
+	void updateClick(int no);
 	
 	//글 좋아요 증가
-	void updateGood(FreeBoard freeBoard);
+	void updateGood(int no);
 	
 	//글 삭제
 	void deleteFree(int no); 
@@ -33,7 +33,7 @@ public interface FreeBoardDao {
 	// 글 번호로 글 찾기(상세화면)
 	FreeBoard selectByNo(int no);
 	
-	//글의 총 댓글 개수
+	//글의 총 댓글 갯수
 	int selectCommentTotal(int no);
 	
 	

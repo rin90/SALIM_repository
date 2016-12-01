@@ -14,6 +14,7 @@
 		<mapper resource="com/salim/dao/mapper/freeMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/quenstionAndAnswerMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/tipMapper.xml"/>
+		
 	</mappers>
 	
 	

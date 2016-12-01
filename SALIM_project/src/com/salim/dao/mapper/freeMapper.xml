@@ -22,16 +22,16 @@
 	</update>
 	
 	<!-- 자유게시판 글 조회수 증가 등록 -->
-	<update id="clickUpdate" parameterType="freeboard">
+	<update id="clickUpdate" parameterType="_int">
 		update free_board
-		set click=#{click} 
+		set click=click +1
 		where no=#{no}
 	</update>
 	
 	<!-- 자유게시판 좋아요 증가 등록  -->
-	<update id="goodUpdate" parameterType="freeboard">
+	<update id="goodUpdate" parameterType="_int">
 		update free_board
-		set good=#{good}
+		set good=good+1
 		where no=#{no}
 	</update>
 	
@@ -51,7 +51,7 @@
 	<select id="selectCurrentPage" parameterType="map" resultType="freeboard">
 		select no, title,member_id memberId,register_time registerTime,click,good 
 		from(
-				select ceil(no/#{current}) page, title,member_id,register_time,click,good 
+				select ceil(rownum/#{current}) page,no, title,member_id,register_time,click,good 
 				from free_board
 		)
 		where page=#{page}
