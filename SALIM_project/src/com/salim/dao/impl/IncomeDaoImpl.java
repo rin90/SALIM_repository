@@ -16,7 +16,6 @@ public class IncomeDaoImpl implements IncomeDao{
 	@Autowired
 	static SqlSessionTemplate session;
 
-	@Override
 	public int insertIncome(Income income) {
 		return session.insert("incomeMapper.insertIncome", income);
 	}

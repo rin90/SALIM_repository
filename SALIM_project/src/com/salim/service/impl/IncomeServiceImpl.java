@@ -65,13 +65,4 @@ public class IncomeServiceImpl implements IncomeService{
 		}
 	}
 	
-/*	
-	public static void main(String [] args){
-		
-		List<Income> list = new ArrayList();
-		list.add(new Income(0, "id-1", 41, new Date(), "되나", 3000000));
-		list.add(new Income(0, "id-2", 41, new Date(), "되나", 3000000));
-		saveIncome(list);
-		
-	}*/
 }
