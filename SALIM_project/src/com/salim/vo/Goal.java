@@ -3,73 +3,57 @@ package com.salim.vo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Goals implements Serializable{
-	
-	private int target;
-	private Date yM;
-	private String gool;
-	private String memberId;
-	
-	public Goals() {
-		super();
-	}
 
-	public Goals(int target, Date yM, String gool, String memberId) {
+public class Goal implements Serializable{
+	
+	private int num;
+	private Date yM;
+	private String goal;
+	private String memberId;
+	public Goal(int num, Date yM, String goal, String memberId) {
 		super();
-		this.target = target;
+		this.num = num;
 		this.yM = yM;
-		this.gool = gool;
+		this.goal = goal;
 		this.memberId = memberId;
 	}
-
-	@Override
-	public String toString() {
-		return "Goals [target=" + target + ", yM=" + yM + ", gool=" + gool + ", memberId=" + memberId + "]";
+	public Goal() {
+		super();
 	}
-
-	public int getTarget() {
-		return target;
+	public int getNum() {
+		return num;
 	}
-
-	public void setTarget(int target) {
-		this.target = target;
+	public void setNum(int num) {
+		this.num = num;
 	}
-
 	public Date getyM() {
 		return yM;
 	}
-
 	public void setyM(Date yM) {
 		this.yM = yM;
 	}
-
-	public String getGool() {
-		return gool;
+	public String getGoal() {
+		return goal;
 	}
-
-	public void setGool(String gool) {
-		this.gool = gool;
+	public void setGoal(String goal) {
+		this.goal = goal;
 	}
-
 	public String getMemberId() {
 		return memberId;
 	}
-
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((gool == null) ? 0 : gool.hashCode());
+		result = prime * result + ((goal == null) ? 0 : goal.hashCode());
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
-		result = prime * result + target;
+		result = prime * result + num;
 		result = prime * result + ((yM == null) ? 0 : yM.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -78,18 +62,18 @@ public class Goals implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Goals other = (Goals) obj;
-		if (gool == null) {
-			if (other.gool != null)
+		Goal other = (Goal) obj;
+		if (goal == null) {
+			if (other.goal != null)
 				return false;
-		} else if (!gool.equals(other.gool))
+		} else if (!goal.equals(other.goal))
 			return false;
 		if (memberId == null) {
 			if (other.memberId != null)
 				return false;
 		} else if (!memberId.equals(other.memberId))
 			return false;
-		if (target != other.target)
+		if (num != other.num)
 			return false;
 		if (yM == null) {
 			if (other.yM != null)
@@ -98,5 +82,10 @@ public class Goals implements Serializable{
 			return false;
 		return true;
 	}
-	
+	@Override
+	public String toString() {
+		return "Goal [num=" + num + ", yM=" + yM + ", goal=" + goal + ", memberId=" + memberId + "]";
+	}
+
+		
 }

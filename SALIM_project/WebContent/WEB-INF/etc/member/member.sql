@@ -5,9 +5,10 @@ create table member(  --회원
  birthday date not null,  -- 생일
  password varchar2(50) not null
 );
-
+select * from member;
 drop table member;
 
+insert into member values ('tester', '살림꾼', 31, sysdate, 'tester');
 
 
 create sequence seq_col--sequence생성

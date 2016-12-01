@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 
+
 <!-- 
 jQuery의   Fullcalendar
 -->
@@ -31,25 +32,44 @@ jQuery의   Fullcalendar
 		var d = date.getDate();
 		var m = date.getMonth();
 		var y = date.getFullYear();
-
+		
 		$('#calendar').fullCalendar({
 			weekends : true,	/* false인 경우 토/일 안나옴 */
 			locale : "ko",
 			header : {
-				left : '', 
+				left : 'today', 
 				center : 'prev, title, next',
-				right : 'today, month,agendaWeek,agendaDay'  
+				right : 'month,listDay,agendaDay'  
+				/* right : 'today, month,agendaWeek,agendaDay'   */
 			},
 			editable : true,
-			dayClick: function(date){
-				alert('Day Click Event : \n' +  date);
-				/* alert(date); */
-			}
-		
-			,
+			
+			dayClick: function(date){	// 밀리초 단위로 계산해서 받아옴
+				var detail = new Date(date);
+				alert('Day Click Event : \n' + detail.getFullYear() + "-" + (detail.getMonth()+1) + "-" + detail.getDate());
+				//window.open("/SALIM_project/popup/input_schedule.jsp", "registGoal", "width=400, height=300");
+			},
+			selectable : true,
+			selectHelper : true,
+ 			select : function(start, end){
+				var title = prompt('Event Title : ');
+				var eventDate;
+				if(title) {
+					eventDate = {
+							title: title,
+							start: start,
+							end: end
+					};
+					$('#calendar').fullCalendar('renderEvent', eventDate, true);
+				}
+				$('#calendar').fullCalendar('unselect');
+			}, 
+ 
+			eventLimite: true,	// 여러개의 Event를 실행시킬 수 있게 셋팅
 			events : [ {
 				title : 'All Day Event',
-				start : new Date(y, m, 1)
+				/* start : new Date(y, m, 1) */
+				start : '2016-12-03'
 			}, {
 				title : 'Long Event',
 				start : new Date(y, m, d - 5),
@@ -90,14 +110,3 @@ jQuery의   Fullcalendar
 
 	});
 </script>
-
-
-	<div id="targetForMonth">
-		이번달 목표 :
-		<br><textarea name="monthGoals" cols="60" rows="5"> </textarea>
-		 <!-- <input type="text" name="monthGoals">  -->
-	</div>
-	
-	
-	<div id='calendar' style='margin: 3em 0; font-size: 13px'></div>
-	
