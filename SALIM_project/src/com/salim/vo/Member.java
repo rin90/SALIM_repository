@@ -3,11 +3,16 @@ package com.salim.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+
 public class Member implements Serializable{
  
-	String MemberId;
+	String memberId;
 	String name;
 	int age;
+	
+	//@JsonSerialize(using=DateJsonSerializer.class)
 	Date brithday;
 	String password;
 	
@@ -15,7 +20,7 @@ public class Member implements Serializable{
 
 	public Member(String memberId, String name, int age, Date brithday, String password) {
 		super();
-		MemberId = memberId;
+		this.memberId = memberId;
 		this.name = name;
 		this.age = age;
 		this.brithday = brithday;
@@ -23,11 +28,11 @@ public class Member implements Serializable{
 	}
 
 	public String getMemberId() {
-		return MemberId;
+		return memberId;
 	}
 
 	public void setMemberId(String memberId) {
-		MemberId = memberId;
+		this.memberId = memberId;
 	}
 
 	public String getName() {
@@ -66,9 +71,9 @@ public class Member implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((MemberId == null) ? 0 : MemberId.hashCode());
 		result = prime * result + age;
 		result = prime * result + ((brithday == null) ? 0 : brithday.hashCode());
+		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
@@ -83,17 +88,17 @@ public class Member implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Member other = (Member) obj;
-		if (MemberId == null) {
-			if (other.MemberId != null)
-				return false;
-		} else if (!MemberId.equals(other.MemberId))
-			return false;
 		if (age != other.age)
 			return false;
 		if (brithday == null) {
 			if (other.brithday != null)
 				return false;
 		} else if (!brithday.equals(other.brithday))
+			return false;
+		if (memberId == null) {
+			if (other.memberId != null)
+				return false;
+		} else if (!memberId.equals(other.memberId))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -110,8 +115,9 @@ public class Member implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Member [MemberId=" + MemberId + ", name=" + name + ", age=" + age + ", brithday=" + brithday
+		return "Member [memberId=" + memberId + ", name=" + name + ", age=" + age + ", brithday=" + brithday
 				+ ", password=" + password + "]";
 	}
+	
 	
 }
