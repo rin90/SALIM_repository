@@ -18,12 +18,14 @@ nav{
 	background-color:lightgray;
 	padding: 15px;
 	min-height:700px;
-	width:250px;
+	width:15%;
 	float:left;
 }
 section{
 	padding: 15px;
+	background-color:white;
 	min-height:400px;
+	width:70%;
 	float:left;
 }
 footer{
