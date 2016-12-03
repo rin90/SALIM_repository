@@ -3,10 +3,28 @@ create table member(  --회원
  name varchar2(20) not null,
  age number not null,
  birthday date not null,  -- 생일
- password varchar2(50) not null
+ password varchar2(50) not null, --비밀번호
+ email varchar2(50) not null --email
 );
 
-drop table member;
+
+
+--테이블 삭제
+drop table member CASCADE CONSTRAINTS;
+
+
+-- 11.30 회원 가입 테스트
+
+--회원 가입 
+insert into member values('mem1','LJH1',20,'1991-04-15','password1');
+insert into member values('mem2','LJH2',20,'1991-04-16','password2');
+insert into member values('mem3','LJH3',20,'1991-04-17','password3');
+insert into member values('mem4','LJH4',20,'1991-04-18','password4');
+insert into member values('mem5','LJH5',20,'1991-04-19','password5');
+
+--회원 조회
+select * from member;
+--alter table member1 add(b)
 
 
 
@@ -29,7 +47,7 @@ create table member_collection(--회원그룹
 member_id varchar2(50) constraint mco_col_fk references member,
 collection_id Number constraint mco_mem_fk references collection,
 grant_id varchar2(300) not null,--권한자id
-constraint mc_pk primary key(member_id,collection_id)
+constraint mc_pk primary key(member_id,collection_id) 
 );
 
 
