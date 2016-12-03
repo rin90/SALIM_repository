@@ -50,6 +50,8 @@
 		</property>
 	</bean>
 	
+
+	
 	<!-- mybatis 연동 설정 -->
 	<!-- BasicDataSource -->
 	<bean name="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" 

@@ -67,4 +67,20 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		map.put("pageBean", pageBean);
 		return map;
 	}
+	
+
+	@Override
+	public List<FreeBoard> selectByMemberId(String memberId) {		
+		return dao.selectByMemberId(memberId);
+	}
+
+	@Override
+	public int selectByTitleTotal() {
+		return dao.selectByTitleTotal();
+	}
+
+	@Override
+	public int selectByMemberIdTotal() {
+		return dao.selectByMemberIdTotal();
+	}
 }

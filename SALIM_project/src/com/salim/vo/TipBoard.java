@@ -1,8 +1,9 @@
 package com.salim.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TipBoard {
+public class TipBoard implements Serializable{
 	private int no;
 	private String title;
 	private String content;

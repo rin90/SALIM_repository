@@ -6,18 +6,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<script type="text/javascript"
+	src="/SALIM_project/etc/scripts/jquery.is"></script>
+<script type="text/javascript">
+	
+</script>
 </head>
 <body>
-	<%-- <form action="${initParam.rootPath }/free/register.do" method="post">
-		카테고리: <select>
-			<option>게시판 선택</option>
+	<form id="registerForm" action="${initParam.rootPath}/free/register.do"
+		method="post" >
+
+		<h4>자유게시판</h4>
+	 	제목:<input type="text" name=title><br> 
+
+		파일첨부:<input type="file" value="사진" name="fileRoot"><br>
+
+		<textarea rows="10" cols="50" name="content"></textarea>
 		
-			<c:forEach items="" var="category">
-				<option>${category }</option>
-			</c:forEach>
-		
-		</select> <input type="submit" value="확인">
+		<br><input type="hidden" name="page" value="${requestScope.page }">
+			<input type="hidden" name="memberId" value="id-3"> 
+			<input type="submit" value="확인">
+			
 	</form>
-	<input type="button" value="취소" > --%>
+	
+	<form action="${initParam.rootPath }/free/list.do" method="post">
+		<input type="hidden" name="page" value="${requestScope.page }">
+		<input type="submit" value="취소">
+	</form>
+
 </body>
 </html>

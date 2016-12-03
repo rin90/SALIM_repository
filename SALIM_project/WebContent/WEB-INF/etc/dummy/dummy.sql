@@ -16,12 +16,15 @@ insert into code values(seq_cod.nextval,'Q&A','회원탈퇴');
 insert into code values(seq_cod.nextval,'Q&A','ID/PW');
 insert into code values(seq_cod.nextval,'Q&A','그룹게시판');
 
+select CODE from code where collection='조회'
 
 --code테이블 카테고리
 insert into CODE values(seq_cod.nextval,'카테고리','자유게시판');
 insert into code values(seq_cod.nextval,'카테고리','Tip게시판');
 
-
+--code테이블 자유게시판의 조회 코드
+insert into code values(seq_cod.nextval,'조회','제목');
+insert into code values(seq_cod.nextval,'조회','작성자');
 
 	
 
@@ -53,46 +56,46 @@ insert into MEMBER values('id-'||seq_dummy.nextval,'이재찬'||seq_dummy.nextva
 
 
 --자유게시판
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'자유게시판','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,0'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into FREE_BOARD values(100+seq_dummy.nextval,'더미','으아아아아아','c:/go/home/my/home/go/go',0,0,'2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
 
 
 --tip게시판
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
-insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go','Tip게시판',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);
+insert into TIP_BOARD values(100+seq_dummy.nextval,'더미','으아아아아','c:/go/home/my/home/go/go',0,0,'생활','2016-01,'||seq_dummy.nextval,'id-'||seq_dummy.nextval);

@@ -33,4 +33,15 @@ public interface FreeBoardService {
 	
 	//글의 총 댓글 갯수
 	int selectCommentTotal(int no);
+	
+	//작성자로 검색
+	List<FreeBoard> selectByMemberId(String memberId);
+
+	//page처리를 위한 제목으로 검색 Board
+	int selectByTitleTotal();
+	
+	//page처리를 위한 작성자로 검색 Board
+	int selectByMemberIdTotal();
+
+
 }

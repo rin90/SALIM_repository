@@ -51,7 +51,7 @@
 	<select id="selectCurrentPage" parameterType="map" resultType="tipboard">
 		select classification,no,title,member_id memberId,register_time registerTime,click,good
 		from (
-			select ceil(no/#{currentPage}) page,classification,title,member_id,register_time,click,good
+			select ceil(rownum/#{currentPage}) page,no,classification,title,member_id,register_time,click,good
 			from tip_board
 		)
 		where page=#{page} 

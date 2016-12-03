@@ -42,9 +42,13 @@ public class CodeController {
 	//소분류 코드 list가져오기
 	@RequestMapping("/small/codeList")
 	@ResponseBody 
-	public List<Code> findCodeList(@RequestParam String secondCode){		
-		System.out.println("안녕");
+	public List<Code> findCodeList(@RequestParam String secondCode){
+		
 		return service.findCode(secondCode);
 	}
+	
+	
+	
+	
 	
 }

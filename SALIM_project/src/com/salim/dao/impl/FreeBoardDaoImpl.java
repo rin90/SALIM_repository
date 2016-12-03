@@ -64,7 +64,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 
 	@Override
 	public List<FreeBoard> selectByTitle(String title) {
-		return session.selectList(make("selectTitle"),title);
+		return session.selectList(make("selectByTitle"),title);
 	}
 
 	@Override
@@ -75,6 +75,19 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	@Override
 	public int selectCommentTotal(int no) {
 		return session.selectOne(make("selectCommentTotal"),no);
+	}
+	
+	@Override
+	public List<FreeBoard> selectByMemberId(String memberId) {
+		return session.selectList(make("selectByMemberid"),memberId);
+	}
+	@Override
+	public int selectByMemberIdTotal() {
+		return session.selectOne(make("selectByMemberIdTotal"));
+	}
+	@Override
+	public int selectByTitleTotal() {
+		return session.selectOne(make("selectByTitleTotal"));
 	}
 	
 	

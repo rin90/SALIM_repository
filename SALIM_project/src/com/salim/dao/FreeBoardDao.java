@@ -24,6 +24,12 @@ public interface FreeBoardDao {
 	//page처리를 위한 글 토탈
 	int selectTotal();
 	
+	//page처리를 위한 글 토탈(기준 memberId)
+	int selectByMemberIdTotal();
+	
+	//page처리를 위한 글 토탈( 기준 제목 )
+	int selectByTitleTotal();
+	
 	//page처리를 위한 현재 페이지
 	List<FreeBoard> selectCurrentPage(int page);
 	
@@ -36,7 +42,8 @@ public interface FreeBoardDao {
 	//글의 총 댓글 갯수
 	int selectCommentTotal(int no);
 	
-	
+	//작성자로 검색
+	List<FreeBoard> selectByMemberId(String memberId);
 	
 
 
