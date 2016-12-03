@@ -1,6 +1,6 @@
 package com.salim.dao;
 
-import java.util.Date;
+import java.util.Map;
 
 import com.salim.vo.Goal;
 
@@ -15,7 +15,7 @@ public interface GoalDao {
 	public abstract int deleteGoal(int num);
 	
 	// 목표 조회
-	public abstract Goal selectGoal(Date date, String memberId);
+	public abstract Goal selectGoal(Goal goal);
 	
 	
 }

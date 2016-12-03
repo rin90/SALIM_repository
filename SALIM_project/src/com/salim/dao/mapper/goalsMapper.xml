@@ -21,9 +21,17 @@
 		insert into Goals values(#{num}, #{yM}, #{goal}, #{memberId})
 	</insert>
 	
-	<select id="selectGoal" parameterType="map" resultMap="goal-resultMap">
+	<update id="updateGoal" parameterType="goal">
+		update goals set goal=#{goal}, y_m=#{yM} where num=#{num}
+	</update>
+	
+	<delete id="deleteGoal" parameterType="_int">
+		delete goals where num=#{value}
+	</delete>
+	
+	<select id="selectGoal" parameterType="goal" resultMap="goal-resultMap">
 		<include refid="goal-select"/>
-		where member_id=#{memberId} and to_char(y_m, 'yyyymm')=#{month}
+		where member_id=#{memberId} and y_m=#{yM}
 	</select>
 	
 </mapper>

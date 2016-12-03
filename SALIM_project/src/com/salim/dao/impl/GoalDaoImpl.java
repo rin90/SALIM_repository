@@ -20,26 +20,22 @@ public class GoalDaoImpl implements GoalDao{
 	
 	@Override
 	public int insertGoal(Goal goal) {
-		return session.insert("goalsMapper.insertGoal");
+		return session.insert("goalsMapper.insertGoal", goal);
 	}
 
 	@Override
 	public int updateGoal(Goal goal) {
-		return 0;
+		return session.update("goalsMapper.updateGoal", goal);
 	}
 
 	@Override
 	public int deleteGoal(int num) {
-		return 0;
+		return session.delete("goalsMapper.deleteGoal", num);
 	}
 
 	@Override
-	public Goal selectGoal(Date date, String memberId) {
-		Map map = new HashMap();
-		map.put("memberId", memberId);
-		SimpleDateFormat form = new SimpleDateFormat("yyyymm");
-		map.put("month", form.format(date));
-		return session.selectOne("goalsMapper.selectGoal", map);
+	public Goal selectGoal(Goal goal) {	// goal객체의 일부 내용 사용 : yM, memberId 
+		return session.selectOne("goalsMapper.selectGoal", goal);
 	}
 	 
 }

@@ -27,13 +27,16 @@ drop sequence seq_goa--삭제
 
 create table goals(--목표
 num number primary key,--목표번호
-y_m Date not null,--목표달
+y_m varchar2(7) not null,--목표달
 goal varchar2(1000) not null,--내용
 member_id varchar2(50) constraint goa_mem_fk references member not null--회원id
 );
-select * from goals where member_id='tester' and to_char(y_m, 'yyyymm')='201612';
 drop table goals;
 
-insert into goals values(seq_goa.nextval, sysdate, '일정완성하고 싶다...', 'tester');
+insert into goals values(seq_goa.nextval, '201612', '일정언제 완성해??=ㅅ= 완성하고 싶다...', 'tester2');
+update goals set goal='우선 목표를 완성해야지...', y_m=sysdate where member_id='tester2';
+delete from goals where num=24;
+select * from goals where member_id='tester' and y_m='201612';
+select * from goals;
 
 

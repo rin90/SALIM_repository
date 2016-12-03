@@ -8,7 +8,7 @@ create table member(  --회원
 select * from member;
 drop table member;
 
-insert into member values ('tester', '살림꾼', 31, sysdate, 'tester');
+insert into member values ('tester2', '테스터2', 11, sysdate, 'tester');
 
 
 create sequence seq_col--sequence생성

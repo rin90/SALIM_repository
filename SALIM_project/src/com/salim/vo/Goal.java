@@ -1,16 +1,15 @@
 package com.salim.vo;
 
 import java.io.Serializable;
-import java.util.Date;
 
 
 public class Goal implements Serializable{
 	
 	private int num;
-	private Date yM;
+	private String yM;
 	private String goal;
 	private String memberId;
-	public Goal(int num, Date yM, String goal, String memberId) {
+	public Goal(int num, String yM, String goal, String memberId) {
 		super();
 		this.num = num;
 		this.yM = yM;
@@ -20,16 +19,28 @@ public class Goal implements Serializable{
 	public Goal() {
 		super();
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((goal == null) ? 0 : goal.hashCode());
+		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result + num;
+		result = prime * result + ((yM == null) ? 0 : yM.hashCode());
+		return result;
+	}
+	
+	
 	public int getNum() {
 		return num;
 	}
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public Date getyM() {
+	public String getyM() {
 		return yM;
 	}
-	public void setyM(Date yM) {
+	public void setyM(String yM) {
 		this.yM = yM;
 	}
 	public String getGoal() {
@@ -43,16 +54,6 @@ public class Goal implements Serializable{
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
-	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((goal == null) ? 0 : goal.hashCode());
-		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
-		result = prime * result + num;
-		result = prime * result + ((yM == null) ? 0 : yM.hashCode());
-		return result;
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -86,6 +87,7 @@ public class Goal implements Serializable{
 	public String toString() {
 		return "Goal [num=" + num + ", yM=" + yM + ", goal=" + goal + ", memberId=" + memberId + "]";
 	}
-
+	
+	
 		
 }
