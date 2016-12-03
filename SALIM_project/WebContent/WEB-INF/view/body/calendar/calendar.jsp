@@ -11,13 +11,10 @@
 	
 	$(document).ready(function(){
 		$("#btnRegisterGoal").on("click", function(){
-			// 
-			//alert($("#calendar").fullCalendar('getDate').format('YYYY-MM'));
+			//alert($("#calendar").fullCalendar('getView').title);
 			
+			alert($("#calendar").fullCalendar('getDate').format('YYYY-MM'));
 			
-			var date = new Date();
-			var m = date.getMonth();
-			var y = date.getFullYear();
 			$.ajax({
 				url:"${initParam.rootPath}/goal/applyDB.do",
 				type:"post",
@@ -28,7 +25,7 @@
 				dataType:"text",
 				success:function(obj){
 					// 버튼을 비활성화 시킬 수 있게. textarea를 변경 불가능하게.
-					alert(obj);
+					//alert(obj);
 					$("#goal").attr("disabled", "disabled");
 					$("#btnRegisterGoal").attr("hidden", "hidden");
 				},
@@ -39,7 +36,6 @@
 				beforeSend:function(){
 					alert($("#goal").val());
 				}
-					
 			});
 			 
 		
@@ -56,10 +52,9 @@
 	
 	<div id="targetForMonth" style="background-color: yellow;">
 		이번달 목표 :<br>
-		
 		<!--   disabled="disabled"  onmouseover="" ondblclick="" -->
 		<div id="textArea" style="background-color: blue;">
-			<textarea name="goal" id="goal" cols="60" rows="5" disabled="disabled">${requestScope.goal.goal }</textarea>
+			<textarea name="goal" id="goal" cols="60" rows="3" disabled="disabled" placeholder="아직 설정된 목표가 없습니다.">${requestScope.goal.goal }</textarea>
 			<!-- <input type="submit" value="등록">  -->
 			<button id="btnRegisterGoal" hidden="true">등록</button>
 		</div>

@@ -34,8 +34,8 @@ public class GoalDaoImpl implements GoalDao{
 	}
 
 	@Override
-	public Goal selectGoal(Goal goal) {	// goal객체의 일부 내용 사용 : yM, memberId 
-		return session.selectOne("goalsMapper.selectGoal", goal);
+	public Goal selectGoal(Map map) {	// month, memberId 
+		return session.selectOne("goalsMapper.selectGoal", map);
 	}
 	 
 }

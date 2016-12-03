@@ -15,7 +15,7 @@ public interface GoalDao {
 	public abstract int deleteGoal(int num);
 	
 	// 목표 조회
-	public abstract Goal selectGoal(Goal goal);
+	public abstract Goal selectGoal(Map map);
 	
 	
 }

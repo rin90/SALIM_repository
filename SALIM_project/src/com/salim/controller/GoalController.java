@@ -17,7 +17,7 @@ import com.salim.vo.Goal;
 @RequestMapping("/goal")
 public class GoalController {
 	@Autowired
-	GoalService service;
+	private GoalService service;
 	
 	@RequestMapping("/applyDB.do")
 	@ResponseBody
@@ -25,6 +25,5 @@ public class GoalController {
 		goal = service.applyDB(goal);
 		return goal;
 	}
-	
 	
 }

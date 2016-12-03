@@ -39,19 +39,23 @@ jQuery의   Fullcalendar
 			header : {
 				left : 'today', 
 				center : 'prev, title, next',
-				right : 'month,listDay,agendaDay'  
+				right : 'month,listMonth,agendaDay'
+				/* right : 'month,listDay,agendaDay'  */ 
 				/* right : 'today, month,agendaWeek,agendaDay'   */
 			},
 			editable : true,
-			
+			/* 
 			dayClick: function(date){	// 밀리초 단위로 계산해서 받아옴
 				var detail = new Date(date);
 				alert('Day Click Event : \n' + detail.getFullYear() + "-" + (detail.getMonth()+1) + "-" + detail.getDate());
 				//window.open("/SALIM_project/popup/input_schedule.jsp", "registGoal", "width=400, height=300");
 			},
+			 */
 			selectable : true,
 			selectHelper : true,
  			select : function(start, end){
+ 				//window.open("/SALIM_project/popup/input_schedule.jsp", "registGoal", "width=400, height=700");
+				 
 				var title = prompt('Event Title : ');
 				var eventDate;
 				if(title) {
@@ -62,11 +66,12 @@ jQuery의   Fullcalendar
 					};
 					$('#calendar').fullCalendar('renderEvent', eventDate, true);
 				}
-				$('#calendar').fullCalendar('unselect');
+				$('#calendar').fullCalendar('unselect'); 
+				
 			}, 
  
-			eventLimite: true,	// 여러개의 Event를 실행시킬 수 있게 셋팅
-			events : [ {
+			eventLimit: true,	// Event가 많이 등록되면 +n 형식으로 표시
+			events : [ {		// json형식으로 받아와서 사용하믄 된데
 				title : 'All Day Event',
 				/* start : new Date(y, m, 1) */
 				start : '2016-12-03'

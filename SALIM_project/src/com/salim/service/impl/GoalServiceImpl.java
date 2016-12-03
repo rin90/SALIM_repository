@@ -1,7 +1,6 @@
 package com.salim.service.impl;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +25,10 @@ public class GoalServiceImpl implements GoalService{	// 비지니스 로직
 		System.out.println("길이는 : " + length);
 		
 		// 1단계. 조회
-		Goal result = dao.selectGoal(goal);
+		Map map = new HashMap();
+		map.put("memberId", goal.getMemberId());
+		map.put("month", goal.getyM());
+		Goal result = dao.selectGoal(map);
 		System.out.print("goalService : ");
 		
 		// 2단계. 비교에 따른 결과 조회 - 조회결과 없으면서 내용이 있으면 insert, 내용이 없으면 delete, 내용이 있으면 update
@@ -47,6 +49,11 @@ public class GoalServiceImpl implements GoalService{	// 비지니스 로직
 			dao.updateGoal(goal);
 		}
 		return goal;
+	}
+
+	@Override
+	public Goal getGoal(Map map) {
+		return dao.selectGoal(map);
 	}
 
 }
