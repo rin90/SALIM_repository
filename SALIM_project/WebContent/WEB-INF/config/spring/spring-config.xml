@@ -36,7 +36,7 @@
 	
 	<!-- member -->
 	
-	<mvc:view-controller path="/loginMember.do" view-name="body/joinTest.tiles"/>
+	<mvc:view-controller path="/loginMember.do" view-name="body/join_form.tiles"/>
 	<!-- 
 	<mvc:view-controller path="/leaveMember.do" view-name="body/leave_member.tiles"/>
 	<mvc:view-controller path="/myPage.do" view-name="body/myPage.tiles"/>
