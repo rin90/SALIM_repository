@@ -4,7 +4,7 @@
 	
 	
 	<!-- 자유게시판 글쓰기 (등록) -->
-	<insert id="freeInsert" parameterType="freeboard">
+	<insert id="TIPInsert" parameterType="freeboard">
 		<selectKey keyProperty="no" resultType="_int" order="BEFORE">
 			select seq_free.nextval from dual
 		</selectKey>
