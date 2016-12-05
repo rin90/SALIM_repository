@@ -20,7 +20,7 @@
 		-> interceptors이용하시는 분들 의미!
 	===============================================-->
 	<!-- 활동 전에 로그인 했는지 여부 체크하는 interceptor -->
-	<mvc:interceptors>
+	<mvc:interceptors> 
 		<mvc:interceptor>
 			<mvc:mapping path="/**/login/**"/>
 			<bean class="com.salim.interceptor.LoginCheckInterceptor"/>

@@ -6,28 +6,30 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
+import com.salim.util.DateJsonSerializer;
 
 public class Member implements Serializable{
  
-	String memberId;
-	String name;
-	int age;
+	private String memberId;
+	private String  name;
+	private int age;
 	
 	//@JsonSerialize(using=DateJsonSerializer.class)
-	//@DateTimeFormat(pattern="yyyy-MM-dd")
-	Date birthday;
-	String password;
+	@DateTimeFormat(pattern="yyyyMMdd")
+	private Date birthday;
+	private String password;
+	private String email;
 	
-	Member(){}
+	public Member(){}
 
-	public Member(String memberId, String name, int age, Date birthday, String password) {
+	public Member(String memberId, String name, int age, Date birthday, String password, String email) {
 		super();
 		this.memberId = memberId;
 		this.name = name;
 		this.age = age;
 		this.birthday = birthday;
 		this.password = password;
+		this.email = email;
 	}
 
 	public String getMemberId() {
@@ -70,12 +72,21 @@ public class Member implements Serializable{
 		this.password = password;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + age;
 		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -98,6 +109,11 @@ public class Member implements Serializable{
 				return false;
 		} else if (!birthday.equals(other.birthday))
 			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
 		if (memberId == null) {
 			if (other.memberId != null)
 				return false;
@@ -119,9 +135,10 @@ public class Member implements Serializable{
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", name=" + name + ", age=" + age + ", birthday=" + birthday
-				+ ", password=" + password + "]";
+				+ ", password=" + password + ", email=" + email + "]";
 	}
 
+	
 	
 	
 }
