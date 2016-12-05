@@ -3,7 +3,7 @@
 <mapper namespace="tipMapper">
 	
 	<!-- tip게시판 글 등록( 글 쓰기) -->
-	<insert id="tipInsert">
+	<insert id="tipInsert" parameterType="tipboard">
 		<selectKey keyProperty="no" resultType="_int" order="BEFORE">
 			select seq_tip.nextval from dual
 		</selectKey>

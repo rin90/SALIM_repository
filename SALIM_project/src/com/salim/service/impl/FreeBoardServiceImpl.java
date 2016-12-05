@@ -28,10 +28,6 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		dao.updateFree(freeBoard);
 	}
 
-	@Override
-	public void updateClick(int no) {
-		dao.updateClick(no);
-	}
 
 	@Override
 	public void updateGood(int no) {
@@ -50,6 +46,9 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 
 	@Override
 	public FreeBoard selectByNo(int no) {
+		//여기서 member_id가 글 등록한 member_id가 같은 id인지 판별해서 같으면 클릭업데이트 하지 않기 다르면 클릭업데이트 하기
+		dao.updateClick(no);
+		
 		return dao.selectByNo(no);
 	}
 

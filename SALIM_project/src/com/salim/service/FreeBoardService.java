@@ -13,9 +13,6 @@ public interface FreeBoardService {
 	//글 수정
 	void updateFree(FreeBoard freeBoard);
 	
-	//조회수정
-	void updateClick(int no);
-	
 	//좋아요 수정
 	void updateGood(int no);
 	

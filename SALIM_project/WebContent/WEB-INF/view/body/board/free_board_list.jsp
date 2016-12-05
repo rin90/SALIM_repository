@@ -35,7 +35,7 @@
 			<c:forEach items="${requestScope.list }" var="freeBoard">
 				<tr>
 					<td>${freeBoard.no }</td>
-					<td><a href="${initParam.rootPath }/free/seleteDetail.do">${freeBoard.title }</a></td>
+					<td><a href="${initParam.rootPath }/free/seleteDetail.do?no=${freeBoard.no}&page=${requestScope.pageBean.page}">${freeBoard.title }</a></td>
 					<td>${freeBoard.memberId }</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${freeBoard.registerTime }"/></td>
 					<td>${freeBoard.click }</td>
