@@ -19,6 +19,7 @@ public class Member implements Serializable{
 	private Date birthday;
 	private String password;
 	private String email;
+	private String password2;
 	
 	public Member(){}
 
@@ -30,6 +31,27 @@ public class Member implements Serializable{
 		this.birthday = birthday;
 		this.password = password;
 		this.email = email;
+	}
+	
+	public Member(String memberId, String name, int age, Date birthday, String password, String password2,
+			String email) {
+		super();
+		this.memberId = memberId;
+		this.name = name;
+		this.age = age;
+		this.birthday = birthday;
+		this.password = password;
+		this.password2 = password2;
+		this.email = email;
+	}
+
+	
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
 	}
 
 	public String getMemberId() {

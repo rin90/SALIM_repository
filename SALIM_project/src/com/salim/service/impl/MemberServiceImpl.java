@@ -92,5 +92,18 @@ public class MemberServiceImpl implements MemberService{
 		System.out.println("로그인 : loginMember()");
 		return sendMap;
 	}
+
+	//아이디 중복 체크 서비스!
+	@Override
+	public boolean findMemberForIdCheck(String memberId) {
+		
+		Member member=memberdao.selectMemberForIdCheck(memberId); 
+		if(member==null)
+		{
+			return true; //중복된 아이디가 없는 경우.
+		}
+
+		return false; //중복된 아이디가 있는 경우.
+	}
 	
 }

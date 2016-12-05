@@ -30,6 +30,7 @@ public interface MemberService {
 	//회원 1사람 id로 조회
 	public Member findMemberById(String memberId);
 	
+	public boolean findMemberForIdCheck(String memberId);
 
 	
 }

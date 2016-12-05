@@ -8,5 +8,5 @@
 <a href="${initParam.rootPath }/">Tip게시판</a><br>
 <a href="${initParam.rootPath }/">Q&A</a><br>
 <a href="${initParam.rootPath }/code/income/codeList.do">수입&지출 입력창</a><br>
-<a href="${initParam.rootPath }/loginMember.do">회원가입</a><br>
+
 

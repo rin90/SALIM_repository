@@ -16,5 +16,10 @@ public interface MemberDao {
 	//회원 로그인 - 메서드 이름이 바뀔 수도 있음 - 바꾸는게 좋을 것 같다.
 	int joinMember(Member member);
 	
+	//아이디로 회원 조회
 	Member selectMemberById(String memberId);
+	
+	//아이디 중복 체크를 위한 회원 조회
+	Member selectMemberForIdCheck(String memberId);
+	
 }

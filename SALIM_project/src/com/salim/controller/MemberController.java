@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.salim.service.MemberService;
@@ -33,7 +34,25 @@ public class MemberController {
 		service.joinMember(member);
 		System.out.println("3");
 
-		return "/WEB-INF/view/member/join_success.jsp";
+		//return "/body/join_success.tiles";
+		return "/join_success.jsp";
+	}
+	
+	
+	//아이디 중복 체크 - ajax 처리
+	@RequestMapping("idDueCheck.do")
+	@ResponseBody
+	public HashMap<String,Boolean> idDueCheck(String memberId)
+	{
+		System.out.println("hello1");
+		//business logic을 불러서 처리를 하고, 
+		System.out.println(memberId);
+		boolean flag=service.findMemberForIdCheck(memberId);
+		System.out.println(flag);
+		HashMap<String,Boolean> idCheckMap=new HashMap<String, Boolean>();
+		
+		idCheckMap.put("flag", flag); //이 부분은 VO가 없어서 map의 형태로 만들어준 부분이다!
+		return idCheckMap;
 	}
 	
 	//회원 탈퇴

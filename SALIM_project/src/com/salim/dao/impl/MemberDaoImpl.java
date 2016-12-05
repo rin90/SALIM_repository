@@ -45,5 +45,10 @@ public class MemberDaoImpl implements MemberDao{
 	{
 		return session.selectOne(makeSqlId("selectMemberById"),memberId);
 	}
+	@Override
+	public Member selectMemberForIdCheck(String memberId) {
+		
+		return session.selectOne(makeSqlId("idCheck"),memberId);
+	}
 
 }

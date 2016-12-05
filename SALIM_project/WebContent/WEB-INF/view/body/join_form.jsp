@@ -3,14 +3,40 @@
 
 <!-- 이 부분 jquery.js 추가해야함! -->
 <script type="text/javascript" src="${initParam.rootPath}/scripts/jquery.js"></script>
+
 <script type="text/javascript">
+var result=false;
 $(document).ready(function(){
 	$("#idCheckBtn").on("click", function(){
-		
+	
 		$.ajax({
-			
-			/* url:"/My_SALIM_project/member/" */
-			
+			 "url":"${initParam.rootPath}/member/idDueCheck.do",
+			 "data":"memberId="+$("#id").val() ,
+			 "dataType":"json",
+			 "beforeSend":function(){
+				 if(!memberId)
+			     {
+					 $("#idCheckLayer").html("아이디를 입력하세요.")
+					 return false;
+			     }
+			 },
+			 "success":function(obj)
+			 {
+				 alert("success");
+				 result= obj.flag;
+				 if(result) //트루인 경우! 사용가능
+				 {
+					 alert("성공, true인 경우");
+					 $("#idCheckLayer").html("사용할 수 있는 아이디입니다.");
+					 
+				 }
+					 
+			 },
+			 "error":function()
+			 {
+				 alert("실패");
+			 }
+				
 		});
 		
 		
@@ -23,12 +49,12 @@ $(document).ready(function(){
 <a href="/My_SALIM_project/loginMember.do">로그인</a> -->
 
 <h2>가입양식</h2>
-<form method="post" action="${initParam.rootPath}/body/join.do">
+<form method="post" action="${initParam.rootPath}/member/join.do">
 	<table style="width:600px">
 		<tr>
 			<td width="100">ID</td>
 			<td>
-				<input type="text" name="memberId" > <button id="idCheckBtn">아이디 중복 체크</button>
+				<input type="text" name="memberId" id='id' ><button id="idCheckBtn">아이디 중복 체크</button><div id="idCheckLayer"></div>
 				
 			</td>
 		</tr>
@@ -36,6 +62,12 @@ $(document).ready(function(){
 			<td>Password</td>
 			<td>
 				<input type="password" name="password">
+			</td>
+		</tr>
+		<tr>
+			<td>Password 재입력</td>
+			<td>
+				<input type="password" name="password2">
 			</td>
 		</tr>
 		<tr>
@@ -59,7 +91,7 @@ $(document).ready(function(){
 		<tr>
 			<td>이메일</td>
 			<td>
-				<input type="text" id="email" name="email">
+				<input type="text" id="email" name="email"> <button id="emailCheckBtn">이메일 중복 체크가 필요한가?</button>
 			</td>
 		</tr>
 		<tr>

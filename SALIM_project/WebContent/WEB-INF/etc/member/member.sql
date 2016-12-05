@@ -16,11 +16,11 @@ drop table member CASCADE CONSTRAINTS;
 -- 11.30 회원 가입 테스트
 
 --회원 가입 
-insert into member values('mem1','LJH1',20,'1991-04-15','password1');
-insert into member values('mem2','LJH2',20,'1991-04-16','password2');
-insert into member values('mem3','LJH3',20,'1991-04-17','password3');
-insert into member values('mem4','LJH4',20,'1991-04-18','password4');
-insert into member values('mem5','LJH5',20,'1991-04-19','password5');
+insert into member values('mem1','LJH1',20,'1991-04-15','password1','email1@naver.com');
+insert into member values('mem2','LJH2',20,'1991-04-16','password2','email2@naver.com');
+insert into member values('mem3','LJH3',20,'1991-04-17','password3','email3@naver.com');
+insert into member values('mem4','LJH4',20,'1991-04-18','password4','email4@naver.com');
+insert into member values('mem5','LJH5',20,'1991-04-19','password5','email5@naver.com');
 
 --회원 조회
 select * from member;

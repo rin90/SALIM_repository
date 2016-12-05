@@ -18,13 +18,23 @@
  		member_Id=#{memberId}
  </update>	 -->
  
+
+ <!-- Id로 Member를 조회 -->
  <select id ="selectMemberById" parameterType="string" resultType="member">
  	
- 	select member_id memberId, name, age, birthday, password, eamil 
+ 	select member_id memberId, name, age, birthday, password, email 
  	from member
  	where member_id=#{value}
  	
  </select>
  
- 
+ <!-- id 중복 체크용 Member 조회  -->
+<select id="idCheck" parameterType="string" resultType="member">
+
+	select member_id memberId, name, age, birthday, password, email 
+ 	from member
+ 	where member_id=#{value}
+ 	
+</select>
+
 </mapper> 
