@@ -39,6 +39,20 @@
 		delete from free_board
 		where no=#{no}
 	</delete>
+
+	<!-- 글 번호로 글 찾기(상세화면) -->
+	<select id="selectByNo" parameterType="_int" resultType="freeboard">
+		select no,title,member_id memberId,register_time registerTime,click,good,content,file_root fileRoot
+		from free_board
+		where no=#{no}
+	</select>
+	
+	<!-- 글의 총댓글 개수 (상세화면)-->
+	<select id="selectCommentTotal" parameterType="_int" resultType="_int">
+	select count(id)
+	from comments
+	where font_no =#{value}
+	</select>
 	
 	<!-- Page처리를 위한 글 토탈 -->
 	<select id="selectTotal" resultType="_int">
@@ -56,49 +70,52 @@
 		where page=#{page}
 	</select>
 	
-	<!-- 조회- 작성자  -->
-	<select id="selectByMemberid" parameterType="string" resultType="freeboard">
-		select no,title,member_id memberId,register_time registerTime,click,good
+	
+	
+	<!-- Page처리를 위한 글 토탈-작성자로 검색  -->
+	<select id="selectMemberIdTotal"  parameterType="string" resultType="_int">
+		select  count(no)
 		from free_board
 		where member_id=#{value}
+	</select>
+	
+	<!-- 조회- 작성자로 검색  -->
+	<select id="selectByMemberid" parameterType="map" resultType="freeboard">
+		select no,title,member_id memberId,register_time registerTime,click,good
+		from(
+		select ceil(rownum/#{current}) page,no,title,member_id,register_time,click,good
+		from free_board
+		where member_id=#{memberId}
+		)
+		where page=#{page}
+	</select>
+	
+
+
+
+	<!-- Page처리를 위한 글 토탈 - 제목으로 검색 -->
+	<select id="selectTitleTotal"   parameterType="string"  resultType="_int">
+		select  count(no)
+		from free_board
+		where title like '%'||#{value}||'%'
 	</select>
 	
 	<!-- 조회 - 제목으로 검색 -->
-	<select id="selectByTitle" parameterType="string" resultType="freeboard">
+	<select id="selectByTitle" parameterType="map" resultType="freeboard">
 		select no,title,member_id memberId,register_time registerTime,click,good
+		from(
+		select ceil(rownum/#{current}) page,no,title,member_id,register_time,click,good
 		from free_board
-		where title like '%'||#{value}||'%'
+		where title like '%'||#{title}||'%'
+		)
+		where page=#{page}
 	</select>
-	
-	<!-- 조회 작성자 글 토탈 -->
-	<select id="selectByMemberIdTotal" parameterType="string" resultType="_int">
-		select count(no)
-		from free_board
-		where member_id=#{value}
-	</select>
-	
-	<!-- 조회 제목 글 토탈 -->
-	<select id="selectByTitleTotal" parameterType="string" resultType="_int">
-		select count(no)
-		from free_board
-		where title like '%'||#{value}||'%'
-	</select>
-	
-	<!-- 글 번호로 글 찾기(상세화면) -->
-	<select id="selectByNo" parameterType="_int" resultType="freeboard">
-		select no,title,member_id memberId,register_time registerTime,click,good,content,file_root fileRoot
-		from free_board
-		where no=#{no}
-	</select>
+		
 	
 	
 	
-	<!-- 글의 총댓글 개수 (상세화면)-->
-	<select id="selectCommentTotal" parameterType="_int" resultType="_int">
-	select count(id)
-	from comments
-	where font_no =#{value}
-	</select>
+	
+	
 	
 	
 	

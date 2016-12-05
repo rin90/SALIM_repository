@@ -86,13 +86,15 @@
 			
 			<p/>
 			
-			<select >				
+			<form action="${initParam.rootPath }/free/keyword.do" method="post">
+			<select name="category">				
 				<c:forEach items="${requestScope.codes }" var="code">
-					<option id="codelist" value="${code.code }">${code.code }</option> 					
+					<option>${code.code }</option> 					
 				</c:forEach>
 			</select>   
-			<input  id="codeText" type="text"> <button id="codeButton">검색</button>
-
+			<input type="hidden" name="page" value="1">
+			<input type="text" name="content"> <input type="submit" value="검색"> 
+			</form>
 
 
 		

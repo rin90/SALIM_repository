@@ -28,15 +28,26 @@ public class FreeBoardController {
 	@Autowired
 	private CodeService codeService;
 
-	// 게시판 목록 뿌려주는 메소드                                                   V    -로그인 없이 가능
+	// 게시판 목록 뿌려주는 메소드                        기본                           V    -로그인 없이 가능
 	@RequestMapping("list")
 	public ModelAndView list(int page) {
-		System.out.println("list");
+	
 		Map map = service.getFreeBoardList(page);
 		map.put("codes", codeService.findCode("조회"));
 		return new ModelAndView("body/board/free_board_list.tiles", map);
 	}
-
+	
+	
+	// 게시판 목록 뿌려주는 메소드 ---  >>>> 검색  -제목 또는 제목으로 검색시                              -로그인 없이 가능
+	@RequestMapping("keyword")
+	public ModelAndView selectByTitle(int page,String content,String category){
+		Map map =service.getTermsFreeBoardList(page, category, content);
+		map.put("codes", codeService.findCode("조회"));
+		return new ModelAndView("body/board/free_board_list.tiles",map);
+	}
+	
+	
+	
 	// 글 등록 form 이동 메소드                                                       V         - 로그인해야 가능
 	@RequestMapping("form")
 	public String fromMove(int page,ModelMap map){
@@ -116,27 +127,5 @@ public class FreeBoardController {
 	public void goodUpdate(int no){
 		service.updateGood(no);
 	}
-	
-	
-	
-
-	
-	// 조회 -제목,작성자 조회 메소드                        V ajax처리      -로그인 없이 가능
-	@RequestMapping("keyword")
-	@ResponseBody
-	public void selectByTitle( String keyword,String category,ModelMap map){
-		int page =1;
-		List<FreeBoard> list =null;
-		System.out.println("왔다.");
-		if(category.equals("제목")){
-			list = service.selectByTitle(keyword);			
-		}else if(category.equals("작성자")){
-			list = service.selectByMemberId(keyword);
-		}
-		Map p=service.getFreeBoardList(page);
-		map.put("pageBean", p);
-		map.put("list", list);
-	}
-	
 
 }

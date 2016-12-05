@@ -12,7 +12,9 @@ create table notes(  --메모
 drop table notes;
 
 
-
+		
+	
+		
 
 
 create sequence seq_exp--sequence생성

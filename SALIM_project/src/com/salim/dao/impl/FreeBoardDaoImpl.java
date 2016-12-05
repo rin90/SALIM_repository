@@ -50,24 +50,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	}
 
 	@Override
-	public int selectTotal() {
-		return session.selectOne(make("selectTotal"));
-	}
-
-	@Override
-	public List<FreeBoard> selectCurrentPage(int page) {
-		HashMap map = new HashMap();
-		map.put("current", Constants.ITEMS);
-		map.put("page",page);
-		return  session.selectList(make("selectCurrentPage"),map);
-	}
-
-	@Override
-	public List<FreeBoard> selectByTitle(String title) {
-		return session.selectList(make("selectByTitle"),title);
-	}
-
-	@Override
 	public FreeBoard selectByNo(int no) {
 		return session.selectOne(make("selectByNo"),no);
 	}
@@ -78,17 +60,46 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	}
 	
 	@Override
-	public List<FreeBoard> selectByMemberId(String memberId) {
-		return session.selectList(make("selectByMemberid"),memberId);
+	public List<FreeBoard> selectCurrentPage(int page) {
+		HashMap map = new HashMap();
+		map.put("current", Constants.ITEMS);
+		map.put("page",page);
+		return  session.selectList(make("selectCurrentPage"),map);
 	}
+	
 	@Override
-	public int selectByMemberIdTotal() {
-		return session.selectOne(make("selectByMemberIdTotal"));
+	public List<FreeBoard> selectByMemberId(int page,String content) {
+		HashMap map = new HashMap();
+		map.put("current", Constants.ITEMS);
+		map.put("page", page);
+		map.put("memberId", content);
+		return session.selectList(make("selectByMemberid"),map);
 	}
+	
 	@Override
-	public int selectByTitleTotal() {
-		return session.selectOne(make("selectByTitleTotal"));
+	public List<FreeBoard> selectByTitle(int page,String content) {
+		HashMap map = new HashMap();
+		map.put("current", Constants.ITEMS);
+		map.put("page", page);
+		map.put("title", content);
+		return session.selectList(make("selectByTitle"),map);
 	}
+	
+	@Override
+	public int selectTotal() {
+		return session.selectOne(make("selectTotal"));
+	}
+	
+	@Override
+	public int selectTitleTotal() {
+		return session.selectOne(make("selectTitleTotal"));
+	}
+	
+	@Override
+	public int selectMemberIdTotal() {
+		return session.selectOne(make("selectMemberIdTotal"));
+	}
+	
 	
 	
 }
