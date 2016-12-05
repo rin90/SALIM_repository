@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,20 +27,18 @@ public class MemberController {
 	
 	//회원 가입
 	@RequestMapping("join.do")
-	public String joinTest(@ModelAttribute Member member) //요청파라미터를 vo 객체로 생성하고, request에 자동 저장
+	public String join(@ModelAttribute Member member) //요청파라미터를 vo 객체로 생성하고, request에 자동 저장
 	{
-		System.out.println("1");
+		//여기서 validator 검증을 해야함!
 		System.out.println(member);
-		System.out.println("2");
-		service.joinMember(member);
-		System.out.println("3");
-
+		service.joinMember(member); //여기까진 잘 온당..ㅎㅎ
 		//return "/body/join_success.tiles";
-		return "/join_success.jsp";
+		return "body/join_success.tiles"; //잘 간다.
 	}
 	
 	
 	//아이디 중복 체크 - ajax 처리
+	//<!-- ajax-->
 	@RequestMapping("idDueCheck.do")
 	@ResponseBody
 	public HashMap<String,Boolean> idDueCheck(String memberId)
@@ -91,7 +90,7 @@ public class MemberController {
 			Member m=(Member)sendMap.get("member");
 			System.out.println(m);
 			session.setAttribute("login_info", (Member)sendMap.get("member"));
-			return "/WEB-INF/view/member/view.jsp";
+			return "body/login_success.tiles";
 		}
 		//회원인 경우 - login 성공페이지로 이동, session에 login_info라는 이름으로 걸어둔다.
 		//회원이 아닌 경우 - 회원 가입 유도
@@ -106,7 +105,7 @@ public class MemberController {
 	{
 		session.invalidate();
 		
-		return "/WEB-INF/view/member/view.jsp";
+		return "redirect:/main.do";
 	}
 	
 	//마이페이지는 일단 단순 view 이동으로 처리함

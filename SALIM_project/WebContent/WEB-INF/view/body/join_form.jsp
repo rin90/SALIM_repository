@@ -8,10 +8,10 @@
 var result=false;
 $(document).ready(function(){
 	$("#idCheckBtn").on("click", function(){
-	
+	alert("TEst");
 		$.ajax({
 			 "url":"${initParam.rootPath}/member/idDueCheck.do",
-			 "data":"memberId="+$("#id").val() ,
+			 "data":"memberId="+$("#memberId").val(),
 			 "dataType":"json",
 			 "beforeSend":function(){
 				 if(!memberId)
@@ -20,8 +20,7 @@ $(document).ready(function(){
 					 return false;
 			     }
 			 },
-			 "success":function(obj)
-			 {
+			 "success":function(obj){
 				 alert("success");
 				 result= obj.flag;
 				 if(result) //트루인 경우! 사용가능
@@ -54,7 +53,7 @@ $(document).ready(function(){
 		<tr>
 			<td width="100">ID</td>
 			<td>
-				<input type="text" name="memberId" id='id' ><button id="idCheckBtn">아이디 중복 체크</button><div id="idCheckLayer"></div>
+				<input type="text" name="memberId" id="memberId" ><button id="idCheckBtn">아이디 중복 체크</button><div id="idCheckLayer"></div>
 				
 			</td>
 		</tr>

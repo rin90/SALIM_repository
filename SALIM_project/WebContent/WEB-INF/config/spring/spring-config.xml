@@ -35,9 +35,12 @@
 	<mvc:view-controller path="/body/income.do" view-name="body/income.tiles"/>
 	
 	<!-- member -->
-	
-	<mvc:view-controller path="/loginMember.do" view-name="body/join_form.tiles"/>	
+
+	<mvc:view-controller path="/joinMember.do" view-name="body/join_form.tiles"/>	
 	<mvc:view-controller path="/join_success.do" view-name="body/join_success.tiles"/>	
+	<mvc:view-controller path="/loginMember.do" view-name="body/login_form.tiles"/>
+	<mvc:view-controller path="/myPage.do" view-name="body/myPage.tiles"/>
+	
 	<!-- <mvc:view-controller path="/leaveMember.do" view-name="body/leave_member.tiles"/>
 	<mvc:view-controller path="/myPage.do" view-name="body/myPage.tiles"/>
  -->

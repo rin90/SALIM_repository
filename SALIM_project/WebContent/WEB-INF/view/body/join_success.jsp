@@ -28,23 +28,7 @@
 		<th align="left">이메일</th>
 		<td>${requestScope.member.email}</td>
 	</tr>
-	<%--
-	<tr>
-		<th align="left">마일리지</th>
-		<td><fmt:formatNumber value="${requestScope.member.mileage}"/>원</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<c:choose>
-				<c:when test="${empty requestScope.member.pictureName }">
-					<img src="${initParam.rootPath }/uploadPhoto/no-photo.png">
-				</c:when>
-				<c:otherwise>
-					<img src="${initParam.rootPath }/uploadPhoto/${requestScope.member.pictureName }">
-				</c:otherwise>
-			</c:choose>
-		</td>
-	</tr> --%>
+	
 </table>
 
 
