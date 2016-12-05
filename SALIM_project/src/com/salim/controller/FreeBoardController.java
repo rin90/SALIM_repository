@@ -34,14 +34,14 @@ public class FreeBoardController {
 		System.out.println("list");
 		Map map = service.getFreeBoardList(page);
 		map.put("codes", codeService.findCode("조회"));
-		return new ModelAndView("board/body/free_board_list.tiles", map);
+		return new ModelAndView("body/board/free_board_list.tiles", map);
 	}
 
 	// 글 등록 form 이동 메소드                                                       V         - 로그인해야 가능
 	@RequestMapping("form")
 	public String fromMove(int page,ModelMap map){
 		map.addAttribute("page", page);
-		return "board/body/free_board_form.tiles";
+		return "body/board/free_board_form.tiles";
 	}
 
 	
@@ -68,7 +68,7 @@ public class FreeBoardController {
 		service.insertFree(freeBoard);
 		map.addAttribute("commentTotal",service.selectCommentTotal(freeBoard.getNo()));
 		map.addAttribute("page",page);
-		return "board/body/free_board_detail.tiles";
+		return "body/board/free_board_detail.tiles";
 	}
 	
 	// 글 수정 form이동 메소드                  V                   -로그인해야 가능
@@ -76,7 +76,7 @@ public class FreeBoardController {
 	public String updateMove(int page,int no,ModelMap map){
 		map.addAttribute("page", page);
 		map.addAttribute("freeBoard",service.selectByNo(no));
-		return "board/body/free_board_modify.tiles";
+		return "body/board/free_board_modify.tiles";
 	}
 	
 
@@ -86,7 +86,7 @@ public class FreeBoardController {
 		service.updateFree(freeBoard);
 		map.addAttribute("page",page);
 		map.addAttribute("commentTotal",service.selectCommentTotal(freeBoard.getNo()));
-		return "board/body/free_board_detail.tiles";
+		return "body/board/free_board_detail.tiles";
 	}
 	
 	// 글 삭제 메소드                                                                 V       -로그인해야 가능
@@ -95,7 +95,7 @@ public class FreeBoardController {
 		service.deleteFree(no);
 		Map map = service.getFreeBoardList(page);
 		map.put("codes", codeService.findCode("조회"));
-		return new ModelAndView("board/body/free_board_list.tiles",map);
+		return new ModelAndView("body/board/free_board_list.tiles",map);
 	}
 	
 	// no로 조회하는 메소드(상세화면) + 댓글 수                            V  member_id가 같을 경우 조회수 증가를 하면 안됨 serviceImple에서 수정해야 할 부분(즉, 자기 자신의 글)
@@ -105,7 +105,7 @@ public class FreeBoardController {
 		map.addAttribute("freeBoard",service.selectByNo(no));
 		map.addAttribute("commentTotal",service.selectCommentTotal(no));
 		map.addAttribute("page",page);
-		return "board/body/free_board_detail.tiles";
+		return "body/board/free_board_detail.tiles";
 	}
 	
 
