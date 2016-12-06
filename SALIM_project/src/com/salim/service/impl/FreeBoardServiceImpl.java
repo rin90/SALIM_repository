@@ -70,19 +70,26 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		
 		// category는 검색 기준입니다.
 		if (category.equals("제목")) {
-			
+			System.out.println("if 제목 실행");
 			list = dao.selectByTitle(page, content);
-			pageBean = new PagingBean(page, dao.selectTitleTotal());
+			pageBean = new PagingBean(page, dao.selectTitleTotal(content));
 			
 		} else if (category.equals("작성자")) {
-			
+			System.out.println("if 작성자 실행");
 			list = dao.selectByMemberId(page, content);
-			pageBean = new PagingBean(page, dao.selectMemberIdTotal());
+			System.out.println("Service내용 ::::"+ content);
+			System.out.println("Service페이지::::"+page);
+			System.out.println("if 작성자 list"+dao.selectByMemberId(page, content));
+			pageBean = new PagingBean(page, dao.selectMemberIdTotal(content));
 		
 		}
 		
 		map.put("list", list);
 		map.put("pageBean", pageBean);
+		System.out.println("Service카테고리:"+category);
+		System.out.println("총페이지:"+pageBean.getTotalPage());
+		System.out.println("작성자"+dao.selectMemberIdTotal(content));
+		System.out.println("제목:"+dao.selectTitleTotal(content));
 		return map;
 	}
 

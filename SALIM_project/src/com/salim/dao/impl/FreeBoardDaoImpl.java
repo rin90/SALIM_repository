@@ -73,6 +73,10 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		map.put("current", Constants.ITEMS);
 		map.put("page", page);
 		map.put("memberId", content);
+		System.out.println("DAO내용 ::::"+ content);
+		System.out.println("DAO페이지::::"+page);
+		System.out.println("DAO 작성자 실행");
+		System.out.println("DAO::::::::::"+session.selectList(make("selectByMemberid"),map));
 		return session.selectList(make("selectByMemberid"),map);
 	}
 	
@@ -82,6 +86,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		map.put("current", Constants.ITEMS);
 		map.put("page", page);
 		map.put("title", content);
+		System.out.println("DAO 제목 실행");
 		return session.selectList(make("selectByTitle"),map);
 	}
 	
@@ -91,13 +96,13 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	}
 	
 	@Override
-	public int selectTitleTotal() {
-		return session.selectOne(make("selectTitleTotal"));
+	public int selectTitleTotal(String content) {
+		return session.selectOne(make("selectTitleTotal"),content);
 	}
 	
 	@Override
-	public int selectMemberIdTotal() {
-		return session.selectOne(make("selectMemberIdTotal"));
+	public int selectMemberIdTotal(String content) {
+		return session.selectOne(make("selectMemberIdTotal"),content);
 	}
 	
 	

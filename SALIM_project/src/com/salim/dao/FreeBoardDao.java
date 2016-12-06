@@ -40,7 +40,7 @@ public interface FreeBoardDao {
 	List<FreeBoard> selectByTitle(int page,String content);
 	
 	//제목으로 검색 글 토탈
-	int selectTitleTotal();
+	int selectTitleTotal(String content);
 	
 	
 	
@@ -49,7 +49,7 @@ public interface FreeBoardDao {
 	List<FreeBoard> selectByMemberId(int page,String content);
 	
 	//작성자로 검색 글 토탈
-	int selectMemberIdTotal();
+	int selectMemberIdTotal(String content);
 	
 	
 		

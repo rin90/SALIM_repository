@@ -38,12 +38,18 @@ public class FreeBoardController {
 	}
 	
 	
-	// 게시판 목록 뿌려주는 메소드 ---  >>>> 검색  -제목 또는 제목으로 검색시                              -로그인 없이 가능
+	// 게시판 목록 뿌려주는 메소드 ---  >>>> 검색  -제목 또는 제목으로 검색시            V                  -로그인 없이 가능
 	@RequestMapping("keyword")
-	public ModelAndView selectByTitle(int page,String content,String category){
-		Map map =service.getTermsFreeBoardList(page, category, content);
+	public ModelAndView selectByTitle(int page,String Search,String category){
+		Map map =service.getTermsFreeBoardList(page, category, Search);
+		List list =(List) map.get("list");
+		if(list.size() == 0){ //12/6일 내일 해야함
+			map=service.getTermsFreeBoardList(page, category, Search);
+		}
 		map.put("codes", codeService.findCode("조회"));
-		return new ModelAndView("body/board/free_board_list.tiles",map);
+		map.put("category", category);
+		map.put("Search", Search);
+		return new ModelAndView("body/board/free_board_terms_list.tiles",map);
 	}
 	
 	
@@ -84,19 +90,23 @@ public class FreeBoardController {
 	
 	// 글 수정 form이동 메소드                  V                   -로그인해야 가능
 	@RequestMapping("updateForm")
-	public String updateMove(int page,int no,ModelMap map){
+	public String updateMove(int page,int no,String category,String Search,ModelMap map){
 		map.addAttribute("page", page);
 		map.addAttribute("freeBoard",service.selectByNo(no));
+		map.addAttribute("category",category);
+		map.addAttribute("Search",Search);
 		return "body/board/free_board_modify.tiles";
 	}
 	
 
 	//글 수정 메소드                                          V               - 로그인해야 가능
 	@RequestMapping("update")
-	public String update(@ModelAttribute FreeBoard freeBoard,int page,ModelMap map){		
+	public String update(@ModelAttribute FreeBoard freeBoard,int page,String category,String Search,ModelMap map){		
 		service.updateFree(freeBoard);
 		map.addAttribute("page",page);
 		map.addAttribute("commentTotal",service.selectCommentTotal(freeBoard.getNo()));
+		map.addAttribute("category",category);
+		map.addAttribute("Search",Search);
 		return "body/board/free_board_detail.tiles";
 	}
 	
@@ -106,22 +116,24 @@ public class FreeBoardController {
 		service.deleteFree(no);
 		Map map = service.getFreeBoardList(page);
 		map.put("codes", codeService.findCode("조회"));
-		return new ModelAndView("body/board/free_board_list.tiles",map);
+			return new ModelAndView("body/board/free_board_list.tiles", map);
 	}
 	
 	// no로 조회하는 메소드(상세화면) + 댓글 수                            V  member_id가 같을 경우 조회수 증가를 하면 안됨 serviceImple에서 수정해야 할 부분(즉, 자기 자신의 글)
 	// -로그인 해야 가능
 	@RequestMapping("seleteDetail")
-	public String detail(int no,int page,ModelMap map){
+	public String detail(int no,int page,String category,String Search,ModelMap map){
 		map.addAttribute("freeBoard",service.selectByNo(no));
 		map.addAttribute("commentTotal",service.selectCommentTotal(no));
 		map.addAttribute("page",page);
+		map.addAttribute("category",category);
+		map.addAttribute("Search",Search);
 		return "body/board/free_board_detail.tiles";
 	}
 	
 
 	
-	// 좋아요 수정 메소드                     V   view에서 ajax처리하기     -로그인 해야 가능
+	// 좋아요 수정 메소드                    view에서 ajax처리하기     -로그인 해야 가능
 	@RequestMapping("good")
 	@ResponseBody
 	public void goodUpdate(int no){

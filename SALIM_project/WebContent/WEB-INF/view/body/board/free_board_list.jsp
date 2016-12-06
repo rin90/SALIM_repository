@@ -35,7 +35,8 @@
 			<c:forEach items="${requestScope.list }" var="freeBoard">
 				<tr>
 					<td>${freeBoard.no }</td>
-					<td><a href="${initParam.rootPath }/free/seleteDetail.do?no=${freeBoard.no}&page=${requestScope.pageBean.page}">${freeBoard.title }</a></td>
+					<td><a 
+					href="${initParam.rootPath }/free/seleteDetail.do?no=${freeBoard.no}&page=${requestScope.pageBean.page}&category=${requestScope.category}">${freeBoard.title }</a></td>
 					<td>${freeBoard.memberId }</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${freeBoard.registerTime }"/></td>
 					<td>${freeBoard.click }</td>
@@ -93,7 +94,7 @@
 				</c:forEach>
 			</select>   
 			<input type="hidden" name="page" value="1">
-			<input type="text" name="content"> <input type="submit" value="검색"> 
+			<input type="text" name="Search"> <input type="submit" value="검색"> 
 			</form>
 
 

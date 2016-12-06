@@ -21,6 +21,8 @@
 		<input type="hidden" name="memberId" value="${requestScope.freeBoard.memberId }"> 
 		<input type="hidden" name="page" value="${requestScope.page }">
 		<input type="hidden" name="no" value="${requestScope.freeBoard.no }">
+		<input type="hidden" name="category" value="${requestScope.category }">
+		<input type="hidden" name="Search" value="${requestScope.Search }">
 		<input type="submit" value="수정완료">
 	
 		 <a href="${initParam.rootPath }/free/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>
@@ -30,6 +32,7 @@
 	
 	<form action="${initParam.rootPath }/free/list.do" method="post">
 		<input type="hidden" name="page" value="${requestScope.page }">
+
 		<input type="submit" value="취소">
 	</form>
 	

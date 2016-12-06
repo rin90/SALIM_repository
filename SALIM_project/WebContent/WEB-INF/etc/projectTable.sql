@@ -13,8 +13,6 @@ drop table notes;
 
 
 		
-	
-		
 
 
 create sequence seq_exp--sequence생성
