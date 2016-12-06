@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.salim.dao.MemberDao;
+
 import com.salim.service.MemberService;
 import com.salim.vo.Member;
 
@@ -105,5 +106,13 @@ public class MemberServiceImpl implements MemberService{
 
 		return false; //중복된 아이디가 있는 경우.
 	}
+
+	@Override
+	public Member findMemberByEmail(String email) {
+		Member member=memberdao.selectMemberByEmail(email);
+		return member;
+	}
+	
+	
 	
 }

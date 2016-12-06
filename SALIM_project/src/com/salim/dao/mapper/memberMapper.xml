@@ -37,4 +37,11 @@
  	
 </select>
 
+<!-- email을 통해 Member 조회 -->
+<select id="selectMemberByEmail" parameterType="string" resultType="member">
+	select member_id memberId, name, age, birthday, password, email 
+ 	from member
+ 	where email=#{value}
+ 	
+</select>
 </mapper> 

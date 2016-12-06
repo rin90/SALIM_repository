@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.salim.dao.MemberDao;
+
 import com.salim.vo.Member;
 
 @Service
@@ -31,6 +32,9 @@ public interface MemberService {
 	public Member findMemberById(String memberId);
 	
 	public boolean findMemberForIdCheck(String memberId);
+	
+	//회원 1사람 email로 조회
+	public Member findMemberByEmail(String email);
 
 	
 }

@@ -1,9 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-<!-- 이 부분 jquery.js 추가해야함! -->
-<script type="text/javascript" src="${initParam.rootPath}/scripts/jquery.js"></script>
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="/jQuery_class/scripts/jquery.js"></script>
 <script type="text/javascript">
 var result=false;
 $(document).ready(function(){
@@ -16,7 +18,7 @@ $(document).ready(function(){
 			 "beforeSend":function(){
 				 if(!memberId)
 			     {
-					 $("#idCheckLayer").html("아이디를 입력하세요.")
+					 $("#idCheckLayer").html("아이디를 입력하세요.");
 					 return false;
 			     }
 			 },
@@ -48,7 +50,7 @@ $(document).ready(function(){
 <a href="/My_SALIM_project/loginMember.do">로그인</a> -->
 
 <h2>가입양식</h2>
-<form method="post" action="${initParam.rootPath}/member/join.do">
+<form method="post" action="${initParam.rootPath}/join.do" method="POST">
 	<table style="width:600px">
 		<tr>
 			<td width="100">ID</td>

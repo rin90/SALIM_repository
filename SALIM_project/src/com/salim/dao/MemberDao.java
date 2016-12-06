@@ -22,4 +22,7 @@ public interface MemberDao {
 	//아이디 중복 체크를 위한 회원 조회
 	Member selectMemberForIdCheck(String memberId);
 	
+	//아이디 찾기 - 이메일로 회원 조회
+	Member selectMemberByEmail(String email);
+	
 }

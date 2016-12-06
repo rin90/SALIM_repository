@@ -40,7 +40,8 @@
 	<mvc:view-controller path="/join_success.do" view-name="body/join_success.tiles"/>	
 	<mvc:view-controller path="/loginMember.do" view-name="body/login_form.tiles"/>
 	<mvc:view-controller path="/myPage.do" view-name="body/myPage.tiles"/>
-	
+	<mvc:view-controller path="/findId.do" view-name="body/findId.tiles"/>
+	<mvc:view-controller path="/findPassword.do" view-name="body/findPassword.tiles"/>
 	<!-- <mvc:view-controller path="/leaveMember.do" view-name="body/leave_member.tiles"/>
 	<mvc:view-controller path="/myPage.do" view-name="body/myPage.tiles"/>
  -->
