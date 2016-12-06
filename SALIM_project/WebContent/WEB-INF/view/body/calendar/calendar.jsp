@@ -12,21 +12,15 @@
 	$(document).ready(function(){
 		/* 목표 관련 등록하는 부분 */
 		$("#btnRegisterGoal").on("click", function(){
-			//alert($("#calendar").fullCalendar('getView').title);
-			
-			alert($("#calendar").fullCalendar('getDate').format('YYYY-MM'));
-			
 			$.ajax({
 				url:"${initParam.rootPath}/goal/applyDB.do",
 				type:"post",
 				data:{"memberId":"tester2", //  {sessionScope.login_info.memberId}, 
 					"yM":$("#calendar").fullCalendar('getDate').format('YYYY-MM'),	// 캘린더에서 현재 보고있는 년도와 달을 받아와야함.
-					/* "yM":"2016-12", */
 					"goal":$("#goal").val()}, 
 				dataType:"text",
 				success:function(obj){
 					// 버튼을 비활성화 시킬 수 있게. textarea를 변경 불가능하게.
-					//alert(obj);
 					$("#goal").attr("disabled", "disabled");
 					$("#btnRegisterGoal").attr("hidden", "hidden");
 				},
@@ -39,9 +33,7 @@
 				}
 			});
 		});
-		
 
-		
 		$("#textArea").on("click", function(){
 			$("#goal").removeAttr("disabled");
 			$("#goal").focus();
