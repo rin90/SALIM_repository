@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace = "categoryMapper">
+	
+	<!-- 
+		대분류 조회 - 수입, 지출을 조회
+				- 수입 지출 하위의 대분류 조회 -> self join으로 값을 가져와야함
+	 -->
+	 
+	 <resultMap type="bigCategory" id="bigCategory-resultmap">
+	 	<id column="big_code" property="bigCode"/>
+	 	<result column="big_content" property="bigContent"/>
+	 	<result column="high_code" property="highCode"/>
+	 </resultMap>
+	 
+	  <resultMap type="smallCategory" id="smallCategory-resultmap">
+	 	<id column="small_code" property="smallCode"/>
+	 	<result column="small_content" property="smallContent"/>
+	 	<result column="big_code" property="bigCode"/>
+	 </resultMap>
+	 
+	 <!-- 조인한 것  -->
+	 <resultMap type="smallCategory" id="smallCategory-bigCategory-resultmap" extends="smallCategory-resultmap">
+	 	<association property="bigCategory" javaType="com.salim.vo.BigCategory">
+	 		<result column="big_code" property="bigCode"/>
+	 		<result column="big_content" property="bigContent"/>
+	 		<result column="high_code" property="highCode"/>
+	 	</association>
+	 </resultMap>
+
+	
+	
+	<!-- 상위 코드 조회 - 수입, 지출 조회-->
+	<select id="selectHighCode" resultMap="bigCategory-resultmap" parameterType="String">
+		select big_code, big_content, high_code
+		from bigCategory
+		where high_code is null
+		and big_content = #{value}
+	</select>
+	
+	<!-- 수입, 지출의 대분류 코드 조회 -> 예) 주수입, 부수입.. -->
+	<select id="selectBigCode" resultMap="bigCategory-resultmap" parameterType="_int">
+		select big_code, big_content, high_code
+		from bigCategory
+		where high_code = #{value}
+	</select>
+	
+	
+	<!-- 대분류 코드에서 소분류 코드들을 조회 -> 예) 급여, 상여.. -->
+	<select id="selectSmallCode" resultMap="smallCategory-resultmap" parameterType="_int">
+		select small_code, small_content, big_code
+		from smallCategory
+		where big_code = #{value}
+	</select>
+	
+	<!-- 소분류 코드로 대분류 코드를 조회 - 소분류 찾는것-> 예) 상여코드로 대분류 주수입을 조회 -->
+	<select id="selectBigCodeBySmallCode" parameterType="_int" resultMap="smallCategory-bigCategory-resultmap">
+		select b.big_code, b.big_content, b.high_code, 
+			   s.small_code, s.small_content, s.big_code
+		from bigCategory b, smallCategory s
+		where s.big_code = b.big_code
+		and s.small_code = #{value}
+	</select>
+	
+</mapper>
