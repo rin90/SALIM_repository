@@ -12,13 +12,20 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- annotation을 이용한 bean생성 설정시 사용 -->
-	<context:component-scan base-package="com.salim.controller, com.salim.dao.impl, com.salim.service.impl"/>
+	<context:component-scan base-package="com.salim.controller, com.salim.dao.impl, com.salim.service.impl, com.salim.interceptor"/>
 
 	<mvc:annotation-driven/>
 	<!-- ===========================================
 		체크 필요하신 분은 이곳에 등록해서 사용하세요. 
 		-> interceptors이용하시는 분들 의미!
 	===============================================-->
+	<!-- 활동 전에 로그인 했는지 여부 체크하는 interceptor -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/login/**"/>
+			<bean class="com.salim.interceptor.LoginCheckInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
 	<!-- 단순 링크 이동 -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles"/>
@@ -26,12 +33,13 @@
 	<mvc:view-controller path="/calendar.do" view-name="body/calendar/calendar.tiles"/> 	
 	<mvc:view-controller path="/graph.do" view-name="body/graph.tiles"/>
 	
+	<mvc:view-controller path="/body/income.do" view-name="body/income.tiles"/>
+
 
 	<!-- ViewResolver등록 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="2"/>	
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="3"
-			p:prefix="/WEB-INF/view"/>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="3" p:prefix="/WEB-INF/view"/>
 	
 	<!-- Tiles 설정 -> 나중에 Bootstrap이용하게 되면 없어질지도... -->
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
@@ -44,7 +52,7 @@
 	
 	<!-- mybatis 연동 설정 -->
 	<!-- BasicDataSource -->
-	<bean name="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
+	<bean name="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" 
 			p:driverClassName="oracle.jdbc.driver.OracleDriver"
 	 			p:url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
 	 			p:username="salim" p:password="salim"
@@ -58,7 +66,7 @@
 	 <!-- SqlSessionTemplate 생성 - 생성자로 sqlSessionFactoryBean을 주입 -->
 	<bean name="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
 		      c:sqlSessionFactory-ref="sqlSessionFactory"/>
-		      
+
 	<!-- Transaction 처리 -->
 	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 			  p:dataSource-ref="dataSource"/>
