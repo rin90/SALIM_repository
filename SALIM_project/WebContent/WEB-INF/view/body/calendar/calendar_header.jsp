@@ -32,11 +32,7 @@ jQuery의   Fullcalendar
 	$(document).ready(function() {
 
 		var current = new Date();
-		/*
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
-		 */
+		
 		$('#calendar').fullCalendar({
 			weekends : true,	
 			locale : "ko",
@@ -44,7 +40,6 @@ jQuery의   Fullcalendar
 				left : 'today', 
 				center : 'prev, title, next',
 				right : 'month,listMonth'
-				/* right : 'month,listMonth,agendaDay' */
 			},
 			editable : true,
 			selectable : true,		// 달력에서 선택할 수 있게
@@ -63,7 +58,7 @@ jQuery의   Fullcalendar
 				$('#calendar').fullCalendar('unselect'); 
 			}, 
 			eventLimit: true,	// Event가 많이 등록되면 +n 형식으로 표시
-			events:{	// 처음에 현재 달을 기준으로 셋팅.
+			events:{			// 처음에 현재 달을 기준으로 셋팅.
 				url : '${initParam.rootPath}/calendar/reload.do',
 				data : {"memberId":"tester2", "date":current.getFullYear()+'-'+(current.getMonth()+1)}
 			}
@@ -71,38 +66,15 @@ jQuery의   Fullcalendar
 		
 		
  		$('.fc-center').on("click", '.fc-prev-button, .fc-next-button', function(){			// 동적으로 변했을 때도 적용할 수 있게!
- 		/* 	
- 		})
- 		$('.fc-prev-button, .fc-next-button').click(function(){ 	// 초기에 한 번만 셋팅되기 때문에 페이지 전환된 이후에는 적용이 안됨
-		 */
-			// alert("이전달 : "+$('#calendar').fullCalendar('getDate').format('YYYY-MM'));
-		
 			$.ajax({
 				url:"${initParam.rootPath}/calendar/reload.do",
 				type:"post",
 				data:{"memberId":"tester2", "date":$('#calendar').fullCalendar('getDate').format('YYYY-MM')},
 				dataType:"json",
 				success:function(list){
-					//alert(list);		// 값을 확인하고 싶다면 dataType을 text로 해두고 alert을 실행시켜봐
 					$('#calendar').fullCalendar('removeEvents');
-					//$('#calendar').fullCalendar('addEventSource', list);
-					  
-					$('#calendar').fullCalendar('addEventSource', function(start, end, timezone, callback){
-						 var events=[];
-						 $.each(list, function(index, item){
-							 events.push({
-								 id:item.no,
-								 title:item.title,
-								 start:item.start,
-								 end:item.end
-							 }); 
-							
-						 });
-						callback(events);
-					 });
-					
+					$('#calendar').fullCalendar('addEventSource', list);
 					$('#calendar').fullCalendar('rerenderEvents');
-					
 				},
 				error:function(request, status, error){
 					alert("앞/뒤 달 관련 일정 받아오는 부분. \ncode : " + request.status + "\nerror : " + error);

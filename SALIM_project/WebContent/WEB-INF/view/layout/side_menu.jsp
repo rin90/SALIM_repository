@@ -1,11 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<<<<<<< HEAD
 <jsp:useBean id="today" class="java.util.Date"/>
 
 <a href="${initParam.rootPath }/calendar.do">일정</a><br>
 <a href="${initParam.rootPath }/calendar/load.do?memberId=tester2">일정2</a><br>
 <%-- <a href="${initParam.rootPath }/calendar/load.do?memberId=${sessionScope.login_info.memberId }">일정3</a><br> --%>
-=======
 <%-- <a href="${initParam.rootPath }/calendar.do">일정</a><br> --%>
 >>>>>>> branch 'master' of https://github.com/rin90/SALIM_repository.git
 <a href="${initParam.rootPath }/graph.do">막대그래프</a><br>
