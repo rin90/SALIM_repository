@@ -7,7 +7,7 @@
 		from schedule 
 	</sql>
 	
-	<resultMap type="com.salim.vo.Schedule" id="schedule-resultMap">
+	<resultMap type="com.salim.vo.Schedule_origin" id="schedule-resultMap-origin">
 		<id column="no" property="no"/>
 		<result column="title" property="title"/>
 		<result column="detail" property="detail"/>
@@ -16,15 +16,34 @@
 		<result column="member_id" property="memberId"/>
 	</resultMap>
 	
+	<resultMap type="com.salim.vo.Schedule" id="schedule-resultMap">
+		<id column="no" property="no"/>
+		<result column="title" property="title"/>
+		<result column="detail" property="detail"/>
+		<result column="start_date" property="start"/>
+		<result column="end_date" property="end"/>
+		<result column="member_id" property="memberId"/>
+	</resultMap>
+	<!-- 
 	<insert id="insertSchedule" parameterType="schedule">
 		insert into schedule values (#{no}, #{title}, #{detail}, #{startDate}, #{endDate}, #{memberId})
+	</insert> 
+	 -->
+	<insert id="insertSchedule" parameterType="schedule">
+		insert into schedule values (#{no}, #{title}, #{detail}, #{start}, #{end}, #{memberId})
 	</insert> 
 	
 	<update id="updateSchedule" parameterType="schedule">
 		update schedule 
-		set title=#{title}, detail=#{detail}, start_date=#{startDate}, end_date=#{endDate} 
+		set title=#{title}, detail=#{detail}, start_date=#{start}, end_date=#{end} 
 		where no=#{no}
 	</update>
+<!-- 	
+	<update id="updateSchedule" parameterType="schedule">
+		update schedule 
+		set title=#{title}, detail=#{detail}, start_date=#{startDate}, end_date=#{endDate} 
+		where no=#{no}
+	</update> -->
 <!-- 	
 	Service에서 update를 여러번 시도하는 것으로 우선 구현 -> 이후 해당 xml파일 내부에서 반복하는 형식을 만들 수 있게 찾아보자.
 	<update id="updateScheduleList" parameterType="list">
@@ -38,12 +57,12 @@
 	
 	<select id="selectScheduleByMonth" parameterType="map" resultMap="schedule-resultMap">
 		<include refid="schedule-select"/>
-		where member_id=#{memberId} and to_char(start_date, 'YYYY-MM')=#{month}
+		where member_id=#{memberId} and to_char(start_date, 'YYYY-MM')=#{month} or (to_char(start_date,'YYYY-MM')&lt;#{month} and to_char(end_date,'YYYY-MM')=#{month})
 	</select>
 	
 	<select id="selectScheduleByDay" parameterType="map" resultMap="schedule-resultMap">
 		<include refid="schedule-select"/>
-		where member_id=#{memberId} and to_char(start_date, 'YYYY-MM-DD')=#{day}
+		where member_id=#{memberId} and (to_char(start_date,'YYYY-MM-DD')&lt;=#{day} and to_char(end_date,'YYYY-MM-DD')>=#{day})
 	</select>
 	
 	

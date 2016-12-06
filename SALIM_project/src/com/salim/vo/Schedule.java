@@ -12,17 +12,17 @@ public class Schedule implements Serializable{
 	private String title;
 	private String detail;
 	@JsonSerialize(using=DataJsonSerializer.class)
-	private Date startDate;
+	private Date start;
 	@JsonSerialize(using=DataJsonSerializer.class)
-	private Date endDate;
+	private Date end;
 	private String memberId;
-	public Schedule(int no, String title, String detail, Date startDate, Date endDate, String memberId) {
+	public Schedule(int no, String title, String detail, Date start, Date end, String memberId) {
 		super();
 		this.no = no;
 		this.title = title;
 		this.detail = detail;
-		this.startDate = startDate;
-		this.endDate = endDate;
+		this.start = start;
+		this.end = end;
 		this.memberId = memberId;
 	}
 	public Schedule() {
@@ -46,17 +46,17 @@ public class Schedule implements Serializable{
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-	public Date getStartDate() {
-		return startDate;
+	public Date getStart() {
+		return start;
 	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setStart(Date start) {
+		this.start = start;
 	}
-	public Date getEndDate() {
-		return endDate;
+	public Date getEnd() {
+		return end;
 	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setEnd(Date end) {
+		this.end = end;
 	}
 	public String getMemberId() {
 		return memberId;
@@ -65,14 +65,19 @@ public class Schedule implements Serializable{
 		this.memberId = memberId;
 	}
 	@Override
+	public String toString() {
+		return "Schedule [no=" + no + ", title=" + title + ", detail=" + detail + ", start=" + start + ", end=" + end
+				+ ", memberId=" + memberId + "]";
+	}
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((detail == null) ? 0 : detail.hashCode());
-		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
+		result = prime * result + ((end == null) ? 0 : end.hashCode());
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + no;
-		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((start == null) ? 0 : start.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -90,10 +95,10 @@ public class Schedule implements Serializable{
 				return false;
 		} else if (!detail.equals(other.detail))
 			return false;
-		if (endDate == null) {
-			if (other.endDate != null)
+		if (end == null) {
+			if (other.end != null)
 				return false;
-		} else if (!endDate.equals(other.endDate))
+		} else if (!end.equals(other.end))
 			return false;
 		if (memberId == null) {
 			if (other.memberId != null)
@@ -102,10 +107,10 @@ public class Schedule implements Serializable{
 			return false;
 		if (no != other.no)
 			return false;
-		if (startDate == null) {
-			if (other.startDate != null)
+		if (start == null) {
+			if (other.start != null)
 				return false;
-		} else if (!startDate.equals(other.startDate))
+		} else if (!start.equals(other.start))
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -114,11 +119,6 @@ public class Schedule implements Serializable{
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "Schedule [no=" + no + ", title=" + title + ", detail=" + detail + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", memberId=" + memberId + "]";
-	}
 	
-	
+	 
 }

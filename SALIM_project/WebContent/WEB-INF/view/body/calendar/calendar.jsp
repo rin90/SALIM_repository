@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="./calendar_header.jsp" %>
-
+<%-- 	<jsp:include page="./calendar_header.jsp"/> --%>
 
 	<!-- 
 		보내줘야 하는 값 : memberId, 년도월 (예-201611)-id:yM, textarea에 있는 값-id:goal
@@ -10,6 +10,7 @@
 	<script type="text/javascript">
 	
 	$(document).ready(function(){
+		/* 목표 관련 등록하는 부분 */
 		$("#btnRegisterGoal").on("click", function(){
 			//alert($("#calendar").fullCalendar('getView').title);
 			
@@ -37,15 +38,16 @@
 					alert($("#goal").val());
 				}
 			});
-			 
-		
 		});
+		
+
 		
 		$("#textArea").on("click", function(){
 			$("#goal").removeAttr("disabled");
 			$("#goal").focus();
 			$("#btnRegisterGoal").removeAttr("hidden");
 		});
+		
 	});
 	</script>
 	
@@ -54,7 +56,7 @@
 		이번달 목표 :<br>
 		<!--   disabled="disabled"  onmouseover="" ondblclick="" -->
 		<div id="textArea" style="background-color: blue;">
-			<textarea name="goal" id="goal" cols="60" rows="3" disabled="disabled" placeholder="아직 설정된 목표가 없습니다.">${requestScope.goal.goal }</textarea>
+			<textarea name="goal" id="goal" cols="60" rows="3" disabled="disabled" placeholder="아직 설정된 목표가 없습니다." >${requestScope.goal.goal }</textarea>
 			<!-- <input type="submit" value="등록">  -->
 			<button id="btnRegisterGoal" hidden="true">등록</button>
 		</div>

@@ -59,7 +59,6 @@
 	<bean name="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
 		      c:sqlSessionFactory-ref="sqlSessionFactory"/>
 		      
-		      
 	<!-- Transaction 처리 -->
 	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 			  p:dataSource-ref="dataSource"/>
