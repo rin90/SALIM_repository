@@ -33,20 +33,29 @@ void tipInsert(TipBoard tipboard );//글쓰기
 	
 	int selectCommentTotal(int value);//글에대한 댓글 총개수
 
-	int updateBoard(TipBoard board, String pass);
+	Map getTipBoardList(int page);
 
-	TipBoard findBySeq(int seq);
 
-	String deleteView(int seq);
 
-	int BoardDelete(int seq, String storPass);
+	List<TipBoard> selectCurrentPage(Map map);
 
-	void insertTipBoard(TipBoard tipboard);
+	Map getTipListBoard(int page);
 
-	List<TipBoard> tipboardList(String keyField, String keyWord);
+	
 
-	TipBoard pagingProc(int i, int j, int size);
 
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
 	
 
 }

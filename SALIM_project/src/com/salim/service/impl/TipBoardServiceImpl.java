@@ -51,66 +51,58 @@ public class TipBoardServiceImpl implements TipBoardService {
 	@Override
 	public int selectTotal(int no) {
 		dao.selectByNo(no);
-		return 0;
+		return selectTotal(no);
 	}
 
 	@Override
-	public List<TipBoard> selectCurrentPage(int no, Map map) {
-		dao.selectCurrentPage(no, map);
-		return null;
+	public List<TipBoard> selectCurrentPage(Map map) {
+		dao.selectCurrentPage(map);
+		return selectCurrentPage(map);
 	}
 
 	@Override
 	public int selectByNo(int no) {
 		dao.selectByNo(no);
-		return 0;
+		return selectByNo(no);
 	}
 
 	@Override
 	public int selectCommentTotal(int value) {
 		dao.selectCommentTotal(value);
-		return 0;
+		return selectCommentTotal(value);
 	}
 
 	@Override
-	public int updateBoard(TipBoard board, String pass) {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<TipBoard> selectCurrentPage(int no,Map map) {
+		dao.selectCurrentPage(map);
+		return selectCurrentPage(map);
+	}
+
+
+
+
+	@Override
+	public Map getTipListBoard(int page) {
+		dao.getTipBoardList(page);
+		return getTipListBoard(page);
 	}
 
 	@Override
-	public TipBoard findBySeq(int seq) {
+	public Map getTipBoardList(int page) {
 		// TODO Auto-generated method stub
-		return null;
+		return getTipBoardList(page);
 	}
 
-	@Override
-	public String deleteView(int seq) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public int BoardDelete(int seq, String storPass) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public void insertTipBoard(TipBoard tipboard) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public List<TipBoard> tipboardList(String keyField, String keyWord) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public TipBoard pagingProc(int i, int j, int size) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
+	
+
+
 }
+	

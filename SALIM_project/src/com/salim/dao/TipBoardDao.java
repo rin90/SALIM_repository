@@ -25,17 +25,16 @@ public interface TipBoardDao {
 	
 	int  selectTotal( int no);//page처리를 우한 글총 개수
 	
-	List<TipBoard> selectCurrentPage(int no,Map map);//page처리를 위한 현재페이지
+	List<TipBoard> selectCurrentPage(Map map);//page처리를 위한 현재페이지
 	
-
+	Map getTipBoardList(int page);
 	
 	int selectByNo(int no);//no로 글 찾기(상세화면)
 	
-	int selectCommentTotal(int value);//글에대한 댓글 총개수
+	int selectCommentTotal(int no);//글에대한 댓글 총개수
 
-	ArrayList selectListBoard(int pageNo);
 
-	void insert(TipBoard tipboard);
+
 	
 	
 }

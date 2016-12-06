@@ -47,34 +47,26 @@ public class TipBoardDaoImpl implements TipBoardDao{
 	@Override
 	public int selectTotal(int no) {
 		session.selectOne("selectTotal" ,no);
-		return 0;
+		return selectTotal(no);
 	}
 
 	@Override
-	public List<TipBoard> selectCurrentPage(int no, Map map) {
+	public List<TipBoard> selectCurrentPage( Map map) {
 		session.selectList("selectCurrentPage",map);
-		return null;
+		return selectCurrentPage(map);
 	}
 
 	@Override
 	public int selectByNo(int no) {
 		session.selectOne("selectByNo",no);
-		return 0;
+		return selectByNo(no);
 	}
 
 	@Override
 	public int selectCommentTotal(int value) {
 		session.selectOne("selectCommentTotal",value);
-		return 0;
+		return selectCommentTotal(value);
 	}
-
-	@Override
-	public ArrayList selectListBoard(int pageNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 
 	@Override
 	public void tipInsert(TipBoard tipboard) {
@@ -82,11 +74,17 @@ public class TipBoardDaoImpl implements TipBoardDao{
 		
 	}
 
-	public void insert(TipBoard tipboard) {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public Map getTipBoardList(int page) {
+		session.selectList("TipBoardList",page);
+		return null;
 	}
 
+	
+
+
+
+	
 
 
 
