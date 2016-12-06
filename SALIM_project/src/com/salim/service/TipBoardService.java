@@ -41,6 +41,7 @@ void tipInsert(TipBoard tipboard );//글쓰기
 
 	Map getTipListBoard(int page);
 
+
 	
 
 

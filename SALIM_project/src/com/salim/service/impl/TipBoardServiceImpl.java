@@ -89,7 +89,7 @@ public class TipBoardServiceImpl implements TipBoardService {
 
 	@Override
 	public Map getTipBoardList(int page) {
-		// TODO Auto-generated method stub
+		dao.getTipBoardList(page);
 		return getTipBoardList(page);
 	}
 
