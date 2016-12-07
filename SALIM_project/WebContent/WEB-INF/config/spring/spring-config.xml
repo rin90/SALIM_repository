@@ -20,7 +20,7 @@
 		-> interceptors이용하시는 분들 의미!
 	===============================================-->
 	<!-- 활동 전에 로그인 했는지 여부 체크하는 interceptor -->
-	<mvc:interceptors>
+	<mvc:interceptors> 
 		<mvc:interceptor>
 			<mvc:mapping path="/**/login/**"/>
 			<bean class="com.salim.interceptor.LoginCheckInterceptor"/>
@@ -30,11 +30,21 @@
 	<!-- 단순 링크 이동 -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles"/>
 	<mvc:view-controller path="/next.do" view-name="body/next.tiles"/>
-	<mvc:view-controller path="/calendar.do" view-name="body/calendar.tiles"/>
+	<mvc:view-controller path="/calendar.do" view-name="body/calendar/calendar.tiles"/> 	
 	<mvc:view-controller path="/graph.do" view-name="body/graph.tiles"/>
-	
 	<mvc:view-controller path="/body/income.do" view-name="body/income.tiles"/>
+	
+	<!-- member -->
 
+	<mvc:view-controller path="/joinMember.do" view-name="body/join_form.tiles"/>	
+	<mvc:view-controller path="/join_success.do" view-name="body/join_success.tiles"/>	
+	<mvc:view-controller path="/loginMember.do" view-name="body/login_form.tiles"/>
+	<mvc:view-controller path="/myPage.do" view-name="body/myPage.tiles"/>
+	<mvc:view-controller path="/findId.do" view-name="body/findId.tiles"/>
+	<mvc:view-controller path="/findPassword.do" view-name="body/findPassword.tiles"/>
+	<!-- <mvc:view-controller path="/leaveMember.do" view-name="body/leave_member.tiles"/>
+	<mvc:view-controller path="/myPage.do" view-name="body/myPage.tiles"/>
+ -->
 
 	<!-- ViewResolver등록 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>
@@ -69,9 +79,7 @@
 	 <!-- SqlSessionTemplate 생성 - 생성자로 sqlSessionFactoryBean을 주입 -->
 	<bean name="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
 		      c:sqlSessionFactory-ref="sqlSessionFactory"/>
-	
-	
-		      
+
 	<!-- Transaction 처리 -->
 	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 			  p:dataSource-ref="dataSource"/>

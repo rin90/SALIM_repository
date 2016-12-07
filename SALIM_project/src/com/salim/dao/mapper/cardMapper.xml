@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="card">
+	<sql id="select-card">
+		select	member_id memberId,
+				card_id	  cardId,
+				card_Type cardType,
+				card_description cardDescription
+		form	card
+	</sql>
+	
+	<!-- insert -->
+	<insert id="insertCard" parameterType="card">
+		insert into card values(#{memberId}, #{cardId}, #{cardType}, #{cardDescription})
+	</insert>
+	
+	<!-- update -->
+	<update id="updateCardByMemberId" parameterType="card">
+		update	card
+		set		cardId = #{cardId},
+				cardType = #{cardType},
+				cardDescription = #{cardDescription}
+		where	member_id = #{memberId}
+	</update>
+	
+	<!-- delete -->
+	<delete id="deleteCardByMemberId" parameterType="string">
+		delete from card where member_id = #{memberId}
+	</delete>
+	
+	<!-- insert -->
+	<select id="selectCardByMemberId" parameterType="string" resultType="card">
+		<include refid="select-card"/>
+		where member_id = #{value}
+	</select>
+</mapper>

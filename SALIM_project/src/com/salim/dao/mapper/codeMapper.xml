@@ -17,5 +17,11 @@
 	
 	</select>
 	
+	<select id="selectCodeById" parameterType="_int" resultMap="code-resultMap">
+		select id, collection, code
+		from code
+		where id=#{value}
+	</select>
+	
 	
 </mapper>
