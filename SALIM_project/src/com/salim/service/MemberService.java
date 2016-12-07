@@ -31,10 +31,15 @@ public interface MemberService {
 	//회원 1사람 id로 조회
 	public Member findMemberById(String memberId);
 	
+	//아이디 중복 체크
 	public boolean findMemberForIdCheck(String memberId);
 	
+	//이메일 중복 체크
+	public boolean findMemberForEmailCheck(String email);
+
 	//회원 1사람 email로 조회
 	public Member findMemberByEmail(String email);
 
+	
 	
 }

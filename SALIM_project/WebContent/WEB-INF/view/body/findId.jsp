@@ -6,12 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/jQuery_class/scripts/jquery.js"></script>
+<script type="text/javascript" src="/SALIM_project/scripts/jquery.js"></script>
 <script type="text/javascript">
 var err;
 $(document).ready(function(){
 	$("#findIdBtn").on("click", function(){
-		
+		$("#result").empty();
+		$("#sarea").empty();
 		$.ajax({
 			
 			"url":"/SALIM_project/member/findId.do",
@@ -22,13 +23,13 @@ $(document).ready(function(){
 				
 				if(!$("#email").val())
 				{
-					$("#sarea").html("<font color='red' size='2'>이메일을 입력하세요.<font>");
+					$("#sarea").html("<font color='red' size='2'>&nbsp;&nbsp;&nbsp;이메일을 입력하세요.<font>");
 					return false;
 				}
 				
 			},
 			"success":function(object){
-				
+			
 				var resultMemberId=object.id;
 				var err=object.emailError;
 				if(resultMemberId!=null)
@@ -75,14 +76,14 @@ $(document).ready(function(){
 	<tr>
 		<td>
 			<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --><input type="text" name="email" id="email" size="70" >
+			
 		</td>
-	</tr>
-	<tr>
 		<td>
-			<div id="sarea">
-			</div>
+			<span id="sarea">
+			</span>
 		</td>
 	</tr>
+
 	<tr>
 		<td align="right">
 			<button id="findIdBtn">아이디 찾기</button>

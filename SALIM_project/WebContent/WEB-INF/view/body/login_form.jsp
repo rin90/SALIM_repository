@@ -23,22 +23,6 @@
 <table>
 	<tr>
 		<td>
-					<c:if test="${requestScope.error!=null}">
-					<span class="errorMessage">
-						${requestScope.error}
-					</span>
-					</c:if>
-					<div class="errorMessage">
-						<form:errors path="loginCheck.memberId"/>
-					</div>
-					<div class="errorMessage">
-					<form:errors path="loginCheck.password" />
-					</div>	
-					
-		</td>
-	</tr>
-	<tr>
-		<td>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디 입력  &nbsp;&nbsp;
 			<a href="${initParam.rootPath}/findId.do">(아이디를 잊으셨나요?)</a>
 			
@@ -48,6 +32,11 @@
 	<tr>	
 		<td>
 		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="memberId" size="40" autofocus="autofocus">
+		</td>
+		<td>
+						<span class="errorMessage">
+							<form:errors path="loginCheck.memberId"/>
+						</span>
 		</td>
 	</tr>
 	<tr>
@@ -63,9 +52,25 @@
 		<td>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="password" size="40">
 		</td>
+		<td>
+			<div class="errorMessage">
+							<form:errors path="loginCheck.password" />
+						</div>	
+		</td>
 	</tr>
 	
 	<tr>
+		<td>
+
+		<c:if test="${requestScope.error!=null}">
+				<span class="errorMessage">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${requestScope.error}
+				</span>
+</c:if>
+	
+						
+					
+	</td>
 		<td colspan="5" align="right">
 			<input type="submit" value="로그인"> 
 		</td>

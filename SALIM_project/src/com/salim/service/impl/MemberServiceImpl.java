@@ -107,6 +107,18 @@ public class MemberServiceImpl implements MemberService{
 		return false; //중복된 아이디가 있는 경우.
 	}
 
+	//이메일 중복 체크 서비스!
+	public boolean findMemberForEmailCheck(String email)
+	{
+		Member member=memberdao.selectMemberByEmail(email);
+		if(member==null)
+		{
+			return true; //중복된 이메일이 없는 경우
+		}
+		return false; //중복된 이메일이 있는 경우
+	}
+	
+	//이메일로 회원 조회
 	@Override
 	public Member findMemberByEmail(String email) {
 		Member member=memberdao.selectMemberByEmail(email);

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/jQuery_class/scripts/jquery.js"></script>
+<script type="text/javascript" src="/SALIM_project/scripts/jquery.js"></script>
 <script type="text/javascript">
 var err;
 $(document).ready(function(){
@@ -103,6 +103,13 @@ $(document).ready(function(){
 		<td>
 			<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --><input type="text" name="id" id="id" size="70" >
 		</td>
+		<td>
+			
+			<div id="sarea">
+			</div>
+			
+		
+		</td>
 	</tr>
 	<tr>
 		<td>
@@ -120,21 +127,14 @@ $(document).ready(function(){
 		<td>
 			<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --><input type="text" name="email" id="email" size="70" >
 		</td>
-	</tr>
-	<tr>
 		<td>
-			<div id="sarea">
-			</div>
+			<span id="sarea2">
+			</span>
 			
 		</td>
+		
 	</tr>
-	<tr>
-		<td>
-			<div id="sarea2">
-			</div>
-			
-		</td>
-	</tr>
+
 	<tr>
 		<td align="right">
 			<button id="emailBtn">비밀번호 찾기</button>

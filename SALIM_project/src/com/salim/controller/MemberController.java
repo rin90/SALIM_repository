@@ -46,20 +46,42 @@ public class MemberController {
 	
 	//아이디 중복 체크 - ajax 처리
 	//<!-- ajax-->
-	@RequestMapping("idDueCheck.do")
+	@RequestMapping("checkingDuplicatedId.do")
 	@ResponseBody
-	public HashMap<String,Boolean> idDueCheck(String memberId)
+	public HashMap<String,Boolean> checkingDuplicatedId(String memberId)
 	{
-		System.out.println("hello1");
-		//business logic을 불러서 처리를 하고, 
-		System.out.println(memberId);
 		boolean flag=service.findMemberForIdCheck(memberId);
-		System.out.println(flag);
 		HashMap<String,Boolean> idCheckMap=new HashMap<String, Boolean>();
-		
 		idCheckMap.put("flag", flag); //이 부분은 VO가 없어서 map의 형태로 만들어준 부분이다!
 		return idCheckMap;
 	}
+	//이메일 중복 체크- ajax 처리 
+	@RequestMapping("checkingDuplicatedEmail.do")
+	@ResponseBody
+	public HashMap<String,Boolean> checkingDuplicatedEmail(String email)
+	{
+		boolean flag=service.findMemberForEmailCheck(email);
+		HashMap<String,Boolean> emailCheckMap=new HashMap<String, Boolean>();
+		emailCheckMap.put("flag", flag); //이 부분은 VO가 없어서 map의 형태로 만들어준 부분이다!
+		return emailCheckMap;
+	}
+	
+	//비밀번호 입력 체크 - ajax 처리
+	@RequestMapping("passwordCheck.do")
+	@ResponseBody
+	public HashMap<String,Boolean>passwordCheck(String password, String password2)
+	{
+		HashMap<String, Boolean>resultMap=new HashMap<String, Boolean>();
+		if(!password.equals(password2))
+		{
+			resultMap.put("passwordResult",false);
+		}else
+		{
+			resultMap.put("passwordResult",true);
+		}
+		return resultMap;
+	}
+	
 	
 	//회원 탈퇴
 	@RequestMapping("leave.do")
@@ -78,7 +100,7 @@ public class MemberController {
 		
 	}
 	
-	//로그인 
+	//로그인 -끝
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String login(@Valid LoginCheck login, BindingResult errors, HttpSession session, ModelMap map)
 	{
@@ -112,7 +134,7 @@ public class MemberController {
 		}
 	}
 
-	//로그아웃
+	//로그아웃-끝
 	@RequestMapping("logout.do")
 	public String logout(HttpSession session)
 	{
@@ -135,7 +157,7 @@ public class MemberController {
 		return null;
 	}
 	
-	//아이디 찾기 
+	//아이디 찾기 -끝
 	@RequestMapping(value="findId.do", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> findId(String email)
@@ -153,7 +175,7 @@ public class MemberController {
 		return hmap;
 	}
 	
-	//비밀번호 찾기
+	//비밀번호 찾기 -끝
 	@RequestMapping(value="findPassword.do", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> findPassword(String id, String email, ModelMap map)
