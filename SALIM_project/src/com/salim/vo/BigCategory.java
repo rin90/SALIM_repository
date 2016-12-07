@@ -1,7 +1,7 @@
 package com.salim.vo;
 
 public class BigCategory {
-
+//대분류
 	private int bigCode;
 	private String bigContent;
 	private int highCode;

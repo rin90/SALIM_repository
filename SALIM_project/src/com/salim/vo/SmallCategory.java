@@ -1,7 +1,7 @@
 package com.salim.vo;
 
 public class SmallCategory {
-	
+//소분류
 	private int smallCode;
 	private String smallContent;
 	private int bigCode;
