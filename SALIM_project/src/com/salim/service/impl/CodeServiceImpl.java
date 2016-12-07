@@ -17,9 +17,14 @@ public class CodeServiceImpl implements CodeService{
 
 	@Override
 	public List<Code> findCode(String collection) {
-		System.out.println(dao);
 		return dao.selectCode(collection);
 	}
+
+	@Override
+	public Code findCodeById(int id) {
+		return dao.selectCodeById(id);
+	}
+	
 	
 	
 }

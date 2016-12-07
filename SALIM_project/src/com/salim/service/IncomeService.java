@@ -12,10 +12,10 @@ public interface IncomeService {
 	 커밋은 버튼 누르는 것을 기준으로 하기. 매개변수는 하나의 로우 단위로 리스트를 받기 - 하나의 income*/
 	
 	//수입을 저장 및 수정
+	//void saveIncome(Income income);
 	void saveIncome(List<Income> incomeList);
-	
 	//수입을 삭제
-	void deleteIncome(List<Income> incomeList);
+	void deleteIncome(List<Integer> incomeIdList);
 	
 	//수입이 해당 날짜에 해당하면 뿌려주기
 	List<Income> selectIncome(Map map);

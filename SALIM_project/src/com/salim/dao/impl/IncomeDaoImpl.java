@@ -14,9 +14,10 @@ import com.salim.vo.Income;
 public class IncomeDaoImpl implements IncomeDao{
 	
 	@Autowired
-	static SqlSessionTemplate session;
+	private SqlSessionTemplate session;
 
 	public int insertIncome(Income income) {
+		System.out.println("DAO까지 왔다감");
 		return session.insert("incomeMapper.insertIncome", income);
 	}
 
@@ -33,10 +34,6 @@ public class IncomeDaoImpl implements IncomeDao{
 	@Override
 	public List<Income> selectIncomeList(Map map) { // map => memberId 와 incomeDate
 		return session.selectList("incomeMapper.selectIncomeDate", map);
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(session);
 	}
 	
 }

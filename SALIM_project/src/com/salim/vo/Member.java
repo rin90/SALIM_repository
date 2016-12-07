@@ -19,7 +19,7 @@ public class Member implements Serializable{
 	Date birthday;
 	String password;
 	
-	Member(){}
+	public Member(){}
 
 	public Member(String memberId, String name, int age, Date birthday, String password) {
 		super();

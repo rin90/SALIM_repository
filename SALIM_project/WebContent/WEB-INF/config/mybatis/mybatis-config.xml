@@ -10,6 +10,8 @@
 	
 	<!-- 추가로 mapper를 설정해야 하는 경우 아래에 등록해 주세요. -->
 	<mappers>
+		<mapper resource="com/salim/dao/mapper/goalsMapper.xml"/>
+		<mapper resource="com/salim/dao/mapper/scheduleMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/testMapper.xml"/> 
 		<mapper resource="com/salim/dao/mapper/freeMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/quenstionAndAnswerMapper.xml"/>
@@ -19,6 +21,7 @@
 		<mapper resource="com/salim/dao/mapper/budgetMapper.xml"/>
 		<!-- <mapper resource="com/salim/dao/mapper/notesMapper.xml"/> -->
 		<mapper resource="com/salim/dao/mapper/codeMapper.xml"/>
+		<mapper resource="com/salim/dao/mapper/categoryMapper.xml"/>
 
 	</mappers>
 	

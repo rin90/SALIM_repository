@@ -6,6 +6,8 @@ create table member(  --회원
  password varchar2(50) not null, --비밀번호
  email varchar2(50) not null --email
 );
+select * from member;
+drop table member;
 
 
 
@@ -26,6 +28,7 @@ insert into member values('mem5','LJH5',20,'1991-04-19','password5');
 select * from member;
 --alter table member1 add(b)
 
+insert into member values ('tester2', '테스터2', 11, sysdate, 'tester');
 
 
 create sequence seq_col--sequence생성

@@ -19,5 +19,11 @@ public class CodeDaoImpl implements CodeDao{
 	public List<Code> selectCode(String collection) {
 		return session.selectList("codeMapper.selectCode", collection);
 	}
+
+	@Override
+	public Code selectCodeById(int id) {
+		return session.selectOne("codeMapper.selectCodeById", id);
+	}
+	
 	
 }
