@@ -30,6 +30,14 @@ public FreeBoard(int no, String title, String content, String fileRoot, int clic
 	this.memberId = memberId;
 }
 
+public Date getRegisterTime() {
+	return registerTime;
+}
+
+public void setRegisterTime(Date registerTime) {
+	this.registerTime = registerTime;
+}
+
 public int getNo() {
 	return no;
 }

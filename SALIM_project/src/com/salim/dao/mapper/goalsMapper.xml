@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="goalsMapper">
+	
+	<sql id="goal-select">
+		select num, y_m, goal, member_id
+		from goals
+	</sql>
+	
+	<resultMap type="com.salim.vo.Goal" id="goal-resultMap">
+		<id column="num" property="num"/>
+		<result column="y_m" property="yM"/>
+		<result column="goal" property="goal"/>
+		<result column="member_id" property="memberId"/>
+	</resultMap>
+	
+	<insert id="insertGoal" parameterType="goal">
+		<selectKey keyProperty="num" resultType="_int" order="BEFORE">
+			select seq_goa.nextval from dual
+		</selectKey>
+		insert into Goals values(#{num}, #{yM}, #{goal}, #{memberId})
+	</insert>
+	
+	<update id="updateGoal" parameterType="goal">
+		update goals set goal=#{goal}, y_m=#{yM} where num=#{num}
+	</update>
+	
+	<delete id="deleteGoal" parameterType="_int">
+		delete goals where num=#{value}
+	</delete>
+	
+	<select id="selectGoal" parameterType="map" resultMap="goal-resultMap">
+		<include refid="goal-select"/>
+		where member_id=#{memberId} and y_m=#{month}
+	</select>
+	
+</mapper>
