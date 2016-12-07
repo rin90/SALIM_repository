@@ -315,6 +315,7 @@ insert into smallCategory values(seq_sma.nextval, '기타', (select big_code fro
 insert into smallCategory values(seq_sma.nextval, '이체/대체', (select big_code from bigCategory where big_content = '이체/대체'));
 
 
+-- 변경
 
 
 
