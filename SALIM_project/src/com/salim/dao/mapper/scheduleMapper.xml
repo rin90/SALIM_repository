@@ -6,16 +6,7 @@
 		select no, title, detail, start_date, end_date, member_id
 		from schedule 
 	</sql>
-	
-	<resultMap type="com.salim.vo.Schedule_origin" id="schedule-resultMap-origin">
-		<id column="no" property="no"/>
-		<result column="title" property="title"/>
-		<result column="detail" property="detail"/>
-		<result column="start_date" property="startDate"/>
-		<result column="end_date" property="endDate"/>
-		<result column="member_id" property="memberId"/>
-	</resultMap>
-	
+
 	<resultMap type="com.salim.vo.Schedule" id="schedule-resultMap">
 		<id column="no" property="no"/>
 		<result column="title" property="title"/>
