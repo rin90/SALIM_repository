@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.salim.util.DateJsonSerializer2;
 
 
 public class Member implements Serializable{
@@ -14,7 +15,7 @@ public class Member implements Serializable{
 	private String  name;
 	private int age;
 	
-	//@JsonSerialize(using=DateJsonSerializer.class)
+	@JsonSerialize(using=DateJsonSerializer2.class)
 	@DateTimeFormat(pattern="yyyyMMdd")
 	private Date birthday;
 	private String password;
