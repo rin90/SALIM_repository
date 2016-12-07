@@ -1,5 +1,7 @@
 package com.salim.controller;
 
+
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -8,13 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.salim.service.TipBoardService;
-import com.salim.vo.TipBoard;
 
 @Controller
 public class TipController {
@@ -26,8 +25,7 @@ public class TipController {
   		return new ModelAndView("body/tip_board_list.tiles",map);
   	}
     
-
-    
+ 
 
     
     @RequestMapping(value="/boardAjax.action")
@@ -40,8 +38,12 @@ public class TipController {
         
 
 }
-
+    
+  
+ 
 }
+
+
 
 
 

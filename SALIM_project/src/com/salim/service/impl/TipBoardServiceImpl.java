@@ -43,8 +43,9 @@ public class TipBoardServiceImpl implements TipBoardService {
 	}
 
 	@Override
-	public void tipDelete(int no) {
+	public int tipDelete(int no) {
 		dao.tipDelete(no);
+		return tipDelete(no);
 		
 	}
 

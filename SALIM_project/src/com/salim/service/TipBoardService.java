@@ -19,7 +19,7 @@ void tipInsert(TipBoard tipboard );//글쓰기
 	
 	void goodUpdate(TipBoard tipboard);//좋아용 증가
 	
-	void tipDelete(int no);//글삭제
+	int tipDelete(int no);
 	
 
 	
@@ -40,6 +40,10 @@ void tipInsert(TipBoard tipboard );//글쓰기
 	List<TipBoard> selectCurrentPage(Map map);
 
 	Map getTipListBoard(int page);
+
+
+
+
 
 
 	

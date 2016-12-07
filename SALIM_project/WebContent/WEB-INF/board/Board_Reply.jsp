@@ -56,14 +56,7 @@
 |댓글|
 
 		</textarea></td>
-		</tr>
-		<tr>
-			<td width=10% align="center">비밀 번호</td> 
-			<td width=70% ><input type=password name="password" size=15 maxlength=15></td>
-		    </tr>
-		<tr>
-			<td colspan=2><hr size=2></td>
-		</tr>
+		
 		<tr>
 			<td colspan="3" align="center">
 			<input type="submit" value="답변 등록" class="btn" >&nbsp;
