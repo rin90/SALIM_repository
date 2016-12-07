@@ -6,7 +6,7 @@ public class Comment {
 
 	private int id;
 	private String content;
-	private Date register_time;
+	private Date registerTime;
 	private String title;
 	private String memberId;
 	
@@ -16,11 +16,11 @@ public class Comment {
 	}
 
 
-	public Comment(int id, String content, Date register_time, String title, String memberId) {
+	public Comment(int id, String content, Date registerTime, String title, String memberId) {
 		super();
 		this.id = id;
 		this.content = content;
-		this.register_time = register_time;
+		this.registerTime = registerTime;
 		this.title = title;
 		this.memberId = memberId;
 	}
@@ -46,13 +46,13 @@ public class Comment {
 	}
 
 
-	public Date getRegister_time() {
-		return register_time;
+	public Date getRegisterTime() {
+		return registerTime;
 	}
 
 
-	public void setRegister_time(Date register_time) {
-		this.register_time = register_time;
+	public void setRegisterTime(Date registerTime) {
+		this.registerTime = registerTime;
 	}
 
 
@@ -78,7 +78,7 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", content=" + content + ", register_time=" + register_time + ", title=" + title
+		return "Comment [id=" + id + ", content=" + content + ", registerTime=" + registerTime + ", title=" + title
 				+ ", memberId=" + memberId + "]";
 	}
 
@@ -90,7 +90,7 @@ public class Comment {
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
-		result = prime * result + ((register_time == null) ? 0 : register_time.hashCode());
+		result = prime * result + ((registerTime == null) ? 0 : registerTime.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -117,10 +117,10 @@ public class Comment {
 				return false;
 		} else if (!memberId.equals(other.memberId))
 			return false;
-		if (register_time == null) {
-			if (other.register_time != null)
+		if (registerTime == null) {
+			if (other.registerTime != null)
 				return false;
-		} else if (!register_time.equals(other.register_time))
+		} else if (!registerTime.equals(other.registerTime))
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -129,7 +129,5 @@ public class Comment {
 			return false;
 		return true;
 	}
-	
-	
 	
 }

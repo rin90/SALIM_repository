@@ -7,11 +7,10 @@ import com.salim.dao.impl.TestDaoImpl;
 
 @Service
 public class TestServiceImpl {
-	
 	@Autowired
 	private TestDaoImpl dao;
 	
 	public String time(){
-		return  dao.time();
+		return dao.time();
 	}
 }

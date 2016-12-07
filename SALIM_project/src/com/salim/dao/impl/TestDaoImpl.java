@@ -11,8 +11,6 @@ public class TestDaoImpl{
 	private SqlSessionTemplate session;
 	
 	public String time(){
-		
-		return session.selectOne("time");
-		
+		return session.selectOne("testMapper.time");
 	}
 }

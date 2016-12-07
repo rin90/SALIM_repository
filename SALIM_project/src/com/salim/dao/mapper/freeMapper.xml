@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="freeMapper">
+	
+	
+	<!-- 자유게시판 글쓰기 (등록) -->
+	<insert id="freeInsert" parameterType="freeboard">
+		<selectKey keyProperty="no" resultType="_int" order="BEFORE">
+			select seq_free.nextval from dual
+		</selectKey>
+		insert into free_board values(#{no},#{title},#{content},#{fileRoot},#{click},#{good},#{category},#{registerTime},#{memberId}) 		
+	</insert>
+	
+	<!-- 자유게시판 글수정 -->
+	<update id="freeUpdate" parameterType="freeboard">
+		update free_board
+		set title=#{title},
+			content=#{content},
+			category=#{category},
+			file_root=#{fileRoot}
+		where no=#{no}
+	</update>
+	
+	<!-- 자유게시판 글 조회수 증가 등록 -->
+	<update id="clickUpdate" parameterType="_int">
+		update free_board
+		set click=click +1
+		where no=#{no}
+	</update>
+	
+	<!-- 자유게시판 좋아요 증가 등록  -->
+	<update id="goodUpdate" parameterType="_int">
+		update free_board
+		set good=good+1
+		where no=#{no}
+	</update>
+	
+	<!-- 자유게시판 글삭제 -->
+	<delete id="freeDelete" parameterType="_int">
+		delete from free_board
+		where no=#{no}
+	</delete>
+	
+	<!-- Page처리를 위한 글 토탈 -->
+	<select id="selectTotal" resultType="_int">
+		select  count(no)
+		from free_board
+	</select>
+	
+	<!-- page처리를 위한 현재 페이지 -->
+	<select id="selectCurrentPage" parameterType="map" resultType="freeboard">
+		select no, title,member_id memberId,register_time registerTime,click,good 
+		from(
+				select ceil(rownum/#{current}) page,no, title,member_id,register_time,click,good 
+				from free_board
+		)
+		where page=#{page}
+	</select>
+	
+	<!-- 조회 - 제목으로 검색 -->
+	<select id="selectByTitle" parameterType="string" resultType="freeboard">
+		select no,title,member_id memberId,register_time registerTime,click,good
+		from free_board
+		where title like '%'||#{value}||'%'
+	</select>
+	
+	<!-- 글 번호로 글 찾기(상세화면) -->
+	<select id="selectByNo" parameterType="_int" resultType="freeboard">
+		select no,title,member_id memberId,register_time registerTime,click,good,content,file_root fileRoot
+		from free_board
+		where no=#{no}
+	</select>
+	
+	<!-- 글의 총댓글 개수 (상세화면)-->
+	<select id="selectCommentTotal" parameterType="_int" resultType="_int">
+	select count(id)
+	from comments
+	where font_no =#{value}
+	</select>
+	
+	
+	
+	
+	
+	
+
+
+</mapper>
