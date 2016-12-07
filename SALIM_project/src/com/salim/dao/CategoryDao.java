@@ -6,7 +6,7 @@ import com.salim.vo.BigCategory;
 import com.salim.vo.SmallCategory;
 
 public interface CategoryDao {
-	
+	//
 	//상위코드를 조회
 	BigCategory selectHighCode(String bigContent);
 	

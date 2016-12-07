@@ -12,7 +12,7 @@ import com.salim.vo.SmallCategory;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
-	
+	//카테고리
 	@Autowired
 	private CategoryDao dao;
 

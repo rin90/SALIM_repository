@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.salim.service.CategoryService;
 import com.salim.vo.BigCategory;
 import com.salim.vo.SmallCategory;
-
+//
 @Controller
 @RequestMapping("/category")
 public class CategoryController {

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.salim.dao.CategoryDao;
 import com.salim.vo.BigCategory;
 import com.salim.vo.SmallCategory;
-
+//카테고리 Dao
 @Repository
 public class CategoryDaoImpl implements CategoryDao{
 	
