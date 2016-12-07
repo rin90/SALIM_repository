@@ -27,9 +27,9 @@ public class IncomeServiceImpl implements IncomeService{
 	 * 회원이 로그인해있으면, 삽입, 수정, 삭제 가능. - 저장 버튼을 누르면 기존에 없으면 삽입, 있으면 수정, 체크박스로 삭제 가능(선택삭제 버튼 별도 존재),
 	 성공했는지 여부 boolean으로 리턴, 매개변수는 작성된 하나의 로우단위로 값이 있는지 체크해서 저장할 것인지 수정할 것인지 선택하기, 
 	 커밋은 버튼 누르는 것을 기준으로 하기. 매개변수는 하나의 로우 단위로 리스트를 받기 - 하나의 income*/
-	
+
 	public void saveIncome(List<Income> incomeList) {
-		
+		//List<Income> incomeList
 		//로그인 확인을 interceptor로 체크한 후
 		
 		//받은 list에서 수입을 빼와서 저장하자
@@ -41,6 +41,8 @@ public class IncomeServiceImpl implements IncomeService{
 				dao.updateIncome(income);
 			}
 		}
+		//dao.insertIncome(income);
+		
 	}
 
 
@@ -55,13 +57,17 @@ public class IncomeServiceImpl implements IncomeService{
 	}
 
 	@Override
-	public void deleteIncome(List<Income> incomeList) {
+	public void deleteIncome(List<Integer> incomeIdList) {
 		
 		//로그인 했는지 interceptor로 확인
 		
 		//income id를 뽑아서 dao의 delete 실행시키기
-		for(int i=0; i<incomeList.size(); i++){
-			dao.deleteIncome(incomeList.get(i).getIncomeId());
+		for(int i=0; i<incomeIdList.size(); i++){
+			if(incomeIdList.get(i) == null){
+				incomeIdList.remove(i);
+			}
+			//int incomeId = Integer.parseInt(incomeIdList.get(i));
+			dao.deleteIncome(incomeIdList.get(i));
 		}
 	}
 	

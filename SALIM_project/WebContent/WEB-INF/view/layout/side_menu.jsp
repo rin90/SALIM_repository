@@ -5,4 +5,8 @@
 <a href="${initParam.rootPath }/next.do">다음페이지</a><br>
 <a href="${initParam.rootPath }/test/time.do">Test</a><br>
 
-<a href="${initParam.rootPath }/code/income/codeList.do">수입&지출 입력창</a>
+<a href="${initParam.rootPath }/household/login/incomeSelect.do">수입&지출 입력</a>
+
+
+<a href="${initParam.rootPath }/category/smallCode.do?bigCode=1">테스트</a>
+

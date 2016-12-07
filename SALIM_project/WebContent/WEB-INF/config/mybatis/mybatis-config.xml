@@ -19,6 +19,7 @@
 		<mapper resource="com/salim/dao/mapper/budgetMapper.xml"/>
 		<!-- <mapper resource="com/salim/dao/mapper/notesMapper.xml"/> -->
 		<mapper resource="com/salim/dao/mapper/codeMapper.xml"/>
+		<mapper resource="com/salim/dao/mapper/categoryMapper.xml"/>
 	</mappers>
 	
 	
