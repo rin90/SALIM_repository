@@ -2,16 +2,47 @@ package com.salim.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+//import com.salim.util.DateJsonSerializer;
 
 public class Income implements Serializable{
 	
 	private int incomeId;
+	
 	private String memberId;
 	private int codeId;
+	@NotNull
+	@DateTimeFormat(pattern="yy-MM-dd")
+	//@JsonSerialize(using=DateJsonSerializer.class)
 	private Date incomeDate;
 	private String explanation;
 	private int incomeMoney;
 	
+	private List<Income> incomeList;
+	
+	public List<Income> getIncomeList() {
+		return incomeList;
+	}
+	public void setIncomeList(List<Income> incomeList) {
+		this.incomeList = incomeList;
+	}
+	public Income(int incomeId, String memberId, int codeId, Date incomeDate, String explanation, int incomeMoney,
+			List<Income> incomeList) {
+		super();
+		this.incomeId = incomeId;
+		this.memberId = memberId;
+		this.codeId = codeId;
+		this.incomeDate = incomeDate;
+		this.explanation = explanation;
+		this.incomeMoney = incomeMoney;
+		this.incomeList = incomeList;
+	}
 	public Income() {
 		super();
 	}
@@ -73,6 +104,7 @@ public class Income implements Serializable{
 		result = prime * result + ((explanation == null) ? 0 : explanation.hashCode());
 		result = prime * result + ((incomeDate == null) ? 0 : incomeDate.hashCode());
 		result = prime * result + incomeId;
+		result = prime * result + ((incomeList == null) ? 0 : incomeList.hashCode());
 		result = prime * result + incomeMoney;
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		return result;
@@ -99,6 +131,11 @@ public class Income implements Serializable{
 		} else if (!incomeDate.equals(other.incomeDate))
 			return false;
 		if (incomeId != other.incomeId)
+			return false;
+		if (incomeList == null) {
+			if (other.incomeList != null)
+				return false;
+		} else if (!incomeList.equals(other.incomeList))
 			return false;
 		if (incomeMoney != other.incomeMoney)
 			return false;

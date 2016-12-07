@@ -6,7 +6,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.salim.util.DateJsonSerializer;
+
 
 public class Member implements Serializable{
  

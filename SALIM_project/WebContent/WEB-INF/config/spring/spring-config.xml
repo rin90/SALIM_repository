@@ -30,7 +30,7 @@
 	<!-- 단순 링크 이동 -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles"/>
 	<mvc:view-controller path="/next.do" view-name="body/next.tiles"/>
-	<mvc:view-controller path="/calendar.do" view-name="body/calendar.tiles"/>
+	<mvc:view-controller path="/calendar.do" view-name="body/calendar/calendar.tiles"/> 	
 	<mvc:view-controller path="/graph.do" view-name="body/graph.tiles"/>
 	<mvc:view-controller path="/body/income.do" view-name="body/income.tiles"/>
 	
@@ -76,9 +76,7 @@
 	 <!-- SqlSessionTemplate 생성 - 생성자로 sqlSessionFactoryBean을 주입 -->
 	<bean name="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
 		      c:sqlSessionFactory-ref="sqlSessionFactory"/>
-	
-	
-		      
+
 	<!-- Transaction 처리 -->
 	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 			  p:dataSource-ref="dataSource"/>
