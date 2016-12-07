@@ -22,7 +22,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter{//intercept
 		
 		
 		//로그인 했다고 가정하고 멤버 가짜 객체 넣자  - session한테 -> 연동 후 session에서 login_info로 가져오면 됨.
-		session.setAttribute("login_info", new Member("id-1", "안녕히", 20, new Date(1991-01-06), "비밀"));
+		session.setAttribute("login_info", new Member("id-1", "안녕히", 20, new Date(1991-01-06), "password1","email123456@naver.com"));
 		//System.out.println(session.getAttribute("login_info"));
 		
 		

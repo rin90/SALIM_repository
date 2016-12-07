@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.salim.util.DateJsonSerializer;
+//import com.salim.util.DateJsonSerializer;
 
 public class Income implements Serializable{
 	
@@ -19,7 +19,7 @@ public class Income implements Serializable{
 	private int codeId;
 	@NotNull
 	@DateTimeFormat(pattern="yy-MM-dd")
-	@JsonSerialize(using=DateJsonSerializer.class)
+	//@JsonSerialize(using=DateJsonSerializer.class)
 	private Date incomeDate;
 	private String explanation;
 	private int incomeMoney;
