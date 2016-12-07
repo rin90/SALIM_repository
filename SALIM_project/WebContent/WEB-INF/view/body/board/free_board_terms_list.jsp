@@ -33,7 +33,7 @@
 				<tr>
 					<td>${freeBoard.no }</td>
 					<td><a
-			href="${initParam.rootPath }/free/seleteDetail.do?no=${freeBoard.no}&page=${requestScope.pageBean.page}&category=${requestScope.category}&Search=${requestScope.Search}">${freeBoard.title }</a></td>
+			href="${initParam.rootPath }/free/seleteDetail.do?no=${freeBoard.no}&page=${requestScope.pageBean.page}&category=${requestScope.category}&search=${requestScope.search}">${freeBoard.title }</a></td>
 					<td>${freeBoard.memberId }</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${freeBoard.registerTime }" /></td>
@@ -67,7 +67,7 @@
 			</c:when>
 			<c:otherwise>
 				<a 
-		href="${initParam.rootPath }/free/keyword.do?page=${page }&category=${requestScope.category}&Search=${requestScope.Search}">${page }</a>
+		href="${initParam.rootPath }/free/keyword.do?page=${page }&category=${requestScope.category}&search=${requestScope.search}">${page }</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
@@ -76,7 +76,7 @@
 	<c:choose>
 		<c:when test="${requestScope.pageBean.nextGroup }">
 			<a
-				href="${initParam.rootPath }/free/keyword.do?page=${requestScope.pageBean.endPage+1 }&category=${requestScope.category}&Search=${requestScope.Search}">&nbsp;▶</a>
+				href="${initParam.rootPath }/free/keyword.do?page=${requestScope.pageBean.endPage+1 }&category=${requestScope.category}&search=${requestScope.search}">&nbsp;▶</a>
 		</c:when>
 		<c:otherwise>
 					&nbsp;▶				
@@ -98,7 +98,8 @@
 				<option>${code.code }</option>
 			</c:forEach>
 		</select> <input type="hidden" name="page" value="1"> <input
-			type="text" name="content" value="${requestScope.Search}"> <input type="submit" value="검색">
+			type="text" name="search" value="${requestScope.search}"> <input type="submit" value="검색">
 	</form>
+		
 </body>
 </html>

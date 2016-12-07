@@ -11,22 +11,26 @@
 <script type="text/javascript" src="/SALIM_project/lib/scripts/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	
-	$("#good").on("click",function(){
-
-		if(!$("#good").val()){
-
-			$("#good").text("♡ 0");
-			$("#good").prop("value","false");
-		
-		}else{	
-
-			$("#good").text("♥ 1");
-			$("#good").prop("value","");
-		}	
-
-	
-	});
+	$("#good").css("color","red")
+	$("#good").on("click",function(){		
+					$.ajax({	
+				"url":"${initParam.rootPath}/free/good.do",
+				"type":"post",
+				"data":"whether="+$("#good").val()+"&no="+${requestScope.freeBoard.no},
+				"beforeSend":function(){
+					if(!$("#good").val()){
+						
+						$("#good").text("♡ 0");
+						$("#good").prop("value","false");
+					
+					}else{	
+			
+						$("#good").text("♥ 1");
+						$("#good").prop("value","");
+					}		
+				}
+			});//ajax
+	});//event
 
 	
 	
@@ -40,13 +44,14 @@ $(document).ready(function(){
 <body>
 		${requestScope.freeBoard.title } &nbsp;&nbsp;&nbsp;<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${requestScope.freeBoard.registerTime }"/>	
 	<hr>
-		${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp; ${requestScope.freeBoard.fileRoot }
+		${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp; 
 		<p/>
-		${requestScope.freeBoard.content }
+		<img src="${initParam.rootPath }/fileroute/${requestScope.freeBoard.fileName }">
+		<br>${requestScope.freeBoard.content }
 		<p/>
 		댓글 &nbsp;${requestScope.commentTotal }&nbsp;&nbsp;조회&nbsp;${requestScope.freeBoard.click }&nbsp;&nbsp; 
 		좋아요 &nbsp;	${requestScope.freeBoard.good }		<button id="good" type="button" value="false">♡&nbsp;0</button>
-		<hr>
+		<hr> 
 			<p/>
 
 			<input type="hidden" name="page" value="${requestScope.page }">
@@ -56,15 +61,22 @@ $(document).ready(function(){
 				</c:when>
 				<c:otherwise>
 					<a 
-					href="${initParam.rootPath }/free/keyword.do?page=${requestScope.page }&&category=${requestScope.category}&Search=${requestScope.Search}">목록</a>
+					href="${initParam.rootPath }/free/keyword.do?page=${requestScope.page }&&category=${requestScope.category}&search=${requestScope.search}">목록</a>
 				</c:otherwise>
 			</c:choose>
 			<p/>
 			<a 
-			href="${initParam.rootPath }/free/updateForm.do?category=${requestScope.category }&Search=${requestScope.Search}&page=${requestScope.page}&no=${requestScope.freeBoard.no}">수정</a> &nbsp;&nbsp;
-			<a 
-			href="${initParam.rootPath }/free/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>	<p/>
-
+			href="${initParam.rootPath }/free/updateForm.do?category=${requestScope.category }&search=${requestScope.search}&page=${requestScope.page}&no=${requestScope.freeBoard.no}">수정</a> &nbsp;&nbsp;
+			<c:choose>
+				<c:when test="${empty requestScope.category }">
+					<a 
+					href="${initParam.rootPath }/free/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>	<p/>
+				</c:when>
+				<c:otherwise>
+					<a
+					href="${initParam.rootPath }/free/delete.do?no=${requestScope.freeBoard.no}&page=1">삭제</a>	<p/>					
+				</c:otherwise>
+			</c:choose>
 
 <form action="${initParam.rootPath }/free/comment.do" method="post">
 	★&nbsp;&nbsp;<textarea rows="2" cols="10"></textarea>

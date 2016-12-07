@@ -6,15 +6,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<script type="text/javascript"
-	src="/SALIM_project/etc/scripts/jquery.is"></script>
+<script type="text/javascript" src="/SALIM_project/lib/scripts/jquery.js"></script>
+	
 <script type="text/javascript">
 	
 </script>
 </head>
 <body>
 	<form id="registerForm" action="${initParam.rootPath}/free/register.do"
-		method="post" >
+		method="post" enctype="multipart/form-data">
 
 		<h4>자유게시판</h4>
 	 	제목:<input type="text" name=title><br> 

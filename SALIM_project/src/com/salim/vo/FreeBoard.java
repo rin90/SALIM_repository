@@ -9,7 +9,8 @@ public class FreeBoard  implements Serializable{
  private int no;
  private String title;
  private String content;
- private String fileRoot;
+ private MultipartFile fileRoot;
+ private String fileName;
  private int click =0;
  private int good = 0;
  private Date registerTime = new Date();
@@ -19,13 +20,14 @@ public FreeBoard() {
 	super();
 }
 
-public FreeBoard(int no, String title, String content, String fileRoot, int click, int good, Date registerTime,
-		String memberId) {
+public FreeBoard(int no, String title, String content, MultipartFile fileRoot, String fileName, int click, int good,
+		Date registerTime, String memberId) {
 	super();
 	this.no = no;
 	this.title = title;
 	this.content = content;
 	this.fileRoot = fileRoot;
+	this.fileName = fileName;
 	this.click = click;
 	this.good = good;
 	this.registerTime = registerTime;
@@ -56,12 +58,20 @@ public void setContent(String content) {
 	this.content = content;
 }
 
-public String getFileRoot() {
+public MultipartFile getFileRoot() {
 	return fileRoot;
 }
 
-public void setFileRoot(String fileRoot) {
+public void setFileRoot(MultipartFile fileRoot) {
 	this.fileRoot = fileRoot;
+}
+
+public String getFileName() {
+	return fileName;
+}
+
+public void setFileName(String fileName) {
+	this.fileName = fileName;
 }
 
 public int getClick() {
@@ -98,8 +108,9 @@ public void setMemberId(String memberId) {
 
 @Override
 public String toString() {
-	return "FreeBoard [no=" + no + ", title=" + title + ", content=" + content + ", fileRoot=" + fileRoot + ", click="
-			+ click + ", good=" + good + ", registerTime=" + registerTime + ", memberId=" + memberId + "]";
+	return "FreeBoard [no=" + no + ", title=" + title + ", content=" + content + ", fileRoot=" + fileRoot
+			+ ", fileName=" + fileName + ", click=" + click + ", good=" + good + ", registerTime=" + registerTime
+			+ ", memberId=" + memberId + "]";
 }
 
 @Override
@@ -108,6 +119,7 @@ public int hashCode() {
 	int result = 1;
 	result = prime * result + click;
 	result = prime * result + ((content == null) ? 0 : content.hashCode());
+	result = prime * result + ((fileName == null) ? 0 : fileName.hashCode());
 	result = prime * result + ((fileRoot == null) ? 0 : fileRoot.hashCode());
 	result = prime * result + good;
 	result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
@@ -132,6 +144,11 @@ public boolean equals(Object obj) {
 		if (other.content != null)
 			return false;
 	} else if (!content.equals(other.content))
+		return false;
+	if (fileName == null) {
+		if (other.fileName != null)
+			return false;
+	} else if (!fileName.equals(other.fileName))
 		return false;
 	if (fileRoot == null) {
 		if (other.fileRoot != null)
@@ -159,6 +176,7 @@ public boolean equals(Object obj) {
 		return false;
 	return true;
 }
+
 
  
 

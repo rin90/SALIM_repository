@@ -14,7 +14,7 @@ public interface FreeBoardService {
 	void updateFree(FreeBoard freeBoard);
 	
 	//좋아요 수정
-	void updateGood(int no);
+	void updateGood(int no,int num);
 	
 	//글 삭제
 	void deleteFree(int no);

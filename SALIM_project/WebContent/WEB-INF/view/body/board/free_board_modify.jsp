@@ -22,7 +22,7 @@
 		<input type="hidden" name="page" value="${requestScope.page }">
 		<input type="hidden" name="no" value="${requestScope.freeBoard.no }">
 		<input type="hidden" name="category" value="${requestScope.category }">
-		<input type="hidden" name="Search" value="${requestScope.Search }">
+		<input type="hidden" name="search" value="${requestScope.search }">
 		<input type="submit" value="수정완료">
 	
 		 <a href="${initParam.rootPath }/free/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>
@@ -30,10 +30,12 @@
 		<p/>
 	
 	
-	<form action="${initParam.rootPath }/free/list.do" method="post">
+	<form action="${initParam.rootPath }/free/seleteDetail.do" method="post">
 		<input type="hidden" name="page" value="${requestScope.page }">
-
-		<input type="submit" value="취소">
+		<input type="hidden" name="no" value="${requestScope.freeBoard.no }">
+		<input type="hidden" name="category" value="${requestScope.category }">
+		<input type="hidden" name="search" value="${requestScope.search }">
+		<input type="submit" value="뒤로">
 	</form>
 	
 </body>

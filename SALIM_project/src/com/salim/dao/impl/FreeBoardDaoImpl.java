@@ -40,8 +40,11 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	}
 
 	@Override
-	public void updateGood(int no) {
-		session.update(make("goodUpdate"),no);
+	public void updateGood(int no,int num) {
+		HashMap map = new HashMap();
+		map.put("no", no);
+		map.put("num", num);
+		session.update(make("goodUpdate"),map);
 	}
 
 	@Override

@@ -94,7 +94,7 @@
 				</c:forEach>
 			</select>   
 			<input type="hidden" name="page" value="1">
-			<input type="text" name="Search"> <input type="submit" value="검색"> 
+			<input type="text" name="search"> <input type="submit" value="검색"> 
 			</form>
 
 

@@ -40,6 +40,7 @@
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="2"/>	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="3" p:prefix="/WEB-INF/view"/>
+	<bean  id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:maxUploadSize="-1"/>
 	
 	<!-- Tiles 설정 -> 나중에 Bootstrap이용하게 되면 없어질지도... -->
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">

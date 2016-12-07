@@ -11,7 +11,8 @@ create table notes(  --메모
 
 drop table notes;
 
-
+		
+		
 		
 
 

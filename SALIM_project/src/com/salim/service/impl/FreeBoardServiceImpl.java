@@ -29,8 +29,8 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	}
 
 	@Override
-	public void updateGood(int no) {
-		dao.updateGood(no);
+	public void updateGood(int no,int num) {
+		dao.updateGood(no,num);
 	}
 
 	@Override
