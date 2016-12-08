@@ -30,15 +30,7 @@
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<%-- <script>
 
-  $( function() {
-
-    $( "#datepicker" ).datepicker();
-
-  } );
-
-  </script> --%>
 <script type="text/javascript">
 var result=false;
 $(document).ready(function(){
@@ -178,14 +170,14 @@ $(document).ready(function(){
 					 if(!obj.birthdayResult)
 					 {
 					 	$("#birthdayResult").html("<font color='red' size='2'>생년월일 형식이 틀렸습니다.<font>")
+					 }else
+					 {
+						 var age=obj.age;
+						 $("#age").val(age);
 					 }
 					 
 				 },
-				"error":function()
-				{
-					 alert("실패");
-			    }
-					
+			
 			});
 			
 			

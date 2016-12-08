@@ -88,10 +88,10 @@ public class MemberController {
 	}
 	@RequestMapping("birthday.do")
 	@ResponseBody
-	public HashMap<String,Boolean> birthdayCheck(String birthday)
+	public Map<String,Object> birthdayCheck(String birthday)
 	{
 		//형식체크 어떠케 하딩
-		HashMap<String,Boolean> resultMap=new HashMap<String,Boolean>();
+		HashMap<String,Object> resultMap=new HashMap<String,Object>();
 		//문자열에 숫자만 포함되야함
 		
 		for(int i=0; i<birthday.length(); i++)
@@ -103,25 +103,24 @@ public class MemberController {
 				return resultMap;
 			}
 		}
+		
 		resultMap.put("birthdayResult", true);
+		
+		int age=Integer.parseInt(birthday.substring(0,4));
+		int year=new Date().getYear()+1900;
+		resultMap.put("age", year-age);
 		return resultMap;
 	}
 
 	
 	//회원 탈퇴
 	@RequestMapping("leave.do")
-	public String leaveMember(String memberId, String password)
+	public String leaveMember(String memberId,HttpSession session)
 	{
-		 //1.요청파라미터 받기
+		session.invalidate();
+		service.leaveMember(memberId);
 		
-		HashMap<String,String> map=new HashMap<String,String>();
-		map.put("memberId", memberId);
-		map.put("password", password);
-		
-		//2.비지니스 로직 호출! - 아이디로 멤버 한 row 있는지 알아보고, 'ㅅ' 그다음 해야겠다 그러니까 그 회원이 있는지 체크해야하네!?
-		service.leaveMember(map);
-		//3.응답 페이지로 이동- 단순 페이지 이동하기!
-		return "/WEB-INF/view/member/view.jsp";
+		return "redirect:/main.do";
 		
 	}
 	
