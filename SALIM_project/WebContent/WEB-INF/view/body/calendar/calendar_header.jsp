@@ -31,7 +31,8 @@ jQuery의   Fullcalendar
 
 	$(document).ready(function() {
 
-		var current = new Date();
+		var today = new Date();
+		var current = today.getFullYear()+'-'+(today.getMonth()+1);
 		
 		$('#calendar').fullCalendar({
 			weekends : true,	
@@ -49,38 +50,42 @@ jQuery의   Fullcalendar
 				var eventDate;
 				if(title) {
 					eventDate = {
-							title: title,
-							start: start,
-							end: end
+						title: title,
+						start: start,
+						end: end
 					};
 					$('#calendar').fullCalendar('renderEvent', eventDate, true);
 				}
 				$('#calendar').fullCalendar('unselect'); 
 			}, 
-			eventLimit: true,	// Event가 많이 등록되면 +n 형식으로 표시
-			events:{			// 처음에 현재 달을 기준으로 셋팅.
-				url : '${initParam.rootPath}/calendar/reload.do',
-				data : {"memberId":"tester2", "date":current.getFullYear()+'-'+(current.getMonth()+1)}
-			}
+			eventLimit: true	// Event가 많이 등록되면 +n 형식으로 표시
 		}); 
+		
+		// 처음 달 기준으로 받아올 때 사용.
+		$.ajax({
+			"url":'${initParam.rootPath}/calendar/reload.do',
+			"dataType":"json",
+			"data":{"memberId":"tester2", "date":current},
+			"success":function(list){
+				$("#calendar").fullCalendar("addEventSource", list);
+			}
+		});
 		
 		
  		$('.fc-center').on("click", '.fc-prev-button, .fc-next-button', function(){			// 동적으로 변했을 때도 적용할 수 있게!
-			$.ajax({
-				url:"${initParam.rootPath}/calendar/reload.do",
-				type:"post",
-				data:{"memberId":"tester2", "date":$('#calendar').fullCalendar('getDate').format('YYYY-MM')},
-				dataType:"json",
-				success:function(list){
-					$('#calendar').fullCalendar('removeEvents');
-					$('#calendar').fullCalendar('addEventSource', list);
-					$('#calendar').fullCalendar('rerenderEvents');
-				},
-				error:function(request, status, error){
-					alert("앞/뒤 달 관련 일정 받아오는 부분. \ncode : " + request.status + "\nerror : " + error);
-				}
-			});
-			
+	 			$.ajax({
+					url:"${initParam.rootPath}/calendar/reload.do",
+					type:"post",
+					data:{"memberId":"tester2", "date":$('#calendar').fullCalendar('getDate').format('YYYY-MM')},
+					dataType:"json",
+					success:function(list){
+						$('#calendar').fullCalendar('removeEvents');
+						$('#calendar').fullCalendar('addEventSource', list);
+					},
+					error:function(request, status, error){
+						alert("앞/뒤 달 관련 일정 받아오는 부분. \ncode : " + request.status + "\nerror : " + error);
+					}
+				});
 		});
 	});
 </script>
