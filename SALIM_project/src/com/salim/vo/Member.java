@@ -3,6 +3,10 @@ package com.salim.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -11,15 +15,23 @@ import com.salim.util.DateJsonSerializer2;
 
 public class Member implements Serializable{
  
+	@NotEmpty
 	private String memberId;
+	@NotEmpty
 	private String  name;
-	private int age;
+	
+	private int age; 
 	
 	@JsonSerialize(using=DateJsonSerializer2.class)
 	@DateTimeFormat(pattern="yyyyMMdd")
 	private Date birthday;
+	
+	@NotEmpty
 	private String password;
+	@NotEmpty
+	@Email
 	private String email;
+	@NotEmpty
 	private String password2;
 	
 	public Member(){}

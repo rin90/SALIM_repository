@@ -34,12 +34,17 @@ public class MemberController {
 	
 	//회원 가입
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
-	public String join(@ModelAttribute Member member) //요청파라미터를 vo 객체로 생성하고, request에 자동 저장
+	public String join(@ModelAttribute @Valid Member member , BindingResult error) //요청파라미터를 vo 객체로 생성하고, request에 자동 저장
 	{
-		//여기서 validator 검증을 해야함!
 		System.out.println(member);
+		//여기서 validator 검증을 해야함!
+		if(error.hasErrors())
+		{
+			return "body/join_form.tiles";
+		}
+		
 		service.joinMember(member); //여기까진 잘 온당..ㅎㅎ
-		//return "/body/join_success.tiles";
+		
 		return "body/join_success.tiles"; //잘 간다.
 	}
 	
@@ -81,7 +86,27 @@ public class MemberController {
 		}
 		return resultMap;
 	}
-	
+	@RequestMapping("birthday.do")
+	@ResponseBody
+	public HashMap<String,Boolean> birthdayCheck(String birthday)
+	{
+		//형식체크 어떠케 하딩
+		HashMap<String,Boolean> resultMap=new HashMap<String,Boolean>();
+		//문자열에 숫자만 포함되야함
+		
+		for(int i=0; i<birthday.length(); i++)
+		{
+			
+			if(!(birthday.charAt(i)>='0'&&birthday.charAt(i)<='9'&&birthday.length()==8))
+			{
+				resultMap.put("birthdayResult", false);
+				return resultMap;
+			}
+		}
+		resultMap.put("birthdayResult", true);
+		return resultMap;
+	}
+
 	
 	//회원 탈퇴
 	@RequestMapping("leave.do")
