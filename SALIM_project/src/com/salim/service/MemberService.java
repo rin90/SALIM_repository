@@ -18,7 +18,7 @@ public interface MemberService {
 	public void joinMember(Member member)/*throws IOException*/;
 	
 	//회원 탈퇴 -leave
-	public void leaveMember(HashMap<String, String> map);
+	public void leaveMember(String id);
 	
 	//회원 수정- modify
 	

@@ -31,12 +31,17 @@ public class MemberController {
 	
 	//회원 가입
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
-	public String join(@ModelAttribute Member member) //요청파라미터를 vo 객체로 생성하고, request에 자동 저장
+	public String join(@ModelAttribute @Valid Member member , BindingResult error) //요청파라미터를 vo 객체로 생성하고, request에 자동 저장
 	{
-		//여기서 validator 검증을 해야함!
 		System.out.println(member);
+		//여기서 validator 검증을 해야함!
+		if(error.hasErrors())
+		{
+			return "body/join_form.tiles";
+		}
+		
 		service.joinMember(member); //여기까진 잘 온당..ㅎㅎ
-		//return "/body/join_success.tiles";
+		
 		return "body/join_success.tiles"; //잘 간다.
 	}
 	
@@ -78,22 +83,41 @@ public class MemberController {
 		}
 		return resultMap;
 	}
-	
+	@RequestMapping("birthday.do")
+	@ResponseBody
+	public Map<String,Object> birthdayCheck(String birthday)
+	{
+		//형식체크 어떠케 하딩
+		HashMap<String,Object> resultMap=new HashMap<String,Object>();
+		//문자열에 숫자만 포함되야함
+		
+		for(int i=0; i<birthday.length(); i++)
+		{
+			
+			if(!(birthday.charAt(i)>='0'&&birthday.charAt(i)<='9'&&birthday.length()==8))
+			{
+				resultMap.put("birthdayResult", false);
+				return resultMap;
+			}
+		}
+		
+		resultMap.put("birthdayResult", true);
+		
+		int age=Integer.parseInt(birthday.substring(0,4));
+		int year=new Date().getYear()+1900;
+		resultMap.put("age", year-age);
+		return resultMap;
+	}
+
 	
 	//회원 탈퇴
 	@RequestMapping("leave.do")
-	public String leaveMember(String memberId, String password)
+	public String leaveMember(String memberId,HttpSession session)
 	{
-		 //1.요청파라미터 받기
+		session.invalidate();
+		service.leaveMember(memberId);
 		
-		HashMap<String,String> map=new HashMap<String,String>();
-		map.put("memberId", memberId);
-		map.put("password", password);
-		
-		//2.비지니스 로직 호출! - 아이디로 멤버 한 row 있는지 알아보고, 'ㅅ' 그다음 해야겠다 그러니까 그 회원이 있는지 체크해야하네!?
-		service.leaveMember(map);
-		//3.응답 페이지로 이동- 단순 페이지 이동하기!
-		return "/WEB-INF/view/member/view.jsp";
+		return "redirect:/main.do";
 		
 	}
 	
