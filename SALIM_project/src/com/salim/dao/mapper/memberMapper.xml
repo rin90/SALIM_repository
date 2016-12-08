@@ -12,11 +12,17 @@
  	where member_Id=#{value}
  </delete>
  <!-- 회원정보 수정 update -->
-<!--  <update id="updateMember" parameterType="member"> 
+<update id="updateMember" parameterType="member"> 
  	update member
  	set
- 		member_Id=#{memberId}
- </update>	 -->
+ 		name=#{name},
+ 		age=#{age},
+ 		birthday=#{birthday},
+ 		password=#{password},
+ 		email=#{email}
+ 	
+ 	where member_Id=#{memberId}
+ </update>
  
 
  <!-- Id로 Member를 조회 -->

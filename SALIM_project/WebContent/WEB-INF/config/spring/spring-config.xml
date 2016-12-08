@@ -44,6 +44,7 @@
 	<!-- member > my > page -->
 	<mvc:view-controller path="/myPage.do" view-name="body/my/page/myPage.tiles"/>
 	<mvc:view-controller path="/leaveMember.do" view-name="body/my/page/leave_member.tiles"/>
+	<mvc:view-controller path="/myInfo_modify.do" view-name="body/my/page/myInfo_modify.tiles"/>
 	<!-- <mvc:view-controller path="/leaveMember.do" view-name="body/leave_member.tiles"/>
 	<mvc:view-controller path="/myPage.do" view-name="body/myPage.tiles"/>
  -->

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +25,7 @@ import com.salim.service.MemberService;
 import com.salim.service.impl.MemberServiceImpl;
 import com.salim.vo.Member;
 import com.salim.vo.validator.LoginCheck;
+import com.salim.vo.validator.MemberModifyCheck;
 
 @Controller
 @RequestMapping("/member/")
@@ -170,15 +172,36 @@ public class MemberController {
 	//마이페이지는 일단 단순 view 이동으로 처리함
 	
 	//회원 정보 수정
-	@RequestMapping("modify.do")
-	public String modifyMember()
+	@RequestMapping(value="modify.do", method=RequestMethod.POST)
+	public String modifyMember(/*@ModelAttribute @Valid MemberModifyCheck member, */
+			String memberId,
+			String name,
+			String password,
+			String password2,
+			Date birthday,
+			String age,
+			String email,
+			
+			HttpSession session)
 	{
-		//회원 정보 수정 
-		//요청 파라미터를 읽어온다.
-		//원래는 검증하고~??
-		//2.business logic 호출
-		//3.결과 응답!
-		return null;
+		//Member tempMember=null, resultMember=null;
+		//회원 비밀번호가 공백으로 가면 ""로 값이 들어가니까, 그거 체크해서 공백인 경우
+		System.out.println("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+memberId+name+password+password2+birthday+age+email);
+		/*System.out.println("member "+member);
+		if(member.getPassword().equals("")||member.getPassword()==null)
+		{
+			System.out.println("password"+member.getPassword());
+			tempMember=service.findMemberById(member.getMemberId());
+			System.out.println("tempMember"+tempMember);
+			member.setPassword(tempMember.getPassword());
+			member.setPassword2(member.getPassword());
+		}
+		BeanUtils.copyProperties(member,resultMember);
+		System.out.println("resultMember"+resultMember);
+		service.modifyMember(resultMember);
+		session.setAttribute("login_info", resultMember);*/
+		
+		return "/myInfo_modify.do";
 	}
 	
 	//아이디 찾기 -끝

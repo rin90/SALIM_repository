@@ -12,6 +12,7 @@ import com.salim.dao.MemberDao;
 import com.salim.service.MemberService;
 import com.salim.vo.Member;
 
+
 @Service
 public class MemberServiceImpl implements MemberService{
 
@@ -102,6 +103,10 @@ public class MemberServiceImpl implements MemberService{
 		return member;
 	}
 	
+	public void modifyMember(Member member)
+	{
+		memberdao.updateMember(member);
+	}
 	
 	
 }

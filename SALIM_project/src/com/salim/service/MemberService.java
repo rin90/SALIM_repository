@@ -10,6 +10,7 @@ import com.salim.dao.MemberDao;
 
 import com.salim.vo.Member;
 
+
 @Service
 public interface MemberService {
 
@@ -40,6 +41,8 @@ public interface MemberService {
 	//회원 1사람 email로 조회
 	public Member findMemberByEmail(String email);
 
+	//회원 정보 수정
+	public void modifyMember(Member member);
 	
 	
 }
