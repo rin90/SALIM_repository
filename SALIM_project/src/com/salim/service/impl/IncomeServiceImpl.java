@@ -52,18 +52,19 @@ public class IncomeServiceImpl implements IncomeService{
 		//로그인 했는지 interceptor로 확인
 		
 		//조회해서 나온 incoem list를 리턴 - 화면에 뿌려주기
+
 		return dao.selectIncomeList(map);
 		
 	}
 
-	@Override
+	//삭제
 	public void deleteIncome(List<Integer> incomeIdList) {
 		
 		//로그인 했는지 interceptor로 확인
 		
 		//income id를 뽑아서 dao의 delete 실행시키기
 		for(int i=0; i<incomeIdList.size(); i++){
-			if(incomeIdList.get(i) == null){
+			if(incomeIdList.get(i) == 0 || incomeIdList.get(i) == null){
 				incomeIdList.remove(i);
 			}
 			//int incomeId = Integer.parseInt(incomeIdList.get(i));

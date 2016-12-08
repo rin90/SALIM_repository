@@ -1,10 +1,8 @@
 package com.salim.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +15,6 @@ import org.springframework.web.servlet.view.InternalResourceView;
 
 import com.salim.service.CodeService;
 import com.salim.vo.Code;
-import com.salim.vo.Member;
 
 @Controller
 @RequestMapping("/code")
@@ -60,8 +57,12 @@ public class CodeController {
 	//소분류 코드 list가져오기
 	@RequestMapping("/small/codeList")
 	@ResponseBody 
-	public List<Code> findCodeList(@RequestParam String secondCode){		
+	public List<Code> findCodeList(@RequestParam String secondCode){
 		return service.findCode(secondCode);
 	}
+	
+	
+	
+	
 	
 }

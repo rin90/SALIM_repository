@@ -13,24 +13,22 @@ public interface FreeBoardService {
 	//글 수정
 	void updateFree(FreeBoard freeBoard);
 	
-	//조회수정
-	void updateClick(int no);
-	
 	//좋아요 수정
-	void updateGood(int no);
+	void updateGood(int no,int num);
 	
 	//글 삭제
 	void deleteFree(int no);
-	
-	//page처리를 위한 PagingBean객체와 list를 반환 -map
-	Map getFreeBoardList(int page);
-	
-	//조회 - 제목으로 검색
-	List<FreeBoard> selectByTitle(String title);
 	
 	//글 번호로 글 찾기(상세화면)
 	FreeBoard selectByNo(int no);
 	
 	//글의 총 댓글 갯수
 	int selectCommentTotal(int no);
+
+	//page처리를 위한 PagingBean객체와 list를 반환 - 토탈
+	Map getFreeBoardList(int page);
+	
+	//page처리를 위한 PagingBean객체와 list를 반환  - 제목으로 검색과 작성자로 검색 처리
+	Map getTermsFreeBoardList(int page,String category,String content);
+	
 }

@@ -15,23 +15,23 @@ public class IncomeDaoImpl implements IncomeDao{
 	
 	@Autowired
 	private SqlSessionTemplate session;
-
+	
+	//삽입
 	public int insertIncome(Income income) {
-		System.out.println("DAO까지 왔다감");
 		return session.insert("incomeMapper.insertIncome", income);
 	}
 
-	@Override
+	//수정
 	public int updateIncome(Income income) {
 		return session.update("incomeMapper.updateIncome", income);
 	}
 
-	@Override
+	//삭제
 	public int deleteIncome(int incomeId) {
 		return session.delete("incomeMapper.deleteIncome", incomeId);
 	}
 
-	@Override
+	//조회
 	public List<Income> selectIncomeList(Map map) { // map => memberId 와 incomeDate
 		return session.selectList("incomeMapper.selectIncomeDate", map);
 	}

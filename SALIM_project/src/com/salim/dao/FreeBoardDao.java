@@ -16,27 +16,43 @@ public interface FreeBoardDao {
 	void updateClick(int no);
 	
 	//글 좋아요 증가
-	void updateGood(int no);
+	void updateGood(int no,int num);
 	
 	//글 삭제
 	void deleteFree(int no); 
-	
-	//page처리를 위한 글 토탈
-	int selectTotal();
-	
-	//page처리를 위한 현재 페이지
-	List<FreeBoard> selectCurrentPage(int page);
-	
-	//조회 제목으로 검색
-	List<FreeBoard> selectByTitle(String title);
-	
+		
 	// 글 번호로 글 찾기(상세화면)
 	FreeBoard selectByNo(int no);
 	
 	//글의 총 댓글 갯수
 	int selectCommentTotal(int no);
 	
+	//page처리를 위한 현재 페이지
+	List<FreeBoard> selectCurrentPage(int page);
+
+	//page처리를 위한 글 토탈
+	int selectTotal();
+
 	
+	
+	
+	//검색 - 제목으로 검색  -현재페이지 리턴
+	List<FreeBoard> selectByTitle(int page,String content);
+	
+	//제목으로 검색 글 토탈
+	int selectTitleTotal(String content);
+	
+	
+	
+	
+	//검색 - 작성자로 검색 -현재페이지 리턴
+	List<FreeBoard> selectByMemberId(int page,String content);
+	
+	//작성자로 검색 글 토탈
+	int selectMemberIdTotal(String content);
+	
+	
+		
 	
 
 

@@ -35,7 +35,7 @@ td, th{
 	</tr>
 	<tr>
 		<td>생년월일</td>
-		<td>${sessionScope.login_info.birthday }</td>
+		<td>${sessionScope.login_info.birthday}</td>
 	</tr>
 	<tr>
 		<td>이메일</td>

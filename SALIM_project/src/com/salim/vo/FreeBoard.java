@@ -1,15 +1,18 @@
 package com.salim.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FreeBoard {
+import org.springframework.web.multipart.MultipartFile;
+
+public class FreeBoard  implements Serializable{
  private int no;
  private String title;
  private String content;
- private String fileRoot;
+ private MultipartFile fileRoot;
+ private String fileName;
  private int click =0;
  private int good = 0;
- private String category;
  private Date registerTime = new Date();
  private String memberId;
  
@@ -17,25 +20,18 @@ public FreeBoard() {
 	super();
 }
 
-public FreeBoard(int no, String title, String content, String fileRoot, int click, int good, String category,
-		String memberId) {
+public FreeBoard(int no, String title, String content, MultipartFile fileRoot, String fileName, int click, int good,
+		Date registerTime, String memberId) {
 	super();
 	this.no = no;
 	this.title = title;
 	this.content = content;
 	this.fileRoot = fileRoot;
+	this.fileName = fileName;
 	this.click = click;
 	this.good = good;
-	this.category = category;
-	this.memberId = memberId;
-}
-
-public Date getRegisterTime() {
-	return registerTime;
-}
-
-public void setRegisterTime(Date registerTime) {
 	this.registerTime = registerTime;
+	this.memberId = memberId;
 }
 
 public int getNo() {
@@ -62,12 +58,20 @@ public void setContent(String content) {
 	this.content = content;
 }
 
-public String getFileRoot() {
+public MultipartFile getFileRoot() {
 	return fileRoot;
 }
 
-public void setFileRoot(String fileRoot) {
+public void setFileRoot(MultipartFile fileRoot) {
 	this.fileRoot = fileRoot;
+}
+
+public String getFileName() {
+	return fileName;
+}
+
+public void setFileName(String fileName) {
+	this.fileName = fileName;
 }
 
 public int getClick() {
@@ -86,12 +90,12 @@ public void setGood(int good) {
 	this.good = good;
 }
 
-public String getCategory() {
-	return category;
+public Date getRegisterTime() {
+	return registerTime;
 }
 
-public void setCategory(String category) {
-	this.category = category;
+public void setRegisterTime(Date registerTime) {
+	this.registerTime = registerTime;
 }
 
 public String getMemberId() {
@@ -104,21 +108,23 @@ public void setMemberId(String memberId) {
 
 @Override
 public String toString() {
-	return "FreeBoard [no=" + no + ", title=" + title + ", content=" + content + ", fileRoot=" + fileRoot + ", click="
-			+ click + ", good=" + good + ", category=" + category + ", memberId=" + memberId + "]";
+	return "FreeBoard [no=" + no + ", title=" + title + ", content=" + content + ", fileRoot=" + fileRoot
+			+ ", fileName=" + fileName + ", click=" + click + ", good=" + good + ", registerTime=" + registerTime
+			+ ", memberId=" + memberId + "]";
 }
 
 @Override
 public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + ((category == null) ? 0 : category.hashCode());
 	result = prime * result + click;
 	result = prime * result + ((content == null) ? 0 : content.hashCode());
+	result = prime * result + ((fileName == null) ? 0 : fileName.hashCode());
 	result = prime * result + ((fileRoot == null) ? 0 : fileRoot.hashCode());
 	result = prime * result + good;
 	result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 	result = prime * result + no;
+	result = prime * result + ((registerTime == null) ? 0 : registerTime.hashCode());
 	result = prime * result + ((title == null) ? 0 : title.hashCode());
 	return result;
 }
@@ -132,17 +138,17 @@ public boolean equals(Object obj) {
 	if (getClass() != obj.getClass())
 		return false;
 	FreeBoard other = (FreeBoard) obj;
-	if (category == null) {
-		if (other.category != null)
-			return false;
-	} else if (!category.equals(other.category))
-		return false;
 	if (click != other.click)
 		return false;
 	if (content == null) {
 		if (other.content != null)
 			return false;
 	} else if (!content.equals(other.content))
+		return false;
+	if (fileName == null) {
+		if (other.fileName != null)
+			return false;
+	} else if (!fileName.equals(other.fileName))
 		return false;
 	if (fileRoot == null) {
 		if (other.fileRoot != null)
@@ -158,6 +164,11 @@ public boolean equals(Object obj) {
 		return false;
 	if (no != other.no)
 		return false;
+	if (registerTime == null) {
+		if (other.registerTime != null)
+			return false;
+	} else if (!registerTime.equals(other.registerTime))
+		return false;
 	if (title == null) {
 		if (other.title != null)
 			return false;
@@ -165,8 +176,6 @@ public boolean equals(Object obj) {
 		return false;
 	return true;
 }
-
-
 
 
  
