@@ -27,8 +27,8 @@ public class ExpenseDaoImpl implements ExpenseDao{
 	}
 
 	//삭제
-	public int deleteExpense(int expenseId) {
-		return session.delete("expenseMapper.deleteExpense", expenseId);
+	public int deleteExpense(Map map) {	//int expenseId, memberId
+		return session.delete("expenseMapper.deleteExpense", map);
 	}
 
 	//조회

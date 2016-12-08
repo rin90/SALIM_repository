@@ -29,12 +29,14 @@
 			income_money=#{incomeMoney}
 		</set>
 		where income_id=#{incomeId}
+		and member_id=#{memberId}
 	</update>
 	
 	<!-- 수입 delete -->
-	<delete id="deleteIncome" parameterType="_int">
+	<delete id="deleteIncome" parameterType="map">
 		delete from income 
 		where income_id=#{incomeId}
+		and member_id=#{memberId}
 	</delete>
 	
 	
