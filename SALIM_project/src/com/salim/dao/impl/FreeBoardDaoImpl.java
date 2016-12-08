@@ -108,6 +108,11 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		return session.selectOne(make("selectMemberIdTotal"),content);
 	}
 	
+	@Override
+	public int selectSeq() {
+		return session.selectOne(make("seq"));
+	}
+	
 	
 	
 }

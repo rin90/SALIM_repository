@@ -19,7 +19,10 @@ public interface FreeBoardService {
 	//글 삭제
 	void deleteFree(int no);
 	
-	//글 번호로 글 찾기(상세화면)
+	//글 번호로 글 찾기(상세화면)+조회수 증가
+	FreeBoard selectByNoAndClickUpdate(int no);
+	
+	//새로고침 방지해서 새로고침시 조회수 증가 안함
 	FreeBoard selectByNo(int no);
 	
 	//글의 총 댓글 갯수
@@ -30,5 +33,10 @@ public interface FreeBoardService {
 	
 	//page처리를 위한 PagingBean객체와 list를 반환  - 제목으로 검색과 작성자로 검색 처리
 	Map getTermsFreeBoardList(int page,String category,String content);
+	
+	
+	
+	int selectSeq();
+	
 	
 }

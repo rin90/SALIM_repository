@@ -2,16 +2,22 @@ package com.salim.controller;
 
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +33,11 @@ import com.salim.vo.FreeBoard;
 @Controller
 @RequestMapping("/free/")
 public class FreeBoardController {
-
+/*	나중에 시간 남으면 처리할 것들
+1. 좋아요 F5처리 못함  -db생성해서 하기 ,쿠키로 할 경우에 사용자가 쿠키를 삭제할 수도 있어서 db는 영구적
+2. file을 입력 받으면 내 디렉토리에(fleroute) 	파일을 저장하기 -이거는 고민 된다. 서버가 계속 on되 있을 경우
+3. 검색 기준을 보여주기 - 지금은 작성자로 검색했을 경우 검색기준이 제목으로 되있음 작성자로 표현해주기 -아마 ajax하면 되지 않을까? - 댓글하고 바로 하기	
+*/
 	@Autowired
 	private FreeBoardService service;
 
@@ -37,7 +47,7 @@ public class FreeBoardController {
 	// 게시판 목록 뿌려주는 메소드                        기본                           V    -로그인 없이 가능
 	@RequestMapping("list")
 	public ModelAndView list(int page) {
-	
+		
 		Map map = service.getFreeBoardList(page);
 		map.put("codes", codeService.findCode("조회"));
 		return new ModelAndView("body/board/free_board_list.tiles", map);
@@ -69,7 +79,7 @@ public class FreeBoardController {
 	
 	// 글 등록 form 이동 메소드                                                       V         - 로그인해야 가능
 	@RequestMapping("form")
-	public String fromMove(int page,ModelMap map){
+	public String fromMove(int page,ModelMap map	){
 		map.addAttribute("page", page);
 		return "body/board/free_board_form.tiles";
 	}
@@ -83,10 +93,22 @@ public class FreeBoardController {
 		밑에 form에서 fileName를 안주고 컨트롤러에서 fileName을 vo객체에 넣어주기 때문에 ModelMap에  다시 객체를 넣었음
 	 */	
 	
-	
+	/*
+	 @Valid -> Spring MVC에서 지원하는 검증할 때 유용 해당 bean객체에 제공하는 기능을 @으로 달아주면 그것을 spring에서 검증하여 에러를 내고 그것을 
+	 			BindingResult로 리턴한다. 그래서 그것을 받아다 쓰면 좋음
+		이거 말고 다른 방법은 Validator클래스를 만드는 방법이 있지만 이것이 더 유용
+	 */
 	// 글 등록 메소드                                   V  -로그인해야 가능
 	@RequestMapping(value = "register", method = RequestMethod.POST)
-	public String insert(@ModelAttribute FreeBoard freeBoard, BindingResult errors, ModelMap map,int page,HttpServletRequest request) throws IllegalStateException, IOException {
+	public String insert(@ModelAttribute @Valid FreeBoard freeBoard, BindingResult errors, ModelMap map,int page,HttpServletRequest request) throws IllegalStateException, IOException {
+		if(errors.hasErrors()) //에러가 있는 경우 전달 
+		{
+			map.addAttribute("page",page);
+			return "body/board/free_board_form.tiles";
+		}
+		System.out.println("요청파라미터 number값:"+freeBoard.getNo());
+		
+	
 		MultipartFile file = freeBoard.getFileRoot();
 
 		if(file != null&& !file.isEmpty()){//업로드 된 파일이 있다면
@@ -99,19 +121,16 @@ public class FreeBoardController {
 			
 			file.transferTo(dest);//파일이동
 		}
-		service.insertFree(freeBoard);
-		System.out.println(freeBoard);
-		map.addAttribute("commentTotal",service.selectCommentTotal(freeBoard.getNo()));
-		map.addAttribute("page",page);
-		map.addAttribute("freeBoard",freeBoard);
-		return "body/board/free_board_detail.tiles";
+
+			service.insertFree(freeBoard);
+		return "redirect:/free/seleteDetail.do?no="+freeBoard.getNo()+"&page="+page;
 	}
 	
 	// 글 수정 form이동 메소드                  V                   -로그인해야 가능
 	@RequestMapping("updateForm")
 	public String updateMove(int page,int no,String category,String search,ModelMap map){
 		map.addAttribute("page", page);
-		map.addAttribute("freeBoard",service.selectByNo(no));
+		map.addAttribute("freeBoard",service.selectByNoAndClickUpdate(no));
 		map.addAttribute("category",category);
 		map.addAttribute("search",search);
 		return "body/board/free_board_modify.tiles";
@@ -121,8 +140,8 @@ public class FreeBoardController {
 	//글 수정 메소드                                          V               - 로그인해야 가능
 	@RequestMapping("update")
 	public String update(@ModelAttribute FreeBoard freeBoard,int page,String category,String search,HttpServletRequest request,ModelMap map) throws IllegalStateException, IOException{
+		System.out.println("수정");
 		MultipartFile file = freeBoard.getFileRoot();
-		
 		if(file != null&& !file.isEmpty()){//업로드 된 파일이 있다면
 			
 			freeBoard.setFileName(file.getOriginalFilename());//파일명
@@ -136,32 +155,40 @@ public class FreeBoardController {
 			file.transferTo(dest);//파일이동
 		}
 		service.updateFree(freeBoard);
-		map.addAttribute("page",page);
-		map.addAttribute("commentTotal",service.selectCommentTotal(freeBoard.getNo()));
-		map.addAttribute("category",category);
-		map.addAttribute("search",search);
-		System.out.println("updateController:"+category);
-		return "body/board/free_board_detail.tiles";
+		if(category !=null&&!category.isEmpty()&&search != null&&!search.isEmpty()){
+			return "redirect:/free/seleteDetail.do?no="+freeBoard.getNo()+"&page="+page+"category="+category+"search="+search;			
+		}else{		
+			return "redirect:/free/seleteDetail.do?no="+freeBoard.getNo()+"&page="+page;						
+		}
 	}
 	
 	// 글 삭제 메소드                                                                 V       -로그인해야 가능
 	@RequestMapping("delete")
-	public ModelAndView delete(int no,int page){
+	public String delete(int no,int page){
+		System.out.println("삭제");
 		service.deleteFree(no);
-		Map map = service.getFreeBoardList(page);
-		map.put("codes", codeService.findCode("조회"));
-		return new ModelAndView("body/board/free_board_list.tiles", map);
+		return "redirect:/free/list.do?page="+page;//redirect방식으로 처리해야함 안그러면 새로고침하면 계속 브라우저가 url을 그대로 가지고 있어서 계속 처리됨
+		//redirect로 값을 유지하기 위해서 controller를 호출하면서 값을 붙여줌
 	}
 	
-	// no로 조회하는 메소드(상세화면) + 댓글 수                            V  member_id가 같을 경우 조회수 증가를 하면 안됨 serviceImple에서 수정해야 할 부분(즉, 자기 자신의 글)
+	// no로 조회하는 메소드(상세화면) + 댓글 수    +조회수                        V  member_id가 같을 경우 조회수 증가를 하면 안됨 serviceImple에서 수정해야 할 부분(즉, 자기 자신의 글)
 	// -로그인 해야 가능
 	@RequestMapping("seleteDetail")
-	public String detail(int no,int page,String category,String search,ModelMap map){
-		map.addAttribute("freeBoard",service.selectByNo(no));
+	public String detail(int no,int page,String category,String search,@CookieValue(required=false, defaultValue="0") String read,
+			HttpServletResponse response,ModelMap map){
+			
+		System.out.println(read);
+		System.out.println("boolean"+read.equals(String.valueOf(no)));
+		if(read.equals(String.valueOf(no))){
+				map.addAttribute("freeBoard",service.selectByNo(no)); // 조회만함
+			}else{				
+				map.addAttribute("freeBoard",service.selectByNoAndClickUpdate(no)); //조회및 조회수 증가				
+			}
 		map.addAttribute("commentTotal",service.selectCommentTotal(no));
 		map.addAttribute("page",page);
 		map.addAttribute("category",category);
 		map.addAttribute("search",search);
+		response.addCookie(new Cookie("read",String.valueOf(no)));
 		return "body/board/free_board_detail.tiles";
 	}
 	
@@ -171,7 +198,7 @@ public class FreeBoardController {
 	@RequestMapping("good")
 	@ResponseBody
 	public void goodUpdate(int no,String whether,HttpServletRequest request){
-		System.out.println("왓??");
+		System.out.println("좋아요");
 		if(whether.isEmpty()){
 			service.updateGood(no,-1);			
 		}else{
@@ -179,6 +206,6 @@ public class FreeBoardController {
 		}
 		
 	}
-	//물어볼 것!! -> detail화면에서 좋아요 숫자를 보여줄 것인지 , 아니면 좋아요 버튼만 
+	
 
 }

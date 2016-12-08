@@ -3,11 +3,14 @@ package com.salim.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FreeBoard  implements Serializable{
  private int no;
+@NotEmpty(message="제목을 입력해주세요")
  private String title;
+@NotEmpty(message="내용을 입력해주세요")
  private String content;
  private MultipartFile fileRoot;
  private String fileName;

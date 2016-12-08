@@ -54,6 +54,6 @@ public interface FreeBoardDao {
 	
 		
 	
-
+	int selectSeq();
 
 }

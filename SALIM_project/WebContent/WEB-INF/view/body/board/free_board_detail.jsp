@@ -23,7 +23,7 @@ $(document).ready(function(){
 						$("#good").text("♡ 0");
 						$("#good").prop("value","false");
 					
-					}else{	
+					}else {	
 			
 						$("#good").text("♥ 1");
 						$("#good").prop("value","");
@@ -34,12 +34,28 @@ $(document).ready(function(){
 
 	
 	
+	//document에서 새로고침 방지 그러나 F12화면 새로고침 방지가 안됨  -> 그래서 쿠키로 합니다 ... 새로고침 방지하는 이유는 값이 그대로 보존되서 조회수가 올라감 .좋아요도redirect해서
+	//옮기면서 해도 결국 같을거야 왜냐하면 어차피 똑같이 값을 주기 때문에 insert,update,delete같은 경우는 insert,update,delete로 다시 안돌아 가자나
+	/* $(document).keydown(function (e) {
+	     
+        if (e.which === 116 || e.which === 123) { //116->f5키를 뜻함 123 -> f12키를 뜻함 :::막음
+        	if (typeof event == "object") {
+                event.keyCode = 0;
+            }
+            return false;
+        } else if (e.which === 82 && e.ctrlKey) {
+            return false;
+        }
+
+	});   근데 이런 보안은 오용이랍니다. 그래서 cooki를 이용합시다.*/ 
+	
 
 
 
 });
 
 </script>
+	
 </head>
 <body>
 		${requestScope.freeBoard.title } &nbsp;&nbsp;&nbsp;<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${requestScope.freeBoard.registerTime }"/>	

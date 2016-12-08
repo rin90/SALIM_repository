@@ -10,7 +10,10 @@
 		</selectKey>
 		insert into free_board values(#{no},#{title},#{content},#{fileName},#{click},#{good},#{registerTime},#{memberId}) 		
 	</insert>
-	
+	<!-- squenc값 증가 -->
+	<select id="seq" resultType="_int">
+			select seq_free.nextval from dual	
+	</select>
 	<!-- 자유게시판 글수정 -->
 	<update id="freeUpdate" parameterType="freeboard">
 		update free_board
@@ -50,7 +53,7 @@
 	<!-- 글의 총댓글 개수 (상세화면)-->
 	<select id="selectCommentTotal" parameterType="_int" resultType="_int">
 	select count(id)
-	from comments
+	from free_comments
 	where font_no =#{value}
 	</select>
 	
