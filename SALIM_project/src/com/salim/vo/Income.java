@@ -12,9 +12,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 //import com.salim.util.DateJsonSerializer;
 
 public class Income implements Serializable{
-	
+	@NotNull
 	private int incomeId;
-	
+	@NotNull
 	private String memberId;
 	private int codeId;
 	@NotNull
