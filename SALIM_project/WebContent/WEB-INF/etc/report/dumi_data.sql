@@ -19,6 +19,15 @@ insert into budget values (seq_bud.nextval, 'tester2',
 
 -- 수입 등록(급여)
 insert into income values (seq_inc.nextval, 'tester2', 2, to_date('2016-12-05','YYYY-MM-DD'), 'A회사', 2000000);
+insert into income values (seq_inc.nextval, 'tester2', 3, to_date('2016-12-30','YYYY-MM-DD'), 'A상여급', 800000);
+insert into income values (seq_inc.nextval, 'tester2', 6, to_date('2016-12-15','YYYY-MM-DD'), 'B통장이자', 11000);
+insert into income values (seq_inc.nextval, 'tester2', 2, to_date('2016-11-05','YYYY-MM-DD'), 'A회사', 2000000);
+insert into income values (seq_inc.nextval, 'tester2', 2, to_date('2015-01-05','YYYY-MM-DD'), 'A회사', 1800000);
+
+insert into income values (seq_inc.nextval, 'tester', 6, to_date('2016-12-20','YYYY-MM-DD'), 'C통장이자', 22000);
+insert into income values (seq_inc.nextval, 'tester', 2, to_date('2016-11-05','YYYY-MM-DD'), 'A회사', 2500000);
+
+
 ---------------- BigCategory 9 --------------------------
 -- 지출 등록(주식비-19	)
 insert into expense (expense_id, member_id, code_id, expense_date, cash_expense)

@@ -21,6 +21,6 @@ public interface ExpenseDao {
 	
 	
 	// 보고서용 - 대분류기준 지출 내역 가져오기. 
-	Map<String, Integer> selectSpendEachCategory(Map map);
+	List selectSpendEachCategory(Map map);
 }
 

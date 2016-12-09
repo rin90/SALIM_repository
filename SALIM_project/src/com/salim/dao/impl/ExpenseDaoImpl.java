@@ -36,11 +36,8 @@ public class ExpenseDaoImpl implements ExpenseDao{
 		return session.selectList("expenseMapper.selectExpenseDate", map);
 	}
 
-	// 월 보고서용	-> selectMap사용법 확인 요망
-	@Override
-	public Map<String, Integer> selectSpendEachCategory(Map map) {
-		return session.selectMap("expenseMapper.selectSpendEachCategory", map, "category");
+	// 월 보고서용	- 대분류 기준 조회
+	public List selectSpendEachCategory(Map map) {
+		return session.selectList("expenseMapper.selectSpendEachCategory", map);
 	}
-	
-	
 }

@@ -13,7 +13,7 @@ from (
 )
 
 -- [최종] big_content의 그룹으로 묶어서 각 그룹별 지출 금액 출력 
-select big_content, sum(total) spend_money
+select big_content category, sum(total) spend_money
 from (	select big.big_code, big.big_content, nvl(small.total, 0) total
 		from bigcategory big, 
 			(select s.small_code, s.small_content, e.total, s.big_code

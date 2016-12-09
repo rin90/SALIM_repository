@@ -1,5 +1,6 @@
 package com.salim.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,7 @@ public class ReportServiceImpl implements ReportService{
 	ExpenseDao edao;
 
 	@Override
-	public Map<String, Integer> selectSpendEachCategory(Map map) {
-		
+	public List selectSpendEachCategory(Map map) {
 		return edao.selectSpendEachCategory(map);
 	}
 

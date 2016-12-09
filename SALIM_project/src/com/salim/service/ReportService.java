@@ -1,5 +1,6 @@
 package com.salim.service;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ReportService {
@@ -8,6 +9,6 @@ public interface ReportService {
 	 * @param map	memberId, 기준이 되는 달(형식 예: 2016-12)
 	 * @return
 	 */
-	Map<String, Integer> selectSpendEachCategory(Map map); 
+	List selectSpendEachCategory(Map map); 
 	
 }

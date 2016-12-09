@@ -27,6 +27,15 @@ jQuery의   Fullcalendar
 }
 </style>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<div id="dialog" title="Basic dialog">
+  <p>짠!</p>
+</div>
+
 <script type='text/javascript'>
 
 	$(document).ready(function() {
@@ -46,7 +55,8 @@ jQuery의   Fullcalendar
 			selectable : true,		// 달력에서 선택할 수 있게
 			selectHelper : true,	// 달력의 어느 부분이 선택되었는지 색으로 표시
  			select : function(start, end){	// 날짜 선택시 수행할 일
-				var title = prompt('Event Title : ');
+ 				$( "#dialog" ).dialog();
+ 				/* var title = prompt('Event Title : ');
 				var eventDate;
 				if(title) {
 					eventDate = {
@@ -56,9 +66,9 @@ jQuery의   Fullcalendar
 					};
 					$('#calendar').fullCalendar('renderEvent', eventDate, true);
 				}
-				$('#calendar').fullCalendar('unselect'); 
+				$('#calendar').fullCalendar('unselect'); */
 			}, 
-			eventLimit: true	// Event가 많이 등록되면 +n 형식으로 표시
+			eventLimit: true	// Event가 많이 등록되면 +n 형식으로 표시 
 		}); 
 		
 		// 처음 달 기준으로 받아올 때 사용.
@@ -89,3 +99,8 @@ jQuery의   Fullcalendar
 		});
 	});
 </script>
+
+
+
+
+
