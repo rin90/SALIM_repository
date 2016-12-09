@@ -13,32 +13,39 @@
 	<script type="text/javascript">
 
 	/* 년 월만 선택하게.. */
-	$(document).ready(function(){
+ 	$(document).ready(function(){
 		$("#budgetDate").datepicker({
 			changeMonth:true,
 			changeYear:true,
 			//monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 			//showMonthAfterYear:true,
 			showButtonPanel:true,
-			dateFormat: 'MM yy',
+			dateFormat: 'yy-MM',
 			onClose:function(dateText, inst){
-				alert(dateText);
-				$("#budgetDate").text(dateText);
+				var month = $("#budgetDate #budgetDate-month :selected").val();
+	            var year = $("#budgetDate #budgetDate-year :selected").val();
+	            $(this).datepicker('setDate', new Date(year, month, 1));
 			}
 		});
-	});
-    	/* $('.date-picker').datepicker( {
-  	    	changeMonth: true,
-    	    changeYear: true,
-        	showButtonPanel: true,
-        	dateFormat: 'yy-MM',
-        	onClose: function(dateText, inst) { 
-            	var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-            	var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-            	$(this).datepicker('budgetDate', new Date(year, month, 1));
-        	}
-    	});
+	}); 
+	
+/* 	$(function() {
+	    $('.date-picker').datepicker( {
+	        changeMonth: true,
+	        changeYear: true,
+	        showButtonPanel: true,
+	        dateFormat: 'MM yy',
+	        onClose: function(dateText, inst) { 
+	            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+	            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+	            $(this).datepicker('setDate', new Date(year, month, 1));
+	        }
+	    });
 	}); */
+
+
+
+
 	
 	
 	
@@ -119,8 +126,11 @@
 </head>
 <body>
 
-	<label for="startDate">Date :</label>
-    <input type="text" name="budgetDate" id="budgetDate" />
+ 	<label for="startDate">Date :</label>
+    <input type="text" name="budgetDate" id="budgetDate" class="date-picker"/>
+    
+    <!-- <label for="startDate">Date :</label>
+    <input name="startDate" id="startDate" class="date-picker" /> -->
 
 
 	<!-- <input type="text" name="sdate" id="sdate" size="7" maxlength="7" class="hasDatepicker">
