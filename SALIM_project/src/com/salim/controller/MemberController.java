@@ -1,11 +1,9 @@
 package com.salim.controller;
 
-import java.awt.List;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -19,13 +17,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.salim.service.MemberService;
-import com.salim.service.impl.MemberServiceImpl;
 import com.salim.vo.Member;
 import com.salim.vo.validator.LoginCheck;
 import com.salim.vo.validator.MemberModifyCheck;
+
+
 
 @Controller
 @RequestMapping("/member/")

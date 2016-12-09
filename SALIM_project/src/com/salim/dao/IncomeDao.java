@@ -16,7 +16,7 @@ public interface IncomeDao {
 	int updateIncome(Income income);
 	
 	//수입을 삭제
-	int deleteIncome(int incomeId);
+	int deleteIncome(Map map);
 	
 	//수입을 조회
 	List<Income> selectIncomeList(Map map);
