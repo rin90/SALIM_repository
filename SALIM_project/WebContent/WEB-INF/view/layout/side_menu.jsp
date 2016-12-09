@@ -11,9 +11,8 @@
 <a href="${initParam.rootPath }/next.do">다음페이지</a><br>
 
 
-<a href="${initParam.rootPath }/household/login/incomeSelect.do">수입&지출 입력</a>
-
-
+<a href="${initParam.rootPath }/household/login/incomeSelect.do">수입&지출 입력</a><br>
+<a href="${initParam.rootPath }/household/login/findbudget.do">에산작성</a><br> 
 
 
 

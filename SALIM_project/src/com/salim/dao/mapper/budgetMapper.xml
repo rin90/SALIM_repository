@@ -15,9 +15,9 @@
 	 		select seq_bud.nextval from dual
 	 	</selectKey>
 	 	insert into budget
-	 	values(#{num}, #{member_id}, #{budget_date}, #{budget}, #{food_expenses}, #{dwelling_communication}, #{householdgoods}, #{cloth_beauty}, 
-	 					#{health_culture}, #{education_parenting}, #{traffic_vehicle}, #{holiday_dues}, #{tax_interest}, #{pinmoney_etc}, 
-	 					#{saving_insurance}, #{credit_card}, #{unclassified})
+	 	values(#{num}, #{memberId}, #{budgetDate}, #{budget}, #{foodExpenses}, #{dwellingCommunication}, #{householdgoods}, #{clothBeauty}, 
+	 					#{healthCulture}, #{educationParenting}, #{trafficVehicle}, #{holidayDues}, #{taxInterest}, #{pinmoneyEtc}, 
+	 					#{savingInsurance}, #{creditCard}, #{unclassified})
 	 </insert>
 	 
 	 <!-- 예산 update -->
@@ -41,6 +41,7 @@
 	 		unclassified=#{unclassified}	
 	 	</set>
 	 	where num=#{num}
+	 	and member_id=#{memberId}
 	 </update>
 	 
 	 <!-- 예산 select -->
@@ -67,7 +68,7 @@
 	 <select id="selectBudget" parameterType="map" resultMap="budget-resultMap">
 	 	select *
 	 	from budget
-	 	where member_id=#{member_id}
+	 	where member_id=#{memberId}
 	 	and budget_date=#{budgetDate}
 	 </select>
 	 
