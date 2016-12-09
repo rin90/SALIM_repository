@@ -2,6 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="freeMapper">
 	
+	<resultMap type="freeboard" id="freeBoard-resultMap">
+		<id column="no" property="no"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="file_root" property="fileRoot"/>
+		<result column="file_name" property="fileName"/>
+		<result column="click" property="click"/>
+		<result column="good" property="good"/>
+		<result column="register_time" property="registerTime"/>
+		<result column="member_id" property="memberId"/>
+	</resultMap>
+	
+	
+	<resultMap type="freeboard" id="freeBoard-freeComment-join-resultMap" extends="freeBoard-resultMap">
+		<collection property="freeComment" ofType="FreeComment">
+			<id column="id" property="id"/>
+			<result column="content" property="content"/>
+			<result column="member_id" property="memberId"/>		
+			<result column="font_no" property="fontNo"/>
+		 	<result column="font_group" property="fontGroup"/>
+			<result column="group_level" property="groupLevel"/>		
+			<result column="register_time" property="registerTime"/>
+		</collection>
+	</resultMap>
+	
+	
+	
 	
 	<!-- 자유게시판 글쓰기 (등록) -->
 	<insert id="freeInsert" parameterType="freeboard">
@@ -10,10 +37,7 @@
 		</selectKey>
 		insert into free_board values(#{no},#{title},#{content},#{fileName},#{click},#{good},#{registerTime},#{memberId}) 		
 	</insert>
-	<!-- squenc값 증가 -->
-	<select id="seq" resultType="_int">
-			select seq_free.nextval from dual	
-	</select>
+
 	<!-- 자유게시판 글수정 -->
 	<update id="freeUpdate" parameterType="freeboard">
 		update free_board
@@ -43,12 +67,15 @@
 		where no=#{no}
 	</delete>
 
-	<!-- 글 번호로 글 찾기(상세화면) -->
+	<!-- 글 번호로 글 찾기(상세화면) - 조인연산 사용-->
 	<select id="selectByNo" parameterType="_int" resultType="freeboard">
-		select no,title,member_id memberId,register_time registerTime,click,good,content,file_root fileName
+		select title,member_id memberId,register_time registerTime,click,good,content,file_root fileName
 		from free_board
 		where no=#{no}
 	</select>
+	
+	
+	
 	
 	<!-- 글의 총댓글 개수 (상세화면)-->
 	<select id="selectCommentTotal" parameterType="_int" resultType="_int">

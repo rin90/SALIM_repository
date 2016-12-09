@@ -11,7 +11,7 @@ public class FreeComment implements Serializable{
 	@NotEmpty(message="내용을 입력해주세요")
 	private String content;
 	private String memberId;
-	private int fontNo;
+	private int fontNo; //FreeBoard의 글번호  
 	private int fontGroup;
 	private int groupLevel;
 	private Date registerTime=new Date();

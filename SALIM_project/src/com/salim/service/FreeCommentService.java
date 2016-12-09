@@ -1,5 +1,7 @@
 package com.salim.service;
 
+import java.util.List;
+
 import com.salim.vo.FreeComment;
 
 public interface FreeCommentService {
@@ -10,5 +12,7 @@ public interface FreeCommentService {
 	void comUpdate(FreeComment comment);
 	//댓글 삭제
 	void comDelete(int id);
+	
+
 
 }

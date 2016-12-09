@@ -1,5 +1,7 @@
 package com.salim.dao;
 
+import java.util.List;
+
 import com.salim.vo.FreeComment;
 
 public interface FreeCommentDao {	
@@ -10,4 +12,6 @@ public interface FreeCommentDao {
 	void comUpdate(FreeComment comment);
 	//댓글 삭제
 	void comDelete(int id);
+	
+	
 }
