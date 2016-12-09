@@ -155,7 +155,7 @@ $(document).ready(function(){
 		
 	
 		 
-		 $("#birthday").on("click",function(){
+/* 		 $("#birthday").on("click",function(){
 			 $("#birthdayResult").empty();
 			 alert("생년월일은 공백없이 8자리를 입력하세요.예)19910101")
 		 });
@@ -181,7 +181,40 @@ $(document).ready(function(){
 			});
 			
 			
-		});
+		}); */
+		
+		 $("#birthday").datepicker({
+			 changeMonth: true,
+		      changeYear: true,
+		 		yearRange:"1900:2016",
+	            showOtherMonths: true, /* 다른 달도 보여줌 */
+	            selectOtherMonths: true,   /* 다른 달도 선택할 수 있게 해줌 */
+	             yearSuffix:'년',   /* 달력에 년도를 표시 */
+	              monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   /* 달의 이름을 지정 */
+	            dayNamesMin:['일','월','화','수','목','금','토'],   /* 요일의 이름을 지정 */
+	            dateFormat:'yymmdd',
+	              onSelect: function(dateText , inst){
+	                 $("#birthday").text(dateText)
+	              	   /* $(".incomeDateHidden").val(dateText) */
+	                /* location.replace("/SALIM_project/household/login/incomeSelect.do?incomeDate="+dateText); */
+	             	
+	                $.ajax({
+	                 "url":"${initParam.rootPath}/member/birthday.do",
+	       			 "data":{"birthday":$('#birthday').val()},
+	       			 "dataType":"json",
+	       			 "success":function(obj){
+	       				 var age= obj.age;
+	       				 $("#age").val(age);
+	       				 alert(age);
+	       			 }
+	                	
+	                });
+	              
+	              }
+	          
+	         });
+		
+		
 		 
 	
 });
