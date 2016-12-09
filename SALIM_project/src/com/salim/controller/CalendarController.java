@@ -43,9 +43,10 @@ public class CalendarController {
 		map.addAttribute("goal", goal);
 		//map.addAttribute("goal", gservice.getGoal(param));
 		
-		List<Schedule> list = sservice.selectScheduleByMonth(param);
-		System.out.println(list);
-		map.addAttribute("monthScheduleList", list);
+// ajax로 데이터를 받아오기 때문에 굳이 필요 없음. 
+//		List<Schedule> list = sservice.selectScheduleByMonth(param);
+//		System.out.println(list);
+//		map.addAttribute("monthScheduleList", list);
 		//map.addAttribute("monthScheduleList", sservice.selectScheduleByMonth(param));
 		
 		return "body/calendar/calendar.tiles";

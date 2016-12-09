@@ -19,5 +19,8 @@ public interface ExpenseDao {
 	//지출 조회 - 조회해야하는 회원id, 지출일을 조회
 	List<Expense> selectExpenseList(Map map);
 	
+	
+	// 보고서용 - 대분류기준 지출 내역 가져오기. 
+	List selectSpendEachCategory(Map map);
 }
 

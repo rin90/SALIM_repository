@@ -5,12 +5,15 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Budget implements Serializable{
 	@NotNull
 	private int num;
 	@NotNull
 	private String memberId;
 	@NotNull
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date budgetDate;
 	private int budget;
 	private int foodExpenses;
