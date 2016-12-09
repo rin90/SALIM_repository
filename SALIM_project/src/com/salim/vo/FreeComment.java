@@ -11,8 +11,8 @@ public class FreeComment implements Serializable{
 	@NotEmpty(message="내용을 입력해주세요")
 	private String content;
 	private String memberId;
-	private int fontNo; //FreeBoard의 글번호  
-	private int fontGroup;
+	private int no; //FreeBoard의 글번호  
+	private int commentGroup;
 	private int groupLevel;
 	private Date registerTime=new Date();
 		
@@ -20,14 +20,14 @@ public class FreeComment implements Serializable{
 		super();
 	}
 
-	public FreeComment(int id, String content, String memberId, int fontNo, int fontGroup, int groupLevel,
+	public FreeComment(int id, String content, String memberId, int no, int commentGroup, int groupLevel,
 			Date registerTime) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.memberId = memberId;
-		this.fontNo = fontNo;
-		this.fontGroup = fontGroup;
+		this.no = no;
+		this.commentGroup = commentGroup;
 		this.groupLevel = groupLevel;
 		this.registerTime = registerTime;
 	}
@@ -56,20 +56,20 @@ public class FreeComment implements Serializable{
 		this.memberId = memberId;
 	}
 
-	public int getFontNo() {
-		return fontNo;
+	public int getNo() {
+		return no;
 	}
 
-	public void setFontNo(int fontNo) {
-		this.fontNo = fontNo;
+	public void setNo(int no) {
+		this.no = no;
 	}
 
-	public int getFontGroup() {
-		return fontGroup;
+	public int getCommentGroup() {
+		return commentGroup;
 	}
 
-	public void setFontGroup(int fontGroup) {
-		this.fontGroup = fontGroup;
+	public void setCommentGroup(int commentGroup) {
+		this.commentGroup = commentGroup;
 	}
 
 	public int getGroupLevel() {
@@ -90,20 +90,21 @@ public class FreeComment implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", content=" + content + ", memberId=" + memberId + ", fontNo=" + fontNo
-				+ ", fontGroup=" + fontGroup + ", groupLevel=" + groupLevel + ", registerTime=" + registerTime + "]";
+		return "FreeComment [id=" + id + ", content=" + content + ", memberId=" + memberId + ", no=" + no
+				+ ", commentGroup=" + commentGroup + ", groupLevel=" + groupLevel + ", registerTime=" + registerTime
+				+ "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + commentGroup;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + fontGroup;
-		result = prime * result + fontNo;
 		result = prime * result + groupLevel;
 		result = prime * result + id;
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result + no;
 		result = prime * result + ((registerTime == null) ? 0 : registerTime.hashCode());
 		return result;
 	}
@@ -117,14 +118,12 @@ public class FreeComment implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		FreeComment other = (FreeComment) obj;
+		if (commentGroup != other.commentGroup)
+			return false;
 		if (content == null) {
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
-			return false;
-		if (fontGroup != other.fontGroup)
-			return false;
-		if (fontNo != other.fontNo)
 			return false;
 		if (groupLevel != other.groupLevel)
 			return false;
@@ -135,6 +134,8 @@ public class FreeComment implements Serializable{
 				return false;
 		} else if (!memberId.equals(other.memberId))
 			return false;
+		if (no != other.no)
+			return false;
 		if (registerTime == null) {
 			if (other.registerTime != null)
 				return false;
@@ -142,6 +143,7 @@ public class FreeComment implements Serializable{
 			return false;
 		return true;
 	}
+
 	
 	
 

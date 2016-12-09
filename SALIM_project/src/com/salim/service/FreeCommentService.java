@@ -13,6 +13,5 @@ public interface FreeCommentService {
 	//댓글 삭제
 	void comDelete(int id);
 	
-
-
+	
 }

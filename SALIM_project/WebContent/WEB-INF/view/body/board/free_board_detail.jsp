@@ -94,8 +94,10 @@ $(document).ready(function(){
 				</c:otherwise>
 			</c:choose>
 
-<form action="${initParam.rootPath }/free/comment.do" method="post">
-	¡Ú&nbsp;&nbsp;<textarea rows="2" cols="10"></textarea>
+<form action="${initParam.rootPath }/comment/insert.do" method="post">
+	<input type="hidden" name="memeberId" value="id-3">
+	<input type="hidden" name="fontNo" value="${requestScope.freeBoard.no }">
+	¡Ú&nbsp;&nbsp;<textarea name="content" rows="2" cols="10"></textarea>
 	<input type="submit" value="µî·Ï">
 </form>
 			

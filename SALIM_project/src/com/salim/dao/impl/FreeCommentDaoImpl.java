@@ -33,6 +33,7 @@ public class FreeCommentDaoImpl  implements FreeCommentDao{
 	public void comDelete(int id) {
 		session.delete(make("comDelete"),id);
 	}
+
 	
 
 }

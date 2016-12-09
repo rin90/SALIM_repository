@@ -131,31 +131,30 @@ insert into FREE_COMMENTS values(700+seq_dummy.nextval,'dd','id-3',5,1,3,'2016-0
 
 
 
-select no, title,member_id memberId,register_time registerTime,click,good,file_root fileName 
-		from(
-				select ceil(rownum/3) page,no, title,member_id,register_time,click,good,file_root 
-				from (
-					select no,title,member_id,register_time,click,good,file_root
-					from free_board
-					order by no desc
-				)
-		)
-		where page=1
 
 
 select id,content,member_id memberId,font_group fontGroup,group_level groupLevel, register_time registerTime
 		from free_comments
 		order by id
+	
+	
+
+		-- (상세화면)글 번호로 글 찾기(상세화면) - 조인연산 사용-->
+		select f.title,f.member_id memberId,f.register_time registerTime,f.click,f.good,f.content,f.file_root fileName,
+		c.id,c.content,c.memberId,c.commentGroup,c.groupLevel,c.registerTime
+		from free_board f,(
+				select id,no,content,memberId,commentGroup,groupLevel,registerTime		
+				from(
+					select id,no,content,member_id memberId,comment_group commentGroup,group_level groupLevel,register_time registerTime
+					from free_comments
+					where no=4  --해당 글에 대한 댓글 모두 가져오기--
+					)
+				order by fontGroup,id--가져온 글에 그룹번호로 정렬(그룹번호는 입력될때마다 증가한다. 그래서 즉 위에(먼저)입력한사람의 그룹 번호가 더 낮다.
+				) c
+		where f.no=9
+		and f.no=c.no(+) 
+
 		
-		
-				
-
-
-
-
-
-
-
 
 
 

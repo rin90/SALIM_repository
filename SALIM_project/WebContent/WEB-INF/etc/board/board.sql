@@ -46,8 +46,8 @@ create table free_comments(  --댓글
 	id number primary key,
 	content varchar2(400) not null,
 	member_id varchar2(50) constraint fco_mem_fk references member ON DELETE CASCADE not null,
-	font_no number constraint fco_fre_fk references FREE_BOARD ON DELETE CASCADE not null,  -- 어떤 글인지 번호
-	font_group number not null,
+	no number constraint fco_fre_fk references FREE_BOARD ON DELETE CASCADE not null,  -- 어떤 글인지 번호
+	comment_group number not null,
 	group_level number not null,
 	register_time date not null
 );
