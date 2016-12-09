@@ -173,21 +173,13 @@ public class MemberController {
 	
 	//회원 정보 수정
 	@RequestMapping(value="modify.do", method=RequestMethod.POST)
-	public String modifyMember(/*@ModelAttribute @Valid MemberModifyCheck member, */
-			String memberId,
-			String name,
-			String password,
-			String password2,
-			Date birthday,
-			String age,
-			String email,
-			
+	public String modifyMember(@ModelAttribute @Valid MemberModifyCheck member, 
 			HttpSession session)
 	{
-		//Member tempMember=null, resultMember=null;
+		System.out.println("controller");
+		Member tempMember=null, resultMember=new Member();
 		//회원 비밀번호가 공백으로 가면 ""로 값이 들어가니까, 그거 체크해서 공백인 경우
-		System.out.println("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+memberId+name+password+password2+birthday+age+email);
-		/*System.out.println("member "+member);
+		
 		if(member.getPassword().equals("")||member.getPassword()==null)
 		{
 			System.out.println("password"+member.getPassword());
@@ -199,9 +191,9 @@ public class MemberController {
 		BeanUtils.copyProperties(member,resultMember);
 		System.out.println("resultMember"+resultMember);
 		service.modifyMember(resultMember);
-		session.setAttribute("login_info", resultMember);*/
+		session.setAttribute("login_info", resultMember);
 		
-		return "/myInfo_modify.do";
+		return "redirect:/myInfo_modify.do";
 	}
 	
 	//아이디 찾기 -끝

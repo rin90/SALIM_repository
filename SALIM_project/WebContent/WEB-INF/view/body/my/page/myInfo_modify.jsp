@@ -33,10 +33,10 @@ $(document).ready(function(){
 				 	$("#passwordResult").html("<font color='red' size='2'>비밀번호가 일치하지 않습니다. 다시 입력해주세요.<font>")
 				 }
 			 },
-		/* 	 "error":function()
+		 	 "error":function()
 			 {
 				 alert("실패");
-			 } */
+			 } 
 				
 		});
 		
@@ -67,10 +67,10 @@ $(document).ready(function(){
 					 $("#emailResult").html("<font color='red' size='2'>사용할 수 없는 이메일입니다.<font>")
 				 }
 			 },
-			 /* "error":function()
+			  "error":function()
 			 {
 				 alert("실패");
-			 } */
+			 } 
 				
 		});
 	});
@@ -91,7 +91,7 @@ $(document).ready(function(){
 					 $("#age").val(age);
 				 }
 				 
-			 },
+			 }
 		
 		});
 		
@@ -121,13 +121,13 @@ $(document).ready(function(){
 	<tr>
 		<td>비밀번호</td>
 		<td>
-			<input type="password" id='password' name='password' value='${sessionScope.login_info.password }'>
+			<input type="password" id='password' name='password' value='${sessionScope.login_info.password}'>
 		</td>
 	</tr>
 	<tr>
 		<td>비밀번호 재입력</td>
 		<td>
-			<input type="password" id='password2' name='password2' value='${${sessionScope.login_info.password2 }'>
+			<input type="password" id='password2' name='password2' value='${sessionScope.login_info.password2}'>
 			<span id='passwordResult'></span>
 		</td>
 	</tr>
