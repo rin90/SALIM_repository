@@ -61,6 +61,7 @@ y_m varchar2(7) not null,--목표달
 goal varchar2(1000) not null,--내용
 member_id varchar2(50) constraint goa_mem_fk references member not null--회원id
 );
+alter table goals drop constraint goa_mem_fk ;
 drop table goals;
 
 insert into goals values(seq_goa.nextval, '201612', '일정언제 완성해??=ㅅ= 완성하고 싶다...', 'tester2');

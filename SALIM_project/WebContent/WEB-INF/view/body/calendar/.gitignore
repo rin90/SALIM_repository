@@ -3,3 +3,4 @@
 /calendar_header_third_directApply.jsp
 /calendar_header_4_eventView_ok.jsp
 /calendar_goal_clear.jsp
+/calendar_header_2번씩 호출 되는 부분 해결(보고자 하는 달+현재날짜달).jsp
