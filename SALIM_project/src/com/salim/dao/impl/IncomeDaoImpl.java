@@ -27,8 +27,8 @@ public class IncomeDaoImpl implements IncomeDao{
 	}
 
 	//삭제
-	public int deleteIncome(int incomeId) {
-		return session.delete("incomeMapper.deleteIncome", incomeId);
+	public int deleteIncome(Map map) { //map => memberId와 incomeId
+		return session.delete("incomeMapper.deleteIncome", map);
 	}
 
 	//조회

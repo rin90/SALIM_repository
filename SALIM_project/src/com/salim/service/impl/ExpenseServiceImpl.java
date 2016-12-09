@@ -1,5 +1,6 @@
 package com.salim.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,13 +37,16 @@ public class ExpenseServiceImpl implements ExpenseService{
 	}
 
 	//삭제
-	public void deleteExpense(List<Integer> expenseIdList) {
-
+	public void deleteExpense(List<Integer> expenseIdList, String memberId) {
+		Map map = new HashMap();
 		for(int i=0; i<expenseIdList.size(); i++){
-			if(expenseIdList.get(i)==0){//null을 넣어줄까 말까??? 생각좀
+			if(expenseIdList.get(i)==0 || expenseIdList.get(i)== null){
+				System.out.println("삭제되는 아이디 - "+expenseIdList);
 				expenseIdList.remove(i);
 			}
-			dao.deleteExpense(expenseIdList.get(i));
+			map.put("expenseId", expenseIdList.get(i));
+			map.put("memberId", memberId);
+			dao.deleteExpense(map);
 		}
 	}
 	

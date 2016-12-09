@@ -14,7 +14,7 @@ public interface ExpenseService {
 	List<Expense> selectExpense(Map map);
 	
 	//지출 삭제
-	void deleteExpense(List<Integer> expenseIdList);
+	void deleteExpense(List<Integer> expenseIdList, String memberId);//List<Integer> expenseIdList, memberId
 	
 	
 }

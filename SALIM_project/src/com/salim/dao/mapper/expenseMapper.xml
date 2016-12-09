@@ -31,12 +31,14 @@
 			card_type=#{cardType}
 		</set>
 		where expense_id=#{expenseId}
+		and member_id=#{memberId}
 	</update>
 	
 	<!-- 지출 delete -->
-	<delete id="deleteExpense" parameterType="_int">
+	<delete id="deleteExpense" parameterType="map">
 		delete from expense
 		where expense_id=#{expenseId}
+		and member_id=#{memberId}
 	</delete>
 	
 	<!-- 지출 select -->
