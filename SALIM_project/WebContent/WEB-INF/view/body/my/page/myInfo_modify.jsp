@@ -120,9 +120,6 @@ $(document).ready(function(){
             dateFormat:'yymmdd',
               onSelect: function(dateText , inst){
                  $("#birthday").text(dateText)
-              	   /* $(".incomeDateHidden").val(dateText) */
-                /* location.replace("/SALIM_project/household/login/incomeSelect.do?incomeDate="+dateText); */
-             	
                 $.ajax({
                  "url":"${initParam.rootPath}/member/birthday.do",
        			 "data":{"birthday":$('#birthday').val()},
@@ -130,7 +127,7 @@ $(document).ready(function(){
        			 "success":function(obj){
        				 var age= obj.age;
        				 $("#age").val(age);
-       				 alert(age);
+       				
        			 }
                 	
                 });
