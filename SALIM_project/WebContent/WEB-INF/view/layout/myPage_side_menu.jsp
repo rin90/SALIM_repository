@@ -6,7 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="">개인 정보 수정</a><br>
+<a href="${initParam.rootPath }/myInfo_modify.do">개인 정보 수정</a><br>
 <a href="">카드/통장 관리</a><br>
 <a href="">가계부 관리</a><br>
 <br><br><br><br><br><br><br><br>

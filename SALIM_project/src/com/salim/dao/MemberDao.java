@@ -2,6 +2,7 @@ package com.salim.dao;
 
 import com.salim.vo.Member;
 
+
 public interface MemberDao {
 	
 	//회원가입

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,17 +26,23 @@ td, th{
 		<td>ID</td>
 		<td>${sessionScope.login_info.memberId }</td>
 	</tr>
+	<tr>	
+		<td>Password</td>
+		<td>${sessionScope.login_info.password }</td>
+	</tr>
 	<tr>
 		<td>이름</td>
 		<td>${sessionScope.login_info.name }</td>
 	</tr>
 	<tr>
-		<td>나이</td>
-		<td>${sessionScope.login_info.age }</td>
+		<td>생년월일</td>
+		<td>
+			<fmt:formatDate value="${sessionScope.login_info.birthday}" pattern="yyyy년 MM월 dd일 "/>
+		</td>
 	</tr>
 	<tr>
-		<td>생년월일</td>
-		<td>${sessionScope.login_info.birthday}</td>
+		<td>나이</td>
+		<td>${sessionScope.login_info.age }</td>
 	</tr>
 	<tr>
 		<td>이메일</td>
