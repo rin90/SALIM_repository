@@ -88,26 +88,18 @@ public class MemberController {
 		}
 		return resultMap;
 	}
+	
+	//생일 입력 시 - 나이 자동으로 생성 - ajax 처리
 	@RequestMapping("birthday.do")
 	@ResponseBody
 	public Map<String,Object> birthdayCheck(String birthday)
 	{
-		//형식체크 어떠케 하딩
 		HashMap<String,Object> resultMap=new HashMap<String,Object>();
-		//문자열에 숫자만 포함되야함
-		
-		for(int i=0; i<birthday.length(); i++)
-		{
-			
-			if(!(birthday.charAt(i)>='0'&&birthday.charAt(i)<='9'&&birthday.length()==8))
-			{
-				resultMap.put("birthdayResult", false);
-				return resultMap;
-			}
-		}
-		
-		resultMap.put("birthdayResult", true);
-		
+	 	System.out.println(birthday);
+	 	if(birthday instanceof String)
+	 	{
+	 		System.out.println(true);
+	 	}
 		int age=Integer.parseInt(birthday.substring(0,4));
 		int year=new Date().getYear()+1900;
 		resultMap.put("age", year-age);
@@ -176,10 +168,11 @@ public class MemberController {
 	public String modifyMember(@ModelAttribute @Valid MemberModifyCheck member, 
 			HttpSession session)
 	{
-		System.out.println("controller");
+		System.out.println(member.getBirthday());
 		Member tempMember=null, resultMember=new Member();
 		//회원 비밀번호가 공백으로 가면 ""로 값이 들어가니까, 그거 체크해서 공백인 경우
 		
+		System.out.println(member.getPassword()+member.getPassword2()+"여기 오류?");
 		if(member.getPassword().equals("")||member.getPassword()==null)
 		{
 			System.out.println("password"+member.getPassword());
@@ -188,6 +181,15 @@ public class MemberController {
 			member.setPassword(tempMember.getPassword());
 			member.setPassword2(member.getPassword());
 		}
+		
+		
+		if(member.getBirthday()==null)
+		{
+			tempMember=service.findMemberById(member.getMemberId());
+			member.setBirthday(tempMember.getBirthday());
+		}
+		
+		
 		BeanUtils.copyProperties(member,resultMember);
 		System.out.println("resultMember"+resultMember);
 		service.modifyMember(resultMember);

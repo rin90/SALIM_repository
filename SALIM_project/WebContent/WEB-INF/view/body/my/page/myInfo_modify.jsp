@@ -1,10 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="${initParam.rootPath }/scripts/jquery.js"></script>
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -74,7 +85,7 @@ $(document).ready(function(){
 				
 		});
 	});
-	
+	/* 
 	$("#birthday").on("blur",function(){
 		 $("#birthdayResult").empty();
 		 $.ajax({
@@ -96,7 +107,38 @@ $(document).ready(function(){
 		});
 		
 		
-	});
+	}); */
+	 $("#birthday").datepicker({
+		 changeMonth: true,
+	      changeYear: true,
+	 		yearRange:"1900:2016",
+            showOtherMonths: true, /* 다른 달도 보여줌 */
+            selectOtherMonths: true,   /* 다른 달도 선택할 수 있게 해줌 */
+             yearSuffix:'년',   /* 달력에 년도를 표시 */
+              monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],   /* 달의 이름을 지정 */
+            dayNamesMin:['일','월','화','수','목','금','토'],   /* 요일의 이름을 지정 */
+            dateFormat:'yymmdd',
+              onSelect: function(dateText , inst){
+                 $("#birthday").text(dateText)
+              	   /* $(".incomeDateHidden").val(dateText) */
+                /* location.replace("/SALIM_project/household/login/incomeSelect.do?incomeDate="+dateText); */
+             	
+                $.ajax({
+                 "url":"${initParam.rootPath}/member/birthday.do",
+       			 "data":{"birthday":$('#birthday').val()},
+       			 "dataType":"json",
+       			 "success":function(obj){
+       				 var age= obj.age;
+       				 $("#age").val(age);
+       				 alert(age);
+       			 }
+                	
+                });
+              
+              }
+          
+         });
+	
 	
 	
 });	
@@ -121,20 +163,21 @@ $(document).ready(function(){
 	<tr>
 		<td>비밀번호</td>
 		<td>
-			<input type="password" id='password' name='password' value='${sessionScope.login_info.password}'>
+			<input type="password" id='password' name='password' <%-- value='${sessionScope.login_info.password}' --%>>
 		</td>
 	</tr>
 	<tr>
 		<td>비밀번호 재입력</td>
 		<td>
-			<input type="password" id='password2' name='password2' value='${sessionScope.login_info.password2}'>
+			<input type="password" id='password2' name='password2' <%-- value='${sessionScope.login_info.password2}' --%>>
 			<span id='passwordResult'></span>
 		</td>
 	</tr>
 	<tr>
 		<td>생년월일</td>
 		<td>
-			<input type="text" id='birthday' name='birthday' placeholder='${sessionScope.login_info.birthday}' value='${sessionScope.login_info.birthday}'>
+			<input type="text" id='birthday' name='birthday' placeholder='<fmt:formatDate value="${sessionScope.login_info.birthday}" pattern="yyyyMMdd"/>'>
+			
 			<span id='birthdayResult'></span>
 		</td>
 	</tr>
