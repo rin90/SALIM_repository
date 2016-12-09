@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.salim.dao.MemberDao;
 import com.salim.vo.Member;
 
+
 @Repository
 public class MemberDaoImpl implements MemberDao{
 

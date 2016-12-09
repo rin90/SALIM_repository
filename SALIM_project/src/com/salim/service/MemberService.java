@@ -10,6 +10,7 @@ import com.salim.dao.MemberDao;
 
 import com.salim.vo.Member;
 
+
 @Service
 public interface MemberService {
 
@@ -18,7 +19,7 @@ public interface MemberService {
 	public void joinMember(Member member)/*throws IOException*/;
 	
 	//회원 탈퇴 -leave
-	public void leaveMember(HashMap<String, String> map);
+	public void leaveMember(String id);
 	
 	//회원 수정- modify
 	
@@ -40,6 +41,8 @@ public interface MemberService {
 	//회원 1사람 email로 조회
 	public Member findMemberByEmail(String email);
 
+	//회원 정보 수정
+	public void modifyMember(Member member);
 	
 	
 }

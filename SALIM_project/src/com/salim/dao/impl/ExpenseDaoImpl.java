@@ -16,22 +16,22 @@ public class ExpenseDaoImpl implements ExpenseDao{
 	@Autowired
 	private SqlSessionTemplate session;
 	
-	@Override
+	//삽입
 	public int insertExpense(Expense expense) {
 		return session.insert("expenseMapper.insertExpense", expense);
 	}
 
-	@Override
+	//수정
 	public int updateExpense(Expense expense) {
 		return session.update("expenseMapper.updateExpense", expense);
 	}
 
-	@Override
-	public int deleteExpense(int expenseId) {
-		return session.delete("expenseMapper.deleteExpense", expenseId);
+	//삭제
+	public int deleteExpense(Map map) {	//int expenseId, memberId
+		return session.delete("expenseMapper.deleteExpense", map);
 	}
 
-	@Override
+	//조회
 	public List<Expense> selectExpenseList(Map map) {
 		return session.selectList("expenseMapper.selectExpenseDate", map);
 	}

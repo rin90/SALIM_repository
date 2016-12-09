@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/SALIM_project/scripts/jquery.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/scripts/jquery.js"></script>
 <script type="text/javascript">
 var err;
 $(document).ready(function(){
