@@ -1,5 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +14,13 @@
 
 <title>jQuery UI Datepicker - Default functionality</title>
 
+<style type="text/css">
+.errorMessage{
+	font-size: 12px;
+	color: red
+}
+
+</style>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -19,15 +30,7 @@
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script>
 
-  $( function() {
-
-    $( "#datepicker" ).datepicker();
-
-  } );
-
-  </script>
 <script type="text/javascript">
 var result=false;
 $(document).ready(function(){
@@ -36,9 +39,9 @@ $(document).ready(function(){
 	$("#idResult").empty();
 	$("#passwordResult").empty();
 	$("#emailResult").empty();
-	
+	$("#birthdayResult").empty();
 	$("#memberId").on("blur", function(){
-		$("#idResult").empty();
+	$("#idResult").empty();
 		
 		$.ajax({
 			 "url":"${initParam.rootPath}/member/checkingDuplicatedId.do",
@@ -63,11 +66,11 @@ $(document).ready(function(){
 					 $("#idResult").html("<font color='red' size='2'>사용할 수 없는 아이디입니다.<font>")
 				 }
 			 },
-			 "error":function()
+			/*  "error":function()
 			 {
 				 alert("실패");
 			 }
-				
+				 */
 		});
 		
 		
@@ -97,10 +100,10 @@ $(document).ready(function(){
 					 $("#emailResult").html("<font color='red' size='2'>사용할 수 없는 이메일입니다.<font>")
 				 }
 			 },
-			 "error":function()
+			 /* "error":function()
 			 {
 				 alert("실패");
-			 }
+			 } */
 				
 		});
 		
@@ -134,10 +137,10 @@ $(document).ready(function(){
 				 	$("#passwordResult").html("<font color='red' size='2'>비밀번호가 일치하지 않습니다. 다시 입력해주세요.<font>")
 				 }
 			 },
-			 "error":function()
+		/* 	 "error":function()
 			 {
 				 alert("실패");
-			 }
+			 } */
 				
 		});
 		
@@ -151,7 +154,39 @@ $(document).ready(function(){
 	});
 		
 	
+		 
+/* 		 $("#birthday").on("click",function(){
+			 $("#birthdayResult").empty();
+			 alert("생년월일은 공백없이 8자리를 입력하세요.예)19910101")
+		 });
+		 
+		$("#birthday").on("blur",function(){
+			 $("#birthdayResult").empty();
+			 $.ajax({
+				 "url":"${initParam.rootPath}/member/birthday.do",
+				 "data":{"birthday":$('#birthday').val()},
+				 "dataType":"json",
+				 "success":function(obj){
+					 if(!obj.birthdayResult)
+					 {
+					 	$("#birthdayResult").html("<font color='red' size='2'>생년월일 형식이 틀렸습니다.<font>")
+					 }else
+					 {
+						 var age=obj.age;
+						 $("#age").val(age);
+					 }
+					 
+				 },
+			
+			});
+			
+			
+		}); */
+		
 		 $("#birthday").datepicker({
+			 changeMonth: true,
+		      changeYear: true,
+		 		yearRange:"1900:2016",
 	            showOtherMonths: true, /* 다른 달도 보여줌 */
 	            selectOtherMonths: true,   /* 다른 달도 선택할 수 있게 해줌 */
 	             yearSuffix:'년',   /* 달력에 년도를 표시 */
@@ -159,11 +194,28 @@ $(document).ready(function(){
 	            dayNamesMin:['일','월','화','수','목','금','토'],   /* 요일의 이름을 지정 */
 	            dateFormat:'yymmdd',
 	              onSelect: function(dateText , inst){
-	                 $("#birthday").text(dateText);
+	                 $("#birthday").text(dateText)
+	              	   /* $(".incomeDateHidden").val(dateText) */
+	                /* location.replace("/SALIM_project/household/login/incomeSelect.do?incomeDate="+dateText); */
+	             	
+	                $.ajax({
+	                 "url":"${initParam.rootPath}/member/birthday.do",
+	       			 "data":{"birthday":$('#birthday').val()},
+	       			 "dataType":"json",
+	       			 "success":function(obj){
+	       				 var age= obj.age;
+	       				 $("#age").val(age);
+	       				 alert(age);
+	       			 }
+	                	
+	                });
+	              
 	              }
 	          
 	         });
 		
+		
+		 
 	
 });
 </script>
@@ -174,7 +226,7 @@ $(document).ready(function(){
 
 <body>
 <h2>새 계정 만들기</h2>
-<form method="post" action="${initParam.rootPath}/join.do" method="POST">
+<form method="post" action="${initParam.rootPath}/member/join.do" method="POST">
 	<table style="width:1000px"  >
 		<tr>
 			<td width="200">ID</td>
@@ -182,6 +234,9 @@ $(document).ready(function(){
 				<input type="text" name="memberId" id="memberId" size='21' >&nbsp;&nbsp;&nbsp;
 				
 					<span id='idResult'></span>
+					<span class="errorMessage">
+						<form:errors path="member.memberId"/>
+					</span>
 			</td>
 			
 		</tr>
@@ -189,6 +244,9 @@ $(document).ready(function(){
 			<td>Password</td>
 			<td>
 				<input type="password" id="password" name="password" size='22'>
+				<span class="errorMessage">
+						<form:errors path="member.password"/>
+				</span>
 			</td>
 		</tr>
 		<tr>
@@ -196,6 +254,9 @@ $(document).ready(function(){
 			<td>
 				<input type="password" id="password2" name="password2" size='22'>&nbsp;&nbsp;&nbsp;
 				<span id='passwordResult'></span>
+				<span class="errorMessage">
+						<form:errors path="member.password2"/>
+					</span>
 			
 			</td>
 			
@@ -204,18 +265,27 @@ $(document).ready(function(){
 			<td>이름</td>
 			<td>
 				<input type="text" id="name" name="name" size='21'>
+				<span class="errorMessage">
+						<form:errors path="member.name"/>
+					</span>
 			</td>
 		</tr>
 		<tr>
 			<td>생일</td>
 			<td>
 				<input type="text" id="birthday" name="birthday" size='21'>
+				<span id='birthdayResult'></span>
+				<span id='birthdayResult2'></span>
+				<span class="errorMessage">
+						<form:errors path="member.birthday"/>
+				</span>
 			</td>
 		</tr>
 		<tr>
 			<td>나이</td>
 			<td>
 				<input type="text" id="age" name="age" size='21'>
+			
 			</td>
 		</tr>
 		<tr>
@@ -223,8 +293,12 @@ $(document).ready(function(){
 			<td>
 				<input type="text" id="email" name="email" size='21'>&nbsp;&nbsp;&nbsp;
 				<span id="emailResult"></span>
+				<span class="errorMessage">
+						<form:errors path="member.email"/>
+					</span>
 			</td>
 		</tr>
+		
 				
 	</table>
 	<br>

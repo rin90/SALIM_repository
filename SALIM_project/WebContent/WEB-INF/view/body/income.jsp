@@ -33,9 +33,10 @@
    	    	 monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],	/* 달의 이름을 지정 */
     	     dayNamesMin:['일','월','화','수','목','금','토'],	/* 요일의 이름을 지정 */
     	     dateFormat:'yy-mm-dd',
+    	     showMonthAfterYear:true,//년 뒤에 월이 오게 하기
      	  	 onSelect: function(dateText , inst){
        			 $("#datepicker").text(dateText),
-       			 $(".incomeDateHidden").val(dateText),
+       			 /* $(".incomeDateHidden").val(dateText), */
        			location.replace("/SALIM_project/household/login/incomeSelect.do?incomeDate="+dateText);
        			 
        			 //여기에 아작스 처리를 하면??
@@ -61,6 +62,7 @@
 		});
 	</script>
 	
+	<!-- 대분류 선택시 소분류 나오게 -->
 	<script type="text/javascript">
 		/* 코드 리스트 뿌려줌 - 아작스 처리 */	
 		$(document).ready(function(){
@@ -75,7 +77,7 @@
 					"type":"post",
 					"dataType":"json",
 					"success":function(obj){
-						var txt="<option>미분류</option>";
+						var txt="<option value='1'>미분류</option>";
 						$.each(obj, function(){
 							
 							txt = txt + "<option value = '"+this.smallCode+"'>"+this.smallContent+"</option>";
@@ -84,7 +86,7 @@
 					},
 					"beforeSend":function(){
 						if(idx==0){
-							$(bigSel).next().empty().append("<option>미분류</option>");
+							$(bigSel).next().empty().append("<option value='1'>미분류</option>");
 							return false;
 						}
 					}
@@ -114,7 +116,7 @@
 	 <script type="text/javascript">
  		$(document).ready(function(){
  			$(".smallCategory").on("click", function(){
- 				var idx = this.selectedIndex;
+ 				//var idx = this.selectedIndex;
  				
  				var sma = this;
  				$.ajax({
@@ -123,12 +125,12 @@
 					"type":"post",
 					"dataType":"json",
 					"success":function(obj){
-						var txt="<option value='0'>미분류</option>";
+						var txt="<option value='1'>미분류</option>";
 						$.each(obj, function(){
 								var selected = $(sma).val()==this.smallCode?"selected='selected'":"";
 								txt = txt + "<option "+selected+" value = '"+this.smallCode+"'>"+this.smallContent+"</option>";
 						});
-						$(sma).html(txt);
+						$(sma).empty().html(txt); //원래는 empty없었음
 						
 					}
  				});
@@ -154,10 +156,17 @@
  	<!-- 맨 위 체크박스 누르면 다 선택되기 -->
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("#checkAll").on("click", function(){
-				if($("#checkAll").prop("checked")){
+			$("#checkAll").on("click", function(){	
+				if($("#checkAll").prop("checked")){ //또는 var ch = $(this).is(":checked"); -> 체크되면 true가 뜸
 					$("input[name=incomeId]").prop("checked", true);
-				}else{
+					//체크되어 있는 값 추출
+					$("input[name=incomeId]:checked").each(function(){
+						var test = $(this).val();
+						if(test == 0){	//아직 저장되지 않은 것 -> 체크 안함
+							$(this).prop("checked", false);
+						}
+					});
+				}else{ //전체 체크 취소하면 - 전체 체크 해제
 					$("input[name=incomeId]").prop("checked", false);
 				}
 			});
@@ -168,29 +177,58 @@
 		
 
 
-		$(document).ready(function(){
+	/* 	$(document).ready(function(){
 			$("#deleteIncome").on("click", function(){
-				alert("클릭");
+				//alert($("#datepicker").val());
 				var checkedArr = [];
 				function checkIncomeId(){
-					$("input [name=incomeId]:checked").each(function(i){
+					alert("값들이 들어갔습니다");
+					$("input [name=incomeId]:checked").each(function(){
 						checkedArr.push($(this).val());
-						
 					});
 					if(checkedArr.length ==0){
 						alert("삭제할 것을 선택해주세요");
 					}
-					alert("넣음")
+					alert("넣음");
 					alert(checkedArr);
 				}
-				$.ajax({
+				/* $.ajax({
 					"url":"/SALIM_project/household/login/incomeDelete.do",
 					"type":"post",
 					"dateType":"json",
-					"data":{"incomeIdList":checkedArr}
-				});
+					"data":{"incomeDate":$("#datepicker").val(), "incomeId":checkedArr},
+					"error":function(xhr, msg, status){
+						alert(status);
+					}
+				}); * /
 			});
-		});
+		}); */ 
+		
+		
+		function checkevent(){
+			var checkedArr = "";
+			//var incomeDate = ${sessionScope.incomeDate};
+			$("input[name=incomeId]:checked").each(function(idx){
+				if($(this).val() != 0){
+					if($("input[name=incomeId]:checked").length-1 == idx){
+						checkedArr+="incomeIdList="+$(this).val();
+					}else{
+						checkedArr+="incomeIdList="+$(this).val()+"&";
+					}
+				}
+			});
+			//alert(checkedArr);
+			if($("input[name=incomeId]:checked").length == 0){
+				alert("삭제할 것을 선택해주세요.");
+				//return false;
+			}else if($("input[name=incomeId]:checked").val()==0){
+				alert("존재하지 않는 데이터입니다. 다시 선택해주세요.");
+			}else{
+				//var incomeIdList ={"incomeIdList":checkedArr};
+				location.href = "/SALIM_project/household/login/incomeDelete.do?"+checkedArr;
+			}
+		}
+		
 		
 	</script>
 
@@ -262,7 +300,7 @@ return arr;
 		<thead>
 			<tr>
 				<td>
-					<a href="${initParam.rootPath }/code/expense/codeList.do"><input type="button" value="지출"/></a>
+					<a href="${initParam.rootPath }/household/login/expenseSelect.do"><input type="button" value="지출"/></a>
 				</td>
 				<td>
 					<a href="${initParam.rootPath }/household/login/incomeSelect.do"><input type="button" value="수입"/></a>
@@ -272,12 +310,12 @@ return arr;
 		<tbody>
 			<tr>
 				<td>
-					삭제 <input type="checkbox" id="checkAll" value="체크박스가 다 체크되었는지 확인하는 것"/>
+					삭제 <input type="checkbox" id="checkAll"/><!--체크박스 체크하면 전체 선택  -->
 				</td>
 				<!-- <td>날짜</td> -->
 				<td>수입내역</td>
 				<td>수입금액</td>
-				<td>분류</td>
+				<td>수입분류</td>
 			</tr>
 		</tbody>
 		<tfoot>
@@ -286,14 +324,14 @@ return arr;
 				<c:forEach items="${requestScope.incomeList }" var="income" varStatus="no">
 					<tr>
 						<td>
-							<input type="checkbox"/>
-							<input type="hidden" name="incomeId" value="${income.incomeId }">
+							<input type="checkbox" name="incomeId" value="${income.incomeId }"/>	<!-- 체크박스 하나하나 -->
+							<input type="hidden" name="incomeId" value="${income.incomeId }"/>
 						</td>
 						<td>
-							${income.explanation}<input type="hidden" name="explanation" value="${income.explanation}">
+							<input type="text" name="explanation" value="${income.explanation}" placeholder="${income.explanation}">
 						</td>
 						<td>
-							${income.incomeMoney}<input type="hidden" name="incomeMoney" value="${income.incomeMoney}" class="money">
+							<input type="text" name="incomeMoney" value="${income.incomeMoney}" class="money" placeholder="${income.incomeMoney}">
 						</td>
 						<td>
 							<select name="bigCategory" class="bigCategory" id="selectBig">
@@ -323,7 +361,7 @@ return arr;
 		<!-- 아무 것도 안 뿌려준 입력창 -->
 			<tr>
 				<td>
-					<input type="checkbox"/>
+					<input type="checkbox" name="incomeId" value="0"/> <!-- 체크박스 하나하나 -->
 					<input type="hidden" name="incomeId" value="0"/>
 				</td>
 					
@@ -332,14 +370,14 @@ return arr;
 				
 				<!-- 여기서 부터 코드 선택 테이블 -->
 				<td>
-					<select class="bigCategory">
+					<select class="bigCategory" name="bigCategory">
 						<c:forEach items="${requestScope.bigCategoryList}" var="bigCategory">
-							<option value="${bigCategory.bigCode }">${bigCategory.bigContent}</option>
+							<option value="${bigCategory.bigCode}">${bigCategory.bigContent}</option>
 						</c:forEach>
 					</select>
 			
 					<select name="codeId" class="smallCategory">
-						<!-- <option>미분류</option> -->
+						<option value="1">미분류</option>
 					</select>
 				</td>
 			</tr>
@@ -351,7 +389,7 @@ return arr;
 	
 	<!-- 저장버튼 -->
 	<input type="submit" value="저장" id="submitIncome"/>
-	<input type="button" value="선택삭제" id="deleteIncome"/>
+	<input type="button" value="선택삭제" id="deleteIncome" onclick="checkevent()"/>
 	
 </form>
 </body>

@@ -3,11 +3,20 @@ package com.salim.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Expense implements Serializable{
 	
+	@NotNull
 	private int expenseId;
+	@NotNull
 	private String memberId;
 	private int codeId;
+	
+	@NotNull
+	@DateTimeFormat(pattern="yy-MM-dd")
 	private Date expenseDate;
 	private String expenseExplain;
 	private int cashExpense;

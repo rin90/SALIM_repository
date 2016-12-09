@@ -1,14 +1,13 @@
 package com.salim.controller;
 
-import java.awt.List;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,12 +17,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.salim.service.MemberService;
-import com.salim.service.impl.MemberServiceImpl;
 import com.salim.vo.Member;
 import com.salim.vo.validator.LoginCheck;
+import com.salim.vo.validator.MemberModifyCheck;
+
+
 
 @Controller
 @RequestMapping("/member/")
@@ -34,12 +34,17 @@ public class MemberController {
 	
 	//회원 가입
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
-	public String join(@ModelAttribute Member member) //요청파라미터를 vo 객체로 생성하고, request에 자동 저장
+	public String join(@ModelAttribute @Valid Member member , BindingResult error) //요청파라미터를 vo 객체로 생성하고, request에 자동 저장
 	{
-		//여기서 validator 검증을 해야함!
 		System.out.println(member);
+		//여기서 validator 검증을 해야함!
+		if(error.hasErrors())
+		{
+			return "body/join_form.tiles";
+		}
+		
 		service.joinMember(member); //여기까진 잘 온당..ㅎㅎ
-		//return "/body/join_success.tiles";
+		
 		return "body/join_success.tiles"; //잘 간다.
 	}
 	
@@ -82,21 +87,32 @@ public class MemberController {
 		return resultMap;
 	}
 	
+	//생일 입력 시 - 나이 자동으로 생성 - ajax 처리
+	@RequestMapping("birthday.do")
+	@ResponseBody
+	public Map<String,Object> birthdayCheck(String birthday)
+	{
+		HashMap<String,Object> resultMap=new HashMap<String,Object>();
+	 	System.out.println(birthday);
+	 	if(birthday instanceof String)
+	 	{
+	 		System.out.println(true);
+	 	}
+		int age=Integer.parseInt(birthday.substring(0,4));
+		int year=new Date().getYear()+1900;
+		resultMap.put("age", year-age);
+		return resultMap;
+	}
+
 	
 	//회원 탈퇴
 	@RequestMapping("leave.do")
-	public String leaveMember(String memberId, String password)
+	public String leaveMember(String memberId,HttpSession session)
 	{
-		 //1.요청파라미터 받기
+		session.invalidate();
+		service.leaveMember(memberId);
 		
-		HashMap<String,String> map=new HashMap<String,String>();
-		map.put("memberId", memberId);
-		map.put("password", password);
-		
-		//2.비지니스 로직 호출! - 아이디로 멤버 한 row 있는지 알아보고, 'ㅅ' 그다음 해야겠다 그러니까 그 회원이 있는지 체크해야하네!?
-		service.leaveMember(map);
-		//3.응답 페이지로 이동- 단순 페이지 이동하기!
-		return "/WEB-INF/view/member/view.jsp";
+		return "redirect:/main.do";
 		
 	}
 	
@@ -146,15 +162,38 @@ public class MemberController {
 	//마이페이지는 일단 단순 view 이동으로 처리함
 	
 	//회원 정보 수정
-	@RequestMapping("modify.do")
-	public String modifyMember()
+	@RequestMapping(value="modify.do", method=RequestMethod.POST)
+	public String modifyMember(@ModelAttribute @Valid MemberModifyCheck member, 
+			HttpSession session)
 	{
-		//회원 정보 수정 
-		//요청 파라미터를 읽어온다.
-		//원래는 검증하고~??
-		//2.business logic 호출
-		//3.결과 응답!
-		return null;
+		System.out.println(member.getBirthday());
+		Member tempMember=null, resultMember=new Member();
+		//회원 비밀번호가 공백으로 가면 ""로 값이 들어가니까, 그거 체크해서 공백인 경우
+		
+		System.out.println(member.getPassword()+member.getPassword2()+"여기 오류?");
+		if(member.getPassword().equals("")||member.getPassword()==null)
+		{
+			System.out.println("password"+member.getPassword());
+			tempMember=service.findMemberById(member.getMemberId());
+			System.out.println("tempMember"+tempMember);
+			member.setPassword(tempMember.getPassword());
+			member.setPassword2(member.getPassword());
+		}
+		
+		
+		if(member.getBirthday()==null)
+		{
+			tempMember=service.findMemberById(member.getMemberId());
+			member.setBirthday(tempMember.getBirthday());
+		}
+		
+		
+		BeanUtils.copyProperties(member,resultMember);
+		System.out.println("resultMember"+resultMember);
+		service.modifyMember(resultMember);
+		session.setAttribute("login_info", resultMember);
+		
+		return "redirect:/myInfo_modify.do";
 	}
 	
 	//아이디 찾기 -끝

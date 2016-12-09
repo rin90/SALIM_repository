@@ -12,6 +12,7 @@ import com.salim.dao.MemberDao;
 import com.salim.service.MemberService;
 import com.salim.vo.Member;
 
+
 @Service
 public class MemberServiceImpl implements MemberService{
 
@@ -28,32 +29,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	//회원 탈퇴
-	public void leaveMember(HashMap<String, String> map) 
+	public void leaveMember(String id) 
 	{
-		String id=map.get("memberId");
-		String pw=map.get("password");
-		
-		//여기서 findMemberById()호출하고, 비밀번호 체크해서! 'ㅅ' 탈퇴시키기
-		System.out.println("지울거지만, id, pw 잘 들어온건지 체크"+id+","+pw);
-		
-		Member member = new Member();
-		member=findMemberById(id);
-		System.out.println(member);
-		if(member!=null)
-		{
-		
-			System.out.println("member를 잘 받아왔다,");
-			if(member.getPassword().equals(pw))
-			{
-				memberdao.deleteMember(id);
-			}
-			else
-			{
-				System.out.println("비밀번호가 틀렸는데, 이걸 나중에 어떻게 바꿀까낭~");
-			}
-		}
-		
-	
+		memberdao.deleteMember(id);
 	}
 	
 	//회원 조회
@@ -125,6 +103,10 @@ public class MemberServiceImpl implements MemberService{
 		return member;
 	}
 	
+	public void modifyMember(Member member)
+	{
+		memberdao.updateMember(member);
+	}
 	
 	
 }
