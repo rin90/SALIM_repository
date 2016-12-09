@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bank">
+	<sql id="select-bank">
+		select	member_id memberId,
+				bank_id	  bankId,
+				bank_Type bankType,
+				bank_description bankDescription
+		form	bank
+	</sql>
+	
+	<!-- insert -->
+	<insert id="insertBank" parameterType="bank">
+		insert into bank values(#{memberId}, #{bankId}, #{bankType}, #{bankDescription})
+	</insert>
+	
+	<!-- update -->
+	<update id="updateBankByMemberId" parameterType="bank">
+		update	bank
+		set		bankId = #{bankId},
+				bankType = #{bankType},
+				bankDescription = #{bankDescription}
+		where	member_id = #{memberId}
+	</update>
+	
+	<!-- delete -->
+	<delete id="deleteBankByMemberId" parameterType="string">
+		delete from bank where member_id = #{memberId}
+	</delete>
+	
+	<!-- select -->
+	<select id="selectBankByMemberId" parameterType="string" resultType="bank">
+		<include refid="select-bank"/>
+		where member_id #{value}
+	</select>
+</mapper>

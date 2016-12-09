@@ -40,31 +40,16 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	}
 
 	@Override
-	public void updateGood(int no) {
-		session.update(make("goodUpdate"),no);
+	public void updateGood(int no,int num) {
+		HashMap map = new HashMap();
+		map.put("no", no);
+		map.put("num", num);
+		session.update(make("goodUpdate"),map);
 	}
 
 	@Override
 	public void deleteFree(int no) {
 		session.delete(make("freeDelete"),no);
-	}
-
-	@Override
-	public int selectTotal() {
-		return session.selectOne(make("selectTotal"));
-	}
-
-	@Override
-	public List<FreeBoard> selectCurrentPage(int page) {
-		HashMap map = new HashMap();
-		map.put("current", Constants.ITEMS);
-		map.put("page",page);
-		return  session.selectList(make("selectCurrentPage"),map);
-	}
-
-	@Override
-	public List<FreeBoard> selectByTitle(String title) {
-		return session.selectList(make("selectTitle"),title);
 	}
 
 	@Override
@@ -76,6 +61,53 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	public int selectCommentTotal(int no) {
 		return session.selectOne(make("selectCommentTotal"),no);
 	}
+	
+	@Override
+	public List<FreeBoard> selectCurrentPage(int page) {
+		HashMap map = new HashMap();
+		map.put("current", Constants.ITEMS);
+		map.put("page",page);
+		return  session.selectList(make("selectCurrentPage"),map);
+	}
+	
+	@Override
+	public List<FreeBoard> selectByMemberId(int page,String content) {
+		HashMap map = new HashMap();
+		map.put("current", Constants.ITEMS);
+		map.put("page", page);
+		map.put("memberId", content);
+		System.out.println("DAO내용 ::::"+ content);
+		System.out.println("DAO페이지::::"+page);
+		System.out.println("DAO 작성자 실행");
+		System.out.println("DAO::::::::::"+session.selectList(make("selectByMemberid"),map));
+		return session.selectList(make("selectByMemberid"),map);
+	}
+	
+	@Override
+	public List<FreeBoard> selectByTitle(int page,String content) {
+		HashMap map = new HashMap();
+		map.put("current", Constants.ITEMS);
+		map.put("page", page);
+		map.put("title", content);
+		System.out.println("DAO 제목 실행");
+		return session.selectList(make("selectByTitle"),map);
+	}
+	
+	@Override
+	public int selectTotal() {
+		return session.selectOne(make("selectTotal"));
+	}
+	
+	@Override
+	public int selectTitleTotal(String content) {
+		return session.selectOne(make("selectTitleTotal"),content);
+	}
+	
+	@Override
+	public int selectMemberIdTotal(String content) {
+		return session.selectOne(make("selectMemberIdTotal"),content);
+	}
+	
 	
 	
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.salim.dao.TipBoardDao;
 import com.salim.service.TipBoardService;
+import com.salim.vo.FreeBoard;
 import com.salim.vo.TipBoard;
 
 import page.page;
@@ -18,22 +19,18 @@ public class TipBoardServiceImpl implements TipBoardService {
 	@Autowired
 	private TipBoardDao dao;
 	
-	@Override
-	public void tipInsert(TipBoard tipboard) {
-		dao.tipInsert(tipboard);
-		
-	}
+
 
 	@Override
 	public void tipUpdate(TipBoard tipboard) {
 		dao.tipUpdate(tipboard);
-		
+	
 	}
 
 	@Override
-	public TipBoard clickUpdateint(TipBoard tipboard) {
+	public void clickUpdateint(TipBoard tipboard) {
 		dao.tipUpdate(tipboard);
-		return null;
+		
 	}
 
 	@Override
@@ -55,11 +52,7 @@ public class TipBoardServiceImpl implements TipBoardService {
 		return selectTotal(no);
 	}
 
-	@Override
-	public List<TipBoard> selectCurrentPage(Map map) {
-		dao.selectCurrentPage(map);
-		return selectCurrentPage(map);
-	}
+	
 
 	@Override
 	public int selectByNo(int no) {
@@ -76,7 +69,7 @@ public class TipBoardServiceImpl implements TipBoardService {
 	@Override
 	public List<TipBoard> selectCurrentPage(int no,Map map) {
 		dao.selectCurrentPage(map);
-		return selectCurrentPage(map);
+		return selectCurrentPage(no, map);
 	}
 
 
@@ -89,10 +82,38 @@ public class TipBoardServiceImpl implements TipBoardService {
 	}
 
 	@Override
-	public Map getTipBoardList(int page) {
-		dao.getTipBoardList(page);
-		return getTipBoardList(page);
+	public void tipinsert(TipBoard tipboard) {
+		// TODO Auto-generated method stub
+		
 	}
+
+	@Override
+	public void tipInsert(TipBoard tipboard) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void goodUpdate(int no, int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	
+
+	
+	
+
+
+	
+
+
+	
+
+
 
 	
 

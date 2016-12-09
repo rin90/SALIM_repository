@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>글 삭제하기</title>
-<style>
 
-</style>
 
 <script type="text/javascript">
 	function move(url) {
@@ -23,9 +24,7 @@
 <body>
 	<center>
 	<br><br>
-	<table width=50% cellspacing=0 cellpadding=3>
- 	
-	</table>
+	
 	
 	<table width=70% cellspacing=0 cellpadding=2>
 		<form name="BoardDeleteForm" method="post" action="Board_Delete_action.jsp" 
@@ -33,11 +32,7 @@
  	<tr>
 		<td align=center>
 		<table align=center border=0 width=91%>
-    <tr> 
-     	<td align=center>  
-	  	<input type=password name="password" size=17 maxlength=15>
-	 	</td> 
-    </tr>
+   
     <tr>
 		<td><hr size=1 color=#eeeeee></td>
 	</tr>

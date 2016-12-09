@@ -7,7 +7,7 @@
 		<selectKey keyProperty="no" resultType="_int" order="BEFORE">
 			select seq_tip.nextval from dual
 		</selectKey>
-		insert into tip_board values(#{no},#{title},#{content},#{fileRoot},#{category},#{click},#{good},#{classification},#{memberId},#{registerTime})
+		insert into tip_board values(#{no},#{title},#{content},#{fileName},#{category},#{click},#{good},#{classification},#{memberId},#{registerTime})
 	</insert>
 	
 	<!-- 글수정  -->
@@ -15,7 +15,7 @@
 		update tip_board 
 		set title=#{title},
 			content=#{content},
-			file_root=#{fileRoot},
+			file_root=#{fileName},
 			category=#{category},
 			classification=#{classification}
 		where no=#{no}
@@ -70,6 +70,76 @@
 		from comment
 		where font_no=#{value}
 	</select>
+	<!-- Page처리를 위한 글 토탈 -->
+	<select id="selectTotal" resultType="_int">
+		select  count(no)
+		from free_board
+	</select>
+	
+	<!-- page처리를 위한 현재 페이지 -->
+	<select id="selectCurrentPage" parameterType="map" resultType="freeboard">
+		select no, title,member_id memberId,register_time registerTime,click,good,file_root fileName 
+		from(
+				select ceil(rownum/#{current}) page,no, title,member_id,register_time,click,good,file_root 
+				from (
+					select no,title,member_id,register_time,click,good,file_root
+					from free_board
+					order by no desc
+				)
+		)
+		where page=#{page}
+	</select>
+	
+	
+	
+	<!-- Page처리를 위한 글 토탈-작성자로 검색  -->
+	<select id="selectMemberIdTotal"  parameterType="string" resultType="_int">
+		select  count(no)
+		from free_board
+		where member_id=#{value}
+	</select>
+	
+	<!-- 조회- 작성자로 검색  -->
+	<select id="selectByMemberid" parameterType="map" resultType="freeboard">
+		select no,title,member_id memberId,register_time registerTime,click,good,file_root fileName
+		from(
+			select ceil(rownum/#{current}) page,no,title,member_id,register_time,click,good,file_root
+			from (
+					select no,title,member_id,register_time,click,good,file_root
+					from free_board
+					order by no desc
+			)
+			where member_id=#{memberId}
+		)
+		where page=#{page}
+	</select>
+	
+
+
+
+	<!-- Page처리를 위한 글 토탈 - 제목으로 검색 -->
+	<select id="selectTitleTotal"   parameterType="string"  resultType="_int">
+		select  count(no)
+		from free_board
+		where title like '%'||#{value}||'%'
+	</select>
+	
+	<!-- 조회 - 제목으로 검색 -->
+	<select id="selectByTitle" parameterType="map" resultType="freeboard">
+		select no,title,member_id memberId,register_time registerTime,click,good,file_root fileName
+		from(
+			select ceil(rownum/#{current}) page,no,title,member_id,register_time,click,good,file_root 
+			from (
+					select no,title,member_id,register_time,click,good,file_root
+					from free_board
+					order by no desc
+			)
+			where title like '%'||#{title}||'%'
+		)
+		where page=#{page}
+	</select>
+		
+	
 	
 	
 </mapper>

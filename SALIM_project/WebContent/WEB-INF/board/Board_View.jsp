@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,12 +35,7 @@
 		<td align=center bgcolor=#dddddd width=50%> 작성일</td>
 		<td bgcolor=#ffffe8 width=40%>2015/11/23</td>
 	</tr>
-    <tr>
-		<td align=center bgcolor=#dddddd> E-mail </td>
-		<td bgcolor=#ffffe8 >hunit@hunit</td> 
-		<td align=center bgcolor=#dddddd> 홈페이지 </td>
-		<td bgcolor=#ffffe8><a href="http://hunit.tistory.com" target="_new">http://hunit.tistory.com</a></td> 
-	</tr>
+ 
 	<tr> 
 		<td align=center bgcolor=#dddddd> 제 목</td>
 		<td bgcolor=#ffffe8 colspan=3> 게시판 글입니다</td>

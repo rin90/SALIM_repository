@@ -1,12 +1,16 @@
 package com.salim.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TipBoard {
+import org.springframework.web.multipart.MultipartFile;
+
+public class TipBoard implements Serializable{
 	private int no;
 	private String title;
 	private String content;
-	private String fileRoot;
+	private MultipartFile fileRoot;
+	private String fileName;
 	private String category;
 	private int click =0;
 	private int good =0;
@@ -20,7 +24,7 @@ public class TipBoard {
 	}
 
 
-	public TipBoard(int no, String title, String content, String fileRoot, String category, int click, int good,
+	public TipBoard(int no, String title, String content, MultipartFile fileRoot, String category, int click, int good,
 			String classification, String memberId) {
 		super();
 		this.no = no;
@@ -65,12 +69,12 @@ public class TipBoard {
 	}
 
 
-	public String getFileRoot() {
+	public MultipartFile getFileRoot() {
 		return fileRoot;
 	}
 
 
-	public void setFileRoot(String fileRoot) {
+	public void setFileRoot(MultipartFile fileRoot) {
 		this.fileRoot = fileRoot;
 	}
 
@@ -196,6 +200,15 @@ public class TipBoard {
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
+	}
+
+
+	
+
+
+	public void setFileName(String originalFilename) {
+		this.fileName=fileName;
+		
 	}
 	
 	
