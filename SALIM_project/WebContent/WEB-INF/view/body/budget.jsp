@@ -13,7 +13,7 @@
 	<script type="text/javascript">
 
 	/* 년 월만 선택하게.. */
- 	$(document).ready(function(){
+/*  	$(document).ready(function(){
 		$("#budgetDate").datepicker({
 			changeMonth:true,
 			changeYear:true,
@@ -27,7 +27,23 @@
 	            $(this).datepicker('setDate', new Date(year, month, 1));
 			}
 		});
-	}); 
+	});  */
+	
+	$(document).ready(function(){
+		$('.date-picker').datepicker( {
+	        changeMonth: true,
+	        changeYear: true,
+	        showButtonPanel: true,
+	        dateFormat: 'yy-MM',
+	        onClose: function(dateText, inst) { 
+	            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+	            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+	            $(this).datepicker('setDate', new Date(year, month, 1));
+	            alert($("input [name=budgetDate]").val());
+	        }
+	    });
+	});
+	
 	
 /* 	$(function() {
 	    $('.date-picker').datepicker( {
@@ -126,11 +142,11 @@
 </head>
 <body>
 
- 	<label for="startDate">Date :</label>
-    <input type="text" name="budgetDate" id="budgetDate" class="date-picker"/>
+ <!-- 	<label for="startDate">Date :</label>
+    <input type="text" name="budgetDate" id="budgetDate" class="date-picker"/> -->
     
-    <!-- <label for="startDate">Date :</label>
-    <input name="startDate" id="startDate" class="date-picker" /> -->
+    <label for="startDate">Date :</label>
+    <input name="budgetDate" id="startDate" class="date-picker" /> 
 
 
 	<!-- <input type="text" name="sdate" id="sdate" size="7" maxlength="7" class="hasDatepicker">

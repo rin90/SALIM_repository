@@ -37,15 +37,15 @@ public class BudgetController {
 	
 	//예산 조회
 	@RequestMapping(value="/login/findbudget.do")
-	public String/*ModelAndView*/ findBudget(/*@DateTimeFormat(pattern="yyyy-MM")@RequestParam Date budgetDate,*/ HttpSession session){
+	public /*String*/ModelAndView findBudget(@DateTimeFormat(pattern="yyyy-MM-dd")@RequestParam Date budgetDate, HttpSession session){
 		
-
+		System.out.println(budgetDate);
 		
-		/*if(budgetDate == null){
+		if(budgetDate == null){
 			Date today = new Date();
 			int year = today.getYear();
 			int month = today.getMonth();
-			budgetDate = new Date(year, month, 0);
+			budgetDate = new Date(year, month, 1);
 		}
 		
 		
@@ -54,9 +54,9 @@ public class BudgetController {
 		map.put("memberId", memberId);
 		map.put("budgetDate", budgetDate);
 		
-		return new ModelAndView("body/budget.tiles", "findBudget", service.findBudget(map));*/
+		return new ModelAndView("body/budget.tiles", "findBudget", service.findBudget(map));
 		
-		return "body/budget.tiles";
+		/*return "body/budget.tiles";*/
 	}
 	
 	
