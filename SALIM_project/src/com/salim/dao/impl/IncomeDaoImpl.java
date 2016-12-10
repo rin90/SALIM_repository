@@ -35,5 +35,15 @@ public class IncomeDaoImpl implements IncomeDao{
 	public List<Income> selectIncomeList(Map map) { // map => memberId 와 incomeDate
 		return session.selectList("incomeMapper.selectIncomeDate", map);
 	}
+
+	@Override
+	public List selectImportEachMonth(Map map) {
+		return session.selectList("incomeMapper.selectImportEachMonth", map);
+	}
+
+	@Override
+	public List selectImportEachCategory(Map map) {
+		return session.selectList("incomeMapper.selectImportEachCategory", map);
+	}
 	
 }
