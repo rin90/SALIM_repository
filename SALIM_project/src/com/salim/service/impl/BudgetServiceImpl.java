@@ -19,8 +19,13 @@ public class BudgetServiceImpl implements BudgetService{
 	public void saveBudget(Budget budget) {
 		
 		if(budget.getNum()==0){
+			System.out.println("=======서비스에 서  인설트 num을 찍어보자"+budget.getNum()+" ========");
+			
 			dao.insertBudget(budget);			
 		}else{
+			
+			System.out.println("=======서비스에 서 수정 num을 찍어보자"+budget.getNum()+" ========");
+			
 			dao.updateBudget(budget);
 		}
 		
