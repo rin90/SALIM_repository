@@ -41,7 +41,9 @@ public class ExpenseController {
 	//지출 조회
 	@RequestMapping(value="/login/expenseSelect.do")
 	public String selectExpense(@DateTimeFormat(pattern="yyyy-MM-dd")Date expenseDate, HttpServletRequest request, HttpSession session, ModelMap modelMap){
-	
+		
+		System.out.println(expenseDate);
+		
 		if(expenseDate == null){
 			Date date = new Date();
 			int year = date.getYear();

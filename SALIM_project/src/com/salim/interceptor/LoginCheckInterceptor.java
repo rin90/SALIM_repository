@@ -20,15 +20,14 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter{//intercept
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws Exception {//handler메소드 호출전에 호출
 		HttpSession session = request.getSession();
 		
-		//그룹
-		if(session.getAttribute("group_info")==null){//그룹으로 들어왔는지 체크
-			if(session.getAttribute("login_info")==null){//개인이 로그인했는지 체크
+			if(session.getAttribute("login_info")==null){
 				System.out.println(session.getAttribute("login_info"));
 				throw new ModelAndViewDefiningException(new ModelAndView("/member/login_form.jsp", "error_message", "로그인 먼저 하세요."));
 			}
+			return true;
 		}
-		return true;
-	}
+		
+	
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,ModelAndView modelAndView) throws Exception {
