@@ -15,6 +15,7 @@ public class Budget implements Serializable{
 	@NotNull
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date budgetDate;
+	
 	private int budget;
 	private int foodExpenses;
 	private int dwellingCommunication;

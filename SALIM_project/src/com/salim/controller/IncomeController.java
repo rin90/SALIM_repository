@@ -102,7 +102,9 @@ public class IncomeController {
 	//해당 날짜에 저장한 수입 목록이 있으면 가져오기
 	@RequestMapping(value="/login/incomeSelect.do")//, method=RequestMethod.POST
 	public View selectIncome(@DateTimeFormat(pattern="yyyy-MM-dd")Date incomeDate ,HttpServletRequest request, HttpSession session){
-
+		
+		System.out.println(incomeDate);
+		
 		String memberId = ((Member)session.getAttribute("login_info")).getMemberId();
 		
 		if(incomeDate == null){
