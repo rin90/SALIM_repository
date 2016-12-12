@@ -1,14 +1,14 @@
 package com.salim.vo;
 
-public class Collection {
+public class Collect{
 
 	private String collectionId;
 	private String collectionName;
 	private String collectionIntro;
 	
-	public Collection(){}
+	public Collect(){}
 
-	public Collection(String collectionId, String collectionName, String collectionIntro) {
+	public Collect(String collectionId, String collectionName, String collectionIntro) {
 		super();
 		this.collectionId = collectionId;
 		this.collectionName = collectionName;
@@ -63,7 +63,7 @@ public class Collection {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Collection other = (Collection) obj;
+		Collect other = (Collect) obj;
 		if (collectionId == null) {
 			if (other.collectionId != null)
 				return false;

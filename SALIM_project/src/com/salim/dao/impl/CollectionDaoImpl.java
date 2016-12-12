@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.salim.dao.CollectionDao;
-import com.salim.vo.Collection;
+import com.salim.vo.Collect;
 
 @Repository
 public class CollectionDaoImpl implements CollectionDao{
@@ -15,18 +15,18 @@ public class CollectionDaoImpl implements CollectionDao{
 	
 	private String makeSql(String sql)
 	{
-		return "colletion."+sql;
+		return "collections."+sql;
 	}
 
 	@Override
-	public int selectCollectionSeq() {
+	public String selectCollectionSeq() {
 		// TODO Auto-generated method stub
 		return session.selectOne(makeSql("selectSequence"));
 		
 	}
 
 	@Override
-	public void insertCollection(Collection collection) {
+	public void insertCollection(Collect collection) {
 		// TODO Auto-generated method stub
 		session.selectOne(makeSql("insertCollection"),collection);
 	}

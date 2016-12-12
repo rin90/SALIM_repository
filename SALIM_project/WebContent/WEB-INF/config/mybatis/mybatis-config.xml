@@ -5,6 +5,7 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	<typeAliases>
+		<typeAlias type="com.salim.vo.Collect" alias="collect"/>
 		<package name="com.salim.vo"/>
 	</typeAliases>
 	

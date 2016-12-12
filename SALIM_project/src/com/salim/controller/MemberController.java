@@ -146,7 +146,7 @@ public class MemberController {
 		}else //해당 아이디가 없는 경우
 		{
 			map.addAttribute("error","ID를 찾을 수 없습니다!");
-			return "body/login_form.tiles";
+			return "redirect:/collection/findAllCollectionList.do";
 		}
 	}
 

@@ -1,11 +1,12 @@
 package com.salim.service;
 
-import com.salim.vo.Collection;
+import com.salim.vo.Collect;
+import com.salim.vo.Member;
 
 public interface CollectionService {
 
 	//sequence값 받아오기.
 	public String findCollectionSeq();
 	
-	public void addCollection(Collection collection);
+	public void addCollection(Collect collection, Member m);
 }
