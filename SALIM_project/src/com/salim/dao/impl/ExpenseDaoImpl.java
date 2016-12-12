@@ -40,4 +40,19 @@ public class ExpenseDaoImpl implements ExpenseDao{
 	public List selectSpendEachCategory(Map map) {
 		return session.selectList("expenseMapper.selectSpendEachCategory", map);
 	}
+
+	@Override	// 한 달 동안
+	public List selectSpendDuringMonth(Map map) {
+		return session.selectList("expenseMapper.selectSpendDuringMonth", map);
+	}
+
+	@Override	// 일 년
+	public List selectSpendEachMonth(Map map) {
+		return session.selectList("expenseMapper.selectSpendEachMonth", map);
+	}
+
+	@Override
+	public List selectTotalMonthReport(Map map) {
+		return session.selectList("expenseMapper.selectTotalMonthReport", map);
+	}
 }
