@@ -9,7 +9,7 @@
  </select>
  
  <insert id='insertCollection' parameterType="collection">
- 	insert into collection values(#{collectionid},#{collectionName},#{collectionIntro})
+ 	insert into collection values(#{collectionId},#{collectionName},#{collectionIntro})
  
  </insert>
  
