@@ -26,14 +26,16 @@ public class BudgetServiceImpl implements BudgetService{
 	//예산 저장 & 수정    - 수정가능한 이번달고 미래달, 수정불가한 과거달 조회만 가능
 	public void saveBudget(Budget budget) {
 		
+		int sumbmit = budget.getFoodExpenses()+budget.getDwellingCommunication()+budget.getHouseholdgoods()
+					 +budget.getClothBeauty()+budget.getHealthCulture()+budget.getEducationParenting()
+					 +budget.getTrafficVehicle()+budget.getHolidayDues()+budget.getTaxInterest()
+					 +budget.getPinmoneyEtc()+budget.getSavingInsurance()+budget.getCreditCard()
+					 +budget.getUnclassified();
+		budget.setBudget(sumbmit);
+		
 		if(budget.getNum()==0){
-			System.out.println("=======서비스에 서  인설트 num을 찍어보자"+budget.getNum()+" ========");
-			
 			dao.insertBudget(budget);			
 		}else{
-			
-			System.out.println("=======서비스에 서 수정 num을 찍어보자"+budget.getNum()+" ========");
-			
 			dao.updateBudget(budget);
 		}
 		

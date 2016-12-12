@@ -41,9 +41,6 @@
 		            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
 		            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 		            $(this).datepicker('setDate', new Date(year, month, 1));
-		            
-		          
-		           // alert(dateText);
 		         
 		            $.ajax({
 		            	"type":"POST",
@@ -51,72 +48,84 @@
 		            	"data":{"budgetDate":$(".month-picker").val()},
 		            	"dataType":"json",
 		            	"success":function(obj){
-		            		if(obj == null){
-		            			obj = "{}";
-		            			$("input[name=num]").val(0);
-		            			$("td input:eq(0)").val(" ");
-			            		$("td input:eq(1)").val(" ");
-			            		$("td input:eq(2)").val(" ");
-			            		$("td input:eq(3)").val(" ");
-			            		$("td input:eq(4)").val(" ");
-			            		$("td input:eq(5)").val(" ");
-			            		$("td input:eq(6)").val(" ");
-			            		$("td input:eq(7)").val(" ");
-			            		$("td input:eq(8)").val(" ");
-			            		$("td input:eq(9)").val(" ");
-			            		$("td input:eq(10)").val(" ");
-			            		$("td input:eq(11)").val(" ");
-			            		$("td input:eq(12)").val(" ");
-			            		$("td input:eq(13)").val(" ");
-		            			
-		            			
-		            		}else{
-		            			//alert(obj.foodExpenses);
-		            			/* var cnt = 0;
-		            			for(var name in obj){
-		            				$("td input:eq("+cnt++ +")").val(obj[name]);
-		            			} */
-		      
-			            		$("td input:eq(0)").val(obj.foodExpenses);
-			            		$("td input:eq(1)").val(obj.dwellingCommunication);
-			            		$("td input:eq(2)").val(obj.householdgoods);
-			            		$("td input:eq(3)").val(obj.clothBeauty);
-			            		$("td input:eq(4)").val(obj.healthCulture);
-			            		$("td input:eq(5)").val(obj.educationParenting);
-			            		$("td input:eq(6)").val(obj.trafficVehicle);
-			            		$("td input:eq(7)").val(obj.holidayDues);
-			            		$("td input:eq(8)").val(obj.taxInterest);
-			            		$("td input:eq(9)").val(obj.pinmoneyEtc);
-			            		$("td input:eq(10)").val(obj.savingInsurance);
-			            		$("td input:eq(11)").val(obj.creditCard);
-			            		$("td input:eq(12)").val(obj.unclassified);
-
-		            		}
 		            		
+		            			$("tbody tr td:eq(2)").text(obj.categoryExpense[7].SPEND_MONEY);
+			            		$("tbody tr td:eq(6)").text(obj.categoryExpense[12].SPEND_MONEY);
+			            		$("tbody tr td:eq(10)").text(obj.categoryExpense[5].SPEND_MONEY);
+			            		$("tbody tr td:eq(14)").text(obj.categoryExpense[9].SPEND_MONEY);
+			            		$("tbody tr td:eq(18)").text(obj.categoryExpense[0].SPEND_MONEY);
+			            		$("tbody tr td:eq(22)").text(obj.categoryExpense[2].SPEND_MONEY);
+			            		$("tbody tr td:eq(26)").text(obj.categoryExpense[3].SPEND_MONEY);
+			            		$("tbody tr td:eq(30)").text(obj.categoryExpense[1].SPEND_MONEY);
+			            		$("tbody tr td:eq(34)").text(obj.categoryExpense[6].SPEND_MONEY);
+			            		$("tbody tr td:eq(38)").text(obj.categoryExpense[8].SPEND_MONEY);
+			            		$("tbody tr td:eq(42)").text(obj.categoryExpense[11].SPEND_MONEY);
+			            		$("tbody tr td:eq(46)").text(obj.categoryExpense[13].SPEND_MONEY);
+			            		$("tbody tr td:eq(50)").text(obj.categoryExpense[4].SPEND_MONEY);
+		            		
+		            		if(obj.monthExpense[0] == null){
+		            			$("tfoot tr td:eq(2)").text(0);
+		            		}else{ 
+		            			$("tfoot tr td:eq(2)").text(obj.monthExpense[0].TOTAL);
+		            		} 
+		            		
+		            		//기간 비교해서 과거 월이면 td의 value로 붙인다
+		            		if(obj.budget == null){
+		            			obj.budget = "{}";
+		            			$("input[name=num]").val(0);
+		            			$("td input:eq(0)").val(0);
+			            		$("td input:eq(1)").val(0);
+			            		$("td input:eq(2)").val(0);
+			            		$("td input:eq(3)").val(0);
+			            		$("td input:eq(4)").val(0);
+			            		$("td input:eq(5)").val(0);
+			            		$("td input:eq(6)").val(0);
+			            		$("td input:eq(7)").val(0);
+			            		$("td input:eq(8)").val(0);
+			            		$("td input:eq(9)").val(0);
+			            		$("td input:eq(10)").val(0);
+			            		$("td input:eq(11)").val(0);
+			            		$("td input:eq(12)").val(0);
+			            		$("td input:eq(13)").val(0);	
+			            		$("tfoot tr td:eq(1)").text(0);
+			            		
+			            		
+		            		}else{
+		            			$("input[name=num]").val(obj.budget.num);
+			            		$("td input:eq(0)").val(obj.budget.foodExpenses);        	
+			            		$("td input:eq(1)").val(obj.budget.dwellingCommunication);
+			            		$("td input:eq(2)").val(obj.budget.householdgoods);
+			            		$("td input:eq(3)").val(obj.budget.clothBeauty);
+			            		$("td input:eq(4)").val(obj.budget.healthCulture);
+			            		$("td input:eq(5)").val(obj.budget.educationParenting);
+			            		$("td input:eq(6)").val(obj.budget.trafficVehicle);
+			            		$("td input:eq(7)").val(obj.budget.holidayDues);
+			            		$("td input:eq(8)").val(obj.budget.taxInterest);
+			            		$("td input:eq(9)").val(obj.budget.pinmoneyEtc);
+			            		$("td input:eq(10)").val(obj.budget.savingInsurance);
+			            		$("td input:eq(11)").val(obj.budget.creditCard);
+			            		$("td input:eq(12)").val(obj.budget.unclassified);
+			            		$("tfoot tr td:eq(1)").text(obj.budget.budget);
+		            		}
 		            	}
 		            });     
 		        }
-		 	
 		    });
 	});
 	
-	//null로 넘어가는 값을 jsp에서 체크할 것인짘?????
 	
-	/*  function moveOther(){
-		 var budgetDate=$(".month-picker").val();
-          location.href = "/SALIM_project/household/login/findbudget.do?budgetDate="+budgetDate;
-	 }   */
-	
-	
-	/* function check(){
-		 	
-	 	Budbet budget = (Budget)requst.getAttribute("budget");
-		 if(budget == null){
-			 //if(budget.get)
-				 return false;
-		 }
-	 }  */
-	 
+	var inputs = window.document.getElementsByClassName("element");
+	var regExp = /^[0-9]+$/;
+	function check(){
+		for(var i=0; i<inputs.length; i++){
+			if(!(regExp.test(inputs[i].value))){
+					alert("숫자만 써주세요.");
+					inputs[i].focus();
+					return false;	
+			}
+		}
+		return true;
+	}; 
 	 
 	
 	</script>
@@ -134,28 +143,13 @@
 	
 <form action="/SALIM_project/household/login/budget.do" method="post">
 	
-	<input type="text" class="month-picker" name="budgetDate" value="${sessionScope.budgetDate}" placeholder="${sessionScope.budgetDate }">
-	
-<!-- 	<input type="button" name="move" value="다른 달로 이동" onclick="moveOther()"> -->
+	<input type="text" class="month-picker" name="budgetDate" value="${requestScope.budgetDate}" placeholder="${requestScope.budgetDate }">
 	<p>
     
-  <!--   <label for="startDate">Date :</label>
-    <input name="budgetDate" id="startDate" class="date-picker" /> 
-	<p> -->
-<%-- 	<%
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String budgetDate = sdf.format(date);
-	%> 
-	<%=budgetDate %> --%>
-<%-- 	<input type="text" name="budgetDate" value="${requestScope.budgetDate }" id="startDate" class="date-picker">
- --%>
-	
-	<input type="hidden" name="num" value="${sessionScope.budgetNum }">
+	<input type="hidden" name="num" value="${requestScope.budgetNum }">
 	<input type="hidden" name="memberId" value="${sessionScope.login_info.memberId}">
 
-	
-	
+
 	<table border="1">
 		<thead>
 			<tr>
@@ -173,7 +167,7 @@
 			<tr>
 				<td>식비</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.foodExpenses }" name="foodExpenses" placeholder="${requestScope.budget.foodExpenses }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.foodExpenses }" name="foodExpenses" placeholder="${requestScope.budget.foodExpenses }">
 				</td>
 				<td>${requestScope.categoryExpense[7].SPEND_MONEY }</td>
 				<td>잔액</td>
@@ -181,7 +175,7 @@
 			<tr>
 				<td>주거/통신</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.dwellingCommunication }" name="dwellingCommunication" placeholder="${requestScope.budget.dwellingCommunication }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.dwellingCommunication }" name="dwellingCommunication" placeholder="${requestScope.budget.dwellingCommunication }">
 				</td>
 				<td>${requestScope.categoryExpense[12].SPEND_MONEY }</td>
 				<td>남은 잔액</td>
@@ -189,7 +183,7 @@
 			<tr>
 				<td>생활용품</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.householdgoods }" name="householdgoods" placeholder="${requestScope.budget.householdgoods }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.householdgoods }" name="householdgoods" placeholder="${requestScope.budget.householdgoods }">
 				</td>
 				<td>${requestScope.categoryExpense[5].SPEND_MONEY }</td>
 				<td>남은 잔액</td>
@@ -197,7 +191,7 @@
 			<tr>
 				<td>의복/미용</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.clothBeauty }" name="clothBeauty" placeholder="${requestScope.budget.clothBeauty }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.clothBeauty }" name="clothBeauty" placeholder="${requestScope.budget.clothBeauty }">
 				</td>
 				<td>${requestScope.categoryExpense[9].SPEND_MONEY }</td>
 				<td>남은 잔액</td>
@@ -205,7 +199,7 @@
 			<tr>
 				<td>건강/문화</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.healthCulture }" name="healthCulture" placeholder="${requestScope.budget.healthCulture }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.healthCulture }" name="healthCulture" placeholder="${requestScope.budget.healthCulture }">
 				</td>
 				<td>${requestScope.categoryExpense[0].SPEND_MONEY }</td>
 				<td>남은 잔액</td>
@@ -213,7 +207,7 @@
 			<tr>
 				<td>교육/육아</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.educationParenting }" name="educationParenting" placeholder="${requestScope.budget.educationParenting }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.educationParenting }" name="educationParenting" placeholder="${requestScope.budget.educationParenting }">
 				</td>
 				<td>${requestScope.categoryExpense[2].SPEND_MONEY }</td>
 				<td>남은 잔액</td>
@@ -221,7 +215,7 @@
 			<tr>
 				<td>교통/차량</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.trafficVehicle }" name="trafficVehicle" placeholder="${requestScope.budget.trafficVehicle }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.trafficVehicle }" name="trafficVehicle" placeholder="${requestScope.budget.trafficVehicle }">
 				</td>
 				<td>${requestScope.categoryExpense[3].SPEND_MONEY }</td>
 				<td>남은 잔액</td>
@@ -229,7 +223,7 @@
 			<tr>
 				<td>경조사/회비</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.holidayDues }" name="holidayDues" placeholder="${requestScope.budget.holidayDues }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.holidayDues }" name="holidayDues" placeholder="${requestScope.budget.holidayDues }">
 				</td>
 				<td>${requestScope.categoryExpense[1].SPEND_MONEY }</td>
 				<td>남은 잔액</td>
@@ -237,7 +231,7 @@
 			<tr>
 				<td>세금/이자</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.taxInterest }" name="taxInterest" placeholder="${requestScope.budget.taxInterest }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.taxInterest }" name="taxInterest" placeholder="${requestScope.budget.taxInterest }">
 				</td>
 				<td>${requestScope.categoryExpense[6].SPEND_MONEY }</td>
 				<td>남은 잔액</td>
@@ -245,7 +239,7 @@
 			<tr>
 				<td>용돈/기타</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.pinmoneyEtc }" name="pinmoneyEtc" placeholder="${requestScope.budget.pinmoneyEtc }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.pinmoneyEtc }" name="pinmoneyEtc" placeholder="${requestScope.budget.pinmoneyEtc }">
 				</td>
 				<td>${requestScope.categoryExpense[8].SPEND_MONEY }</td>
 				<td>남은 잔액</td>
@@ -253,7 +247,7 @@
 			<tr>
 				<td>저축/보험</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.savingInsurance }" name="savingInsurance" placeholder="${requestScope.budget.savingInsurance }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.savingInsurance }" name="savingInsurance" placeholder="${requestScope.budget.savingInsurance }">
 				</td>
 				<td>${requestScope.categoryExpense[11].SPEND_MONEY }</td>
 				<td>남은 잔액</td>
@@ -261,7 +255,7 @@
 			<tr>
 				<td>카드대금</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.creditCard }" name="creditCard" placeholder="${requestScope.budget.creditCard }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.creditCard }" name="creditCard" placeholder="${requestScope.budget.creditCard }">
 				</td>
 				<td>${requestScope.categoryExpense[13].SPEND_MONEY }</td>
 				<td>남은 잔액</td>
@@ -269,7 +263,7 @@
 			<tr>
 				<td>미분류</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.unclassified }" name="unclassified" placeholder="${requestScope.budget.unclassified }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.unclassified }" name="unclassified" placeholder="${requestScope.budget.unclassified }">
 				</td>
 				<td>${requestScope.categoryExpense[4].SPEND_MONEY }</td>
 				<td>남은 잔액</td>
@@ -281,7 +275,9 @@
 			<tr>
 				<td>합계</td>
 				<td>
-					<input type="text" value="${empty requestScope.budget? 0:requestScope.budget.budget }" name="budget" placeholder="${requestScope.budget.budget }">
+					<%-- <input id="tt" type="text" value="${empty requestScope.budget? 0:requestScope.budget.budget }" name="budget" placeholder="${requestScope.budget.budget }"> --%>
+					${empty requestScope.budget? 0:requestScope.budget.budget }
+				
 				</td>
 				<td>${requestScope.monthExpense[0].TOTAL }</td>
 				<td>남은 잔액</td>
@@ -291,8 +287,7 @@
 	</table>
 	
 	
-	<input type="submit" value="저장하기" />
-	<!-- onclick="check()" -->
+	<input type="submit" value="저장하기" onclick="return check();" />
 	
 </form>		
 	
