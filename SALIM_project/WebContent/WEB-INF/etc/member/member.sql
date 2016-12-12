@@ -41,8 +41,11 @@ collection_name varchar2(50) not null,--그룹이름
 collection_intro varchar2(300)--그룹소개
 );
 
-drop table collection;
+drop table collection CASCADE CONSTRAINTS;
 
+select * from collection ;
+insert into collection values('g6','그룹이름','그룹 소개');
+insert into collection values('g7','그룹 이름','그룹 소개');
 
 
 
@@ -53,5 +56,17 @@ grant_id varchar2(300) not null,--권한자id
 constraint mc_pk primary key(member_id,collection_id) 
 );
 
+select * from MEMBER_COLLECTION;
 
 drop table member_collection;
+
+
+
+
+
+
+
+
+
+
+
