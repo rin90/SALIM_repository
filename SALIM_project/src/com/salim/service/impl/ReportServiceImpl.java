@@ -37,14 +37,14 @@ public class ReportServiceImpl implements ReportService{
 */
 		result.put("total", edao.selectTotalMonthReport(map));
 		
-		ArrayList<List> detailImport = new ArrayList<>();
-		ArrayList<List> detailSpend = new ArrayList<>();
+		ArrayList<String> detailImport = new ArrayList<>();
+		ArrayList<String> detailSpend = new ArrayList<>();
 		String year = (String)map.get("year");
 		// map에 달을 셋팅해서~
 		for(int i=1; i<=12; i++){	// 달의 역할 수행
 			map.put("month", year+(i<9? "-0"+i:"-"+i));
-			detailImport.add(idao.selectImportEachCategory(map));
-			detailSpend.add(edao.selectSpendEachCategory(map));
+			detailImport.add(idao.selectImportEachCategory(map).toString().replace("=", ":"));
+			detailSpend.add(edao.selectSpendEachCategory(map).toString().replace("=", ":"));
 		}
 		result.put("detailImport", detailImport);
 		result.put("detailSpend", detailSpend);
