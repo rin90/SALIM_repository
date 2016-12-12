@@ -28,9 +28,9 @@ public class ReportController {
 		param.put("memberId", memberId);
 		
 		List<Map> result = service.selectSpendEachCategory(param);
-		for(Map temp: result){
+/*		for(Map temp: result){
 			temp.replace("CATEGORY", "'"+temp.get("CATEGORY")+"'");
-		}
+		}*/
 		String str = result.toString().replaceAll("=", ":");
 		System.out.println(str);
 		/*
@@ -45,8 +45,10 @@ public class ReportController {
 	}
 	
 	@RequestMapping("/loadYear.do")
-	public String loadYear(String memberId, ModelMap map){
-		String year = new SimpleDateFormat("yyyy").format(new Date());
+	public String loadYear(String memberId, String year, ModelMap map){
+		if(year==null){
+			year = new SimpleDateFormat("yyyy").format(new Date());
+		}
 		Map<String, String> param = new HashMap();
 		param.put("year", year);
 		param.put("memberId", memberId);
