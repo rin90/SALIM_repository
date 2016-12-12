@@ -3,6 +3,7 @@ package com.salim.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +33,9 @@ public class BudgetController {
 	@Autowired
 	private BudgetService service;
 	
+	/*@Autowired
+	private ReportService reportService;*/
+	
 	//예산 저장 & 수정
 	@RequestMapping(value="/login/budget.do", method=RequestMethod.POST)
 	public View saveBudget(@ModelAttribute Budget budget){
@@ -45,7 +50,7 @@ public class BudgetController {
 	
 	//예산 조회
 	@RequestMapping(value="/login/findbudget.do")
-	public ModelAndView findBudget(HttpSession session, HttpServletRequest request){
+	public ModelAndView findBudget(HttpSession session, HttpServletRequest request, ModelMap setting){
 		
 		System.out.println("================(처음 시작할 때&저장후) 조회======================");
 		
@@ -60,13 +65,40 @@ public class BudgetController {
 		Map map = new HashMap();
 		map.put("memberId", memberId);
 		map.put("budgetDate", budgetDate);
+
 		
-		//받기로한 포맷으로 바꿔주고 찍음
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-		//System.out.println("받고자하는 날짜 포맷 - "+sdf.format(budgetDate));
 		
-		Budget budget = service.findBudget(map);
-		System.out.println("해당일로 - "+sdf.format(budgetDate)+" 조회한 예산 - "+budget);
+		//결과 조회 후 알맞은 곳에 뿌려주기
+		Map result = new HashMap();
+		result = service.findBudget(map);
+		
+		Budget budget = (Budget) result.get("budget");
+		List categoryExpense = (List) result.get("categoryExpense");
+		List monthExpense = (List) result.get("monthExpense");
+		
+		
+		
+		
+		
+		//결과 일단 뿌려보려고...
+		System.out.println("==================카테고리별 합 결과 뽑아보기===================");
+		System.out.println("에산 - "+budget);
+		System.out.println("카테고리 별 - "+categoryExpense);
+		System.out.println("달별 - "+monthExpense);
+		System.out.println("==================카테고리별 합 결과 뽑아보기===================");
+		
+		setting.addAllAttributes(result);
+		
+		
+		System.out.println("=========카테고리 list 번호 알기===============");
+		for(int i =0; i<categoryExpense.size(); i++){
+			System.out.println(i+"번째 - "+"내용 - "+categoryExpense.get(i));
+		}
+		System.out.println("=========카테고리 list 번호 알기===============");
+		
+		
+		
+		
 		
 		int budgetNum=0;
 		if(budget != null){
@@ -76,39 +108,9 @@ public class BudgetController {
 		session.setAttribute("budgetNum", budgetNum);
 		
 	//session대신 request로 바꿔보자
-		session.setAttribute("budgetDate", sdf.format(budgetDate));
+		session.setAttribute("budgetDate", new SimpleDateFormat("yyyy-MM").format(budgetDate));
 		
-		
-		/*
-		 * 하나의 컨트롤러로 모든일을 처리할 떄 쓰는 코드
-		//처음에 조회할 달을 못받아오면 넣어주자
-		Date budgetDate = null;
-		if(request.getAttribute("budgetDate") == null){ //한번 왔다 오면 request에 있을테니까
-			Date today = new Date();
-			int year = today.getYear();
-			int month = today.getMonth();
-			budgetDate = new Date(year, month, 01);
-		}else{ //달을 받아오면 session에 있는 것을 조회해서 가져오기
-			budgetDate = (Date)request.getAttribute("budgetDate"); //session에 저장
-		}
-		//받기로한 포맷으로 바꿔주고 찍음
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-		System.out.println("받고자하는 날짜 포맷 - "+budgetDate);
-		
-		String memberId = ((Member)session.getAttribute("login_info")).getMemberId();
-		Map map = new HashMap();
-		map.put("memberId", memberId);
-		map.put("budgetDate", budgetDate);
-		
-		Budget budget = service.findBudget(map);
-		System.out.println("해당일로 - "+budgetDate+" 조회한 예산 - "+budget);
-		
-		session.setAttribute("budgetDate", sdf.format(budgetDate));
-		session.setAttribute("budget", budget);
-		*/
-		
-		
-		return new ModelAndView("body/budget.tiles", "budget", budget);
+		return new ModelAndView("body/budget.tiles");
 		
 		/*return "body/budget.tiles";*/
 	}
@@ -132,6 +134,9 @@ public class BudgetController {
 			memberId = ((Group)session.getAttribute("group_info").get)
 		}*/
 		
+		
+		
+		
 		System.out.println("===========아작스로 조회할 때 ===================");
 		
 		System.out.println("아작스 조회시 사용할 날짜 - "+budgetDate);
@@ -148,7 +153,15 @@ public class BudgetController {
 		
 		session.setAttribute("budgetDate", budgetDate);
 		
-		Budget budget = service.findBudget(map);
+		/*Budget budget = service.findBudget(map);*/
+		
+		//결과 조회 후 알맞은 곳에 뿌려주기
+		Map result = new HashMap();
+		result = service.findBudget(map);
+				
+		Budget budget = (Budget) result.get("budget");
+		List categoryExpense = (List) result.get("categoryExpense");
+		List monthExpense = (List) result.get("monthExpense");
 		
 		//session.setAttribute("budget", budget);
 		request.setAttribute("budget", budget);
