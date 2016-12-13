@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" > 
+<mapper namespace="collections"> 
+
+<!-- collection 추가 -->
+ 
+ <select id="selectSequence" resultType='string'>
+ 	select 'collectionId'||seq_col.nextval from dual
+ </select>
+ 
+ <insert id='insertCollection' parameterType="collect">
+ 	insert into collection values(#{collectionId},#{collectionName},#{collectionIntro})
+ 
+ </insert>
+ <!-- collect 아이디로 조회하기 -->
+ <select id="selectCollectionByColletionId" parameterType="string" resultType="collect">
+ 	select collection_id collectionId, collection_name collectionName, collection_intro collectionIntro
+ 	from collection
+ 	where collection_id=#{value}
+ </select>
+ 
+ <!-- 그룹 가계부 조회 : 입력된 멤버 아이디에 해당하는 그룹의 정보를 조회 -->
+ <select id="selectCollectionByMemberId" parameterType="string" resultType="collect">
+select COLLECTION.collection_id collectionId, COLLECTION.collection_name collectionName, COLLECTION.collection_intro collectionIntro
+from collection,
+(
+	select member_collection.member_id memberId, member_collection.collection_id collectionId, member_collection.grant_Id grantId
+	from member_collection,
+	(
+		select member.member_id memberId
+		from member
+		where member.member_id=#{value}
+	)
+	where memberId=member_collection.member_id
+)
+where collection.collection_id =collectionId
+
+
+ </select>
+ 
+ 
+</mapper> 

@@ -13,7 +13,6 @@
 
 	<!-- annotation을 이용한 bean생성 설정시 사용 -->
 	<context:component-scan base-package="com.salim.controller, com.salim.dao.impl, com.salim.service.impl, com.salim.interceptor"/>
-
 	<mvc:annotation-driven/>
 	<!-- ===========================================
 		체크 필요하신 분은 이곳에 등록해서 사용하세요. 
@@ -41,14 +40,18 @@
 	<mvc:view-controller path="/loginMember.do" view-name="body/login_form.tiles"/>
 	<mvc:view-controller path="/findId.do" view-name="body/findId.tiles"/>
 	<mvc:view-controller path="/findPassword.do" view-name="body/findPassword.tiles"/>
+    <mvc:view-controller path="/loginSuccess.do" view-name="body/login_success.tiles"/>
 	<!-- member > my > page -->
 	<mvc:view-controller path="/myPage.do" view-name="body/my/page/myPage.tiles"/>
 	<mvc:view-controller path="/leaveMember.do" view-name="body/my/page/leave_member.tiles"/>
 	<mvc:view-controller path="/myInfo_modify.do" view-name="body/my/page/myInfo_modify.tiles"/>
+
 	<!-- <mvc:view-controller path="/leaveMember.do" view-name="body/leave_member.tiles"/>
 	<mvc:view-controller path="/myPage.do" view-name="body/myPage.tiles"/>
  -->
-
+<!-- collection -->
+	<mvc:view-controller path="/collection.do" view-name="body/collection_form.tiles"/> 
+	
 	<!-- ViewResolver등록 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="2"/>	

@@ -18,7 +18,7 @@ import com.salim.service.ReportService;
 public class ReportController {
 	
 	@Autowired
-	ReportService service;
+	private ReportService service;
 	
 	@RequestMapping("/loadMonth.do")
 	public String loadMonth(String memberId, ModelMap map){
@@ -28,9 +28,9 @@ public class ReportController {
 		param.put("memberId", memberId);
 		
 		List<Map> result = service.selectSpendEachCategory(param);
-		for(Map temp: result){
+/*		for(Map temp: result){
 			temp.replace("CATEGORY", "'"+temp.get("CATEGORY")+"'");
-		}
+		}*/
 		String str = result.toString().replaceAll("=", ":");
 		System.out.println(str);
 		/*
@@ -43,4 +43,24 @@ public class ReportController {
 		map.addAttribute("month", new SimpleDateFormat("yyyy년도 MM월").format(today));
 		return "body/report/month_report.tiles";
 	}
+	
+	@RequestMapping("/loadYear.do")
+	public String loadYear(String memberId, String year, ModelMap map){
+		if(year==null){
+			year = new SimpleDateFormat("yyyy").format(new Date());
+		}
+		Map<String, String> param = new HashMap();
+		param.put("year", year);
+		param.put("memberId", memberId);
+		
+		Map result = service.selectYearReport(param);
+		map.addAllAttributes(result);
+		map.addAttribute("total2", result.get("total").toString().replaceAll("=", ":"));
+		System.out.println(map.get("total2"));
+//		map.addAttribute("totalSpend2", result.get("totalSpend").toString().replaceAll("=", ":"));
+		map.addAttribute("year", year);
+		return "body/report/year_report.tiles";
+	}
+	
+	
 }

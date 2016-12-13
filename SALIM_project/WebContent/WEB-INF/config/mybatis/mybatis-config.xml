@@ -5,6 +5,7 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	<typeAliases>
+		<typeAlias type="com.salim.vo.Collect" alias="collect"/>
 		<package name="com.salim.vo"/>
 	</typeAliases>
 	
@@ -20,10 +21,11 @@
 		<mapper resource="com/salim/dao/mapper/expenseMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/budgetMapper.xml"/>
 		<!-- <mapper resource="com/salim/dao/mapper/notesMapper.xml"/> -->
-
+		<mapper resource="com/salim/dao/mapper/collectionMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/codeMapper.xml"/>
-		<!-- <mapper resource="com/salim/dao/mapper/memberMapper.xml"/> -->
 
+		<mapper resource="com/salim/dao/mapper/memberMapper.xml"/>
+		<mapper resource="com/salim/dao/mapper/memberNCollectionMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/codeMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/categoryMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/freeCommentMapper.xml"/> 
