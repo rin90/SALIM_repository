@@ -136,7 +136,7 @@ public class MemberController {
 			if(login.getPassword().equals(member.getPassword())) //비밀번호 체크
 			{
 				 session.setAttribute("login_info",member); // 비밀번호가 일치하는 경우 - 로그인 성공
-				return "body/login_success.tiles"; //로그인 성공화면
+				return "redirect:/collection/findAllCollectionList.do"; //로그인 성공화면
 			}else
 			{//비밀번호가 틀린 경우 - 다시 로그인 폼으로 돌아간다.
 				map.addAttribute("error", "Password가 틀렸습니다!");

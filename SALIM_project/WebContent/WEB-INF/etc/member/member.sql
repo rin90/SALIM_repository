@@ -61,13 +61,43 @@ select * from MEMBER_COLLECTION;
 
 drop table member_collection;
 
+---------------------------------------------------------------------------------------------------------------------------
+
+select COLLECTION.collection_id, COLLECTION.collection_name, COLLECTION.collection_intro
+from collection,
+(
+	select member_collection.member_id memberId, member_collection.collection_id collectionId, member_collection.grant_Id grantId
+	from member, member_collection
+	where member.member_id=member_collection.member_id
+)
+where collection.collection_id =collectionId
+
+
+--[최종] 가계부 조회하기 (로그인 시) -------------------------------------------------------------------------------------------------------------------------
+select COLLECTION.collection_id collectionId, COLLECTION.collection_name collectionName, COLLECTION.collection_intro collectionIntro
+from collection,
+(
+	select member_collection.member_id memberId, member_collection.collection_id collectionId, member_collection.grant_Id grantId
+	from member_collection,
+	(
+		select member.member_id memberId
+		from member
+		where member.member_id='1'
+	)
+	where memberId=member_collection.member_id
+)
+where collection.collection_id =collectionId
 
 
 
-
-
-
-
+select COLLECTION.collection_id, COLLECTION.collection_name, COLLECTION.collection_intro
+	from collection,
+	(
+		select member_collection.member_id memberId, member_collection.collection_id collectionId, member_collection.grant_Id grantId
+		from member, member_collection
+		where member_collection.member_id='1'
+	)
+	where collection.collection_id = collectionId
 
 
 

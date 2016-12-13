@@ -1,5 +1,7 @@
 package com.salim.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,7 +19,10 @@ public class CollectionDaoImpl implements CollectionDao{
 	{
 		return "collections."+sql;
 	}
-
+	private String makeSqlmemberNCollection(String sql)
+	{
+		return "memberNCollection."+sql;
+	}
 	@Override
 	public String selectCollectionSeq() {
 		// TODO Auto-generated method stub
@@ -30,4 +35,14 @@ public class CollectionDaoImpl implements CollectionDao{
 		// TODO Auto-generated method stub
 		session.selectOne(makeSql("insertCollection"),collection);
 	}
+	
+	public List<Collect> selectCollectionByMemberId(String memberId)
+	{
+		return session.selectList(makeSql("selectCollectionByMemberId"),memberId);
+	}
+	public Collect selectCollectionByCollectionId(String collectionId)
+	{
+		return session.selectOne(makeSql("selectCollectionByColletionId"),collectionId);
+	}
+
 }
