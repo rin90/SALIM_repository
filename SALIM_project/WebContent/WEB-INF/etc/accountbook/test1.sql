@@ -10,7 +10,22 @@ select * from INCOME where income_date = '2016-12-02'
 select * from CODE where id=41
 
 select b.big_code, b.big_content, b.high_code, 
-			   s.small_code, s.small_content, s.big_code
-		from bigCategory b, smallCategory s
-		where s.big_code = b.big_code
-		and s.small_code = 5
+	   s.small_code, s.small_content, s.big_code
+	   from bigCategory b, smallCategory s
+	   where s.big_code = b.big_code
+	   and s.small_code = 5 
+	 
+insert into notes values (seq_nts.nextval, '2016-12-02', '내용용', '1'); 	 
+	 
+	 
+update notes set content='수정된 내용'
+where no=1;
+	 
+select no, day_date, content, member_id
+from NOTES
+where member_id=1
+and day_date='2016-12-02';
+
+-- member와 join된 것 없애기
+alter table notes drop constraint nts_mem_fk;
+alter table notes drop constraint nts_mem_fk;

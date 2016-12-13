@@ -13,20 +13,18 @@
 <html>	
 <head>	
 <meta charset="UTF-8">	
-<title>수입 입력 화면</title>	
+<title>SALIM - 수입 입력</title>	
 </head>
 
-<!-- 여기서부터 코드  -->
+<!-- datepicker 넣기 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- 기기에 맞춰서 크기를 잡으라는 말. 이것을 쓸거면 기본 meta태그를 삭제 -->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	<script>
-	
-	/* 달력 */
 		$(document).ready(function(){
-			
+		  /* 달력 */
 	      $("#datepicker").datepicker({
     	     showOtherMonths: true, 
         	 selectOtherMonths: true,	
@@ -104,7 +102,7 @@
 			
 		});
 	
-	
+		/* 체크된 것만 컨트롤러로 넘기기 */
 		function checkevent(){
 			var checkedArr = "";
 			$("input[name=incomeId]:checked").each(function(idx){
@@ -121,25 +119,47 @@
 			}else if($("input[name=incomeId]:checked").val()==0){
 				alert("존재하지 않는 데이터입니다. 다시 선택해주세요.");
 			}else{
-				location.href = "/SALIM_project/household/login/incomeDelete.do?"+checkedArr;
+				location.href = "/SALIM_project/household/login/incomeDelete.do?incomeDate="+$("#datepicker").val()+"&"+checkedArr;
 			}
 		}
+		
+		//저장시 숫자 포맷 체크
+		var inputs = window.document.getElementsByClassName("element");
+		var regExp = /^[0-9]+$/;
+		function checkFormat(){
+			for(var i=0; i<inputs.length; i++){
+				if(!(inputs[i].value=="") && !(regExp.test(inputs[i].value))){
+					alert("숫자만 써주세요.");
+					inputs[i].focus();
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		/* var contentcheck = window.document.getElementsByClassName("contentLength");
 	
+		 */
+					
+				
+		/* function checklength(val){
+			if(val.value.length >16){
+				alert("수입 내역은 16자이내로 입력하세요.")
+			}
+		}
+		 */
+		
 	
 	</script>
 
 </head>
 <body>
 
-<div id="aaaa">
-	
-</div>
-
-<form action="${initParam.rootPath }/household/login/income.do" method="post" name="form1">
+<form action="${initParam.rootPath }/household/login/income.do" method="post">
 	
 	<!-- 달력 - 날짜 선택 -->
 	<p>
-	<input type="text" id="datepicker" name="incomeDate" value="${sessionScope.incomeDate }" placeholder="${sessionScope.incomeDate }">
+	<input type="text" id="datepicker" name="incomeDate" value="${requestScope.incomeDate }" placeholder="${requestScope.incomeDate }">
 	</p>
 
 	<!-- 오늘 수입, 지출 불러오기 -->
@@ -165,7 +185,6 @@
 		</tbody>
 	</table>
 	
-	
 	<!-- 수입입력란 -->
 	<table border="1">
 		<thead>
@@ -181,16 +200,14 @@
 		<tbody>
 			<tr>
 				<td>
-					삭제 <input type="checkbox" id="checkAll"/><!--체크박스 체크하면 전체 선택  -->
+					<input type="checkbox" id="checkAll"/>선택삭제<!--체크박스 체크하면 전체 선택  -->
 				</td>
-				<!-- <td>날짜</td> -->
 				<td>수입내역</td>
 				<td>수입금액</td>
 				<td>수입분류</td>
 			</tr>
 		</tbody>
 		<tfoot>
-
 			<c:if test="${requestScope.incomeList != null }">
 				<c:forEach items="${requestScope.incomeList }" var="income" varStatus="no">
 					<tr>
@@ -199,10 +216,10 @@
 							<input type="hidden" name="incomeId" value="${income.incomeId }"/>
 						</td>
 						<td>
-							<input type="text" name="explanation" value="${income.explanation}" placeholder="${income.explanation}">
+							<input type="text" name="explanation" onkeyup="checklength()" value="${income.explanation}" placeholder="${income.explanation}">
 						</td>
 						<td>
-							<input type="text" name="incomeMoney" value="${income.incomeMoney}" class="money" placeholder="${income.incomeMoney}">
+							<input type="text" class="element" name="incomeMoney" value="${income.incomeMoney}" placeholder="${income.incomeMoney}">
 						</td>
 						<td>
 							<select name="bigCategory" class="bigCategory" id="selectBig">
@@ -235,9 +252,8 @@
 					<input type="checkbox" name="incomeId" value="0"/> <!-- 체크박스 하나하나 -->
 					<input type="hidden" name="incomeId" value="0"/>
 				</td>
-					
-				<td><input type="text" name="explanation"/></td>
-				<td><input type="text" name="incomeMoney" class="money"/></td>
+				<td><input type="text" name="explanation" onkeyup="checklength()"/></td>
+				<td><input type="text" name="incomeMoney" class="element" /></td>
 				
 				<!-- 여기서 부터 코드 선택 테이블 -->
 				<td>
@@ -246,7 +262,7 @@
 							<option value="${bigCategory.bigCode}">${bigCategory.bigContent}</option>
 						</c:forEach>
 					</select>
-			
+					
 					<select name="codeId" class="smallCategory">
 						<option value="1">미분류</option>
 					</select>
@@ -256,10 +272,11 @@
 	</table>
 	
 	<!-- 메모장 -->
-	<textarea rows="25" cols="60" name="notes"></textarea>
+	<textarea rows="25" cols="60" name="notes">${requestScope.notes.content }</textarea>
+	<input type="hidden" name="notesNum" value="${empty requestScope.notes.no? 0:requestScope.notes.no }">
 	
 	<!-- 저장버튼 -->
-	<input type="submit" value="저장" id="submitIncome"/>
+	<input type="submit" value="저장" id="submitIncome" onclick="return checkFormat()"/>
 	<input type="button" value="선택삭제" id="deleteIncome" onclick="checkevent()"/>
 
 </form>

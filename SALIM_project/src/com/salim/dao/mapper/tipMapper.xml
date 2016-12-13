@@ -22,16 +22,16 @@
 	</update>
 	
 	<!-- 조회수 증가 -->
-	<update id="clickUpdate" parameterType="tipboard">
+	<update id="clickUpdate" parameterType="_int">
 		update tip_board
-		set click=#{click}
+		set click=click+1
 		where no=#{no}
 	</update>
 	
 	<!-- 좋아용 증가 -->
-	<update id="goodUpdate" parameterType="tipboard">
+	<update id="goodUpdate" parameterType="map">
 		update tip_board
-		set good=#{good}
+		set good=good+#{num}
 		where no=#{no}
 	</update>
 	
