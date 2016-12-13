@@ -52,12 +52,13 @@ public class CollectController {
 		return "body/login_success.tiles";
 	}
 	
-	@RequestMapping("/getSession.do")
-	public String getSession(HttpSession session,String collectionId)
+	@RequestMapping("/setSession.do")
+	public String setSession(HttpSession session,String collectionId)
 	{
 		//요청 파라미터 받은 뒤, 디비에서 받아와야겟다,
 		Collect collect=new Collect();
 		collect=service.findCollectionByCollectionId(collectionId);
+		System.out.println("collect"+collect);
 		session.setAttribute("group_info",collect);
 		return "redirect:/household/login/incomeSelect.do";
 	}
