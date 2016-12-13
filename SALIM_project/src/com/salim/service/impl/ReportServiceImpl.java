@@ -27,29 +27,43 @@ public class ReportServiceImpl implements ReportService{
 		return edao.selectSpendEachCategory(map);
 	}
 
-	@Override	@Transactional	// 조회하는 부분이기 때문에 굳이 Tx처리 해 주지 않아도 됨.
+	@Override	@Transactional	
 	public Map<String, List> selectYearReport(Map map) {
-		
 		Map<String, List> result = new HashMap<>();
-/*		
-  		result.put("totalImport", idao.selectImportEachMonth(map));
-		result.put("totalSpend", edao.selectSpendEachMonth(map));
-*/
-		result.put("total", edao.selectTotalMonthReport(map));
 		
-		ArrayList<List> detailImport = new ArrayList<>();
-		ArrayList<List> detailSpend = new ArrayList<>();
+		ArrayList detailImport = new ArrayList();
+		ArrayList detailSpend = new ArrayList();
 		String year = (String)map.get("year");
-		// map에 달을 셋팅해서~
-		for(int i=1; i<=12; i++){	// 달의 역할 수행
-			map.put("month", year+(i<9? "-0"+i:"-"+i));
-			detailImport.add(idao.selectImportEachCategory(map));
-			detailSpend.add(edao.selectSpendEachCategory(map));
+		
+		if(map.get("converter").equals("true")){
+			// 달별 총 수입 지출 가지고 오는 부분
+			result.put("total", wrapSinglePotation(edao.selectTotalMonthReport(map), "MONTH"));
+			// 달별 대분류에 따른 내용 받아오는 부분
+			for(int i=1; i<=12; i++){	
+				map.put("month", year+(i<9? "-0"+i:"-"+i));
+				// 수입
+				detailImport.add(wrapSinglePotation(idao.selectImportEachCategory(map), "CATEGORY").toString().replace("=", ":"));
+				// 지출
+				detailSpend.add(wrapSinglePotation(edao.selectSpendEachCategory(map), "CATEGORY").toString().replace("=", ":"));
+			}
+		}else{
+			result.put("total", edao.selectTotalMonthReport(map));
+			for(int i=1; i<=12; i++){	
+				map.put("month", year+(i<9? "-0"+i:"-"+i));
+				detailImport.add(idao.selectImportEachCategory(map));
+				detailSpend.add(edao.selectSpendEachCategory(map));
+			}
 		}
 		result.put("detailImport", detailImport);
 		result.put("detailSpend", detailSpend);
-		
 		return result;
 	}
 
+	// target에 해당하는 값을 ''으로 감싸게 하는 Method
+	public List<Map> wrapSinglePotation(List<Map> list, String target){
+		for(Map temp: list){	// category의 값을 ''으로 감쌀 수 있게 변경해야함.
+			temp.replace(target, "'"+temp.get(target)+"'");
+		}
+		return list;
+	}
 }

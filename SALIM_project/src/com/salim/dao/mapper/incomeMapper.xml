@@ -67,7 +67,7 @@
 	
 	<!-- 1년동안 각각의 달의 수입 금액의 총합 (특정 년도, 특정 ID 기준 )-->
 	<select id="selectImportEachMonth" parameterType="map" resultType="map">
-		select ''''||stand.LV||'월'||'''' month, nvl(result.total, 0) income_month_total  
+		select stand.LV||'월' month, nvl(result.total, 0) income_month_total  
 		from (	select month, sum(income_money) total 
 				from (	select income_id, to_char(income_date, 'MM') month, income_money 
 						from income 
