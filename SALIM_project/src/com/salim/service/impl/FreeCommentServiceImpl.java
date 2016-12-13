@@ -25,8 +25,19 @@ public class FreeCommentServiceImpl implements FreeCommentService{
 	}
 
 	@Override
+	public int comGroupUp() {
+		return dao.comGroupUp();
+	}
+
+	@Override
 	public void comDelete(int id) {
 		dao.comDelete(id);
+	}
+
+	@Override
+	public int selectCommentTotal(int no) {
+		System.out.println("freeCommentServiceImpl:"+dao.selectCommentTotal(no));
+		return dao.selectCommentTotal(no);
 	}
 
 

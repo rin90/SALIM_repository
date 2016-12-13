@@ -38,18 +38,23 @@ drop table tip_board;
 
 
 
-create sequence seq_com--sequence생성
+create sequence seq_com--sequence생성 id용
 select seq_com.nextval from dual  -- 조회 
 drop sequence seq_com--삭제
 
+--보류
+create sequence seq_cog--sequence생성 commentGroup용
+select seq_cog.nextval from dual  -- 조회 
+drop sequence seq_cog--삭제
+
 create table free_comments(  --댓글
 	id number primary key,
-	content varchar2(400) not null,
-	member_id varchar2(50) constraint fco_mem_fk references member ON DELETE CASCADE not null,
+	comment_content varchar2(400) not null,
+	comment_member_id varchar2(50) constraint fco_mem_fk references member ON DELETE CASCADE not null,
 	no number constraint fco_fre_fk references FREE_BOARD ON DELETE CASCADE not null,  -- 어떤 글인지 번호
 	comment_group number not null,
 	group_level number not null,
-	register_time date not null
+	comment_register_time date not null
 );
 
 
@@ -72,7 +77,7 @@ create table question_and_answer(  -- Q&A 게시판
 
 drop table question_and_answer;
 
---나중에 시간남으면 하기
+--나중에 시간남으면 하기 좋아요 영구 저장테이블
 create sequence seq_odt
 select seq_odt.nextval from dual
 drop sequence seq_odt

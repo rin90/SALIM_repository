@@ -16,7 +16,7 @@ public class FreeCommentDaoImpl  implements FreeCommentDao{
 	private SqlSessionTemplate session;
 	
 	private String make(String tagId){
-		return "freeComment"+tagId;
+		return "freeCommentMapper."+tagId;
 	}
 	
 	@Override
@@ -30,8 +30,18 @@ public class FreeCommentDaoImpl  implements FreeCommentDao{
 	}
 
 	@Override
+	public int comGroupUp() {
+		return session.selectOne(make("comGroupUpdate"));
+	}
+	
+	@Override
 	public void comDelete(int id) {
 		session.delete(make("comDelete"),id);
+	}
+	
+	@Override
+	public int selectCommentTotal(int no) {
+		return session.selectOne(make("selectCommentTotal"),no);
 	}
 
 	

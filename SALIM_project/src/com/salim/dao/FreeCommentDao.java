@@ -13,5 +13,10 @@ public interface FreeCommentDao {
 	//댓글 삭제
 	void comDelete(int id);
 	
+	//commentGroup증가
+	int comGroupUp();
 	
+	
+	//글의 총 댓글 갯수
+	int selectCommentTotal(int no);
 }

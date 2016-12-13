@@ -11,6 +11,7 @@ import com.salim.dao.FreeBoardDao;
 import com.salim.service.FreeBoardService;
 import com.salim.util.PagingBean;
 import com.salim.vo.FreeBoard;
+import com.salim.vo.FreeComment;
 
 @Service
 public class FreeBoardServiceImpl implements FreeBoardService {
@@ -40,22 +41,19 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 	@Override
 	public FreeBoard selectByNoAndClickUpdate(int no) {
-		System.out.println("클릭 업데이트 했다.");
+		System.out.println("클릭 업데이트 했다."+dao.selectByNo(no));
 		dao.updateClick(no);
-
+			
 		return dao.selectByNo(no);
 	}
 	
 	@Override
 	public FreeBoard selectByNo(int no) {
-		System.out.println("조회만 했음");
+		System.out.println("조회만했음"+dao.selectByNo(no));
+	
 		return dao.selectByNo(no);
 	}
 	
-	@Override
-	public int selectCommentTotal(int no) {
-		return dao.selectCommentTotal(no);
-	}
 
 	@Override
 	public Map getFreeBoardList(int page) {

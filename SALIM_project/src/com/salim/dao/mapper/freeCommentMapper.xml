@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="freeComment">
-
+<mapper namespace="freeCommentMapper">
 
 
 
@@ -10,14 +9,14 @@
 	<selectKey keyProperty="id" resultType="_int" order="BEFORE" >
 		select seq_com.nextval from dual
 	</selectKey>
-		insert into free_comments values(#{id},#{content},#{memeberId},#{no},#{commentGroup},#{groupLevel},#{registerTime})	
+		insert into free_comments values(#{id},#{commentContent},#{commentMemberId},#{no},#{commentGroup},#{groupLevel},#{commentRegisterTime})	
 	</insert>
 	
 	<!-- 댓글 수정 -->
 	<update id="comUpdate" parameterType="freecomment">
 		update free_comments 
-		set content=#{content},
-			register_time=#{registerTime}
+		set comment_content=#{commentContent},
+			comment_register_time=#{commentRegisterTime}
 		where	id=#{id}
 	</update>
 
@@ -28,10 +27,27 @@
 	</delete>
 	
 	<!-- 그룹번호 증가  -->
-	<update id="comGroupUpdate">
-		update free_comments
-		set comment_group=comment_group+1
-	</update>
+	<select id="comGroupUpdate" resultType="_int">
+		select seq_cog.nextval
+		from dual
+	</select>
+
+	
+	<!-- 글의 총댓글 개수 (상세화면)-->
+	<select id="selectCommentTotal" parameterType="_int" resultType="_int">
+		select count(id)
+		from free_comments
+		where no =#{value}
+	</select>
+	
+	<!-- id로 댓글 찾기 -->
+<!-- 	<select id="contentById" parameterType="_int" resultType="string">
+	select content
+	from free_comments
+	where id=#{value}
+	</select> -->
+	
+	
 	
 		<!--  해당 글에 댓글 뿌리는거 작성하기-상세화면들어갈 때 실행  - freeMapper에서 조인연산했음-->
 <!-- 	<select id="comList" parameterType="_int" resultType="freecomment">

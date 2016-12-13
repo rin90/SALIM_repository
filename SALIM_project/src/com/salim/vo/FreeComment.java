@@ -7,29 +7,28 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class FreeComment implements Serializable{
 
-	private int id;
-	@NotEmpty(message="내용을 입력해주세요")
-	private String content;
-	private String memberId;
+	private int id; //sequence를 통해 입력
+	private String commentContent;//사용자
+	private String commentMemberId;//hidden
 	private int no; //FreeBoard의 글번호  
-	private int commentGroup;
-	private int groupLevel;
-	private Date registerTime=new Date();
+	private int commentGroup;//자동
+	private int groupLevel;//자동
+	private Date commentRegisterTime=new Date();//자동
 		
 	public FreeComment() {
 		super();
 	}
 
-	public FreeComment(int id, String content, String memberId, int no, int commentGroup, int groupLevel,
-			Date registerTime) {
+	public FreeComment(int id, String commentContent, String commentMemberId, int no, int commentGroup, int groupLevel,
+			Date commentRegisterTime) {
 		super();
 		this.id = id;
-		this.content = content;
-		this.memberId = memberId;
+		this.commentContent = commentContent;
+		this.commentMemberId = commentMemberId;
 		this.no = no;
 		this.commentGroup = commentGroup;
 		this.groupLevel = groupLevel;
-		this.registerTime = registerTime;
+		this.commentRegisterTime = commentRegisterTime;
 	}
 
 	public int getId() {
@@ -40,20 +39,20 @@ public class FreeComment implements Serializable{
 		this.id = id;
 	}
 
-	public String getContent() {
-		return content;
+	public String getCommentContent() {
+		return commentContent;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setCommentContent(String commentContent) {
+		this.commentContent = commentContent;
 	}
 
-	public String getMemberId() {
-		return memberId;
+	public String getCommentMemberId() {
+		return commentMemberId;
 	}
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setCommentMemberId(String commentMemberId) {
+		this.commentMemberId = commentMemberId;
 	}
 
 	public int getNo() {
@@ -80,32 +79,32 @@ public class FreeComment implements Serializable{
 		this.groupLevel = groupLevel;
 	}
 
-	public Date getRegisterTime() {
-		return registerTime;
+	public Date getCommentRegisterTime() {
+		return commentRegisterTime;
 	}
 
-	public void setRegisterTime(Date registerTime) {
-		this.registerTime = registerTime;
+	public void setCommentRegisterTime(Date commentRegisterTime) {
+		this.commentRegisterTime = commentRegisterTime;
 	}
 
 	@Override
 	public String toString() {
-		return "FreeComment [id=" + id + ", content=" + content + ", memberId=" + memberId + ", no=" + no
-				+ ", commentGroup=" + commentGroup + ", groupLevel=" + groupLevel + ", registerTime=" + registerTime
-				+ "]";
+		return "FreeComment [id=" + id + ", commentContent=" + commentContent + ", commentMemberId=" + commentMemberId
+				+ ", no=" + no + ", commentGroup=" + commentGroup + ", groupLevel=" + groupLevel
+				+ ", commentRegisterTime=" + commentRegisterTime + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((commentContent == null) ? 0 : commentContent.hashCode());
 		result = prime * result + commentGroup;
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((commentMemberId == null) ? 0 : commentMemberId.hashCode());
+		result = prime * result + ((commentRegisterTime == null) ? 0 : commentRegisterTime.hashCode());
 		result = prime * result + groupLevel;
 		result = prime * result + id;
-		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + no;
-		result = prime * result + ((registerTime == null) ? 0 : registerTime.hashCode());
 		return result;
 	}
 
@@ -118,31 +117,33 @@ public class FreeComment implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		FreeComment other = (FreeComment) obj;
+		if (commentContent == null) {
+			if (other.commentContent != null)
+				return false;
+		} else if (!commentContent.equals(other.commentContent))
+			return false;
 		if (commentGroup != other.commentGroup)
 			return false;
-		if (content == null) {
-			if (other.content != null)
+		if (commentMemberId == null) {
+			if (other.commentMemberId != null)
 				return false;
-		} else if (!content.equals(other.content))
+		} else if (!commentMemberId.equals(other.commentMemberId))
+			return false;
+		if (commentRegisterTime == null) {
+			if (other.commentRegisterTime != null)
+				return false;
+		} else if (!commentRegisterTime.equals(other.commentRegisterTime))
 			return false;
 		if (groupLevel != other.groupLevel)
 			return false;
 		if (id != other.id)
 			return false;
-		if (memberId == null) {
-			if (other.memberId != null)
-				return false;
-		} else if (!memberId.equals(other.memberId))
-			return false;
 		if (no != other.no)
-			return false;
-		if (registerTime == null) {
-			if (other.registerTime != null)
-				return false;
-		} else if (!registerTime.equals(other.registerTime))
 			return false;
 		return true;
 	}
+
+	
 
 	
 	

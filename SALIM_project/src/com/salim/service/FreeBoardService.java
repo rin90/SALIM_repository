@@ -25,8 +25,7 @@ public interface FreeBoardService {
 	//새로고침 방지해서 새로고침시 조회수 증가 안함
 	FreeBoard selectByNo(int no);
 	
-	//글의 총 댓글 갯수
-	int selectCommentTotal(int no);
+	
 
 	//page처리를 위한 PagingBean객체와 list를 반환 - 토탈
 	Map getFreeBoardList(int page);
