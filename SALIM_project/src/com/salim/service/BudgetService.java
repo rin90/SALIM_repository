@@ -18,6 +18,6 @@ public interface BudgetService {
 	void saveBudget(Budget budget);
 	
 	//예산 조회
-	Budget findBudget(Map map);//memberId, 해당 월
+	Map findBudget(Map map);//memberId, 해당 월
 	
 }

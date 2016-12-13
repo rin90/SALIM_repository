@@ -84,7 +84,7 @@ unclassified number not null --미분류
 
 drop table budget;
 
-
+select * from BUDGET;
 
 
 

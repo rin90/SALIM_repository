@@ -13,7 +13,7 @@ public class Budget implements Serializable{
 	@NotNull
 	private String memberId;
 	@NotNull
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern="yyyy-MM")
 	private Date budgetDate;
 	
 	private int budget;
