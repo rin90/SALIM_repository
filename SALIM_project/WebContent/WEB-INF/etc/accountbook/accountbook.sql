@@ -11,8 +11,8 @@ create table notes(  --메모
 
 drop table notes;
 
-
-
+select * from notes;
+alter table notes drop constraint nts_mem_fk;
 
 
 create sequence seq_exp--sequence생성
@@ -85,7 +85,7 @@ unclassified number not null --미분류
 drop table budget;
 
 select * from BUDGET;
-
+alter table budget drop constraint bud_mem_fk;
 
 
 
