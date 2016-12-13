@@ -57,10 +57,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		return session.selectOne(make("selectByNo"),no);
 	}
 
-	@Override
-	public int selectCommentTotal(int no) {
-		return session.selectOne(make("selectCommentTotal"),no);
-	}
 	
 	@Override
 	public List<FreeBoard> selectCurrentPage(int page) {
@@ -106,6 +102,11 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	@Override
 	public int selectMemberIdTotal(String content) {
 		return session.selectOne(make("selectMemberIdTotal"),content);
+	}
+	
+	@Override
+	public int selectSeq() {
+		return session.selectOne(make("seq"));
 	}
 	
 	
