@@ -166,16 +166,21 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 								</span>																						
 							</c:otherwise>
 						</c:choose>
-						<span style="padding:5px" class="commentInfo">
 						
-							<input class="update" type="button" value="수정 ">
-							<a href="${initParam.rootPath }/comment/login/delete.do?id=${comment.id }&no=${comment.no}&page=${requestScope.page}&category=${requestScope.category}&search=${requestScope.search}">삭제</a>
-							<br>
-							<c:if test="${comment.groupLevel ==1}">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							</c:if>	
+						
+						<span style="padding:5px" class="commentInfo">
+							<c:if test="${comment.commentMemberId ==sessionScope.login_info.memberId }">
+								<input class="update" type="button" value="수정 ">
+								<a href="${initParam.rootPath }/comment/login/delete.do?id=${comment.id }&no=${comment.no}&page=${requestScope.page}&category=${requestScope.category}&search=${requestScope.search}">삭제</a>
+							</c:if>
+								<br>
+								<c:if test="${comment.groupLevel ==1}">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</c:if>
+									
 							${comment.commentContent }
 						</span>
+						
 						</c:otherwise>
 					</c:choose>
 				
@@ -245,6 +250,8 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 				</c:otherwise>
 			</c:choose>
 			<p/>
+			
+			<c:if test="${requestScope.freeBoard.memberId== sessionScope.login_info.memberId }">
 			<a 
 			href="${initParam.rootPath }/free/login/updateForm.do?category=${requestScope.category }&search=${requestScope.search}&page=${requestScope.page}&no=${requestScope.freeBoard.no}">수정</a> &nbsp;&nbsp;
 			<%--카테고리를 기준으로 해서 검색list에서 상세화면에서 삭제했을 때는 기본list 1페이지로 기본list에서 삭제했을 때는 현재 페이지로 이동 --%>
@@ -258,7 +265,7 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 					href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=1">삭제</a>	<p/>					
 				</c:otherwise>
 			</c:choose>
-
+			</c:if>
 			
 
 

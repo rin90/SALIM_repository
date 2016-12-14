@@ -48,7 +48,7 @@ public class FreeCommentController {
 		return "redirect:/free/login/seleteDetail.do?no="+comment.getNo()+"&page="+page+"&category="+category+"&search="+search;
 	}
 	
-	//삭제
+	//삭제 
 	@RequestMapping("login/delete")
 	public String comDelete(int id,int no,int page,String category,String search) throws Exception{
 		service.comDelete(id);
