@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.salim.dao.CollectionDao;
+import com.salim.dao.MemberDao;
 import com.salim.dao.MemberNCollectionDao;
 import com.salim.service.CollectionService;
 import com.salim.vo.Collect;
@@ -22,6 +23,8 @@ public class CollectionServiceImpl implements CollectionService{
 	@Autowired
 	private MemberNCollectionDao mncdao;
 	
+	@Autowired
+	private MemberDao memdao;
 	@Override
 	public String findCollectionSeq() {
 		return dao.selectCollectionSeq();
@@ -73,6 +76,44 @@ public class CollectionServiceImpl implements CollectionService{
 		}
 	}
 	
+	public String modifyCollection(Collect collect,String memberIdforGrant)
+	{
+		//1. memberIdforGrant를 비교해야되니까.
+		Collect dbCollect=new Collect();
+		Member member=new Member();
+		
+
+		dbCollect=dao.selectCollectionByCollectionId(collect.getCollectionId());
+		
+		
+		if(memberIdforGrant.equals(dbCollect.getGrantId()))
+		{
+			//권한 있는 사람 - 수정 가능
+			dao.updateCollection(collect);
+		}
+		else
+		{
+			//권한 없는 사람의 접근
+			return "접근 권한이 없습니다.";
+		}
+		return "";
+	}
+	
+	//가계부 삭제 부분
+	
+	public int removeCollection(String collectionId)
+	{
+		int num=mncdao.deleteMemberNCollectionByCollectionId(collectionId);
+		
+		if(num==1) //부모 테이블의 row 삭제 성공 시
+		{
+			return dao.deleteCollectionByCollectionId(collectionId); 
+		}else
+		{
+			System.out.println("부모 테이블이 삭제가 안 되었다.");
+			return 0;
+		}
+	}
 	
 }
 

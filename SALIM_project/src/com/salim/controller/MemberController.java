@@ -110,7 +110,7 @@ public class MemberController {
 	public String leaveMember(String memberId,HttpSession session)
 	{
 		session.invalidate();
-		service.leaveMember(memberId);
+		service.leaveMember(memberId); //member_collection 테이블에서도 삭제해줘야 한다.
 		
 		return "redirect:/main.do";
 		

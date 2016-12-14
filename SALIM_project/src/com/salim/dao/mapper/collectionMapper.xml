@@ -38,5 +38,20 @@ where collection.collection_id =collectionId
 
  </select>
  
+ <!-- 그룹 가계부 수정 updateCollection-->
+ 
+  <update id="updateCollection" parameterType="collect">
+ 	update collection 
+ 	set collection_name=#{collectionName},
+ 		collection_intro=#{collectionIntro},
+ 		grant_id=#{grantId}
+ 	where collection_id=#{collectionId}	
+ </update>
+ 
+ <!-- 그룹 가계부 삭제하기! -->
+ <delete id="deleteCollectionByCollectionId" parameterType='string'>
+	delete from COLLECTION
+	where collection_id=#{value} 
+ </delete>
  
 </mapper> 

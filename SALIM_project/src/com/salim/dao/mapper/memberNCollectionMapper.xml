@@ -7,5 +7,8 @@
  	insert into member_Collection values(#{memberId},#{collectionId},#{invite})
  </insert>
  
- 
+ <delete id="deleteMemberNCollectionByCollectionId" parameterType="string">
+ 	delete from MEMBER_COLLECTION
+	where collection_id=#{value}
+ </delete>
 </mapper> 
