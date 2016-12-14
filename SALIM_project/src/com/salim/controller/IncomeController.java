@@ -103,6 +103,8 @@ public class IncomeController {
 		if(content != null && !content.trim().isEmpty()){
 			Notes notes = new Notes(Integer.parseInt(request.getParameter("notesNum")), incomeDate, request.getParameter("notes"), memberId);
 			notesService.saveNotes(notes);
+		}else{
+			notesService.deleteNotes(Integer.parseInt(request.getParameter("notesNum")));
 		}
 		
 		//저장할 객체 만들기 - 수입
