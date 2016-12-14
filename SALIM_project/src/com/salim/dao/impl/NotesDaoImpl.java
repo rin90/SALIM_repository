@@ -35,6 +35,11 @@ public class NotesDaoImpl implements NotesDao{
 	public Notes selectNotes(Map map) {//memberId 와 dayDate
 		return session.selectOne("notesMapper.selectNotes", map);
 	}
+
+	@Override
+	public int deleteNotes(int no) {
+		return session.delete("notesMapper.deleteNotes", no);
+	}
 	
 	
 }

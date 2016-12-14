@@ -25,7 +25,13 @@ public class NotesServiceImpl implements NotesService{
 			System.out.println("수정한 객체 - "+notes);
 			System.out.println(notes.getDayDate()+"메모의 날짜");
 			System.out.println(notes.getMemberId()+"회원 아이디");
-			dao.updateNotes(notes);
+			if(notes.getContent().trim().isEmpty()){
+				System.out.println("메모 삭제"+notes);
+				dao.deleteNotes(notes.getNo());
+			}else{
+				System.out.println("메모 수정"+notes);
+				dao.updateNotes(notes);
+			}
 		}
 	}
 	
@@ -38,5 +44,9 @@ public class NotesServiceImpl implements NotesService{
 	}
 	
 	
+	//삭제
+	public void deleteNotes(int no) {
+		dao.deleteNotes(no);
+	}
 	
 }

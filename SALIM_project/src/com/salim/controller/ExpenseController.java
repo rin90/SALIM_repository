@@ -92,6 +92,12 @@ public class ExpenseController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		request.setAttribute("expenseDate", sdf.format(expenseDate));
 		
+		
+		System.out.println("=========지출 조회 확인=================");
+		System.out.println(expenseList);
+		
+		
+		
 		return "body/expense.tiles";
 	}
 	
@@ -176,8 +182,8 @@ public class ExpenseController {
 			}else{
 				expenseList.add(new Expense(expenseId.get(i), memberId, codeId.get(i), expenseDate, expenseExplain.get(i), cashExpense.get(i), cardExpense.get(i), "카드타입"));
 			}
-		}
-
+		}	
+		
 		//DB에 저장
 		service.saveExpense(expenseList);
 		

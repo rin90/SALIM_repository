@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-	<form action="${initParam.rootPath }/free/update.do" method="post" enctype="multipart/form-data">
+	<form action="${initParam.rootPath }/free/login/update.do" method="post" enctype="multipart/form-data">
 		<h4>자유게시판</h4>
 		 제목:<input type="text" name="title" value="${requestScope.freeBoard.title }"><br> 
 
@@ -22,12 +22,12 @@
 		<input type="submit" value="수정완료">
 
 	
-		 <a href="${initParam.rootPath }/free/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>
+		 <a href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>
 	</form>
 		<p/>
 	
 	
-	<form action="${initParam.rootPath }/free/seleteDetail.do" method="post">
+	<form action="${initParam.rootPath }/free/login/seleteDetail.do" method="post">
 		<input type="hidden" name="page" value="${requestScope.page }">
 		<input type="hidden" name="no" value="${requestScope.freeBoard.no }">
 		<input type="hidden" name="category" value="${requestScope.category }">

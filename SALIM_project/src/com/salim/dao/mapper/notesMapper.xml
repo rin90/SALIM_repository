@@ -44,4 +44,9 @@
 	 	and day_date=#{dayDate}
 	 </select>
 	 
+	 <!-- 메모 delete -->
+	 <delete id="deleteNotes" parameterType="_int">
+	 	delete from notes 
+	 	where no=#{value}
+	 </delete>
 </mapper>
