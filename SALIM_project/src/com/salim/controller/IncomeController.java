@@ -26,6 +26,7 @@ import com.salim.service.CategoryService;
 import com.salim.service.IncomeService;
 import com.salim.service.NotesService;
 import com.salim.vo.BigCategory;
+import com.salim.vo.Collect;
 import com.salim.vo.Income;
 import com.salim.vo.Member;
 import com.salim.vo.Notes;
@@ -54,7 +55,15 @@ public class IncomeController {
 						   HttpServletRequest request){
 		
 		//로그인 체크
-		Member member = (Member) session.getAttribute("login_info");
+		
+		//memberId에 개인id인지 그룹id인지 파악
+		String memberId = null;
+		Collect collect = (Collect) session.getAttribute("group_info");
+		if(collect != null){
+			memberId = collect.getCollectionId();
+		}else{
+			memberId = ((Member)session.getAttribute("login_info")).getMemberId();
+		}
 		
 		//검증
 		int max = 1;
@@ -88,10 +97,13 @@ public class IncomeController {
 				incomeMoney.add(i, 0);
 			}
 		}
-
+		
 		//메모 객체 만들기
-		Notes notes = new Notes(Integer.parseInt(request.getParameter("notesNum")), incomeDate, request.getParameter("notes"), member.getMemberId());
-		notesService.saveNotes(notes);
+		String content = request.getParameter("notes");
+		if(content != null && !content.trim().isEmpty()){
+			Notes notes = new Notes(Integer.parseInt(request.getParameter("notesNum")), incomeDate, request.getParameter("notes"), memberId);
+			notesService.saveNotes(notes);
+		}
 		
 		//저장할 객체 만들기 - 수입
 		List<Income> incomeList = new ArrayList<Income>();
@@ -99,9 +111,11 @@ public class IncomeController {
 			if(codeId.get(i)==1 && explanation.get(i).trim().isEmpty() && incomeMoney.get(i) == 0){
 				return "redirect:/household/login/incomeSelect.do?incomeDate="+new SimpleDateFormat("yyyy-MM-dd").format(incomeDate);
 			}else{
-				incomeList.add(new Income(incomeId.get(i), member.getMemberId(), codeId.get(i), incomeDate, explanation.get(i), incomeMoney.get(i)));
+				incomeList.add(new Income(incomeId.get(i), memberId, codeId.get(i), incomeDate, explanation.get(i), incomeMoney.get(i)));
 			}
 		}
+		System.out.println("==========저장한 수입객체 =============");
+		System.out.println(incomeList);
 		
 		//DB에 저장
 		service.saveIncome(incomeList);
@@ -125,7 +139,16 @@ public class IncomeController {
 			System.out.println("없으면 오늘날짜로 조회 - "+incomeDate);
 		}
 
-		String memberId = ((Member)session.getAttribute("login_info")).getMemberId();
+		//memberId에 개인id인지 그룹id인지 파악
+		String memberId = null;
+		Collect collect = (Collect) session.getAttribute("group_info");
+		System.out.println("수입 조회에서 collection이 있나 파악하는 것"+collect);
+		if(collect != null){
+			memberId = collect.getCollectionId();
+		}else{
+			memberId = ((Member)session.getAttribute("login_info")).getMemberId();
+		}
+		//String memberId = ((Member)session.getAttribute("login_info")).getMemberId();
 		
 		//수입 조회
 		Map map = new HashMap<>();
@@ -165,8 +188,16 @@ public class IncomeController {
 	//삭제
 	@RequestMapping(value="/login/incomeDelete.do")
 	public String deleteIncome(@RequestParam ArrayList<Integer> incomeIdList, HttpSession session, HttpServletRequest request){
-
-		String memberId = ((Member)session.getAttribute("login_info")).getMemberId();
+		
+		//memberId에 개인id인지 그룹id인지 파악
+		String memberId = null;
+		Collect collect = (Collect) session.getAttribute("group_info");
+		if(collect != null){
+			memberId = collect.getCollectionId();
+		}else{
+			memberId = ((Member)session.getAttribute("login_info")).getMemberId();
+		}
+		//String memberId = ((Member)session.getAttribute("login_info")).getMemberId();
 		service.deleteIncome(incomeIdList, memberId);
 		return "redirect:/household/login/incomeSelect.do?incomeDate="+request.getParameter("incomeDate");
 	}

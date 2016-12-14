@@ -80,7 +80,7 @@
 	
 	<!-- 1달동안 사용한 대분류별 지출금액 (특정 달, 특정ID 기준) -->
 	<select id="selectSpendEachCategory" parameterType="map" resultType="map">
-		select ''''||big.big_content||'''' category, nvl(result.total, 0) spend_money
+		select big.big_content category, nvl(result.total, 0) spend_money
 		from bigcategory big,
 			(	select big.big_code, sum(small.total) total
 				from bigcategory big, 
@@ -99,7 +99,7 @@
 	
 	<!-- 1년동안 각각의 달에 지출한 금액의 총합 (특정 년도, 특정 ID 기준 )-->
 	<select id="selectSpendEachMonth" parameterType="map" resultType="map">
-		select ''''||stand.LV||'월'||'''' month, nvl(result.total, 0) spend_month_total 
+		select stand.LV||'월' month, nvl(result.total, 0) spend_month_total 
 		from (	select sum(cash+card) total, edate 
 				from(	select code_id, nvl(cash_expense,0) cash, nvl(card_expense,0) card, to_char(expense_date, 'MM') edate 
 						from expense 
@@ -112,7 +112,7 @@
 	
 	<!-- 1년동안의 특정 계정이 사용한 수입*지출 금액 -->
 	<select id="selectTotalMonthReport" parameterType="map" resultType="map">
-		select ''''||i.month||'월'||'''' month, i.income_month_total, s.spend_month_total 
+		select i.month||'월' month, i.income_month_total, s.spend_month_total 
 		from (	select stand.LV month, nvl(result.total, 0) income_month_total 
 				from (	select month, sum(income_money) total
 						from (	select income_id, to_char(income_date, 'MM') month, income_money

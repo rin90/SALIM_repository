@@ -235,7 +235,7 @@
 	<p>
     
 	<input type="hidden" name="num" value="${requestScope.budgetNum }">
-	<input type="hidden" name="memberId" value="${sessionScope.login_info.memberId}">
+	<input type="hidden" name="memberId" value="${empty sessionScope.group_info.collectionId? sessionScope.login_info.memberId:sessionScope.group_info.collectionId}">
 
 
 	<table border="1">

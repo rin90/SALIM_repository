@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.salim.service.ReportService;
 
@@ -28,20 +29,24 @@ public class ReportController {
 		param.put("memberId", memberId);
 		
 		List<Map> result = service.selectSpendEachCategory(param);
-/*		for(Map temp: result){
+		for(Map temp: result){
 			temp.replace("CATEGORY", "'"+temp.get("CATEGORY")+"'");
-		}*/
+		}
 		String str = result.toString().replaceAll("=", ":");
 		System.out.println(str);
-		/*
-		Map<String, Integer> result = service.selectSpendEachCategory(param);
-		System.out.println(result.size());
-		for(String key:result.keySet()){
-			System.out.println(result.get(key));
-		}*/
+		
 		map.addAttribute("result", str);
-		map.addAttribute("month", new SimpleDateFormat("yyyy년도 MM월").format(today));
+		map.addAttribute("month", new SimpleDateFormat("yyyy-MM").format(today));
 		return "body/report/month_report.tiles";
+	}
+	
+	@RequestMapping("/updateMonth.do")
+	@ResponseBody
+	public List<Map> updateMonth(String memberId, String month){
+		Map<String, String> param = new HashMap();
+		param.put("month", month);
+		param.put("memberId", memberId);
+		return service.selectSpendEachCategory(param);
 	}
 	
 	@RequestMapping("/loadYear.do")
@@ -52,15 +57,24 @@ public class ReportController {
 		Map<String, String> param = new HashMap();
 		param.put("year", year);
 		param.put("memberId", memberId);
+		param.put("converter", "true");	// 수정부분
 		
 		Map result = service.selectYearReport(param);
+		result.replace("total", result.get("total").toString().replaceAll("=", ":"));
 		map.addAllAttributes(result);
-		map.addAttribute("total2", result.get("total").toString().replaceAll("=", ":"));
-		System.out.println(map.get("total2"));
-//		map.addAttribute("totalSpend2", result.get("totalSpend").toString().replaceAll("=", ":"));
 		map.addAttribute("year", year);
 		return "body/report/year_report.tiles";
 	}
 	
+	@RequestMapping("/updateYear.do")
+	@ResponseBody
+	public Map updateYear(String year, String memberId){
+		Map<String, String> param = new HashMap();
+		param.put("year", year);
+		param.put("memberId", memberId);
+		param.put("converter", "false");// 수정부분
+
+		return service.selectYearReport(param);
+	}
 	
 }

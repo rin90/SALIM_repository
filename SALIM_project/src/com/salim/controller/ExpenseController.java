@@ -25,6 +25,7 @@ import com.salim.service.CategoryService;
 import com.salim.service.ExpenseService;
 import com.salim.service.NotesService;
 import com.salim.vo.BigCategory;
+import com.salim.vo.Collect;
 import com.salim.vo.Expense;
 import com.salim.vo.Member;
 import com.salim.vo.Notes;
@@ -53,7 +54,15 @@ public class ExpenseController {
 			expenseDate = new Date(year, month, day);
 		}
 		
-		String memberId = ((Member)session.getAttribute("login_info")).getMemberId();
+		//memberId에 개인id인지 그룹id인지 파악
+		String memberId = null;
+		Collect collect = (Collect) session.getAttribute("group_info");
+		System.out.println("지출 조회에서 collection이 있나 파악하는 것"+collect);
+		if(collect != null){
+			memberId = collect.getCollectionId();
+		}else{
+			memberId = ((Member)session.getAttribute("login_info")).getMemberId();
+		}
 		
 		//지출 조회
 		Map map = new HashMap();
@@ -96,12 +105,19 @@ public class ExpenseController {
 							  /* 카드 통장 타입 보여지게 하는 것은 나중에..*/
 							  @RequestParam ArrayList<Integer> codeId,
 							  @DateTimeFormat(pattern="yyyy-MM-dd") @RequestParam Date expenseDate,
-							  /*@RequestParam Notes notes,*/
 							  HttpSession session,
 							  HttpServletRequest request){
 		
 		//로그인 체크
-		Member member = (Member) session.getAttribute("login_info");
+		
+		//memberId에 개인id인지 그룹id인지 파악
+		String memberId = null;
+		Collect collect = (Collect) session.getAttribute("group_info");
+		if(collect != null){
+			memberId = collect.getCollectionId();
+		}else{
+			memberId = ((Member)session.getAttribute("login_info")).getMemberId();
+		}
 		
 		//검증
 		int max =1;
@@ -146,8 +162,11 @@ public class ExpenseController {
 		}
 
 		//메모 객체 만들기
-		Notes notes = new Notes(Integer.parseInt(request.getParameter("notesNum")), expenseDate, request.getParameter("notes"), member.getMemberId());
-		notesService.saveNotes(notes);
+		String content = request.getParameter("notes");
+		if(content != null && !content.trim().isEmpty()){
+			Notes notes = new Notes(Integer.parseInt(request.getParameter("notesNum")), expenseDate, request.getParameter("notes"), memberId);
+			notesService.saveNotes(notes);
+		}
 		
 		//저장할 객체 만들기 - 지출
 		List<Expense> expenseList = new ArrayList<> ();
@@ -155,7 +174,7 @@ public class ExpenseController {
 			if(codeId.get(i)==18 && expenseExplain.get(i).trim().isEmpty() && cashExpense.get(i)==0 && cardExpense.get(i)==0){
 				return "redirect:/household/login/expenseSelect.do?expenseDate="+new SimpleDateFormat("yyyy-MM-dd").format(expenseDate);
 			}else{
-				expenseList.add(new Expense(expenseId.get(i), member.getMemberId(), codeId.get(i), expenseDate, expenseExplain.get(i), cashExpense.get(i), cardExpense.get(i), "카드타입"));
+				expenseList.add(new Expense(expenseId.get(i), memberId, codeId.get(i), expenseDate, expenseExplain.get(i), cashExpense.get(i), cardExpense.get(i), "카드타입"));
 			}
 		}
 
@@ -170,7 +189,14 @@ public class ExpenseController {
 	@RequestMapping(value="/login/expenseDelete.do")
 	public String deleteExpense(@RequestParam ArrayList<Integer> expenseIdList, HttpSession session, HttpServletRequest request){
 		
-		String memberId = ((Member)session.getAttribute("login_info")).getMemberId();
+		//memberId에 개인id인지 그룹id인지 파악
+		String memberId = null;
+		Collect collect = (Collect) session.getAttribute("group_info");
+		if(collect != null){
+			memberId = collect.getCollectionId();
+		}else{
+			memberId = ((Member)session.getAttribute("login_info")).getMemberId();
+		}
 		service.deleteExpense(expenseIdList, memberId);
 		return "redirect/household/login/expenseSelect.do?expenseDate="+request.getParameter("expenseDate");
 	}
