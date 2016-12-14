@@ -137,17 +137,31 @@
 			return true;
 		}
 		
-		/* var contentcheck = window.document.getElementsByClassName("contentLength");
 	
-		 */
-					
-				
-		function checklength(){
-			if(this.value.length >16){
-				alert("수입 내역은 16자이내로 입력하세요.");
-			}
-		}
-		 
+		
+		
+		//글자수 체크
+		$(document).ready(function(){
+			//수입내역 글자수 체크	
+			$(".explane").keyup(function(e){
+				var content = $(this).val();
+				if(content.length>20){
+					alert("글자수는 20자를 초과할 수 없습니다.");
+					$(this).focus();
+				}
+			});
+			//메모 글자수 체크
+			$("#notes").keyup(function(e){
+				var content = $(this).val();
+				if(content.length>1000){
+					alert("글자수는 1000자를 초과할 수 없습니다.");
+					$(this).focus();
+				}
+			});
+		});
+		
+		
+		
 		
 	
 	</script>
@@ -216,7 +230,7 @@
 							<input type="hidden" name="incomeId" value="${income.incomeId }"/>
 						</td>
 						<td>
-							<input type="text" name="explanation" onkeyup="checklength()" value="${income.explanation}" placeholder="${income.explanation}">
+							<input type="text" name="explanation" class="explane" value="${income.explanation}" placeholder="${income.explanation}">
 						</td>
 						<td>
 							<input type="text" class="element" name="incomeMoney" value="${income.incomeMoney}" placeholder="${income.incomeMoney}">
@@ -252,7 +266,7 @@
 					<input type="checkbox" name="incomeId" value="0"/> <!-- 체크박스 하나하나 -->
 					<input type="hidden" name="incomeId" value="0"/>
 				</td>
-				<td><input type="text" name="explanation" onkeyup="checklength()"/></td>
+				<td><input type="text" name="explanation" class="explane"/></td>
 				<td><input type="text" name="incomeMoney" class="element" /></td>
 				
 				<!-- 여기서 부터 코드 선택 테이블 -->
@@ -272,7 +286,7 @@
 	</table>
 	
 	<!-- 메모장 -->
-	<textarea rows="25" cols="60" name="notes">${requestScope.notes.content }</textarea>
+	<textarea rows="25" cols="60" name="notes" id="notes">${requestScope.notes.content }</textarea>
 	<input type="hidden" name="notesNum" value="${empty requestScope.notes.no? 0:requestScope.notes.no }">
 	
 	<!-- 저장버튼 -->
