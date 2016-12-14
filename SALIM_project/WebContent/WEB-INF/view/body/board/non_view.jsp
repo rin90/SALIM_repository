@@ -6,13 +6,13 @@
 
   검색 결과가 없습니다.
   
-  <form action="${initParam.rootPath }/free/form.do">
+  <form action="${initParam.rootPath }/free/login/form.do">
 		<input type="hidden" name="page"value="1">
 			 &nbsp;&nbsp;&nbsp;
 			<input type="submit" value="글쓰기">
 	</form>
 	
-		<form action="${initParam.rootPath }/free/keyword.do" method="post">
+		<form action="${initParam.rootPath }/free/login/keyword.do" method="post">
 		<select name="category">
 			
 			<c:forEach items="${requestScope.codes }" var="code">
