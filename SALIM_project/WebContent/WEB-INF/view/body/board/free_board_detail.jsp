@@ -12,7 +12,7 @@ $(document).ready(function(){
 	$("#good").css("color","red")
 	$("#good").on("click",function(){		
 					$.ajax({	
-				"url":"${initParam.rootPath}/free/good.do",
+				"url":"${initParam.rootPath}/free/login/good.do",
 				"type":"post",
 				"data":"whether="+$("#good").val()+"&no="+${requestScope.freeBoard.no},
 				"beforeSend":function(){
@@ -169,7 +169,7 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 						<span style="padding:5px" class="commentInfo">
 						
 							<input class="update" type="button" value="수정 ">
-							<a href="${initParam.rootPath }/comment/delete.do?id=${comment.id }&no=${comment.no}&page=${requestScope.page}&category=${requestScope.category}&search=${requestScope.search}">삭제</a>
+							<a href="${initParam.rootPath }/comment/login/delete.do?id=${comment.id }&no=${comment.no}&page=${requestScope.page}&category=${requestScope.category}&search=${requestScope.search}">삭제</a>
 							<br>
 							<c:if test="${comment.groupLevel ==1}">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -180,7 +180,7 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 					</c:choose>
 				
 				<!-- 수정 Form  -->
-				<form  class="updateMethod" action="${initParam.rootPath }/comment/update.do" method="post" hidden="false">
+				<form  class="updateMethod" action="${initParam.rootPath }/comment/login/update.do" method="post" hidden="false">
 					<input class="scope" type="hidden" value="${comment.commentContent }">
 					<textarea name="commentContent" rows="3" cols="50" >${comment.commentContent }</textarea>
 					<input class="updateCancel" type="button" value="수정취소">
@@ -193,12 +193,12 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 				</form>
 				
 				<!-- 답글Form -->
-				<form class="secondRegister" action="${initParam.rootPath }/comment/insert.do" method="post" hidden="">
+				<form class="secondRegister" action="${initParam.rootPath }/comment/login/insert.do" method="post" hidden="">
 					<hr><br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="scodCancel" type="button" value="답글 취소">└<br>&nbsp;&nbsp;
 					★&nbsp;&nbsp;&nbsp;
 					<textarea class="secondText" name="commentContent" rows="3" cols="50"></textarea>
-					<input type="hidden" name="commentMemberId" value="id-3">
+					<input type="hidden" name="commentMemberId" value="${sessionScope.login_info.memberId }">
 					<input type="hidden" name="no" value="${requestScope.freeBoard.no }">
 					<input type="hidden" name="groupLevel" value="1">
 					<input type="hidden" name="page" value="${requestScope.page }">
@@ -216,10 +216,10 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 		
 		
 		<!-- 댓글 -->
-		<form id="register" action="${initParam.rootPath }/comment/insert.do" method="post">
+		<form id="register" action="${initParam.rootPath }/comment/login/insert.do" method="post">
 		
 			★&nbsp;&nbsp;<textarea id="comment0" name="commentContent" rows="2" cols="10"></textarea>
-			<input type="hidden" name="commentMemberId" value="id-3">
+			<input type="hidden" name="commentMemberId" value="${sessionScope.login_info.memberId }">
 			<input type="hidden" name="no" value="${requestScope.freeBoard.no }">
 			<input type="hidden" name="groupLevel" value="0">
 			<input type="hidden" name="page" value="${requestScope.page }">
@@ -234,26 +234,28 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 			<p/>
 
 			<input type="hidden" name="page" value="${requestScope.page }">
+			<%--카테고리를 기준으로 해서 검색list 또는 기본 list로 이동 --%>
 			<c:choose>
 				<c:when test="${empty requestScope.category  }">
-					<a href="${initParam.rootPath }/free/list.do?page=${requestScope.page }">목록</a>
+					<a href="${initParam.rootPath }/free/login/list.do?page=${requestScope.page }">목록</a>
 				</c:when>
 				<c:otherwise>
 					<a 
-					href="${initParam.rootPath }/free/keyword.do?page=${requestScope.page }&&category=${requestScope.category}&search=${requestScope.search}">목록</a>
+					href="${initParam.rootPath }/free/login/keyword.do?page=${requestScope.page }&&category=${requestScope.category}&search=${requestScope.search}">목록</a>
 				</c:otherwise>
 			</c:choose>
 			<p/>
 			<a 
-			href="${initParam.rootPath }/free/updateForm.do?category=${requestScope.category }&search=${requestScope.search}&page=${requestScope.page}&no=${requestScope.freeBoard.no}">수정</a> &nbsp;&nbsp;
+			href="${initParam.rootPath }/free/login/updateForm.do?category=${requestScope.category }&search=${requestScope.search}&page=${requestScope.page}&no=${requestScope.freeBoard.no}">수정</a> &nbsp;&nbsp;
+			<%--카테고리를 기준으로 해서 검색list에서 상세화면에서 삭제했을 때는 기본list 1페이지로 기본list에서 삭제했을 때는 현재 페이지로 이동 --%>
 			<c:choose>
 				<c:when test="${empty requestScope.category }">
 					<a 
-					href="${initParam.rootPath }/free/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>	<p/>
+					href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>	<p/>
 				</c:when>
 				<c:otherwise>
 					<a
-					href="${initParam.rootPath }/free/delete.do?no=${requestScope.freeBoard.no}&page=1">삭제</a>	<p/>					
+					href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=1">삭제</a>	<p/>					
 				</c:otherwise>
 			</c:choose>
 

@@ -9,7 +9,7 @@ create table member(  --회원
 select * from member;
 drop table member;
 
-
+alter table member add(email varchar2(50) not null); 
 
 --테이블 삭제
 drop table member CASCADE CONSTRAINTS;
