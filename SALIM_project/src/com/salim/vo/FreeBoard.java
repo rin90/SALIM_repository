@@ -2,12 +2,16 @@ package com.salim.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FreeBoard  implements Serializable{
  private int no;
+@NotEmpty(message="제목을 입력해주세요")
  private String title;
+@NotEmpty(message="내용을 입력해주세요")
  private String content;
  private MultipartFile fileRoot;
  private String fileName;
@@ -15,7 +19,14 @@ public class FreeBoard  implements Serializable{
  private int good = 0;
  private Date registerTime = new Date();
  private String memberId;
+ /*
+ 글 하나에 댓글은 여러개 가지고 있고 글을 보여줄때 동시에 해당 글에 대한 댓글도 보여줘야 한다.
+ (지금은) 반대로 댓글은 글의 번호만 가지고 있으면 된다. 그리고 댓글은 글에 대해 어떤 정보를 가져올 이유가 없다.
+ */
+ private List<FreeComment> freeComment;//조인 연산을 위해 
  
+
+
 public FreeBoard() {
 	super();
 }
@@ -32,6 +43,14 @@ public FreeBoard(int no, String title, String content, MultipartFile fileRoot, S
 	this.good = good;
 	this.registerTime = registerTime;
 	this.memberId = memberId;
+}
+
+public List<FreeComment> getFreeComment() {
+	return freeComment;
+}
+
+public void setFreeComment(List<FreeComment> freeComment) {
+	this.freeComment = freeComment;
 }
 
 public int getNo() {

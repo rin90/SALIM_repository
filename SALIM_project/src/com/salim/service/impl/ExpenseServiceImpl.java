@@ -41,7 +41,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 		Map map = new HashMap();
 		for(int i=0; i<expenseIdList.size(); i++){
 			if(expenseIdList.get(i)==0 || expenseIdList.get(i)== null){
-				System.out.println("삭제되는 아이디 - "+expenseIdList);
+				//System.out.println("삭제되는 아이디 - "+expenseIdList);
 				expenseIdList.remove(i);
 			}
 			map.put("expenseId", expenseIdList.get(i));

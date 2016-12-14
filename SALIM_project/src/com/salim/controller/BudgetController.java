@@ -1,5 +1,6 @@
 package com.salim.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,51 +36,6 @@ public class BudgetController {
 	//예산 저장 & 수정
 	@RequestMapping(value="/login/budget.do", method=RequestMethod.POST)
 	public String saveBudget(@ModelAttribute Budget budget){
-		service.saveBudget(budget);
-		
-		
-		
-		return "body/budget.tiles";
-	}
-	
-	//예산 조회
-	@RequestMapping(value="/login/findbudget.do")
-	public String findBudget(HttpSession session, HttpServletRequest request, ModelMap modelmap){
-		
-		
-		Date today = new Date();
-		int year = today.getYear();
-		int month = today.getMonth();
-		Date budgetDate = new Date(year, month, 01);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-		
-		System.out.println(budgetDate);
-		
-		String memberId = ((Member)session.getAttribute("login_info")).getMemberId();
-		Map map = new HashMap();
-		map.put("memberId", memberId);
-		map.put("budgetDate", budgetDate);
-		
-		modelmap.put("budget", service.findBudget(map));
-		modelmap.put("budgetDate", sdf.format(budgetDate));
-		
-		/*return new ModelAndView("body/budget.tiles", "Budget", service.findBudget(map));*/
-		
-		return "body/budget.tiles";
-	}
-	
-	
-	//예산 조회 아작스 처리
-	@RequestMapping(value="/login/findbudgetMonth.do")
-	@ResponseBody //@DateTimeFormat(pattern="yyyy-MM")@RequestParam
-	public Budget findBudgetMonth(@DateTimeFormat(pattern="yyyy-MM")@RequestParam Date budgetDate, HttpSession session){
-		
-		/*String budgetDate*/
-		/*@RequestParam Date budgetDate*/
-		/*@DateTimeFormat(pattern="yyyy-MM")*/
-		/*@DateTimeFormat(pattern="dd/MM/yyyy")*/
-		/*@DateTimeFormat(pattern="yyyy-MM-dd")*/
-		/*@DateTimeFormat(pattern="yyyy-mm")*/
 		
 		/* 그룹추가시 사용할 것
 		 * String memberId = null;
@@ -87,20 +43,84 @@ public class BudgetController {
 			memberId = ((Group)session.getAttribute("group_info").get)
 		}*/
 		
-		System.out.println("뭘롤 넘어오는지 좀 찍어보자 휴 - "+budgetDate);
+		service.saveBudget(budget);
 		
+		
+		return "redirect:/household/login/findbudget.do?budgetDate="+new SimpleDateFormat("yyyy-MM").format(budget.getBudgetDate())+"&budgetNum="+budget.getNum();
+	}
+	
+	//예산 조회
+	@RequestMapping(value="/login/findbudget.do")
+	public String findBudget(HttpSession session, HttpServletRequest request, ModelMap modelMap) throws ParseException{
+		
+		/* 그룹추가시 사용할 것
+		 * String memberId = null;
+		if(session.getAttribute("group_info") != null){
+			memberId = ((Group)session.getAttribute("group_info").get)
+		}*/
+		
+		Date budgetDate = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		if(request.getParameter("budgetDate") == null){
+			Date today = new Date();
+			int year = today.getYear();
+			int month = today.getMonth();
+			budgetDate = new Date(year, month, 01);
+		}else{
+			budgetDate = (Date)sdf.parse(request.getParameter("budgetDate"));
+		}
 		
 		String memberId = ((Member)session.getAttribute("login_info")).getMemberId();
-		
 		Map map = new HashMap();
 		map.put("memberId", memberId);
 		map.put("budgetDate", budgetDate);
 		
-		Budget budget = service.findBudget(map);
+		
+		Map result = service.findBudget(map);
+		modelMap.addAllAttributes(result);
+		
+		Budget budget = (Budget) result.get("budget");
+		int budgetNum=0;
+		if(budget != null){
+			budgetNum = budget.getNum();
+		}
+		request.setAttribute("budgetNum", budgetNum);
+		
+		request.setAttribute("budgetDate", sdf.format(budgetDate));//budgetDate
+		
+		return "body/budget.tiles";
+	}
+	
+	
+	//예산 조회 아작스 처리
+	@RequestMapping(value="/login/findbudgetMonth.do")
+	@ResponseBody
+	public Map findBudgetMonth(@DateTimeFormat(pattern="yyyy-MM")@RequestParam Date budgetDate, HttpSession session, HttpServletRequest request){
 		
 		
+		/* 그룹추가시 사용할 것
+		 * String memberId = null;
+		if(session.getAttribute("group_info") != null){
+			memberId = ((Group)session.getAttribute("group_info").get)
+		}*/
+
+		String memberId = ((Member)session.getAttribute("login_info")).getMemberId();
+		Map map = new HashMap();
+		map.put("memberId", memberId);
+		map.put("budgetDate", budgetDate);
 		
-		return budget;
+		request.setAttribute("budgetDate", budgetDate);
+		
+		Map result = service.findBudget(map);
+		
+		Budget budget = (Budget) result.get("budget");	
+		int budgetNum=0;
+		if(budget != null){
+			budgetNum = budget.getNum();
+		}
+		request.setAttribute("budgetNum", budgetNum);
+		
+		return result;
 	}
 	
 	

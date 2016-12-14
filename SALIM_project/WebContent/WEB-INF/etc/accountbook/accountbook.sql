@@ -11,8 +11,8 @@ create table notes(  --메모
 
 drop table notes;
 
-
-
+select * from notes;
+alter table notes drop constraint nts_mem_fk;
 
 
 create sequence seq_exp--sequence생성
@@ -21,7 +21,7 @@ drop sequence seq_exp--삭제
 
 create table expense(  --지출
 expense_id number primary key,
-member_id Varchar2(50) constraint exp_mem_fk references member not null,
+member_id Varchar2(50) not null,
 code_id Number not null,  --코드 id
 expense_date Date not null,  --지출일
 expense_explain Varchar2(300),  --사용내역
@@ -29,6 +29,8 @@ cash_expense Number,  --현금지출액
 card_expense Number,  -- 카드지출액
 card_type Varchar2(20)  --카드종류
 );
+
+select * from expense;
 
 drop table expense;
 
@@ -40,12 +42,14 @@ drop sequence seq_inc--삭제
 
 create table income(  --수입
 income_id Number primary key,
-member_id varchar2(50) constraint inc_mem_fk references member not null,
+member_id varchar2(50) not null,
 code_id Number not null,  --코드 id
 income_date date not null, --수입일
 explanation Varchar2(20) not null,  --수입내역
 income_money Number not null --수입금액
 );
+
+select * from income;
 
 drop table income;
 
@@ -80,8 +84,8 @@ unclassified number not null --미분류
 
 drop table budget;
 
-
-
+select * from BUDGET;
+alter table budget drop constraint bud_mem_fk;
 
 
 

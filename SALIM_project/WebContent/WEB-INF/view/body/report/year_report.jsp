@@ -6,6 +6,15 @@
 
 <script type="text/javascript" src="${initParam.rootPath }/lib/scripts/jquery.js"></script>
 
+<h1 align="center">
+ 	 <button onclick="updateYear($('#year').text()-1)">◀ </button> 
+	 <label id="year">${requestScope.year}</label>년도
+ 	 <button onclick="updateYear(+$('#year').text()+1)"> ▶</button> 	<!-- jQuery의 경우 +연산자의 피연산자들 중 하나가 문자열이면 문자열 잇기 수행. -->
+</h1>
+<h1 align="center">수입 & 지출 내역 보고서</h1>
+
+<div id="chart" style="width=1000px"></div>
+
 <script type="text/javascript">
 function barGraph(arr){
 	c3.generate({
@@ -110,18 +119,6 @@ $(document).ready(function(){
 });
 
 </script>
-
-
-
-
-<h1 align="center">
- 	 <button onclick="updateYear($('#year').text()-1)">◀ </button> 
-	 <label id="year">${requestScope.year}</label>년도
- 	 <button onclick="updateYear(+$('#year').text()+1)"> ▶</button> 	<!-- jQuery의 경우 +연산자의 피연산자들 중 하나가 문자열이면 문자열 잇기 수행. -->
-</h1>
-<h1 align="center">수입 & 지출 내역 보고서</h1>
-
-<div id="chart" style="width=1000px"></div>
 
 <br>
 <p><hr>
