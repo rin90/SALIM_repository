@@ -28,10 +28,10 @@ public class CollectionServiceImpl implements CollectionService{
 	}
 	
 
-	public void addCollection(Collect collection,Member m)
+	public void addCollection(Collect collection, Member m)
 	{
-		//System.out.println("addCollection"+collection);
-		 dao.insertCollection(collection);
+		System.out.println("addCollection"+collection);
+		 dao.insertCollection(collection); //가계부 추가 부분
 		 
 		 	HashMap<String,String> map=new HashMap<String,String>();
 			
@@ -39,9 +39,8 @@ public class CollectionServiceImpl implements CollectionService{
 				
 				map.put("memberId",m.getMemberId());
 				map.put("collectionId", collection.getCollectionId());
-				map.put("grantId",m.getMemberId());
+				map.put("invite","false");
 				mncdao.insertmemberNCollection(map);
-		
 	}
 	
 	public List<Collect> findCollectionByMemberId(String memberId) throws Exception

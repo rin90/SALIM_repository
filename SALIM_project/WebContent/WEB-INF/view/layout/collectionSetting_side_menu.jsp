@@ -6,9 +6,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="${initParam.rootPath }/myInfo_modify.do">회원 초대</a><br>
-<a href="${initParam.rootPath }/collection.do">그룹 추가</a><br>
-<a href="${initParam.rootPath }/myInfo_modify.do">그룹 수정</a><br>
+<a href="${initParam.rootPath }/collection/collectionSetting.do">환경 설정</a><br>
+
+<a href="${initParam.rootPath }/collection/inviteMember.do">회원 초대</a><br>
 
 </body>
 </html>

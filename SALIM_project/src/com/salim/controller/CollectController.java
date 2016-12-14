@@ -30,9 +30,9 @@ public class CollectController {
 	{
 		//일단 요청파라미터를 VO로 안 받고 매개변수로 받기!
 		
-		String collectionId=service.findCollectionSeq();
-		Collect collect=new Collect(collectionId, collectionName, collectionIntro);
 		Member m=(Member)session.getAttribute("login_info");
+		String collectionId=service.findCollectionSeq();
+		Collect collect=new Collect(collectionId, collectionName, collectionIntro, m.getMemberId());
 		service.addCollection(collect,m);
 		return "redirect:/collection/findAllCollectionList.do"; //로그인 성공페이지로 일단 ㄱㄱ 
 	}
@@ -43,7 +43,7 @@ public class CollectController {
 	{
 		
 		Member m=(Member)session.getAttribute("login_info");
-		//System.out.println(m.getMemberId());
+		System.out.println(m.getMemberId());
 		List<Collect> collectionList=new ArrayList<Collect>();	
 		try {
 			collectionList=service.findCollectionByMemberId(m.getMemberId());
@@ -63,7 +63,6 @@ public class CollectController {
 	public String setSession(HttpSession session , String collectionId)
 	{
 		//요청 파라미터 받은 뒤, 디비에서 받아와야겟다,
-		System.out.println("왜 값을 안 찍어봣을까 collectionId"+collectionId);
 		Collect collect=new Collect();
 		try {
 			collect=service.findCollectionByCollectionId(collectionId);
@@ -71,13 +70,23 @@ public class CollectController {
 			// TODO Auto-generated catch block
 			System.out.println("collection이 값이 없음...ㄷㄷ");
 		}
-		System.out.println("collect"+collect);
+
 		session.setAttribute("group_info",collect);
 		return "redirect:/household/login/incomeSelect.do";
 	}
 
 
+	@RequestMapping("/collectionSetting.do")
+	public String collectionSetting()
+	{
+		return "body/collection/setting/settings/collectionSettingMain.tiles";
+	}
 	
+	@RequestMapping("/inviteMember.do")
+	public String inviteMember()
+	{
+		return "body/collection/setting/settings/inviteMember_form.tiles";
+	}
 	
 	
 	
