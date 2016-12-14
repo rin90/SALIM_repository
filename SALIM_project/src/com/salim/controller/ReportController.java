@@ -29,9 +29,9 @@ public class ReportController {
 		param.put("memberId", memberId);
 		
 		List<Map> result = service.selectSpendEachCategory(param);
-/*		for(Map temp: result){
+		for(Map temp: result){
 			temp.replace("CATEGORY", "'"+temp.get("CATEGORY")+"'");
-		}*/
+		}
 		String str = result.toString().replaceAll("=", ":");
 		System.out.println(str);
 		

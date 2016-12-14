@@ -80,7 +80,7 @@
 	
 	<!-- 1달동안 사용한 대분류별 지출금액 (특정 달, 특정ID 기준) -->
 	<select id="selectSpendEachCategory" parameterType="map" resultType="map">
-		select ''''||big.big_content||'''' category, nvl(result.total, 0) spend_money
+		select big.big_content category, nvl(result.total, 0) spend_money
 		from bigcategory big,
 			(	select big.big_code, sum(small.total) total
 				from bigcategory big, 
