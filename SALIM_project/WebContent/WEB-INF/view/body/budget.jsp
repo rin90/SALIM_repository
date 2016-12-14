@@ -180,23 +180,7 @@
 			            		$("td input:eq(12)").val(obj.budget.unclassified);
 			            		$("tfoot tr td:eq(1)").text(obj.budget.budget);
 		            		}
-		            		
-		            		/* //지출과 예산의 차이.
-		            		$("tbody tr td:eq(3)").text(obj.categoryExpense[7].SPEND_MONEY);
-			            	$("tbody tr td:eq(7)").text(obj.categoryExpense[12].SPEND_MONEY);
-			           		$("tbody tr td:eq(11)").text(obj.categoryExpense[5].SPEND_MONEY);
-			           		$("tbody tr td:eq(15)").text(obj.categoryExpense[9].SPEND_MONEY);
-			           		$("tbody tr td:eq(19)").text(obj.categoryExpense[0].SPEND_MONEY);
-			           		$("tbody tr td:eq(23)").text(obj.categoryExpense[2].SPEND_MONEY);
-			           		$("tbody tr td:eq(27)").text(obj.categoryExpense[3].SPEND_MONEY);
-			           		$("tbody tr td:eq(31)").text(obj.categoryExpense[1].SPEND_MONEY);
-			           		$("tbody tr td:eq(35)").text(obj.categoryExpense[6].SPEND_MONEY);
-			           		$("tbody tr td:eq(39)").text(obj.categoryExpense[8].SPEND_MONEY);
-			           		$("tbody tr td:eq(43)").text(obj.categoryExpense[11].SPEND_MONEY);
-			           		$("tbody tr td:eq(47)").text(obj.categoryExpense[13].SPEND_MONEY);
-			           		$("tbody tr td:eq(51)").text(obj.categoryExpense[4].SPEND_MONEY);
-		            		 */
-		 
+
 		            	}
 		            });     
 		        }
@@ -216,8 +200,7 @@
 		}
 		return true;
 	}; 
-	 
-	
+
 	</script>
 	
 	<style>
@@ -229,7 +212,7 @@
 </head>
 <body>
 	
-<form action="/SALIM_project/household/login/budget.do" method="post">
+<form action="/SALIM_project/household/login/budget.do?" method="post">
 	
 	<input type="text" class="month-picker" name="budgetDate" value="${requestScope.budgetDate}" placeholder="${requestScope.budgetDate }">
 	<p>

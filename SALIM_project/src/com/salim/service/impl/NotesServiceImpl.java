@@ -17,14 +17,10 @@ public class NotesServiceImpl implements NotesService{
 
 	//저장 & 수정
 	public void saveNotes(Notes notes) {
-		
-		if(notes.getNo() == 0){
+		if(notes.getNo() == 0 && !notes.getContent().trim().isEmpty()){
 			System.out.println("저장한 객체.. - "+notes);
 			dao.insertNotes(notes);
 		}else{
-			System.out.println("수정한 객체 - "+notes);
-			System.out.println(notes.getDayDate()+"메모의 날짜");
-			System.out.println(notes.getMemberId()+"회원 아이디");
 			if(notes.getContent().trim().isEmpty()){
 				System.out.println("메모 삭제"+notes);
 				dao.deleteNotes(notes.getNo());
@@ -37,12 +33,8 @@ public class NotesServiceImpl implements NotesService{
 	
 	//조회
 	public Notes findNotes(Map map) {//memberId와 dayDate
-		
-		Notes notes = dao.selectNotes(map);
-		
 		return dao.selectNotes(map);	
 	}
-	
 	
 	//삭제
 	public void deleteNotes(int no) {

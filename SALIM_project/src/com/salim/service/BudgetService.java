@@ -1,5 +1,6 @@
 package com.salim.service;
 
+import java.util.Date;
 import java.util.Map;
 
 import com.salim.vo.Budget;
@@ -18,6 +19,6 @@ public interface BudgetService {
 	void saveBudget(Budget budget);
 	
 	//예산 조회
-	Map findBudget(Map map);//memberId, 해당 월
+	Map findBudget(String memberId, Date budgetDate);//memberId, 해당 월
 	
 }

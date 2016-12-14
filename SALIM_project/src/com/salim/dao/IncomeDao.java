@@ -2,6 +2,7 @@ package com.salim.dao;
 
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public interface IncomeDao {
 	int deleteIncome(Map map);
 	
 	//수입을 조회
-	List<Income> selectIncomeList(Map map);
+	List<Income> selectIncomeList(String memberId, Date incomeDate);
 	
 	
 	
