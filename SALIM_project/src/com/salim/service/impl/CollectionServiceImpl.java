@@ -44,18 +44,34 @@ public class CollectionServiceImpl implements CollectionService{
 		
 	}
 	
-	public List<Collect> findCollectionByMemberId(String memberId)
+	public List<Collect> findCollectionByMemberId(String memberId) throws Exception
 	{
 		List<Collect>list=new ArrayList<Collect>();
 		list=dao.selectCollectionByMemberId(memberId); //무조건 List 값이 있는게 아님... 여기서 처리를 해야함
-		return list;
+		if(list==null)
+		{
+			//collection이 null인 경우, 
+			throw new Exception();
+		
+		}else
+		{
+			return list;
+		}
 	}
 	
-	public Collect findCollectionByCollectionId(String collectionId)
+	public Collect findCollectionByCollectionId(String collectionId) throws Exception
 	{
 		Collect c=new Collect();
 		c= dao.selectCollectionByCollectionId(collectionId);
-		return c;
+		if(c==null)
+		{
+			//collection이 null인 경우, 
+			throw new Exception();
+		
+		}else
+		{
+			return c;
+		}
 	}
 	
 	

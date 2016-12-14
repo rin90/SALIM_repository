@@ -43,27 +43,40 @@ public class CollectController {
 	{
 		
 		Member m=(Member)session.getAttribute("login_info");
-		System.out.println(m.getMemberId());
+		//System.out.println(m.getMemberId());
 		List<Collect> collectionList=new ArrayList<Collect>();	
-		collectionList=service.findCollectionByMemberId(m.getMemberId());
-		System.out.println(collectionList);
-		map.addAttribute("collectionList", collectionList);
+		try {
+			collectionList=service.findCollectionByMemberId(m.getMemberId());
+			System.out.println(collectionList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("collectionList가 없음!!ㄷㄷ");
+		}
+		
+		map.addAttribute("collectionList", collectionList);//이걸 왜...request에 담았을까?..??으이..?
+		//session.setAttribute("collectionList", collectionList);
 
 		return "body/login_success.tiles";
 	}
 	
 	@RequestMapping("/setSession.do")
-	public String setSession(HttpSession session,String collectionId)
+	public String setSession(HttpSession session , String collectionId)
 	{
 		//요청 파라미터 받은 뒤, 디비에서 받아와야겟다,
+		System.out.println("왜 값을 안 찍어봣을까 collectionId"+collectionId);
 		Collect collect=new Collect();
-		collect=service.findCollectionByCollectionId(collectionId);
+		try {
+			collect=service.findCollectionByCollectionId(collectionId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("collection이 값이 없음...ㄷㄷ");
+		}
 		System.out.println("collect"+collect);
 		session.setAttribute("group_info",collect);
 		return "redirect:/household/login/incomeSelect.do";
 	}
 
-	//${initParam.rootPath }/
+
 	
 	
 	

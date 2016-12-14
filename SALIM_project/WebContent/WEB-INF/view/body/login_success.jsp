@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,9 +29,9 @@
 
 <script type="text/javascript" src="/SALIM_project/scripts/jquery.js"></script>
 <script type="text/javascript">
-$(document).ready({
+$(document).ready(function(){
 	
-	$("#selectable").on("click",function(){
+	$(".mydiv").on("click","selectable",function(){
 		alert("dk");
 	});
 	
@@ -68,12 +69,17 @@ $(document).ready({
 	</th>
 </tr>
 </table>
+
 <table>	
 	<c:if test="${requestScope.collectionList!=null}">
 	<tr>
+		
 		<c:forEach  items="${requestScope.collectionList}" var="collectionList">	
-			<%@include file="collectionIncludedFile.jsp" %>	
+			
+				<%@include file="collectionIncludedFile.jsp" %>	
+			
 		</c:forEach>
+		
 	</tr>
 	</c:if>
 </table>	
