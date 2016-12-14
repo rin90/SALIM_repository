@@ -10,7 +10,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.salim.service.impl.CollectionServiceImpl;
 import com.salim.vo.Collect;
@@ -76,10 +78,42 @@ public class CollectController {
 	}
 
 
-	@RequestMapping("/collectionSetting.do")
-	public String collectionSetting()
+	@RequestMapping(value="/collectionModify.do",method=RequestMethod.POST)
+	public String collectionModify(HttpSession session,String memberIdforGrant, @ModelAttribute Collect collect, ModelMap map)
 	{
+		//1. bussiness 로직으로 입력 받은 memberId 가 collection 테이블의 grantId인지 체크한 다음 
+		// 맞으면 수정, 틀리면 ajax로 화면에 alert 창 띄우고 'ㅅ' 그럼 되겠다.
+	
+		//1.memberIdforGrant가 참/거짓 
+		System.out.println("수정!!!!!!!!!!!!!!!");
+		String grantMessage=service.modifyCollection(collect, memberIdforGrant);
+		if(!grantMessage.equals(""))
+		{
+			map.addAttribute("grantMessage",grantMessage);
+		}
+		else
+		{
+			session.setAttribute("group_info", collect);
+		}
+		System.out.println("grantMessage =  "+grantMessage);
+		
 		return "body/collection/setting/settings/collectionSettingMain.tiles";
+	}
+	
+	@RequestMapping(value="/removeCollection.do",method=RequestMethod.POST)
+	public String removeCollection(String collectionId)
+	{
+		System.out.println("삭제!!!!!!!!!!!!!");
+		if(service.removeCollection(collectionId)==1)
+		{
+			System.out.println("여기는 removeCollecton.do 실행한 부분");
+			return "redirect:/collection/findAllCollectionList.do";
+		}
+		else
+		{
+			return null;
+		}
+		
 	}
 	
 	@RequestMapping("/inviteMember.do")

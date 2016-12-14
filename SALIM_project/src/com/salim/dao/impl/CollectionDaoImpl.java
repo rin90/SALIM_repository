@@ -47,4 +47,14 @@ public class CollectionDaoImpl implements CollectionDao{
 		return session.selectOne(makeSql("selectCollectionByColletionId"),collectionId);
 	}
 
+	public void updateCollection(Collect collect)
+	{
+		session.update(makeSql("updateCollection"),collect);
+	}
+	
+	public int deleteCollectionByCollectionId(String collectionId)
+	{
+		return session.delete(makeSql("deleteCollectionByCollectionId"),collectionId);
+	}
+	
 }
