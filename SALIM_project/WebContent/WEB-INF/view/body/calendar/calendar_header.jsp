@@ -32,8 +32,8 @@ jQuery의   Fullcalendar
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<div id="dialog" title="Basic dialog">
-  <p>짠!</p>
+<div id="dialog" title="Basic dialog" hidden="hidden">
+	<jsp:include page="./schedule.jsp"></jsp:include> 
 </div>
 
 <script type='text/javascript'>

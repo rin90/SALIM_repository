@@ -3,8 +3,8 @@
 <mapper namespace="goalsMapper">
 	
 	<sql id="goal-select">
-		select num, y_m, goal, member_id
-		from goals
+		select num, y_m, goal, member_id 
+		from goals 
 	</sql>
 	
 	<resultMap type="com.salim.vo.Goal" id="goal-resultMap">

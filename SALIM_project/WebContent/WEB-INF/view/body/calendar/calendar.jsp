@@ -29,7 +29,7 @@
 					alert("code:"+request.status+"\nerror:"+error);
 				},
 				beforeSend:function(){
-					alert($("#goal").val());
+					//alert($("#goal").val());
 				}
 			});
 		});
