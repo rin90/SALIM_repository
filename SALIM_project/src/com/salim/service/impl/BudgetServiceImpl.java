@@ -44,8 +44,6 @@ public class BudgetServiceImpl implements BudgetService{
 	//예산 조회
 	public Map findBudget(Map map) {	
 		
-	
-		
 		//예산조회 - map -> memberId, 조회할 년도와 월 budgetDate
 		Budget budget = dao.selectBudget(map);
 		
@@ -58,8 +56,7 @@ public class BudgetServiceImpl implements BudgetService{
 		
 		//한달 총 지출 조회
 		List monthExpense = expenseDao.selectSpendDuringMonth(emap);
-		
-		
+	
 		Map result = new HashMap();
 		result.put("budget", budget);
 		result.put("categoryExpense", categoryExpense);
