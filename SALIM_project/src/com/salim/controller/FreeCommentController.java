@@ -32,7 +32,7 @@ public class FreeCommentController {
 		service.comRegister(comment);
 		System.out.println("카테고리comment:"+category);
 		System.out.println("내용comment:"+search);
-		return "redirect:/free/seleteDetail.do?no="+comment.getNo()+"&page="+page+"&search="+search+"&category="+URLEncoder.encode(category, "UTF-8");
+		return "redirect:/free/login/seleteDetail.do?no="+comment.getNo()+"&page="+page+"&search="+search+"&category="+URLEncoder.encode(category, "UTF-8");
 		//URLEncoder.encode -> 한글이 보낼때 encoding이 되지 않아서 해준 것임
  	}
 	
@@ -45,14 +45,14 @@ public class FreeCommentController {
 		System.out.println("댓글 수정 도착"+comment.getId());
 		System.out.println(comment.getCommentContent());
 		service.comUpdate(comment);
-		return "redirect:/free/seleteDetail.do?no="+comment.getNo()+"&page="+page+"&category="+category+"&search="+search;
+		return "redirect:/free/login/seleteDetail.do?no="+comment.getNo()+"&page="+page+"&category="+category+"&search="+search;
 	}
 	
 	//삭제
 	@RequestMapping("login/delete")
 	public String comDelete(int id,int no,int page,String category,String search) throws Exception{
 		service.comDelete(id);
-		return "redirect:/free/seleteDetail.do?no="+no+"&page="+page+"&category="+URLEncoder.encode(category, "UTF-8")+"&search="+search;
+		return "redirect:/free/login/seleteDetail.do?no="+no+"&page="+page+"&category="+URLEncoder.encode(category, "UTF-8")+"&search="+search;
 	}
 	
 	
