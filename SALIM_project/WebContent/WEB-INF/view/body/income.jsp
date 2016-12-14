@@ -142,12 +142,12 @@
 		 */
 					
 				
-		/* function checklength(val){
-			if(val.value.length >16){
-				alert("수입 내역은 16자이내로 입력하세요.")
+		function checklength(){
+			if(this.value.length >16){
+				alert("수입 내역은 16자이내로 입력하세요.");
 			}
 		}
-		 */
+		 
 		
 	
 	</script>
