@@ -30,9 +30,9 @@ public class CollectController {
 	{
 		//일단 요청파라미터를 VO로 안 받고 매개변수로 받기!
 		
-		String collectionId=service.findCollectionSeq();
-		Collect collect=new Collect(collectionId, collectionName, collectionIntro);
 		Member m=(Member)session.getAttribute("login_info");
+		String collectionId=service.findCollectionSeq();
+		Collect collect=new Collect(collectionId, collectionName, collectionIntro, m.getMemberId());
 		service.addCollection(collect,m);
 		return "redirect:/collection/findAllCollectionList.do"; //로그인 성공페이지로 일단 ㄱㄱ 
 	}
@@ -45,25 +45,48 @@ public class CollectController {
 		Member m=(Member)session.getAttribute("login_info");
 		System.out.println(m.getMemberId());
 		List<Collect> collectionList=new ArrayList<Collect>();	
-		collectionList=service.findCollectionByMemberId(m.getMemberId());
-		System.out.println(collectionList);
-		map.addAttribute("collectionList", collectionList);
+		try {
+			collectionList=service.findCollectionByMemberId(m.getMemberId());
+			System.out.println(collectionList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("collectionList가 없음!!ㄷㄷ");
+		}
+		
+		map.addAttribute("collectionList", collectionList);//이걸 왜...request에 담았을까?..??으이..?
+		//session.setAttribute("collectionList", collectionList);
 
 		return "body/login_success.tiles";
 	}
 	
-	@RequestMapping("/getSession.do")
-	public String getSession(HttpSession session,String collectionId)
+	@RequestMapping("/setSession.do")
+	public String setSession(HttpSession session , String collectionId)
 	{
 		//요청 파라미터 받은 뒤, 디비에서 받아와야겟다,
 		Collect collect=new Collect();
-		collect=service.findCollectionByCollectionId(collectionId);
+		try {
+			collect=service.findCollectionByCollectionId(collectionId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("collection이 값이 없음...ㄷㄷ");
+		}
+
 		session.setAttribute("group_info",collect);
 		return "redirect:/household/login/incomeSelect.do";
 	}
 
-	//${initParam.rootPath }/
+
+	@RequestMapping("/collectionSetting.do")
+	public String collectionSetting()
+	{
+		return "body/collection/setting/settings/collectionSettingMain.tiles";
+	}
 	
+	@RequestMapping("/inviteMember.do")
+	public String inviteMember()
+	{
+		return "body/collection/setting/settings/inviteMember_form.tiles";
+	}
 	
 	
 	

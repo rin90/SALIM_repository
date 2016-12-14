@@ -38,7 +38,8 @@ drop sequence seq_col--삭제
 create table collection(--그룹
 collection_id varchar2(50) primary key,--그룹id
 collection_name varchar2(50) not null,--그룹이름
-collection_intro varchar2(300)--그룹소개
+collection_intro varchar2(300),--그룹소개
+grant_id varchar2(50) not null
 );
 
 drop table collection CASCADE CONSTRAINTS;
@@ -52,7 +53,7 @@ insert into collection values('g7','그룹 이름','그룹 소개');
 create table member_collection(--회원그룹
 member_id varchar2(50) constraint mco_col_fk references member,
 collection_id varchar2(50) constraint mco_mem_fk references collection,
-grant_id varchar2(300) not null,--권한자id
+invite varchar2(50) not null,
 constraint mc_pk primary key(member_id,collection_id) 
 );
 

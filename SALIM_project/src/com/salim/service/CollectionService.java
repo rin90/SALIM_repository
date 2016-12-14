@@ -12,7 +12,7 @@ public interface CollectionService {
 	
 	public void addCollection(Collect collection, Member m);
 	
-	public List<Collect> findCollectionByMemberId(String memberId);
+	public List<Collect> findCollectionByMemberId(String memberId) throws Exception;
 	
-	public Collect findCollectionByCollectionId(String collectionId);
+	public Collect findCollectionByCollectionId(String collectionId)throws Exception;
 }

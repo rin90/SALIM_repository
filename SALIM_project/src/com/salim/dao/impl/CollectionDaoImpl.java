@@ -24,17 +24,19 @@ public class CollectionDaoImpl implements CollectionDao{
 		return "memberNCollection."+sql;
 	}
 	@Override
-	public String selectCollectionSeq() {
+	public String selectCollectionSeq() { // 그룹 가계부 이름 생성
 		// TODO Auto-generated method stub
 		return session.selectOne(makeSql("selectSequence"));
 		
 	}
 
 	@Override
-	public void insertCollection(Collect collection) {
+	public void insertCollection(Collect collection) { 
 		// TODO Auto-generated method stub
 		session.selectOne(makeSql("insertCollection"),collection);
 	}
+	
+
 	
 	public List<Collect> selectCollectionByMemberId(String memberId)
 	{

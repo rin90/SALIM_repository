@@ -4,7 +4,7 @@
 
 <!-- 그룹 가계부 추가 --> 
  <insert id="insertmemberNCollection" parameterType="hashmap" >
- 	insert into member_Collection values(#{memberId},#{collectionId},#{grantId})
+ 	insert into member_Collection values(#{memberId},#{collectionId},#{invite})
  </insert>
  
  
