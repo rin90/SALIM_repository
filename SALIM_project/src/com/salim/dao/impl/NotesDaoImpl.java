@@ -17,23 +17,22 @@ public class NotesDaoImpl implements NotesDao{
 
 	@Override
 	public int insertNotes(Notes notes) {
-		
-		System.out.println("DAO에서 받은 생성할 객체 - "+notes);
-		
 		return session.insert("notesMapper.insertNotes", notes);
 	}
 
 	@Override
 	public int updateNotes(Notes notes) {
-		
-		System.out.println("DAO에서 받은 수정할 객체 - "+notes);
-		
 		return session.update("notesMapper.updateNotes", notes);
 	}
 
 	@Override
 	public Notes selectNotes(Map map) {//memberId 와 dayDate
 		return session.selectOne("notesMapper.selectNotes", map);
+	}
+
+	@Override
+	public int deleteNotes(int no) {
+		return session.delete("notesMapper.deleteNotes", no);
 	}
 	
 	

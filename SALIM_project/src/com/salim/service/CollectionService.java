@@ -15,4 +15,8 @@ public interface CollectionService {
 	public List<Collect> findCollectionByMemberId(String memberId) throws Exception;
 	
 	public Collect findCollectionByCollectionId(String collectionId)throws Exception;
+
+	public String modifyCollection(Collect collect,String memberIdforGrant);
+
+	public int removeCollection(String collectionId);
 }

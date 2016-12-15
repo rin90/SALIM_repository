@@ -14,5 +14,8 @@ public interface NotesDao {
 	
 	//메모 조회
 	Notes selectNotes(Map map);
+	
+	//메모 삭제
+	int deleteNotes(int no);
 
 }

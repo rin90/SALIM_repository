@@ -26,9 +26,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter{//intercept
 			}
 			return true;
 		}
-		
 	
-
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,ModelAndView modelAndView) throws Exception {
 		//로그아웃 후 웹 브라우저 back 버튼 클릭시 이전 페이지에 로그인 된 상태로 보이는 것 안되도록 처리 & 로그인 한 후 모든 페이지들이 cache 사용하지않도록 처리한다

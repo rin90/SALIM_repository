@@ -21,4 +21,9 @@ public class MemberNCollectionDaoImpl implements MemberNCollectionDao{
 	{
 		 session.insert(makeSql("insertmemberNCollection"),map);
 	}
+	
+	public int deleteMemberNCollectionByCollectionId(String collectionId)
+	{
+		return session.delete(makeSql("deleteMemberNCollectionByCollectionId"),collectionId);
+	}
 }

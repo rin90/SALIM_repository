@@ -36,21 +36,9 @@ public class BudgetController {
 	
 	//예산 저장 & 수정
 	@RequestMapping(value="/login/budget.do", method=RequestMethod.POST)
-	public String saveBudget(@ModelAttribute Budget budget){
-		
-		/* jsp에서 제대로 안 넘어오면 사용하기 - 그룹 연결 후 테스트
-		//memberId에 개인id인지 그룹id인지 파악
-		String memberId = null;
-		Collect collect = (Collect) session.getAttribute("group_info");
-		if(collect != null){
-			memberId = collect.getCollectionId();
-		}else{
-			memberId = ((Member)session.getAttribute("login_info")).getMemberId();
-		}
-		*/
-		
+	public String saveBudget(@ModelAttribute Budget budget, HttpSession session){
+		String memberId = checkMemberId(session);
 		service.saveBudget(budget);
-		
 		return "redirect:/household/login/findbudget.do?budgetDate="+new SimpleDateFormat("yyyy-MM").format(budget.getBudgetDate())+"&budgetNum="+budget.getNum();
 	}
 	
@@ -58,14 +46,7 @@ public class BudgetController {
 	@RequestMapping(value="/login/findbudget.do")
 	public String findBudget(HttpSession session, HttpServletRequest request, ModelMap modelMap) throws ParseException{
 		
-		//memberId에 개인id인지 그룹id인지 파악
-		String memberId = null;
-		Collect collect = (Collect) session.getAttribute("group_info");
-		if(collect != null){
-			memberId = collect.getCollectionId();
-		}else{
-			memberId = ((Member)session.getAttribute("login_info")).getMemberId();
-		}
+		String memberId = checkMemberId(session);
 		
 		Date budgetDate = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
@@ -78,23 +59,9 @@ public class BudgetController {
 			budgetDate = (Date)sdf.parse(request.getParameter("budgetDate"));
 		}
 		
-		//String memberId = ((Member)session.getAttribute("login_info")).getMemberId();
-		Map map = new HashMap();
-		map.put("memberId", memberId);
-		map.put("budgetDate", budgetDate);
-		
-		
-		Map result = service.findBudget(map);
+		Map result = service.findBudget(memberId, budgetDate);
 		modelMap.addAllAttributes(result);
-		
-		Budget budget = (Budget) result.get("budget");
-		int budgetNum=0;
-		if(budget != null){
-			budgetNum = budget.getNum();
-		}
-		request.setAttribute("budgetNum", budgetNum);
-		
-		request.setAttribute("budgetDate", sdf.format(budgetDate));//budgetDate
+		modelMap.addAttribute("budgetDate", sdf.format(budgetDate));//budgetDate
 		
 		return "body/budget.tiles";
 	}
@@ -107,6 +74,28 @@ public class BudgetController {
 		
 		
 		//memberId에 개인id인지 그룹id인지 파악
+		String memberId = checkMemberId(session);
+		
+		//예산, 월별 지출액, 월별 지출 총계 조회
+		Map result = service.findBudget(memberId, budgetDate);
+		
+		//새로고침시 데이터 유지를 위해서
+		/*request.setAttribute("budgetDate", budgetDate);
+		System.out.println(budgetDate);
+		System.out.println(((Budget)result.get("budget")).getNum());*/
+/*		
+		Budget budget = (Budget) result.get("budget");	
+		int budgetNum=0;
+		if(budget != null){
+			budgetNum = budget.getNum();
+		}
+		request.setAttribute("budgetNum", budgetNum);*/
+		
+		return result;
+	}
+	
+	//그룹인지 개인인지 판별
+	public String checkMemberId(HttpSession session){
 		String memberId = null;
 		Collect collect = (Collect) session.getAttribute("group_info");
 		if(collect != null){
@@ -114,27 +103,8 @@ public class BudgetController {
 		}else{
 			memberId = ((Member)session.getAttribute("login_info")).getMemberId();
 		}
-		
-		//예산, 월별 지출액, 월별 지출 총계 조회
-		Map map = new HashMap();
-		map.put("memberId", memberId);
-		map.put("budgetDate", budgetDate);
-		Map result = service.findBudget(map);
-		
-		//새로고침시 데이터 유지를 위해서
-		request.setAttribute("budgetDate", budgetDate);
-		
-		Budget budget = (Budget) result.get("budget");	
-		int budgetNum=0;
-		if(budget != null){
-			budgetNum = budget.getNum();
-		}
-		request.setAttribute("budgetNum", budgetNum);
-		
-		return result;
-	}
-	
-	
+		return memberId;
+	}	
 	
 	
 }

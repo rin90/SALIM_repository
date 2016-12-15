@@ -15,4 +15,8 @@ public interface CollectionDao {
 	public List<Collect> selectCollectionByMemberId(String memberId);
 	
 	public Collect selectCollectionByCollectionId(String collectionId);
+	
+	public void updateCollection(Collect collect);
+	
+	public int deleteCollectionByCollectionId(String collectionId);
 }

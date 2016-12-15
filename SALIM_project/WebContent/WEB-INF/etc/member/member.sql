@@ -9,7 +9,7 @@ create table member(  --회원
 select * from member;
 drop table member;
 
-
+alter table member add(email varchar2(50) not null); 
 
 --테이블 삭제
 drop table member CASCADE CONSTRAINTS;
@@ -50,6 +50,7 @@ insert into collection values('g7','그룹 이름','그룹 소개');
 
 
 
+
 create table member_collection(--회원그룹
 member_id varchar2(50) constraint mco_col_fk references member,
 collection_id varchar2(50) constraint mco_mem_fk references collection,
@@ -61,6 +62,17 @@ constraint mc_pk primary key(member_id,collection_id)
 select * from MEMBER_COLLECTION;
 
 drop table member_collection;
+
+--collection 삭제!----------------------------------------
+
+delete from MEMBER_COLLECTION
+where collection_id='collectionId46'
+
+delete from COLLECTION
+where collection_id='collectionId46'
+
+
+
 
 ---------------------------------------------------------------------------------------------------------------------------
 

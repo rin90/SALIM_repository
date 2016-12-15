@@ -15,11 +15,11 @@
 
 
 <a href="${initParam.rootPath }/household/login/incomeSelect.do">수입&지출 입력</a><br>
-<a href="${initParam.rootPath }/household/login/findbudget.do">에산작성</a><br> 
+<a href="${initParam.rootPath }/household/login/findbudget.do">예산작성</a><br> 
 
 
 <a href="${initParam.rootPath }/test/time.do">Test</a><br>
-<a href="${initParam.rootPath }/free/list.do?page=1">자유게시판</a><br>
+<a href="${initParam.rootPath }/free/login/list.do?page=1">자유게시판</a><br>
 <a href="${initParam.rootPath }/">Tip게시판</a><br>
 <a href="${initParam.rootPath }/">Q&A</a><br>
 <a href="${initParam.rootPath }/collectionSetting.do">그룹 환경설정</a><br>

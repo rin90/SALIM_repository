@@ -18,7 +18,7 @@
 </style>
 
 
-	<form id="registerForm" action="${initParam.rootPath}/free/register.do"
+	<form id="registerForm" action="${initParam.rootPath}/free/login/register.do"
 		method="post" enctype="multipart/form-data">
 
 		<h4>자유게시판</h4>
@@ -28,13 +28,14 @@
 
 		<textarea rows="10" cols="50" name="content"></textarea><div class="errorMessage"><form:errors path="freeBoard.content" /></div>
 		
-		<br><input type="hidden" name="page" value="${requestScope.page }">
-			<input type="hidden" name="memberId" value="id-3"> 
+		<br>
+			<input type="hidden" name="page" value="${requestScope.page }">
+			<input type="hidden" name="memberId" value="${sessionScope.login_info.memberId }"> 
 			<input type="submit" value="확인">
 			
 	</form>
 	
-	<form action="${initParam.rootPath }/free/list.do" method="post">
+	<form action="${initParam.rootPath }/free/login/list.do" method="post">
 		<input type="hidden" name="page" value="${requestScope.page }">
 		<input type="submit" value="취소">
 	</form>

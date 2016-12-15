@@ -28,7 +28,7 @@
 				<tr>
 					<td>${freeBoard.no }</td>
 					<td><a
-			href="${initParam.rootPath }/free/seleteDetail.do?no=${freeBoard.no}&page=${requestScope.pageBean.page}&category=${requestScope.category}&search=${requestScope.search}">${freeBoard.title }</a></td>
+			href="${initParam.rootPath }/free/login/seleteDetail.do?no=${freeBoard.no}&page=${requestScope.pageBean.page}&category=${requestScope.category}&search=${requestScope.search}">${freeBoard.title }</a></td>
 					<td>${freeBoard.memberId }</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${freeBoard.registerTime }" /></td>
@@ -46,7 +46,7 @@
 	<c:choose>
 		<c:when test="${requestScope.pageBean.previousGroup }">
 			<a
-				href="${initParam.rootPath }/free/keyword.do?page=${requestScope.pageBean.beginPage-1}&category=${requestScope.category}&Search=${requestScope.Search}">¢¸&nbsp;</a>
+				href="${initParam.rootPath }/free/login/keyword.do?page=${requestScope.pageBean.beginPage-1}&category=${requestScope.category}&Search=${requestScope.Search}">¢¸&nbsp;</a>
 		</c:when>
 		<c:otherwise>
 					¢¸&nbsp;
@@ -62,7 +62,7 @@
 			</c:when>
 			<c:otherwise>
 				<a 
-		href="${initParam.rootPath }/free/keyword.do?page=${page }&category=${requestScope.category}&search=${requestScope.search}">${page }</a>
+		href="${initParam.rootPath }/free/login/keyword.do?page=${page }&category=${requestScope.category}&search=${requestScope.search}">${page }</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
@@ -71,22 +71,22 @@
 	<c:choose>
 		<c:when test="${requestScope.pageBean.nextGroup }">
 			<a
-				href="${initParam.rootPath }/free/keyword.do?page=${requestScope.pageBean.endPage+1 }&category=${requestScope.category}&search=${requestScope.search}">&nbsp;¢º</a>
+				href="${initParam.rootPath }/free/login/keyword.do?page=${requestScope.pageBean.endPage+1 }&category=${requestScope.category}&search=${requestScope.search}">&nbsp;¢º</a>
 		</c:when>
 		<c:otherwise>
 					&nbsp;¢º				
 				</c:otherwise>
 	</c:choose>
 
-	<form action="${initParam.rootPath }/free/form.do">
+	<form action="${initParam.rootPath }/free/login/form.do">
 		<input type="hidden" name="page"
 			value="${requestScope.pageBean.page }"> &nbsp;&nbsp;&nbsp;<input
 			type="submit" value="±Û¾²±â">
 	</form>
 
 	<p />
-	${requestScope.category }
-	<form action="${initParam.rootPath }/free/keyword.do" method="post">
+
+	<form action="${initParam.rootPath }/free/login/keyword.do" method="post">
 		<select name="category">
 			<c:forEach items="${requestScope.codes }" var="code">
 				<c:choose>

@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,10 @@ import com.salim.service.FreeCommentService;
 import com.salim.util.PagingBean;
 import com.salim.vo.FreeBoard;
 import com.salim.vo.FreeComment;
+import com.salim.vo.Member;
 
 @Controller
-@RequestMapping("/free/")
+@RequestMapping("/free/login/")
 public class FreeBoardController {
 	/*
 	 * 나중에 시간 남으면 처리할 것들 1. 좋아요 F5처리 못함 -db생성해서 하기 ,쿠키로 할 경우에 사용자가 쿠키를 삭제할 수도
@@ -50,7 +52,6 @@ public class FreeBoardController {
 	// 게시판 목록 뿌려주는 메소드 기본 V -로그인 없이 가능
 	@RequestMapping("list")
 	public ModelAndView list(int page) {
-
 		Map map = service.getFreeBoardList(page);
 		map.put("codes", codeService.findCode("조회"));
 		List<FreeBoard> list = (List<FreeBoard>) map.get("list");
@@ -131,7 +132,7 @@ public class FreeBoardController {
 		}
 
 		service.insertFree(freeBoard);
-		return "redirect:/free/seleteDetail.do?no=" + freeBoard.getNo() + "&page=" + page;
+		return "redirect:/free/login/seleteDetail.do?no=" + freeBoard.getNo() + "&page=" + page;
 	}
 
 	// 글 수정 form이동 메소드 V -로그인해야 가능
@@ -166,10 +167,10 @@ public class FreeBoardController {
 		}
 		service.updateFree(freeBoard);
 		if (category != null && !category.isEmpty() && search != null && !search.isEmpty()) {
-			return "redirect:/free/seleteDetail.do?no=" + freeBoard.getNo() + "&page=" + page + "category=" + category
+			return "redirect:/free/login/seleteDetail.do?no=" + freeBoard.getNo() + "&page=" + page + "category=" + category
 					+ "search=" + search;
 		} else {
-			return "redirect:/free/seleteDetail.do?no=" + freeBoard.getNo() + "&page=" + page;
+			return "redirect:/free/login/seleteDetail.do?no=" + freeBoard.getNo() + "&page=" + page;
 		}
 	}
 
@@ -178,7 +179,7 @@ public class FreeBoardController {
 	public String delete(int no, int page) {
 		System.out.println("삭제");
 		service.deleteFree(no);
-		return "redirect:/free/list.do?page=" + page;// redirect방식으로 처리해야함 안그러면
+		return "redirect:/free/login/list.do?page=" + page;// redirect방식으로 처리해야함 안그러면
 														// 새로고침하면 계속 브라우저가 url을
 														// 그대로 가지고 있어서 계속 처리됨
 		// redirect로 값을 유지하기 위해서 controller를 호출하면서 값을 붙여줌
