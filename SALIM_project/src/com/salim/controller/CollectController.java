@@ -117,8 +117,9 @@ public class CollectController {
 	}
 	
 	@RequestMapping("/inviteMember.do")
-	public String inviteMember()
+	public String inviteMember(String email)
 	{
+		System.out.println(email+"dddddddddddd");
 		return "body/collection/setting/settings/inviteMember_form.tiles";
 	}
 	
