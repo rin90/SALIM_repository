@@ -47,5 +47,14 @@ public class IncomeDaoImpl implements IncomeDao{
 	public List selectImportEachCategory(Map map) {
 		return session.selectList("incomeMapper.selectImportEachCategory", map);
 	}
+
+	/*============================================
+		일일 수입 총액
+  	============================================*/
+	@Override
+	public int selectDayIncome(Map map) {
+		Object result = session.selectOne("incomeMapper.selectDayIncome", map);
+		return (result==null)?0:(Integer)result;
+	}
 	
 }

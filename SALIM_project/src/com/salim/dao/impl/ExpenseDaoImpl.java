@@ -57,4 +57,14 @@ public class ExpenseDaoImpl implements ExpenseDao{
 	public List selectTotalMonthReport(Map map) {
 		return session.selectList("expenseMapper.selectTotalMonthReport", map);
 	}
+
+	
+	/*============================================
+		일일 사용 내역 총액
+	  ============================================*/
+	@Override	
+	public int selectDayExpense(Map map) {
+		Object result = session.selectOne("expenseMapper.selectDayExpense", map);
+		return (result==null)?0:(Integer)result;
+	}
 }

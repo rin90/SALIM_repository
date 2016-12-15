@@ -53,6 +53,7 @@ public class ExpenseController {
 			int day = date.getDate();
 			expenseDate = new Date(year, month, day);
 		}
+
 		String memberId = checkMemberId(session);
 		modelMap.addAllAttributes(service.selectExpense(memberId, expenseDate));
 		modelMap.addAttribute("expenseDate", new SimpleDateFormat("yyyy-MM-dd").format(expenseDate));

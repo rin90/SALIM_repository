@@ -25,4 +25,8 @@ public interface ExpenseService {
 	void deleteExpense(List<Integer> expenseIdList, String memberId);//List<Integer> expenseIdList, memberId
 	
 	
+	/*=================== << 일일 일정관련 부분용 >> ======================*/
+	int selectDayExpense(Map map);
+	
+	
 }

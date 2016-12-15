@@ -143,6 +143,14 @@ public class ExpenseServiceImpl implements ExpenseService{
 			dao.deleteExpense(map);
 		}
 	}
+
+	/*============================================
+		일일 사용 내역 총액
+	  ============================================*/
+	@Override
+	public int selectDayExpense(Map map) {
+		return dao.selectDayExpense(map);
+	}
 	
 	
 }
