@@ -1,5 +1,7 @@
 package com.salim.dao.impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +29,7 @@ public class IncomeDaoImpl implements IncomeDao{
 	}
 
 	//삭제
-	public int deleteIncome(Map map) { //map => memberId와 incomeId
+	public int deleteIncome(Map map) {
 		return session.delete("incomeMapper.deleteIncome", map);
 	}
 
