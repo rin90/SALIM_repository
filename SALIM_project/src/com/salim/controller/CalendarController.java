@@ -99,9 +99,8 @@ public class CalendarController {
 		result.put("daySchedule", sservice.selectScheduleByDay(param));
 		result.put("dayNote", nservice.findNotes(param));
 		
-//		result.put("dayIncome", iservice.selectDayIncome(param));
-//		result.put("dayExpense", eservice.selectDayExpense(param));
-		
+		result.put("dayExpense", (Integer)eservice.selectDayExpense(param));
+		result.put("dayIncome", (Integer)iservice.selectDayIncome(param));
 		
 		return result;
 	}

@@ -62,6 +62,14 @@
 		order by expense_id asc
 	</select>
 	
+	<!-- ======================================================== -->
+	<!--		<<<< 하루치 총 지출액 >>>>		-->
+	<select id="selectDayExpense" parameterType="map" resultType="_int">
+		select sum(nvl(cash_expense, 0) + nvl(card_expense, 0)) expense
+		from expense
+		where member_id=#{memberId} and to_char(expense_date, 'YYYY-MM-DD')=#{day}
+	</select>
+	
 	
 	<!-- ==================================================================================== -->
 	<!-- 	<<<<<	보고서용 Qery	>>>>>	-->	

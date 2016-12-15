@@ -137,6 +137,14 @@ public class IncomeServiceImpl implements IncomeService{
 		}
 	}
 
+	/*============================================
+		일일 수입 내역 총액
+	  ============================================*/
+	@Override
+	public int selectDayIncome(Map map) {
+		return dao.selectDayIncome(map);
+	}
+
 
 	
 }
