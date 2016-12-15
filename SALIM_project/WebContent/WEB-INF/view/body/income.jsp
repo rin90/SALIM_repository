@@ -15,6 +15,7 @@
 <meta charset="UTF-8">	
 <title>SALIM - 수입 입력</title>	
 </head>
+           		 
 
 <!-- datepicker 넣기 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- 기기에 맞춰서 크기를 잡으라는 말. 이것을 쓸거면 기본 meta태그를 삭제 -->
@@ -33,10 +34,11 @@
     	     dayNamesMin:['일','월','화','수','목','금','토'],	
     	     dateFormat:'yy-mm-dd',
     	     showMonthAfterYear:true,
-     	  	 onSelect: function(dateText , inst){
+     	  	 onSelect: function(dateText, inst){
        			 $("#datepicker").text(dateText),
-       			location.replace("/SALIM_project/household/login/incomeSelect.do?incomeDate="+dateText);
-       		 }      	
+       			 location.replace("/SALIM_project/household/login/incomeSelect.do?incomeDate="+dateText);
+     	  	 
+     	  	 }      	
      	 });
 	      
 	      /* 대분류 선택시 소분류 나오게 */
@@ -261,6 +263,7 @@
 		
 		
 		<!-- 아무 것도 안 뿌려준 입력창 -->
+		<c:forEach begin="1" end="5">
 			<tr>
 				<td>
 					<input type="checkbox" name="incomeId" value="0"/> <!-- 체크박스 하나하나 -->
@@ -282,6 +285,8 @@
 					</select>
 				</td>
 			</tr>
+		</c:forEach>
+			
 		</tfoot>
 	</table>
 	

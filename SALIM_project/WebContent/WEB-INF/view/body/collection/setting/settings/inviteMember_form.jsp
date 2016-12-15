@@ -5,19 +5,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<script type="text/javascript">
+<script type="text/javascript" >
 
 function messageKeep()
 {
-	
 	 alert($("#emailMessage").val());
-	 //keepMessage=$("#emailMessage").val();
 }
 
 function emailClick()
 {
-	var keepMessage=window.document.getElementsByClassName("emailMessage");
-	var m=keepMessage.value;
+	var keepMessage=window.document.getElementsByIdName("emailMessage");
+	var m=$("#emailMessage").val(); 
 	alert(m+"초대장을 보냈습니다.");
 }
 
@@ -35,7 +33,7 @@ function emailClick()
 </tr>
 <tr>
 	<td>
-		<input type="text" name="email" class='emailMessage' onblur="messageKeep();">&nbsp;&nbsp;
+		<input type="text" name="email" id='emailMessage' onblur="messageKeep();">&nbsp;&nbsp;
 	</td>
 	<td>
 		<input type="submit" value="초대하기" onclick="emailClick();" >
