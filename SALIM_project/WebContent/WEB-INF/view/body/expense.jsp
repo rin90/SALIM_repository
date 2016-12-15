@@ -175,15 +175,15 @@
 		<tbody>
 			<tr>
 				<td>수입</td>
-				<td>얼마 들어왔는지 누계</td>
+				<td>${requestScope.incomeSum }</td>
 			</tr>
 			<tr>
 				<td>지출</td>
-				<td>얼마 나갔는지 누계</td>
+				<td>${requestScope.expenseSum }</td>
 			</tr>
 			<tr>
 				<td>누계</td>
-				<td>수입-지출</td>
+				<td>${requestScope.incomeSum - requestScope.expenseSum }</td>
 			</tr>
 		</tbody>
 	</table>

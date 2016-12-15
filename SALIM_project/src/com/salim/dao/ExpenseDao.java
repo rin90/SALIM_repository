@@ -55,5 +55,8 @@ public interface ExpenseDao {
 	 * @return	
 	 */
 	List selectTotalMonthReport(Map map);
+	
+	/*=================== << 한달 동안 지출 누계 >> ======================*/
+	int selectForOneMonthExpense(Map map);
 }
 

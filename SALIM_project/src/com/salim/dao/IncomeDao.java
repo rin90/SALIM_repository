@@ -44,4 +44,6 @@ public interface IncomeDao {
 	 */
 	List selectImportEachCategory(Map map);
 	
+	/*==================<< 한달 동안 수입 누계 >>====================*/
+	int selectForOneMonthIncome(Map map);
 }

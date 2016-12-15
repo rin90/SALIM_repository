@@ -57,4 +57,15 @@ public class IncomeDaoImpl implements IncomeDao{
 		return (result==null)?0:(Integer)result;
 	}
 	
+	/*========================================
+	 	한달 동안 수입 누계
+	 =========================================*/
+	@Override
+	public int selectForOneMonthIncome(Map map) {
+		/*Integer incomeSum = session.selectOne("incomeMapper.selectForOneMonthIncome", map);
+		return (incomeSum == null)? 0:incomeSum;*/
+		return session.selectOne("incomeMapper.selectForOneMonthIncome", map);
+	}
+
+	
 }
