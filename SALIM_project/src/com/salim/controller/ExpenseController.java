@@ -69,6 +69,7 @@ public class ExpenseController {
 		map.put("memberId", memberId);
 		map.put("expenseDate", expenseDate);
 		List<Expense> expenseList = service.selectExpense(map);
+		
 		//대분류 조회
 		List<BigCategory> bigCategoryList = categoryService.selectBigCode(categoryService.selectHighCode("지출").getBigCode());
 		//조회된 지출에 해당되는 소분류 조회
