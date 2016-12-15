@@ -101,8 +101,14 @@ public class ExpenseServiceImpl implements ExpenseService{
 	//조회
 	public Map selectExpense(String memberId, Date expenseDate) {
 		
+		//Dao에서 필요한 것
+		Map param = new HashMap();
+		param.put("memberId", memberId);
+		param.put("dayDate", expenseDate);
+		param.put("expenseDate", expenseDate);
+		
 		//지출 조회
-		List<Expense> expenseList = dao.selectExpenseList(memberId, expenseDate);
+		List<Expense> expenseList = dao.selectExpenseList(param);
 		//대분류 조회
 		List<BigCategory> bigCategoryList = categoryDao.selectBigCode(categoryDao.selectHighCode("지출").getBigCode());
 		//조회된 지출에 해당되는 소분류 조회
@@ -112,10 +118,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 			selectSmallCategoryList.add(categoryDao.selectBigCodeBySmallCode(bigCode));
 		}
 		//메모 조회
-		Map notesMap = new HashMap();
-		notesMap.put("memberId", memberId);
-		notesMap.put("dayDate", expenseDate);
-		Notes notes = notesService.findNotes(notesMap);
+		Notes notes = notesService.findNotes(param);
 		
 		//지출 조회
 		Map result = new HashMap();

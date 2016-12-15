@@ -45,10 +45,11 @@ public class BudgetServiceImpl implements BudgetService{
 	public Map findBudget(String memberId, Date budgetDate) {	
 		
 		//예산조회 - map -> memberId, 조회할 년도와 월 budgetDate
-		Map map = new HashMap();
-		map.put("memberId", memberId);
-		map.put("budgetDate", budgetDate);
-		Budget budget = dao.selectBudget(map);
+		Map param = new HashMap();
+		param.put("memberId", memberId);
+		param.put("budgetDate", budgetDate);
+		param.put("month", new SimpleDateFormat("yyyy-MM").format(budgetDate));
+		Budget budget = dao.selectBudget(param);
 		
 		int budgetNum=0;
 		if(budget != null){
@@ -56,20 +57,16 @@ public class BudgetServiceImpl implements BudgetService{
 		}
 		
 		//지출조회 - map -> memberId, month -> 대분류 기준별 금액
-		Map emap = new HashMap();
-		emap.put("memberId", memberId);
-		emap.put("month", new SimpleDateFormat("yyyy-MM").format(budgetDate));
-		List categoryExpense  = expenseDao.selectSpendEachCategory(emap);
+		List categoryExpense  = expenseDao.selectSpendEachCategory(param);
 		
 		//한달 총 지출 조회
-		List monthExpense = expenseDao.selectSpendDuringMonth(emap);
+		List monthExpense = expenseDao.selectSpendDuringMonth(param);
 		
 		Map result = new HashMap();
 		result.put("budget", budget);
 		result.put("categoryExpense", categoryExpense);
 		result.put("monthExpense", monthExpense);
 		result.put("budgetNum", budgetNum);
-		
 		
 		return result;
 	}

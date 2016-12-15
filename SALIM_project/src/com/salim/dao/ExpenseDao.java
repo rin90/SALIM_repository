@@ -18,7 +18,7 @@ public interface ExpenseDao {
 	int deleteExpense(Map map);
 	
 	//지출 조회 - 조회해야하는 회원id, 지출일을 조회
-	List<Expense> selectExpenseList(String memberId, Date expenseDate);
+	List<Expense> selectExpenseList(Map map);//memberId, expenseDate
 	
 	
 	/*=================== << 보고서용 >> ======================*/

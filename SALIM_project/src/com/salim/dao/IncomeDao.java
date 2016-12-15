@@ -20,7 +20,7 @@ public interface IncomeDao {
 	int deleteIncome(Map map);
 	
 	//수입을 조회
-	List<Income> selectIncomeList(String memberId, Date incomeDate);
+	List<Income> selectIncomeList(Map map);//memberId, incomeDate
 	
 	
 	

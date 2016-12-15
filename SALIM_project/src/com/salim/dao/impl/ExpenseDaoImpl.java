@@ -34,10 +34,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
 	}
 
 	//조회
-	public List<Expense> selectExpenseList(String memberId, Date expenseDate) {
-		Map map = new HashMap();
-		map.put("memberId", memberId);
-		map.put("expenseDate", expenseDate);
+	public List<Expense> selectExpenseList(Map map) {
 		return session.selectList("expenseMapper.selectExpenseDate", map);
 	}
 

@@ -91,8 +91,14 @@ public class IncomeServiceImpl implements IncomeService{
 	//조회
 	public Map selectIncome(String memberId, Date incomeDate) {//map으로 memberId와 incomeDate를 받음.
 		
+		//Dao로 넘길 값들 한번에
+		Map param = new HashMap();
+		param.put("memberId", memberId);
+		param.put("dayDate", incomeDate);
+		param.put("incomeDate", incomeDate);
+		
 		//수입 조회
-		List<Income> incomeList = dao.selectIncomeList(memberId, incomeDate); 
+		List<Income> incomeList = dao.selectIncomeList(param); 
 		
 		//대분류 조회
 		List<BigCategory> bigCategoryList = categoryDao.selectBigCode(categoryDao.selectHighCode("수입").getBigCode());
@@ -105,10 +111,7 @@ public class IncomeServiceImpl implements IncomeService{
 		}
 		
 		//메모 조회
-		Map notesMap = new HashMap();
-		notesMap.put("memberId", memberId);
-		notesMap.put("dayDate", incomeDate);
-		Notes notes = notesService.findNotes(notesMap);		
+		Notes notes = notesService.findNotes(param);		
 
 		//수입 조회에 다 조회
 		Map result = new HashMap();

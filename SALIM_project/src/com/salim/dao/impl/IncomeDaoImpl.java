@@ -34,10 +34,7 @@ public class IncomeDaoImpl implements IncomeDao{
 	}
 
 	//조회
-	public List<Income> selectIncomeList(String memberId, Date incomeDate) { // map => memberId 와 incomeDate
-		Map map = new HashMap<>();
-		map.put("memberId", memberId);
-		map.put("incomeDate", incomeDate);
+	public List<Income> selectIncomeList(Map map) { // map => memberId 와 incomeDate
 		return session.selectList("incomeMapper.selectIncomeDate", map);
 	}
 
