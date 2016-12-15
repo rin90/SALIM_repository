@@ -8,181 +8,163 @@
 <meta charset="UTF-8">	
 <title>예산 쓰기, 수정, 삭제</title>	
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
-<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<script type="text/javascript">
 
 	/* 년 월만 선택하게.. */
 	$(function(){
-		$.datepicker.regional['ko']={
-				 prevText : '이전달',
-		         nextText : '다음달',
-		         monthNames : [  '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
-		         monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
-		         dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
-		         dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
-		         dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-		         firstDay : 0,
-		         yearSuffix : '',
-		         showAnim : "slideDown"  	
-		};
-		$.datepicker.setDefaults( $.datepicker.regional[ "ko" ] );
-		
 		 $('.month-picker').datepicker({
-		        changeMonth: true,
-		        changeYear: true,
-		        showButtonPanel: true,
-		        dateFormat: 'yy-mm',
-		        onClose: function(dateText, inst) { 
-		        	
-		            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-		            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-		            $(this).datepicker('setDate', new Date(year, month, 1));
-		         
-		            $.ajax({
-		            	"type":"POST",
-		            	"url":"/SALIM_project/household/login/findbudgetMonth.do",
-		            	"data":{"budgetDate":$(".month-picker").val()},
-		            	"dataType":"json",
-		            	"success":function(obj){
-		            		//지출 달 별로 가져온 것
-		            		$("tbody tr td:eq(2)").text(obj.categoryExpense[7].SPEND_MONEY);
-			            	$("tbody tr td:eq(6)").text(obj.categoryExpense[12].SPEND_MONEY);
-			           		$("tbody tr td:eq(10)").text(obj.categoryExpense[5].SPEND_MONEY);
-			           		$("tbody tr td:eq(14)").text(obj.categoryExpense[9].SPEND_MONEY);
-			           		$("tbody tr td:eq(18)").text(obj.categoryExpense[0].SPEND_MONEY);
-			           		$("tbody tr td:eq(22)").text(obj.categoryExpense[2].SPEND_MONEY);
-			           		$("tbody tr td:eq(26)").text(obj.categoryExpense[3].SPEND_MONEY);
-			           		$("tbody tr td:eq(30)").text(obj.categoryExpense[1].SPEND_MONEY);
-			           		$("tbody tr td:eq(34)").text(obj.categoryExpense[6].SPEND_MONEY);
-			           		$("tbody tr td:eq(38)").text(obj.categoryExpense[8].SPEND_MONEY);
-			           		$("tbody tr td:eq(42)").text(obj.categoryExpense[11].SPEND_MONEY);
-			           		$("tbody tr td:eq(46)").text(obj.categoryExpense[13].SPEND_MONEY);
-			           		$("tbody tr td:eq(50)").text(obj.categoryExpense[4].SPEND_MONEY);
+			showMonthAfterYear:true,
+			dayNamesMin:["일","월","화","수","목","금","토"],
+			monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    changeMonth: true,
+		    changeYear: true,
+		    showButtonPanel: true,
+		    dateFormat: 'yy-mm',
+		    onClose: function(dateText, inst) { 
+		    	var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+		        var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+		        $(this).datepicker('setDate', new Date(year, month, 1));
+		        $.ajax({
+		            "type":"POST",
+		            "url":"/SALIM_project/household/login/findbudgetMonth.do",
+		            "data":{"budgetDate":$(".month-picker").val()},
+		            "dataType":"json",
+		            "success":function(obj){
+		            	//지출 달 별로 가져온 것
+		            	$("tbody tr td:eq(2)").text(obj.categoryExpense[7].SPEND_MONEY);
+			           	$("tbody tr td:eq(6)").text(obj.categoryExpense[12].SPEND_MONEY);
+			        	$("tbody tr td:eq(10)").text(obj.categoryExpense[5].SPEND_MONEY);
+			        	$("tbody tr td:eq(14)").text(obj.categoryExpense[9].SPEND_MONEY);
+			        	$("tbody tr td:eq(18)").text(obj.categoryExpense[0].SPEND_MONEY);
+			        	$("tbody tr td:eq(22)").text(obj.categoryExpense[2].SPEND_MONEY);
+			       		$("tbody tr td:eq(26)").text(obj.categoryExpense[3].SPEND_MONEY);
+			       		$("tbody tr td:eq(30)").text(obj.categoryExpense[1].SPEND_MONEY);
+			       		$("tbody tr td:eq(34)").text(obj.categoryExpense[6].SPEND_MONEY);
+			           	$("tbody tr td:eq(38)").text(obj.categoryExpense[8].SPEND_MONEY);
+			           	$("tbody tr td:eq(42)").text(obj.categoryExpense[11].SPEND_MONEY);
+			           	$("tbody tr td:eq(46)").text(obj.categoryExpense[13].SPEND_MONEY);
+			           	$("tbody tr td:eq(50)").text(obj.categoryExpense[4].SPEND_MONEY);
+		            	
+			           	//지출의 총계를 가져옴
+		            	if(obj.monthExpense[0] == null){
+		            		$("tfoot tr td:eq(2)").text(0);
 		            		
-			           		//지출의 총계를 가져옴
-		            		if(obj.monthExpense[0] == null){
-		            			$("tfoot tr td:eq(2)").text(0);
-		            			
-		            			if(obj.budget == null){
-		            				$("tfoot tr td:eq(3)").text(0);
-		            				
-		            				$("tbody tr td:eq(3)").text(0);
-					            	$("tbody tr td:eq(7)").text(0);
-					           		$("tbody tr td:eq(11)").text(0);
-					           		$("tbody tr td:eq(15)").text(0);
-					           		$("tbody tr td:eq(19)").text(0);
-					           		$("tbody tr td:eq(23)").text(0);
-					           		$("tbody tr td:eq(27)").text(0);
-					           		$("tbody tr td:eq(31)").text(0);
-					           		$("tbody tr td:eq(35)").text(0);
-					           		$("tbody tr td:eq(39)").text(0);
-					           		$("tbody tr td:eq(43)").text(0);
-					           		$("tbody tr td:eq(47)").text(0);
-					           		$("tbody tr td:eq(51)").text(0);
-		            				
-		            			}else{
-		            				$("tfoot tr td:eq(3)").text(obj.budget.budget - 0);
-		            				
-		            				$("tbody tr td:eq(3)").text(obj.budget.foodExpenses-0);
-					            	$("tbody tr td:eq(7)").text(obj.budget.dwellingCommunication-0);
-					           		$("tbody tr td:eq(11)").text(obj.budget.householdgoods-0);
-					           		$("tbody tr td:eq(15)").text(obj.budget.clothBeauty-0);
-					           		$("tbody tr td:eq(19)").text(obj.budget.healthCulture-0);
-					           		$("tbody tr td:eq(23)").text(obj.budget.educationParenting-0);
-					           		$("tbody tr td:eq(27)").text(obj.budget.trafficVehicle-0);
-					           		$("tbody tr td:eq(31)").text(obj.budget.holidayDues-0);
-					           		$("tbody tr td:eq(35)").text(obj.budget.taxInterest-0);
-					           		$("tbody tr td:eq(39)").text(obj.budget.pinmoneyEtc-0);
-					           		$("tbody tr td:eq(43)").text(obj.budget.savingInsurance-0);
-					           		$("tbody tr td:eq(47)").text(obj.budget.creditCard-0);
-					           		$("tbody tr td:eq(51)").text(obj.budget.unclassified-0);
-		            				
-		            				
-		            				
-		            			}
-		            		}else{ 
-		            			
-		            			$("tfoot tr td:eq(2)").text(obj.monthExpense[0].TOTAL);
-		            			
-		            			if(obj.budget == null){
-		            				$("tfoot tr td:eq(3)").text(0 - obj.monthExpense[0].TOTAL);
-		            				
-		            				$("tbody tr td:eq(3)").text(0-obj.categoryExpense[7].SPEND_MONEY);
-					            	$("tbody tr td:eq(7)").text(0-obj.categoryExpense[12].SPEND_MONEY);
-					           		$("tbody tr td:eq(11)").text(0-obj.categoryExpense[5].SPEND_MONEY);
-					           		$("tbody tr td:eq(15)").text(0-obj.categoryExpense[9].SPEND_MONEY);
-					           		$("tbody tr td:eq(19)").text(0-obj.categoryExpense[0].SPEND_MONEY);
-					           		$("tbody tr td:eq(23)").text(0-obj.categoryExpense[2].SPEND_MONEY);
-					           		$("tbody tr td:eq(27)").text(0-obj.categoryExpense[3].SPEND_MONEY);
-					           		$("tbody tr td:eq(31)").text(0-obj.categoryExpense[1].SPEND_MONEY);
-					           		$("tbody tr td:eq(35)").text(0-obj.categoryExpense[6].SPEND_MONEY);
-					           		$("tbody tr td:eq(39)").text(0-obj.categoryExpense[8].SPEND_MONEY);
-					           		$("tbody tr td:eq(43)").text(0-obj.categoryExpense[11].SPEND_MONEY);
-					           		$("tbody tr td:eq(47)").text(0-obj.categoryExpense[13].SPEND_MONEY);
-					           		$("tbody tr td:eq(51)").text(0-obj.categoryExpense[4].SPEND_MONEY);
-					           		
-		            			}else{
-		            				$("tfoot tr td:eq(3)").text(obj.budget.budget - obj.monthExpense[0].TOTAL);
-		            			
-		            				$("tbody tr td:eq(3)").text(obj.budget.foodExpenses-obj.categoryExpense[7].SPEND_MONEY);
-					            	$("tbody tr td:eq(7)").text(obj.budget.dwellingCommunication-obj.categoryExpense[12].SPEND_MONEY);
-					           		$("tbody tr td:eq(11)").text(obj.budget.householdgoods-obj.categoryExpense[5].SPEND_MONEY);
-					           		$("tbody tr td:eq(15)").text(obj.budget.clothBeauty-obj.categoryExpense[9].SPEND_MONEY);
-					           		$("tbody tr td:eq(19)").text(obj.budget.healthCulture-obj.categoryExpense[0].SPEND_MONEY);
-					           		$("tbody tr td:eq(23)").text(obj.budget.educationParenting-obj.categoryExpense[2].SPEND_MONEY);
-					           		$("tbody tr td:eq(27)").text(obj.budget.trafficVehicle-obj.categoryExpense[3].SPEND_MONEY);
-					           		$("tbody tr td:eq(31)").text(obj.budget.holidayDues-obj.categoryExpense[1].SPEND_MONEY);
-					           		$("tbody tr td:eq(35)").text(obj.budget.taxInterest-obj.categoryExpense[6].SPEND_MONEY);
-					           		$("tbody tr td:eq(39)").text(obj.budget.pinmoneyEtc-obj.categoryExpense[8].SPEND_MONEY);
-					           		$("tbody tr td:eq(43)").text(obj.budget.savingInsurance-obj.categoryExpense[11].SPEND_MONEY);
-					           		$("tbody tr td:eq(47)").text(obj.budget.creditCard-obj.categoryExpense[13].SPEND_MONEY);
-					           		$("tbody tr td:eq(51)").text(obj.budget.unclassified-obj.categoryExpense[4].SPEND_MONEY);
-		            			
-		            			}
-		            		} 
-		            		
-		            		//예산 달 기준으로 가져옴
 		            		if(obj.budget == null){
-		            			obj.budget = "{}";
-		            			$("input[name=num]").val(0);
-		            			$("td input:eq(0)").val(0);
-			            		$("td input:eq(1)").val(0);
-			            		$("td input:eq(2)").val(0);
-			            		$("td input:eq(3)").val(0);
-			            		$("td input:eq(4)").val(0);
-			            		$("td input:eq(5)").val(0);
-			            		$("td input:eq(6)").val(0);
-			            		$("td input:eq(7)").val(0);
-			            		$("td input:eq(8)").val(0);
-			            		$("td input:eq(9)").val(0);
-			            		$("td input:eq(10)").val(0);
-			            		$("td input:eq(11)").val(0);
-			            		$("td input:eq(12)").val(0);
-			            		$("td input:eq(13)").val(0);	
-			            		$("tfoot tr td:eq(1)").text(0);
+		            			$("tfoot tr td:eq(3)").text(0);
+		            			
+		            			$("tbody tr td:eq(3)").text(0);
+					           	$("tbody tr td:eq(7)").text(0);
+					       		$("tbody tr td:eq(11)").text(0);
+						        $("tbody tr td:eq(15)").text(0);
+						        $("tbody tr td:eq(19)").text(0);
+						        $("tbody tr td:eq(23)").text(0);
+						        $("tbody tr td:eq(27)").text(0);
+						        $("tbody tr td:eq(31)").text(0);
+						        $("tbody tr td:eq(35)").text(0);
+						        $("tbody tr td:eq(39)").text(0);
+						        $("tbody tr td:eq(43)").text(0);
+						        $("tbody tr td:eq(47)").text(0);
+						        $("tbody tr td:eq(51)").text(0);
+		            				
 		            		}else{
-		            			$("input[name=num]").val(obj.budget.num);
-			            		$("td input:eq(0)").val(obj.budget.foodExpenses);        	
-			            		$("td input:eq(1)").val(obj.budget.dwellingCommunication);
-			            		$("td input:eq(2)").val(obj.budget.householdgoods);
-			            		$("td input:eq(3)").val(obj.budget.clothBeauty);
-			            		$("td input:eq(4)").val(obj.budget.healthCulture);
-			            		$("td input:eq(5)").val(obj.budget.educationParenting);
-			            		$("td input:eq(6)").val(obj.budget.trafficVehicle);
-			            		$("td input:eq(7)").val(obj.budget.holidayDues);
-			            		$("td input:eq(8)").val(obj.budget.taxInterest);
-			            		$("td input:eq(9)").val(obj.budget.pinmoneyEtc);
-			            		$("td input:eq(10)").val(obj.budget.savingInsurance);
-			            		$("td input:eq(11)").val(obj.budget.creditCard);
-			            		$("td input:eq(12)").val(obj.budget.unclassified);
-			            		$("tfoot tr td:eq(1)").text(obj.budget.budget);
+		            			$("tfoot tr td:eq(3)").text(obj.budget.budget - 0);
+		            				
+		            			$("tbody tr td:eq(3)").text(obj.budget.foodExpenses-0);
+					           	$("tbody tr td:eq(7)").text(obj.budget.dwellingCommunication-0);
+					           	$("tbody tr td:eq(11)").text(obj.budget.householdgoods-0);
+					           	$("tbody tr td:eq(15)").text(obj.budget.clothBeauty-0);
+					           	$("tbody tr td:eq(19)").text(obj.budget.healthCulture-0);
+					           	$("tbody tr td:eq(23)").text(obj.budget.educationParenting-0);
+					           	$("tbody tr td:eq(27)").text(obj.budget.trafficVehicle-0);
+					           	$("tbody tr td:eq(31)").text(obj.budget.holidayDues-0);
+					           	$("tbody tr td:eq(35)").text(obj.budget.taxInterest-0);
+					           	$("tbody tr td:eq(39)").text(obj.budget.pinmoneyEtc-0);
+					           	$("tbody tr td:eq(43)").text(obj.budget.savingInsurance-0);
+					           	$("tbody tr td:eq(47)").text(obj.budget.creditCard-0);
+					           	$("tbody tr td:eq(51)").text(obj.budget.unclassified-0);
 		            		}
-
+		            	}else{ 
+		            		$("tfoot tr td:eq(2)").text(obj.monthExpense[0].TOTAL);
+		            			
+		            		if(obj.budget == null){
+		            			$("tfoot tr td:eq(3)").text(0 - obj.monthExpense[0].TOTAL);
+		            				
+		            			$("tbody tr td:eq(3)").text(0-obj.categoryExpense[7].SPEND_MONEY);
+					           	$("tbody tr td:eq(7)").text(0-obj.categoryExpense[12].SPEND_MONEY);
+					           	$("tbody tr td:eq(11)").text(0-obj.categoryExpense[5].SPEND_MONEY);
+					          	$("tbody tr td:eq(15)").text(0-obj.categoryExpense[9].SPEND_MONEY);
+					           	$("tbody tr td:eq(19)").text(0-obj.categoryExpense[0].SPEND_MONEY);
+					           	$("tbody tr td:eq(23)").text(0-obj.categoryExpense[2].SPEND_MONEY);
+					           	$("tbody tr td:eq(27)").text(0-obj.categoryExpense[3].SPEND_MONEY);
+					           	$("tbody tr td:eq(31)").text(0-obj.categoryExpense[1].SPEND_MONEY);
+					           	$("tbody tr td:eq(35)").text(0-obj.categoryExpense[6].SPEND_MONEY);
+					           	$("tbody tr td:eq(39)").text(0-obj.categoryExpense[8].SPEND_MONEY);
+					           	$("tbody tr td:eq(43)").text(0-obj.categoryExpense[11].SPEND_MONEY);
+					           	$("tbody tr td:eq(47)").text(0-obj.categoryExpense[13].SPEND_MONEY);
+					           	$("tbody tr td:eq(51)").text(0-obj.categoryExpense[4].SPEND_MONEY);
+					           		
+		            		}else{
+		            			$("tfoot tr td:eq(3)").text(obj.budget.budget - obj.monthExpense[0].TOTAL);
+		            			
+		            			$("tbody tr td:eq(3)").text(obj.budget.foodExpenses-obj.categoryExpense[7].SPEND_MONEY);
+					            $("tbody tr td:eq(7)").text(obj.budget.dwellingCommunication-obj.categoryExpense[12].SPEND_MONEY);
+					           	$("tbody tr td:eq(11)").text(obj.budget.householdgoods-obj.categoryExpense[5].SPEND_MONEY);
+					           	$("tbody tr td:eq(15)").text(obj.budget.clothBeauty-obj.categoryExpense[9].SPEND_MONEY);
+					           	$("tbody tr td:eq(19)").text(obj.budget.healthCulture-obj.categoryExpense[0].SPEND_MONEY);
+					           	$("tbody tr td:eq(23)").text(obj.budget.educationParenting-obj.categoryExpense[2].SPEND_MONEY);
+					           	$("tbody tr td:eq(27)").text(obj.budget.trafficVehicle-obj.categoryExpense[3].SPEND_MONEY);
+					           	$("tbody tr td:eq(31)").text(obj.budget.holidayDues-obj.categoryExpense[1].SPEND_MONEY);
+					           	$("tbody tr td:eq(35)").text(obj.budget.taxInterest-obj.categoryExpense[6].SPEND_MONEY);
+					           	$("tbody tr td:eq(39)").text(obj.budget.pinmoneyEtc-obj.categoryExpense[8].SPEND_MONEY);
+					           	$("tbody tr td:eq(43)").text(obj.budget.savingInsurance-obj.categoryExpense[11].SPEND_MONEY);
+					           	$("tbody tr td:eq(47)").text(obj.budget.creditCard-obj.categoryExpense[13].SPEND_MONEY);
+					           	$("tbody tr td:eq(51)").text(obj.budget.unclassified-obj.categoryExpense[4].SPEND_MONEY);
+		            			
+		            		}
+		            	} 
+		            		
+		            	//예산 달 기준으로 가져옴
+		            	if(obj.budget == null){
+		            		obj.budget = "{}";
+		            		$("input[name=num]").val(0);
+		            		$("td input:eq(0)").val(0);
+			            	$("td input:eq(1)").val(0);
+			            	$("td input:eq(2)").val(0);
+			            	$("td input:eq(3)").val(0);
+			            	$("td input:eq(4)").val(0);
+			            	$("td input:eq(5)").val(0);
+			            	$("td input:eq(6)").val(0);
+			            	$("td input:eq(7)").val(0);
+			            	$("td input:eq(8)").val(0);
+			            	$("td input:eq(9)").val(0);
+			            	$("td input:eq(10)").val(0);
+			            	$("td input:eq(11)").val(0);
+			            	$("td input:eq(12)").val(0);
+			            	$("td input:eq(13)").val(0);	
+			            	$("tfoot tr td:eq(1)").text(0);
+		            	}else{
+		            		$("input[name=num]").val(obj.budget.num);
+			            	$("td input:eq(0)").val(obj.budget.foodExpenses);        	
+			            	$("td input:eq(1)").val(obj.budget.dwellingCommunication);
+			            	$("td input:eq(2)").val(obj.budget.householdgoods);
+			            	$("td input:eq(3)").val(obj.budget.clothBeauty);
+			            	$("td input:eq(4)").val(obj.budget.healthCulture);
+			            	$("td input:eq(5)").val(obj.budget.educationParenting);
+			            	$("td input:eq(6)").val(obj.budget.trafficVehicle);
+			            	$("td input:eq(7)").val(obj.budget.holidayDues);
+			            	$("td input:eq(8)").val(obj.budget.taxInterest);
+			            	$("td input:eq(9)").val(obj.budget.pinmoneyEtc);
+			            	$("td input:eq(10)").val(obj.budget.savingInsurance);
+			            	$("td input:eq(11)").val(obj.budget.creditCard);
+			            	$("td input:eq(12)").val(obj.budget.unclassified);
+			            	$("tfoot tr td:eq(1)").text(obj.budget.budget);
 		            	}
-		            });     
+		            }
+		           });     
 		        }
 		    });
 	});
