@@ -11,6 +11,7 @@ import com.salim.dao.FreeBoardDao;
 import com.salim.service.FreeBoardService;
 import com.salim.util.PagingBean;
 import com.salim.vo.FreeBoard;
+import com.salim.vo.FreeComment;
 
 @Service
 public class FreeBoardServiceImpl implements FreeBoardService {
@@ -39,18 +40,20 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	}
 
 	@Override
-	public FreeBoard selectByNo(int no) {
-		// 여기서 member_id가 글 등록한 member_id가 같은 id인지 판별해서 같으면 클릭업데이트 하지 않기 다르면
-		// 클릭업데이트 하기
+	public FreeBoard selectByNoAndClickUpdate(int no) {
+		System.out.println("클릭 업데이트 했다."+dao.selectByNo(no));
 		dao.updateClick(no);
-
+			
 		return dao.selectByNo(no);
 	}
-
+	
 	@Override
-	public int selectCommentTotal(int no) {
-		return dao.selectCommentTotal(no);
+	public FreeBoard selectByNo(int no) {
+		System.out.println("조회만했음"+dao.selectByNo(no));
+	
+		return dao.selectByNo(no);
 	}
+	
 
 	@Override
 	public Map getFreeBoardList(int page) {
@@ -92,5 +95,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		System.out.println("제목:"+dao.selectTitleTotal(content));
 		return map;
 	}
+
+	@Override
+	public int selectSeq() {
+		return dao.selectSeq();
+	}
+
+	
 
 }

@@ -1,5 +1,7 @@
 package com.salim.dao.impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +37,44 @@ public class ExpenseDaoImpl implements ExpenseDao{
 	public List<Expense> selectExpenseList(Map map) {
 		return session.selectList("expenseMapper.selectExpenseDate", map);
 	}
+
+	// 월 보고서용	- 대분류 기준 조회
+	public List selectSpendEachCategory(Map map) {
+		return session.selectList("expenseMapper.selectSpendEachCategory", map);
+	}
+
+	@Override	// 한 달 동안
+	public List selectSpendDuringMonth(Map map) {
+		return session.selectList("expenseMapper.selectSpendDuringMonth", map);
+	}
+
+	@Override	// 일 년
+	public List selectSpendEachMonth(Map map) {
+		return session.selectList("expenseMapper.selectSpendEachMonth", map);
+	}
+
+	@Override
+	public List selectTotalMonthReport(Map map) {
+		return session.selectList("expenseMapper.selectTotalMonthReport", map);
+	}
+
+	
+	/*============================================
+		일일 사용 내역 총액
+	  ============================================*/
+	@Override	
+	public int selectDayExpense(Map map) {
+		Object result = session.selectOne("expenseMapper.selectDayExpense", map);
+		return (result==null)?0:(Integer)result;
+	}
+	/*========================================
+ 		한달 동안 지출 누계
+ 	=========================================*/
+	@Override
+	public int selectForOneMonthExpense(Map map) {
+		return session.selectOne("expenseMapper.selectForOneMonthExpense", map);
+	}
+	
 	
 	
 }

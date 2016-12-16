@@ -3,11 +3,19 @@ package com.salim.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Budget implements Serializable{
-	
+	@NotNull
 	private int num;
+	@NotNull
 	private String memberId;
+	@NotNull
+	@DateTimeFormat(pattern="yyyy-MM")
 	private Date budgetDate;
+	
 	private int budget;
 	private int foodExpenses;
 	private int dwellingCommunication;
@@ -22,11 +30,10 @@ public class Budget implements Serializable{
 	private int savingInsurance;
 	private int creditCard;
 	private int unclassified;
-	
 	public Budget() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-
 	public Budget(int num, String memberId, Date budgetDate, int budget, int foodExpenses, int dwellingCommunication,
 			int householdgoods, int clothBeauty, int healthCulture, int educationParenting, int trafficVehicle,
 			int holidayDues, int taxInterest, int pinmoneyEtc, int savingInsurance, int creditCard, int unclassified) {
@@ -49,7 +56,6 @@ public class Budget implements Serializable{
 		this.creditCard = creditCard;
 		this.unclassified = unclassified;
 	}
-
 	@Override
 	public String toString() {
 		return "Budget [num=" + num + ", memberId=" + memberId + ", budgetDate=" + budgetDate + ", budget=" + budget
@@ -60,143 +66,108 @@ public class Budget implements Serializable{
 				+ ", savingInsurance=" + savingInsurance + ", creditCard=" + creditCard + ", unclassified="
 				+ unclassified + "]";
 	}
-
 	public int getNum() {
 		return num;
 	}
-
 	public void setNum(int num) {
 		this.num = num;
 	}
-
 	public String getMemberId() {
 		return memberId;
 	}
-
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-
 	public Date getBudgetDate() {
 		return budgetDate;
 	}
-
 	public void setBudgetDate(Date budgetDate) {
 		this.budgetDate = budgetDate;
 	}
-
 	public int getBudget() {
 		return budget;
 	}
-
 	public void setBudget(int budget) {
 		this.budget = budget;
 	}
-
 	public int getFoodExpenses() {
 		return foodExpenses;
 	}
-
 	public void setFoodExpenses(int foodExpenses) {
 		this.foodExpenses = foodExpenses;
 	}
-
 	public int getDwellingCommunication() {
 		return dwellingCommunication;
 	}
-
 	public void setDwellingCommunication(int dwellingCommunication) {
 		this.dwellingCommunication = dwellingCommunication;
 	}
-
 	public int getHouseholdgoods() {
 		return householdgoods;
 	}
-
 	public void setHouseholdgoods(int householdgoods) {
 		this.householdgoods = householdgoods;
 	}
-
 	public int getClothBeauty() {
 		return clothBeauty;
 	}
-
 	public void setClothBeauty(int clothBeauty) {
 		this.clothBeauty = clothBeauty;
 	}
-
 	public int getHealthCulture() {
 		return healthCulture;
 	}
-
 	public void setHealthCulture(int healthCulture) {
 		this.healthCulture = healthCulture;
 	}
-
 	public int getEducationParenting() {
 		return educationParenting;
 	}
-
 	public void setEducationParenting(int educationParenting) {
 		this.educationParenting = educationParenting;
 	}
-
 	public int getTrafficVehicle() {
 		return trafficVehicle;
 	}
-
 	public void setTrafficVehicle(int trafficVehicle) {
 		this.trafficVehicle = trafficVehicle;
 	}
-
 	public int getHolidayDues() {
 		return holidayDues;
 	}
-
 	public void setHolidayDues(int holidayDues) {
 		this.holidayDues = holidayDues;
 	}
-
 	public int getTaxInterest() {
 		return taxInterest;
 	}
-
 	public void setTaxInterest(int taxInterest) {
 		this.taxInterest = taxInterest;
 	}
-
 	public int getPinmoneyEtc() {
 		return pinmoneyEtc;
 	}
-
 	public void setPinmoneyEtc(int pinmoneyEtc) {
 		this.pinmoneyEtc = pinmoneyEtc;
 	}
-
 	public int getSavingInsurance() {
 		return savingInsurance;
 	}
-
 	public void setSavingInsurance(int savingInsurance) {
 		this.savingInsurance = savingInsurance;
 	}
-
 	public int getCreditCard() {
 		return creditCard;
 	}
-
 	public void setCreditCard(int creditCard) {
 		this.creditCard = creditCard;
 	}
-
 	public int getUnclassified() {
 		return unclassified;
 	}
-
 	public void setUnclassified(int unclassified) {
 		this.unclassified = unclassified;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -220,7 +191,6 @@ public class Budget implements Serializable{
 		result = prime * result + unclassified;
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -272,5 +242,7 @@ public class Budget implements Serializable{
 			return false;
 		return true;
 	}
+	
+
 	
 }

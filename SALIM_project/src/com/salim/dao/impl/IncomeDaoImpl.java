@@ -1,5 +1,7 @@
 package com.salim.dao.impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +29,7 @@ public class IncomeDaoImpl implements IncomeDao{
 	}
 
 	//삭제
-	public int deleteIncome(Map map) { //map => memberId와 incomeId
+	public int deleteIncome(Map map) {
 		return session.delete("incomeMapper.deleteIncome", map);
 	}
 
@@ -35,5 +37,35 @@ public class IncomeDaoImpl implements IncomeDao{
 	public List<Income> selectIncomeList(Map map) { // map => memberId 와 incomeDate
 		return session.selectList("incomeMapper.selectIncomeDate", map);
 	}
+
+	@Override
+	public List selectImportEachMonth(Map map) {
+		return session.selectList("incomeMapper.selectImportEachMonth", map);
+	}
+
+	@Override
+	public List selectImportEachCategory(Map map) {
+		return session.selectList("incomeMapper.selectImportEachCategory", map);
+	}
+
+	/*============================================
+		일일 수입 총액
+  	============================================*/
+	@Override
+	public int selectDayIncome(Map map) {
+		Object result = session.selectOne("incomeMapper.selectDayIncome", map);
+		return (result==null)?0:(Integer)result;
+	}
+	
+	/*========================================
+	 	한달 동안 수입 누계
+	 =========================================*/
+	@Override
+	public int selectForOneMonthIncome(Map map) {
+		/*Integer incomeSum = session.selectOne("incomeMapper.selectForOneMonthIncome", map);
+		return (incomeSum == null)? 0:incomeSum;*/
+		return session.selectOne("incomeMapper.selectForOneMonthIncome", map);
+	}
+
 	
 }

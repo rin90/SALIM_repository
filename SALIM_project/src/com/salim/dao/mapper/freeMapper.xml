@@ -2,6 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="freeMapper">
 	
+	<resultMap type="freeboard" id="freeBoard-resultMap">
+		<id column="no" property="no"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="file_root" property="fileName"/>
+		<result column="click" property="click"/>
+		<result column="good" property="good"/>
+		<result column="register_time" property="registerTime"/>
+		<result column="member_id" property="memberId"/>
+	</resultMap>
+	
+	
+	<resultMap type="freeboard" id="freeBoard-freeComment-join-resultMap" extends="freeBoard-resultMap">
+		<collection property="freeComment" ofType="FreeComment">
+			<id column="id" property="id"/>
+			<result column="comment_content" property="commentContent"/>
+			<result column="comment_member_id" property="commentMemberId"/>		
+			<result column="no" property="no"/>
+		 	<result column="comment_group" property="commentGroup"/>
+			<result column="group_level" property="groupLevel"/>		
+			<result column="comment_register_time" property="commentRegisterTime"/>
+		</collection>
+	</resultMap>
+	
+	
+	
 	
 	<!-- 자유게시판 글쓰기 (등록) -->
 	<insert id="freeInsert" parameterType="freeboard">
@@ -10,7 +36,7 @@
 		</selectKey>
 		insert into free_board values(#{no},#{title},#{content},#{fileName},#{click},#{good},#{registerTime},#{memberId}) 		
 	</insert>
-	
+
 	<!-- 자유게시판 글수정 -->
 	<update id="freeUpdate" parameterType="freeboard">
 		update free_board
@@ -39,20 +65,28 @@
 		delete from free_board
 		where no=#{no}
 	</delete>
-
-	<!-- 글 번호로 글 찾기(상세화면) -->
-	<select id="selectByNo" parameterType="_int" resultType="freeboard">
-		select no,title,member_id memberId,register_time registerTime,click,good,content,file_root fileName
-		from free_board
-		where no=#{no}
+	
+	<!--(상세화면) 글 번호로 글 찾기(상세화면) - 조인연산 사용-->
+	<select id="selectByNo" parameterType="_int" resultMap="freeBoard-freeComment-join-resultMap">
+		select f.no,f.title,f.member_id ,f.register_time ,f.click,f.good,f.content,f.file_root 
+		,c.id,c.comment_content,c.comment_member_id ,c.no,c.comment_group ,c.group_level ,c.comment_register_time 
+		from free_board f,(
+					select id,no,comment_content,comment_member_id ,comment_group ,group_level ,comment_register_time 
+					from free_comments
+					where no=#{value} <!--해당 글에 대한 댓글 모두 가져오기-->
+					order by comment_group,id <!--가져온 글에 그룹번호로 정렬그룹번호는 입력될때마다 증가한다. 그래서 즉 위에(먼저)입력한사람의 그룹 번호가 더 낮다.-->
+				) c
+		where f.no=#{value}
+		and f.no=c.no(+)
 	</select>
 	
-	<!-- 글의 총댓글 개수 (상세화면)-->
-	<select id="selectCommentTotal" parameterType="_int" resultType="_int">
-	select count(id)
-	from comments
-	where font_no =#{value}
+	<!-- join안할 경우에 기냥 상세 조회 
+	<select id="selectByNo2" parameterType="_int" resultMap="freeBoard-resultMap">
+		select f.title,f.member_id memberId,f.register_time registerTime,f.click,f.good,f.content,f.file_root fileName
+		from free_board f
+		where f.no=#{value}
 	</select>
+	 -->
 	
 	<!-- Page처리를 위한 글 토탈 -->
 	<select id="selectTotal" resultType="_int">

@@ -54,7 +54,7 @@
 			<!-- 이전페이지 -->
 			<c:choose>
 				<c:when test="${requestScope.pageBean.previousGroup }">
-					<a href="${initParam.rootPath }/keyword.do?page=${requestScope.pageBean.beginPage-1}">◀&nbsp;</a>
+					<a href="${initParam.rootPath }/keyword.do?category=${requestScope.category }&search=${requestScope.search }&page=${requestScope.pageBean.beginPage-1}">◀&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 					◀&nbsp;
@@ -72,10 +72,11 @@
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
+			
 			<!-- 다음페이지 -->
 			<c:choose>
 				<c:when test="${requestScope.pageBean.nextGroup }">
-					<a href="${initParam.rootPath }/keyword.do?page=${requestScope.pageBean.endPage+1 }">&nbsp;▶</a>
+					<a href="${initParam.rootPath }/keyword.do?category=${requestScope.category }&search=${requestScope.search }&page=${requestScope.pageBean.endPage+1 }">&nbsp;▶</a>
 				</c:when>
 				<c:otherwise>
 					&nbsp;▶				

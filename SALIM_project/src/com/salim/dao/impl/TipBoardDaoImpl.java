@@ -73,9 +73,8 @@ public class TipBoardDaoImpl implements TipBoardDao{
 	}
 
 	@Override
-	public int selectCommentTotal(int value) {
-		
-		return session.selectOne("selectCommentTotal",value);
+	public int selectCommentTotal(int content) {
+		return session.selectOne("selectTitleTotal",content);
 	}
 
 

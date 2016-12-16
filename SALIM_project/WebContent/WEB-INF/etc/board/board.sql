@@ -10,7 +10,7 @@ create table free_board( --자유게시판
  click	number not null,  --조회수
  good number not null,  --좋아요
  register_time date not null, --작성일
- member_id varchar2(50) constraint fre_mem_fk references member not null--inline방식
+ member_id varchar2(50) constraint fre_mem_fk references member ON DELETE CASCADE not null--inline방식
 );
 select * from free_board;
 
@@ -31,7 +31,7 @@ create table tip_board(  --tip게시판
 	good number not null,   -- 좋아요
 	classification varchar2(20) not null, --분류
 	register_time date not null, -- 작성일
-	member_id varchar2(50) constraint tip_mem_fk references member not null--inline방식
+	member_id varchar2(50) constraint tip_mem_fk references member ON DELETE CASCADE not null--inline방식
 );
 select * from tip_board;
 drop table tip_board;
@@ -39,20 +39,27 @@ drop table tip_board;
 
 
 
-create sequence seq_com--sequence생성
+create sequence seq_com--sequence생성 id용
 select seq_com.nextval from dual  -- 조회 
 drop sequence seq_com--삭제
 
-create table comments(  --댓글
+--보류
+create sequence seq_cog--sequence생성 commentGroup용
+select seq_cog.nextval from dual  -- 조회 
+drop sequence seq_cog--삭제
+
+create table free_comments(  --댓글
 	id number primary key,
-	content varchar2(400) not null,
-	register_time date not null,
-	font_no number not null,  -- 어떤 글인지 번호
-	category varchar2(10) not null,    
-	member_id varchar2(50) constraint com_mem_fk references member not null
+	comment_content varchar2(400) not null,
+	comment_member_id varchar2(50) constraint fco_mem_fk references member ON DELETE CASCADE not null,
+	no number constraint fco_fre_fk references FREE_BOARD ON DELETE CASCADE not null,  -- 어떤 글인지 번호
+	comment_group number not null,
+	group_level number not null,
+	comment_register_time date not null
 );
 
-drop table comments;
+
+drop table free_comments;
 
 
 
@@ -70,3 +77,19 @@ create table question_and_answer(  -- Q&A 게시판
 );
 
 drop table question_and_answer;
+
+--나중에 시간남으면 하기 좋아요 영구 저장테이블
+create sequence seq_odt
+select seq_odt.nextval from dual
+drop sequence seq_odt
+
+create table good_t(
+	id number primary key,
+	no number not null,
+	good_whether number not null,
+	member_id varchar2(50) constant goo_mem_fk references member not null
+);
+drop table good_t
+
+
+

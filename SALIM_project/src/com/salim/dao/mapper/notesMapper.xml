@@ -7,6 +7,14 @@
 		메모 update
 		메모 select -->
 	
+	<resultMap type="notes" id="notes-resultMap">
+		<id property="no" column="no"/>
+		<result property="dayDate" column="day_date"/>
+		<result property="content" column="content"/>
+		<result property="memberId" column="member_id"/>
+	</resultMap>
+	
+	
 	 
 	<!-- 메모 insert -->
 	 <insert id="insertNotes" parameterType="notes">
@@ -21,17 +29,24 @@
 	 <update id="updateNotes" parameterType="notes">
 	 	update notes
 	 	<set>
-	 		content=#{content}
+	 		day_date=#{dayDate},
+	 		content=#{content},
+	 		member_id=#{memberId}
 	 	</set>
 	 	where no=#{no}
 	 </update>
 	 
 	<!--  메모 select -->
-	 <select id="selectNotes" parameterMap="map" resultType="notes">
+	 <select id="selectNotes" parameterType="map" resultMap="notes-resultMap">
 	 	select no, day_date, content, member_id
 	 	from notes
 	 	where member_id=#{memberId}
 	 	and day_date=#{dayDate}
 	 </select>
 	 
+	 <!-- 메모 delete -->
+	 <delete id="deleteNotes" parameterType="_int">
+	 	delete from notes 
+	 	where no=#{value}
+	 </delete>
 </mapper>

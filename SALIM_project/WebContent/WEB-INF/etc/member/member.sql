@@ -9,7 +9,7 @@ create table member(  --회원
 select * from member;
 drop table member;
 
-
+alter table member add(email varchar2(50) not null); 
 
 --테이블 삭제
 drop table member CASCADE CONSTRAINTS;
@@ -36,22 +36,81 @@ select seq_col.nextval from dual  -- 조회
 drop sequence seq_col--삭제
 
 create table collection(--그룹
-collection_id Number primary key,--그룹id
+collection_id varchar2(50) primary key,--그룹id
 collection_name varchar2(50) not null,--그룹이름
-collection_intro varchar2(300)--그룹소개
+collection_intro varchar2(300),--그룹소개
+grant_id varchar2(50) not null
 );
 
-drop table collection;
+drop table collection CASCADE CONSTRAINTS;
+
+select * from collection;
+insert into collection values('g6','그룹이름','그룹 소개');
+insert into collection values('g7','그룹 이름','그룹 소개');
 
 
 
 
 create table member_collection(--회원그룹
 member_id varchar2(50) constraint mco_col_fk references member,
-collection_id Number constraint mco_mem_fk references collection,
-grant_id varchar2(300) not null,--권한자id
+collection_id varchar2(50) constraint mco_mem_fk references collection,
+invite varchar2(50) not null,
 constraint mc_pk primary key(member_id,collection_id) 
 );
 
 
+select * from MEMBER_COLLECTION;
+
 drop table member_collection;
+
+--collection 삭제!----------------------------------------
+
+delete from MEMBER_COLLECTION
+where collection_id='collectionId46'
+
+delete from COLLECTION
+where collection_id='collectionId46'
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+
+select COLLECTION.collection_id, COLLECTION.collection_name, COLLECTION.collection_intro
+from collection,
+(
+	select member_collection.member_id memberId, member_collection.collection_id collectionId, member_collection.grant_Id grantId
+	from member, member_collection
+	where member.member_id=member_collection.member_id
+)
+where collection.collection_id =collectionId
+
+
+--[최종] 가계부 조회하기 (로그인 시) -------------------------------------------------------------------------------------------------------------------------
+select COLLECTION.collection_id collectionId, COLLECTION.collection_name collectionName, COLLECTION.collection_intro collectionIntro
+from collection,
+(
+	select member_collection.member_id memberId, member_collection.collection_id collectionId, member_collection.grant_Id grantId
+	from member_collection,
+	(
+		select member.member_id memberId
+		from member
+		where member.member_id='1'
+	)
+	where memberId=member_collection.member_id
+)
+where collection.collection_id =collectionId
+
+
+
+select COLLECTION.collection_id, COLLECTION.collection_name, COLLECTION.collection_intro
+	from collection,
+	(
+		select member_collection.member_id memberId, member_collection.collection_id collectionId, member_collection.grant_Id grantId
+		from member, member_collection
+		where member_collection.member_id='1'
+	)
+	where collection.collection_id = collectionId
+
+
+

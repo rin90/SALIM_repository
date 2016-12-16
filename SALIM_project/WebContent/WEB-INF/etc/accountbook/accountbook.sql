@@ -5,14 +5,16 @@ drop sequence seq_nts--삭제
 create table notes(  --메모
 	no number primary key,
 	day_date date not null,   --날짜
-	content varchar2(500) not null,
-	member_id varchar2(50) constraint nts_mem_fk references member not null
+	content varchar2(3000) not null,--메모 1000자까지 쓸수 있게
+	member_id varchar2(50) 
 );
+--member와 join 취소 : constraint nts_mem_fk references member not null
 
 drop table notes;
 
-
-
+select * from notes;
+--member와 join취소
+alter table notes drop constraint nts_mem_fk;
 
 
 create sequence seq_exp--sequence생성
@@ -21,14 +23,16 @@ drop sequence seq_exp--삭제
 
 create table expense(  --지출
 expense_id number primary key,
-member_id Varchar2(50) constraint exp_mem_fk references member not null,
+member_id Varchar2(50) not null,
 code_id Number not null,  --코드 id
 expense_date Date not null,  --지출일
-expense_explain Varchar2(300),  --사용내역
+expense_explain Varchar2(60),  --사용내역
 cash_expense Number,  --현금지출액
 card_expense Number,  -- 카드지출액
 card_type Varchar2(20)  --카드종류
 );
+
+select * from expense;
 
 drop table expense;
 
@@ -40,12 +44,14 @@ drop sequence seq_inc--삭제
 
 create table income(  --수입
 income_id Number primary key,
-member_id varchar2(50) constraint inc_mem_fk references member not null,
+member_id varchar2(50) not null,
 code_id Number not null,  --코드 id
 income_date date not null, --수입일
-explanation Varchar2(20) not null,  --수입내역
+explanation Varchar2(60) not null,  --수입내역, 20자까지 쓸수있게
 income_money Number not null --수입금액
 );
+
+select * from income;
 
 drop table income;
 
@@ -60,7 +66,7 @@ drop sequence seq_bud--삭제
 
 create table budget( --예산
 num number primary key, -- 예산번호
-member_id varchar2(50) constraint bud_mem_fk references member not null, 
+member_id varchar2(50), --예산이 귀속되는 회원id나 그룹id
 budget_date date not null, --예산일
 budget number not null,  --예산금액
 food_expenses number not null,   --식비
@@ -80,7 +86,10 @@ unclassified number not null --미분류
 
 drop table budget;
 
-
+select * from BUDGET;
+--member와 join취소
+alter table budget drop constraint bud_mem_fk;
+--constraint bud_mem_fk references member not null
 
 
 

@@ -7,7 +7,7 @@
 <title>SALIM - 지출 입력</title>	
 </head>
 
-<!-- datepicker 장착 -->
+<!-- datepicker 넣기 -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -116,6 +116,41 @@
 			location.href = "/SALIM_project/household/login/expenseDelete.do?"+checkedArr;
 		}
 	}
+	
+	//숫자 포맷 체크
+	var inputs = window.document.getElementsByClassName("element");
+	var regExp = /^[0-9]+$/;
+	function checkFormat(){
+		for(var i=0; i<inputs.length; i++){
+			if(!(inputs[i].value=="") && !(regExp.test(inputs[i].value))){
+					alert("숫자만 써주세요.");
+					inputs[i].focus();
+					return false;			
+			}
+		}
+		return true;
+	}; 
+	
+	
+	$(document).ready(function(){
+		//지출내역 글자수 체크
+		$(".explane").keyup(function(e){
+			var content = $(this).val();
+			if(content.length>20){
+				alert("글자수는 20자를 초과할 수 없습니다.");
+				$(this).focus();
+			}
+		});
+		//메모 글자수 체크
+		$("#notes").keyup(function(e){
+			var content = $(this).val();
+			if(content.length>1000){
+				alert("글자수는 1000자를 초과할 수 없습니다.");
+				$(this).focus();
+			}
+		});
+	});
+	
   </script>
 
 
@@ -124,8 +159,11 @@
 <body>
 
 <form action="/SALIM_project/household/login/expense.do" method="post">
-	<!-- 날짜 선택창 -->	<!-- 포맷 이상하게 나오는거 해결하기 -->
-	<input type="text" id="datepicker" name="expenseDate" value="${sessionScope.expenseDate }"  placeholder="${sessionScope.expenseDate }"><p>
+	
+	<!-- 날짜 선택창 -->
+	<p>
+	<input type="text" id="datepicker" name="expenseDate" value="${requestScope.expenseDate }"  placeholder="${requestScope.expenseDate }">
+	</p>
 	
 	<!-- 오늘 수입, 지출 불러오기 -->
 	<table border="1">
@@ -137,15 +175,15 @@
 		<tbody>
 			<tr>
 				<td>수입</td>
-				<td>얼마 들어왔는지 누계</td>
+				<td>${requestScope.incomeSum }</td>
 			</tr>
 			<tr>
 				<td>지출</td>
-				<td>얼마 나갔는지 누계</td>
+				<td>${requestScope.expenseSum }</td>
 			</tr>
 			<tr>
 				<td>누계</td>
-				<td>수입-지출</td>
+				<td>${requestScope.incomeSum - requestScope.expenseSum }</td>
 			</tr>
 		</tbody>
 	</table>
@@ -167,7 +205,6 @@
 				<td>
 					<input type="checkbox" id="checkAll"/>선택삭제 <!--체크박스 체크하면 전체 선택  -->
 				</td>
-				<!-- <td>날짜</td> -->
 				<td>지출내역</td>
 				<td>현금 지출금액</td>
 				<td>카드 지출금액</td>
@@ -184,13 +221,13 @@
 							<input type="hidden" name="expenseId" value="${expense.expenseId }"/>
 						</td>
 						<td>
-							<input type="text" name="expenseExplain" value="${expense.expenseExplain}" placeholder="${expense.expenseExplain}">
+							<input type="text" class="explane" name="expenseExplain" value="${expense.expenseExplain}" placeholder="${expense.expenseExplain}">
 						</td>
 						<td>
-							<input type="text" name="cashExpense" value="${expense.cashExpense}" class="money" placeholder="${expense.cashExpense}">
+							<input type="text" class="element" name="cashExpense" value="${expense.cashExpense}" placeholder="${expense.cashExpense}">
 						</td>
 						<td>
-							<input type="text" name="cardExpense" value="${expense.cardExpense}" class="money" placeholder="${expense.cardExpense}">
+							<input type="text" class="element" name="cardExpense" value="${expense.cardExpense}" placeholder="${expense.cardExpense}">
 						</td>
 						<td>	<!-- 통장/카드 선택하는거 나오게 하기 -->
 							<select>
@@ -223,39 +260,42 @@
 		
 		
 		<!-- 아무 것도 안 뿌려준 입력창 -->
-			<tr>
-				<td>
-					<input type="checkbox" name="expenseId" value="0"/> <!-- 체크박스 하나하나 -->
-					<input type="hidden" name="expenseId" value="0"/>
-				</td>
-					
-				<td><input type="text" name="expenseExplain"/></td>
-				<td><input type="text" name="cashExpense" class="money"/></td>
-				<td><input type="text" name="cardExpense" class="money"/></td>
-				<td>통장/카드 선택</td>
+			<c:forEach begin="1" end="5">
+				<tr>
+					<td>
+						<input type="checkbox" name="expenseId" value="0"/> <!-- 체크박스 하나하나 -->
+						<input type="hidden" name="expenseId" value="0"/>
+					</td>
+					<td><input type="text" name="expenseExplain" class="explane"/></td>
+					<td><input type="text" name="cashExpense" class="element"/></td>
+					<td><input type="text" name="cardExpense" class="element"/></td>
+					<td>통장/카드 선택</td>
 				
-				<!-- 여기서 부터 코드 선택 테이블 -->
-				<td>
-					<select class="bigCategory">
-						<c:forEach items="${requestScope.bigCategoryList}" var="bigCategory">
-							<option value="${bigCategory.bigCode }">${bigCategory.bigContent}</option>
-						</c:forEach>
-					</select>
+					<!-- 여기서 부터 코드 선택 테이블 -->
+					<td>
+						<select class="bigCategory">
+							<c:forEach items="${requestScope.bigCategoryList}" var="bigCategory">
+								<option value="${bigCategory.bigCode }">${bigCategory.bigContent}</option>
+							</c:forEach>
+						</select>
 					
-					<select name="codeId" class="smallCategory">
-						<option value="18">미분류</option>
-					</select>
-				</td>
-			</tr>
+						<select name="codeId" class="smallCategory">
+							<option value="18">미분류</option>
+						</select>
+					</td>
+				</tr>
+			</c:forEach>
+			
 		</tfoot>
 	</table>
 	
 	<!-- 메모장 -->
-	<textarea rows="25" cols="60" name="notes"></textarea>
+	<textarea rows="25" cols="60" name="notes" id="notes">${requestScope.notes.content }</textarea>
+	<input type="hidden" name="notesNum" value="${empty requestScope.notes.no? 0:requestScope.notes.no }">
 	
 	<!-- 저장버튼 -->
-	<input type="submit" value="저장" id="submitExpense"/>
-	<input type="button" value="선택삭제" id="deleteExpense" onclick="checkevent()"/>
+	<input type="submit" value="저장" id="submitExpense" onclick="return checkFormat();"/>
+	<input type="button" value="선택삭제" id="deleteExpense" onclick="checkevent();"/>
 	
 </form>	
 	

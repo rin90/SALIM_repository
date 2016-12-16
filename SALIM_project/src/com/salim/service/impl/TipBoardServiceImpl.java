@@ -91,7 +91,7 @@ public TipBoard ModelAndselectByNo(int no){
 		
 		// category는 검색 기준입니다.
 		if (category.equals("제목")) {    
-			System.out.println("if 제목 실행");
+			System.out.println("제목 실행");
 			list = dao.selectByTitle(page, content);
 			pageBean = new PagingBean(page, dao.selectCommentTotal(content));
 			
@@ -103,6 +103,8 @@ public TipBoard ModelAndselectByNo(int no){
 			System.out.println("if 작성자 list"+dao.selectByMemberId(page, content));
 			pageBean = new PagingBean(page, dao.selectMemberIdTotal(content));
 		
+		} else if(category.equals("분류")){
+			
 		}
 		
 		map.put("list", list);

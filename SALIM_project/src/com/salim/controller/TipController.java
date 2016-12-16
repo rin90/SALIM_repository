@@ -47,19 +47,17 @@ public class TipController {
 		Map map = null;
 		map = tipBoardService.getTermsTipListBoard(page, category, search);
 		List list = (List) map.get("list");
-		System.out.println(list);
+		
 		if (list.size() != 0) { // 12/6일 내일 해야함
 			page = page - 1;
 			map = tipBoardService.getTermsTipListBoard(page, category, search);
 		}
-		map.put("codes", codeService.findCode("조회"));
+		map.put("codes", codeService.findCode("tip"));
 		map.put("category", category);
 		map.put("search", search);
-		PagingBean p = (PagingBean) map.get("pageBean");
-		
-			return new ModelAndView("body/tipboard/tipboard_list.tiles", map);
-		}
-	
+
+		return new ModelAndView("body/tipboard/tipboard_list.tiles", map);
+	}
 
 	// 아작스처리
 	@RequestMapping(value = "/boardAjax")
@@ -73,11 +71,11 @@ public class TipController {
 
 	// 글 수정 폼 이동
 	@RequestMapping("move")
-	public ModelAndView updatemove(int no ,int page) {
+	public ModelAndView updatemove(int no, int page) {
 		Map map = new HashMap();
 		map.put("codes", codeService.findCode("tip"));
 		map.put("tipBoard", tipBoardService.ModelAndselectByNo(no));
-        map.put("page",page);
+		map.put("page", page);
 		System.out.println(tipBoardService.ModelAndselectByNo(no));
 		return new ModelAndView("body/tipboard/tip_board_modify.tiles", map);
 
@@ -85,17 +83,17 @@ public class TipController {
 
 	// 글수정파일이저장되는곳
 	@RequestMapping(value = "boardUpdate")
-	public String update(@ModelAttribute TipBoard tipBoard, HttpServletRequest request, ModelMap map ,int page)
+	public String update(@ModelAttribute TipBoard tipBoard, HttpServletRequest request, ModelMap map, int page)
 			throws IllegalStateException, IOException {
 		MultipartFile file = tipBoard.getFileRoot();
 		if (file != null && !file.isEmpty()) {// 업로드 된 파일이 있다면
-			System.out.println("dsadasd"+file.getOriginalFilename());
+			System.out.println("dsadasd" + file.getOriginalFilename());
 			tipBoard.setFileName(file.getOriginalFilename());// 파일명
-			System.out.println("파일이름:"+tipBoard.getFileName());
+			System.out.println("파일이름:" + tipBoard.getFileName());
 
 			String dir = request.getServletContext().getRealPath("/tipFileRoute");// 파일
-																				// 저장되는
-																				// 곳
+																					// 저장되는
+																					// 곳
 
 			System.out.println("진짜 파일 경로::" + dir);
 
@@ -105,39 +103,37 @@ public class TipController {
 		}
 		tipBoardService.tipUpdate(tipBoard);
 
-		return "redirect:/selectByNo.do?no=" + tipBoard.getNo()+"&page="+page;
-		
+		return "redirect:/selectByNo.do?no=" + tipBoard.getNo() + "&page=" + page;
 
 	}
-	
-
 
 	// 글삭제
 	@RequestMapping("delete")
-	public String delete(int no ,int page ,ModelMap map) {
+	public String delete(int no, int page, ModelMap map) {
 		tipBoardService.tipDelete(no);
-       
-		return "redirect:/list.do?page="+page;
+
+		return "redirect:/list.do?page=" + page;
 	}
 
 	// 글등록하는기능
 	@RequestMapping(value = "/boardInsert", method = RequestMethod.POST)
-	public String insert(int page,@ModelAttribute TipBoard tipboard, HttpServletRequest request) throws IllegalStateException, IOException {
-		
+	public String insert(int page, @ModelAttribute TipBoard tipboard, HttpServletRequest request)
+			throws IllegalStateException, IOException {
+
 		MultipartFile file = tipboard.getFileRoot();
-	
+
 		if (file != null && !file.isEmpty()) {
-			
+
 			tipboard.setFileName(file.getOriginalFilename());
-			
+
 			String dir = request.getServletContext().getRealPath("/tipFileRoute");
-			
+
 			File dest = new File(dir, file.getOriginalFilename());
 
 			file.transferTo(dest);
 		}
 		tipBoardService.tipInsert(tipboard);
-		return "redirect:/selectByNo.do?no=" + tipboard.getNo()+"&page="+page;
+		return "redirect:/selectByNo.do?no=" + tipboard.getNo() + "&page=" + page;
 	}
 
 	// 좋아요 증가
@@ -154,9 +150,9 @@ public class TipController {
 	}
 
 	@RequestMapping("selectByNo")
-	public String selectByNo(int no, ModelMap map,int page) {
+	public String selectByNo(int no, ModelMap map, int page) {
 		map.addAttribute("tipBoard", tipBoardService.selectByNo(no));
-		map.addAttribute("page",page);
+		map.addAttribute("page", page);
 		System.out.println("dd");
 		return "body/tipboard/tip_board_detail.tiles";
 	}
@@ -168,14 +164,6 @@ public class TipController {
 		map.addAttribute("page", page);
 		return "body/tipboard/tip_board_form.tiles";
 	}
-@RequestMapping("search")
-public String selectTitleTotal(int no,int page ,ModelMap map){
-	map.addAttribute("codes", codeService.findCode("tip"));
-	map.addAttribute("page",page);
-	map.addAttribute("tipBoard", tipBoardService.selectTitleTotal(no, page));
-		
-	return "body/tipboard/tip_board_search.tiles";
-	
-}
-	
+
+
 }
