@@ -29,3 +29,9 @@ and day_date='2016-12-02';
 -- member와 join된 것 없애기
 alter table notes drop constraint nts_mem_fk;
 alter table notes drop constraint nts_mem_fk;
+
+
+
+
+select member_id, card_id, card_type, card_description from CARd
+where member_id=1;
