@@ -3,7 +3,7 @@
 <mapper namespace= "memberNCollection"> 
 
 <!-- 그룹 가계부 추가 --> 
- <insert id="insertmemberNCollection" parameterType="hashmap" >
+ <insert id="insertmemberNCollection" parameterType="memberNCollection" >
  	insert into member_Collection values(#{memberId},#{collectionId},#{invite})
  </insert>
  
@@ -11,4 +11,13 @@
  	delete from MEMBER_COLLECTION
 	where collection_id=#{value}
  </delete>
+ 
+ <!-- 그룹 가계부 -->
+ <select id="selectByMemberIdAndCollectionId" resultType="memberNCollection" parameterType="memberNCollection">
+ 	select member_id memberId, collection_id collectionId, invite
+ 	from member_collection
+ 	where member_collection.member_id=#{memberId} and member_collection.collection_id=#{collectionId}
+ </select>
+ 
 </mapper> 
+

@@ -2,6 +2,7 @@ package com.salim.service.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import com.salim.dao.MemberNCollectionDao;
 import com.salim.service.CollectionService;
 import com.salim.vo.Collect;
 import com.salim.vo.Member;
+import com.salim.vo.MemberNCollection;
 
 @Service
 public class CollectionServiceImpl implements CollectionService{
@@ -36,14 +38,8 @@ public class CollectionServiceImpl implements CollectionService{
 		System.out.println("addCollection"+collection);
 		 dao.insertCollection(collection); //가계부 추가 부분
 		 
-		 	HashMap<String,String> map=new HashMap<String,String>();
-			
-				//가계부가 추가 되었다. 'ㅅ' 
-				
-				map.put("memberId",m.getMemberId());
-				map.put("collectionId", collection.getCollectionId());
-				map.put("invite","false");
-				mncdao.insertmemberNCollection(map);
+		 MemberNCollection memberNcollection=new MemberNCollection(m.getMemberId(),collection.getCollectionId(),"true");
+		 mncdao.insertmemberNCollection(memberNcollection);
 	}
 	
 	public List<Collect> findCollectionByMemberId(String memberId) throws Exception
@@ -115,10 +111,59 @@ public class CollectionServiceImpl implements CollectionService{
 		}
 	}
 	
+	public String findEmailForMemberInvited(String email, String memberId, String collectionId)
+	{
+		//1.멤버가 -> 'ㅅ' 권한이 있는지
+		//있다면 -> 입력한 이메일이 있는지  -> 있을 경우 -> 입력한 이메일에 해당하는 맴버 아이디와 콜랙션 아이디로 => 이미 초대했거나 최종 최대된 회원인지를! 확인.
+		
+		System.out.println("검증하는 메서드인데ㅡ,"+email+"/"+memberId+"/"+collectionId);
+		Member member=new Member();
+		Collect collection=new Collect();
+		collection=dao.selectCollectionByCollectionId(collectionId); // 
+		
+		if(memberId.equals(collection.getGrantId())) //권한이 있는 사람인지 확인
+		{
+			member=memdao.selectMemberByEmail(email); //입력한 이메일로 회원을 가져왔고,
+
+			if(member!=null) //회원이 있는 경우 
+			{
+				//여기서 다시 나뉘어야 한다
+				MemberNCollection mnc=new MemberNCollection();
+				HashMap<String,String> map=new HashMap<String,String>();
+				map.put("memberId", memberId);
+				map.put("collectionId", collectionId);
+				
+				mnc=mncdao.selectByMemberIdAndCollectionId(map);
+				if(mnc==null)
+				{
+					return email+"님께 초대 메시지를 보냈습니다.";
+				}else
+				{
+					return "이미 초대한 회원입니다.";
+				}
+			}else{
+				return "이메일을 찾을 수 없습니다.";
+			}
+		}else
+		{
+			return "멤버 초대 권한이 없습니다.";
+		}
+		
+	}
+	
+	//회원 초대!! 'ㅅ' 
+	public void inviteMemberInCollection(String email, String collectionId)
+	{
+		Member member=new Member();
+		member=memdao.selectMemberByEmail(email); //회원 아이디 알아내려고...
+		if(member!=null)
+		{
+			MemberNCollection memberNcollection=new MemberNCollection(member.getMemberId(),collectionId,"false");
+			mncdao.insertmemberNCollection(memberNcollection);
+			System.out.println("아////////////////ㅠㅠ");
+		}
+	}
 }
-
-
-
 
 
 

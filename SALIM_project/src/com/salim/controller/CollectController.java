@@ -3,6 +3,7 @@ package com.salim.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,8 +14,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.salim.service.impl.CollectionServiceImpl;
+import com.salim.service.impl.MemberServiceImpl;
 import com.salim.vo.Collect;
 import com.salim.vo.Member;
 
@@ -24,6 +27,8 @@ public class CollectController {
 
 	@Autowired
 	private CollectionServiceImpl service;
+	@Autowired
+	private MemberServiceImpl memberService;
 
 
 	//가계부 추가 
@@ -116,10 +121,27 @@ public class CollectController {
 		
 	}
 	
-	@RequestMapping("/inviteMember.do")
-	public String inviteMember(String email)
+	
+	//emailcheck - ajax 처리
+	@RequestMapping("/emailCheck.do")
+	@ResponseBody
+	public HashMap<String,String> emailCheckAjax(String emailMessage, String memberId, String collectionId)
 	{
-		System.out.println(email+"dddddddddddd");
+		System.out.println(emailMessage+memberId+collectionId);
+		HashMap<String,String> map=new HashMap<String,String>();	
+		String emailCheckMessage=service.findEmailForMemberInvited(emailMessage,memberId,collectionId);
+		System.out.println(emailCheckMessage);
+		map.put("emailCheckMessage",emailCheckMessage);
+		return map;
+	}
+	
+	//초대하기
+	@RequestMapping("/inviteMember.do")
+	public String inviteMember(String email, String collectionId)
+	{
+		//2.비지니스 로직 호출! 'ㅅ'
+		System.out.println("inviteMember()"+email+collectionId);
+		service.inviteMemberInCollection(email, collectionId);
 		return "body/collection/setting/settings/inviteMember_form.tiles";
 	}
 	
