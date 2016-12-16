@@ -1,5 +1,6 @@
 package com.salim.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +22,23 @@ public class BankServiceImpl implements BankService{
 	}
 
 	@Override
-	public void deleteBank(List<Integer> bankId) {
-		
+	public void deleteBank(List<Integer> bankIdList) {
+		System.out.println("통장 삭제 서비스로 들어오  - "+bankIdList);
+		for(int i=0; i<bankIdList.size(); i++){
+			dao.deleteBankByMemberId(bankIdList.get(i));
+		}
 	}
 
 	@Override
 	public void modify(Bank bank) {
-		// TODO Auto-generated method stub
+		dao.updateBankByMemberId(bank);
 		
 	}
 
 	@Override
 	public List findBankByMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return dao.selectBankByMemberId(memberId);
 	}
 	
 	

@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bank">
-	<sql id="select-bank">
-		select	member_id memberId,
-				bank_id	  bankId,
-				bank_Type bankType,
-				bank_description bankDescription
-		form	bank
-	</sql>
+<mapper namespace="bankMapper">
 	
 	<!-- insert -->
 	<insert id="insertBank" parameterType="bank">
@@ -20,20 +13,29 @@
 	<!-- update -->
 	<update id="updateBankByMemberId" parameterType="bank">
 		update	bank
-		set		bankId = #{bankId},
-				bankType = #{bankType},
-				bankDescription = #{bankDescription}
-		where	member_id = #{memberId}
+		set	bank_type = #{bankType},
+			bank_description = #{bankDescription}
+		where member_id = #{memberId}
+		and bank_id = #{bankId}
 	</update>
 	
 	<!-- delete -->
-	<delete id="deleteBankByMemberId" parameterType="string">
-		delete from bank where member_id = #{memberId}
+	<delete id="deleteBankByMemberId" parameterType="_int">
+		delete from bank where bank_id = #{bankId}
 	</delete>
 	
 	<!-- select -->
-	<select id="selectBankByMemberId" parameterType="string" resultType="bank">
-		<include refid="select-bank"/>
-		where member_id #{value}
+	<resultMap type="bank" id="bank-resultMap">
+		<result property="memberId" column="member_id"/>
+   		<result property="bankId" column="bank_id"/>
+   		<result property="bankType" column="bank_type"/>
+   		<result property="bankDescription" column="bank_description"/>
+   </resultMap>
+	
+	<select id="selectBankByMemberId" parameterType="string" resultMap="bank-resultMap">
+		select member_id, bank_id, bank_type, bank_description
+		from bank
+		where member_id = #{value}
+		order by bank_id
 	</select>
 </mapper>
