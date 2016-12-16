@@ -12,12 +12,20 @@
 	where collection_id=#{value}
  </delete>
  
- <!-- 그룹 가계부 -->
- <select id="selectByMemberIdAndCollectionId" resultType="memberNCollection" parameterType="memberNCollection">
+ <!-- 그룹 가계부 조회 -->
+ <select id="selectByMemberIdAndCollectionId" resultType="memberNCollection" parameterType="map">
  	select member_id memberId, collection_id collectionId, invite
  	from member_collection
  	where member_collection.member_id=#{memberId} and member_collection.collection_id=#{collectionId}
  </select>
  
+ <!-- 그룹 가계부 list 조회! -->
+ <select id="selectAllByCollectionId" parameterType="string" resultType="memberNCollection">
+ 	
+ 	select member_id memberId, collection_id collectionId, invite
+ 	from member_collection
+ 	where collection_id=#{value}
+ 
+ </select>
 </mapper> 
 

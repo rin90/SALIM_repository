@@ -97,20 +97,44 @@ public class CollectionServiceImpl implements CollectionService{
 	
 	//가계부 삭제 부분
 	
-	public int removeCollection(String collectionId)
+	public String removeCollection(String collectionId, String memberIdforGrant)
 	{
-		int num=mncdao.deleteMemberNCollectionByCollectionId(collectionId);
+		System.out.println("removeCollection:    "+collectionId);
 		
-		if(num==1) //부모 테이블의 row 삭제 성공 시
+		Collect dbCollect=new Collect();
+		
+		dbCollect=dao.selectCollectionByCollectionId(collectionId);
+		
+		if(memberIdforGrant.equals(dbCollect.getGrantId()))
 		{
-			return dao.deleteCollectionByCollectionId(collectionId); 
-		}else
-		{
-			System.out.println("부모 테이블이 삭제가 안 되었다.");
-			return 0;
+			//권한 있는 사람 - 수정 가능
+			List<MemberNCollection> list=new ArrayList<MemberNCollection>();
+			list=mncdao.selectAllByCollectionId(collectionId);
+			if(list!=null) //부모 테이블이 있는 경우
+			{
+				mncdao.deleteMemberNCollectionByCollectionId(collectionId);// 부모 테이블 지우고
+				System.out.println("부모 테이블 삭제함");
+				dao.deleteCollectionByCollectionId(collectionId);
+			}else
+			{
+				System.out.println("부모 테이블이 없는 경우?");
+				dao.deleteCollectionByCollectionId(collectionId);
+			}
+			
 		}
+		else
+		{
+			//권한 없는 사람의 접근
+			return "접근 권한이 없습니다.";
+		}
+		
+		//무조건 있는게 아니라서??라고 생각했는데 무조건 부모테이블은 1개 있음 그룹을 생성한 사람의 정보는 무조건 1row 저장된다. 하 ㅠㅠ 있는 경우와 없는 경우를 나눠서 해야 함 ㅠㅠㅠㅠㅠ 하..
+		
+		return "";
+		
 	}
 	
+	//나중에 조인으로 처리해야할 메서드 일단은 그냥 함 ㄱㄱ
 	public String findEmailForMemberInvited(String email, String memberId, String collectionId)
 	{
 		//1.멤버가 -> 'ㅅ' 권한이 있는지
@@ -119,8 +143,7 @@ public class CollectionServiceImpl implements CollectionService{
 		System.out.println("검증하는 메서드인데ㅡ,"+email+"/"+memberId+"/"+collectionId);
 		Member member=new Member();
 		Collect collection=new Collect();
-		collection=dao.selectCollectionByCollectionId(collectionId); // 
-		
+		collection=dao.selectCollectionByCollectionId(collectionId); // collectionId로 collection에 접근해서, 권한이 있는 지 확인....
 		if(memberId.equals(collection.getGrantId())) //권한이 있는 사람인지 확인
 		{
 			member=memdao.selectMemberByEmail(email); //입력한 이메일로 회원을 가져왔고,
@@ -128,12 +151,14 @@ public class CollectionServiceImpl implements CollectionService{
 			if(member!=null) //회원이 있는 경우 
 			{
 				//여기서 다시 나뉘어야 한다
-				MemberNCollection mnc=new MemberNCollection();
-				HashMap<String,String> map=new HashMap<String,String>();
-				map.put("memberId", memberId);
+				MemberNCollection mnc=new MemberNCollection(); //중간 테이블 접근!
+				HashMap<String,String> map=new HashMap<String,String>(); //왜 map을 이용했니?
+				map.put("memberId", member.getMemberId());
 				map.put("collectionId", collectionId);
 				
 				mnc=mncdao.selectByMemberIdAndCollectionId(map);
+				
+				System.out.println(mnc);
 				if(mnc==null)
 				{
 					return email+"님께 초대 메시지를 보냈습니다.";
@@ -141,10 +166,10 @@ public class CollectionServiceImpl implements CollectionService{
 				{
 					return "이미 초대한 회원입니다.";
 				}
-			}else{
+			}else{ //입력한 회원이 없는 경우
 				return "이메일을 찾을 수 없습니다.";
 			}
-		}else
+		}else //멤버 초대할 권한이 없는 경우
 		{
 			return "멤버 초대 권한이 없습니다.";
 		}
@@ -160,8 +185,9 @@ public class CollectionServiceImpl implements CollectionService{
 		{
 			MemberNCollection memberNcollection=new MemberNCollection(member.getMemberId(),collectionId,"false");
 			mncdao.insertmemberNCollection(memberNcollection);
-			System.out.println("아////////////////ㅠㅠ");
+			System.out.println("회원 초대하는 부분 끝남 inviteMemberInCollection();");
 		}
+		
 	}
 }
 

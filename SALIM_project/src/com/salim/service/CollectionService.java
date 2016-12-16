@@ -18,7 +18,7 @@ public interface CollectionService {
 
 	public String modifyCollection(Collect collect,String memberIdforGrant);
 
-	public int removeCollection(String collectionId);
+	public String removeCollection(String collectionId, String memberIdforGrant);
 	
 	//멤버 초대 시, 입력한 이메일이 있는지 회원으로 체크.
 	public String findEmailForMemberInvited(String email, String memberId, String collectionId);

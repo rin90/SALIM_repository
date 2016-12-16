@@ -1,6 +1,7 @@
 package com.salim.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -33,4 +34,9 @@ public class MemberNCollectionDaoImpl implements MemberNCollectionDao{
 	{
 		return session.selectOne(makeSql("selectByMemberIdAndCollectionId"), map);
 	}
+	
+	public List<MemberNCollection> selectAllByCollectionId(String collectionId)
+	{
+		return session.selectList(makeSql("selectAllByCollectionId"),collectionId);
+	}	
 }
