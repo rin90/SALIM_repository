@@ -55,7 +55,11 @@ public class FreeBoardController {
 		Map map = service.getFreeBoardList(page);
 		map.put("codes", codeService.findCode("조회"));
 		List<FreeBoard> list = (List<FreeBoard>) map.get("list");
-		if (list.size() != 0) {
+		if(list.size() == 0){
+			page= page-1;
+			map=service.getFreeBoardList(page);
+		}
+		if (page != 0) {
 			return new ModelAndView("body/board/free_board_list.tiles", map);
 		} else {
 			return new ModelAndView("body/board/non_view.tiles", map);

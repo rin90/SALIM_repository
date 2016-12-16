@@ -6,10 +6,12 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 	<!-- annotation을 이용한 bean생성 설정시 사용 -->
 	<context:component-scan base-package="com.salim.controller, com.salim.dao.impl, com.salim.service.impl, com.salim.interceptor"/>
@@ -87,9 +89,43 @@
 	 <!-- SqlSessionTemplate 생성 - 생성자로 sqlSessionFactoryBean을 주입 -->
 	<bean name="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
 		      c:sqlSessionFactory-ref="sqlSessionFactory"/>
-
+	
 	<!-- Transaction 처리 -->
 	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 			  p:dataSource-ref="dataSource"/>
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!--  메일 처리 -->
+	<!-- https://www.google.com/settings/u/0/security/lesssecureapps 에서 보안수준을 낮춘다. -->
+	<bean name="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		p:host="smtp.gmail.com"
+		p:port="587"
+		p:username="gmail계정"
+		p:password="gmail 패스워드"
+		p:javaMailProperties-ref="mailProperty"/>
+		
+	<util:properties id="mailProperty"> 
+		<prop key="mail.transport.protocol">smtp</prop>
+		<prop key="mail.smtp.auth">true</prop>
+		<prop key="mail.smtp.starttls.enable">true</prop>
+		<prop key="mail.debug" >true</prop>
+	</util:properties>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </beans>
