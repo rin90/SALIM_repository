@@ -12,6 +12,7 @@ create table free_board( --자유게시판
  register_time date not null, --작성일
  member_id varchar2(50) constraint fre_mem_fk references member not null--inline방식
 );
+select * from free_board;
 
 drop table free_board;
 
@@ -32,7 +33,7 @@ create table tip_board(  --tip게시판
 	register_time date not null, -- 작성일
 	member_id varchar2(50) constraint tip_mem_fk references member not null--inline방식
 );
-
+select * from tip_board;
 drop table tip_board;
 
 

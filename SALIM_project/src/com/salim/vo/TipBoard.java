@@ -1,6 +1,7 @@
 package com.salim.vo;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -11,7 +12,6 @@ public class TipBoard implements Serializable{
 	private String content;
 	private MultipartFile fileRoot;
 	private String fileName;
-	private String category;
 	private int click =0;
 	private int good =0;
 	private String classification;//분류
@@ -21,21 +21,6 @@ public class TipBoard implements Serializable{
 	
 	public TipBoard() {
 		super();
-	}
-
-
-	public TipBoard(int no, String title, String content, MultipartFile fileRoot, String category, int click, int good,
-			String classification, String memberId) {
-		super();
-		this.no = no;
-		this.title = title;
-		this.content = content;
-		this.fileRoot = fileRoot;
-		this.category = category;
-		this.click = click;
-		this.good = good;
-		this.classification = classification;
-		this.memberId = memberId;
 	}
 
 
@@ -79,13 +64,13 @@ public class TipBoard implements Serializable{
 	}
 
 
-	public String getCategory() {
-		return category;
+	public String getFileName() {
+		return fileName;
 	}
 
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 
@@ -119,6 +104,16 @@ public class TipBoard implements Serializable{
 	}
 
 
+	public Date getRegisterTime() {
+		return registerTime;
+	}
+
+
+	public void setRegisterTime(Date registerTime) {
+		this.registerTime = registerTime;
+	}
+
+
 	public String getMemberId() {
 		return memberId;
 	}
@@ -130,25 +125,18 @@ public class TipBoard implements Serializable{
 
 
 	@Override
-	public String toString() {
-		return "TipBoard [no=" + no + ", title=" + title + ", content=" + content + ", fileRoot=" + fileRoot
-				+ ", category=" + category + ", click=" + click + ", good=" + good + ", classification="
-				+ classification + ", memberId=" + memberId + "]";
-	}
-
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((classification == null) ? 0 : classification.hashCode());
 		result = prime * result + click;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((fileName == null) ? 0 : fileName.hashCode());
 		result = prime * result + ((fileRoot == null) ? 0 : fileRoot.hashCode());
 		result = prime * result + good;
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + no;
+		result = prime * result + ((registerTime == null) ? 0 : registerTime.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -163,11 +151,6 @@ public class TipBoard implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		TipBoard other = (TipBoard) obj;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
 		if (classification == null) {
 			if (other.classification != null)
 				return false;
@@ -179,6 +162,11 @@ public class TipBoard implements Serializable{
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
+			return false;
+		if (fileName == null) {
+			if (other.fileName != null)
+				return false;
+		} else if (!fileName.equals(other.fileName))
 			return false;
 		if (fileRoot == null) {
 			if (other.fileRoot != null)
@@ -194,6 +182,11 @@ public class TipBoard implements Serializable{
 			return false;
 		if (no != other.no)
 			return false;
+		if (registerTime == null) {
+			if (other.registerTime != null)
+				return false;
+		} else if (!registerTime.equals(other.registerTime))
+			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
@@ -203,15 +196,30 @@ public class TipBoard implements Serializable{
 	}
 
 
-	
-
-
-	public void setFileName(String originalFilename) {
-		this.fileName=fileName;
-		
+	@Override
+	public String toString() {
+		return "TipBoard [no=" + no + ", title=" + title + ", content=" + content + ", fileRoot=" + fileRoot
+				+ ", fileName=" + fileName + ", click=" + click + ", good=" + good + ", classification="
+				+ classification + ", registerTime=" + registerTime + ", memberId=" + memberId + "]";
 	}
-	
-	
+
+
+	public TipBoard(int no, String title, String content, MultipartFile fileRoot, String fileName, int click, int good,
+			String classification, Date registerTime, String memberId) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.content = content;
+		this.fileRoot = fileRoot;
+		this.fileName = fileName;
+		this.click = click;
+		this.good = good;
+		this.classification = classification;
+		this.registerTime = registerTime;
+		this.memberId = memberId;
+	}
+
+
 	
 	
 	

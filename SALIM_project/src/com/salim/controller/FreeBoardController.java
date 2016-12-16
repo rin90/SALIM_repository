@@ -34,7 +34,7 @@ public class FreeBoardController {
 	@Autowired
 	private CodeService codeService;
 
-	// 게시판 목록 뿌려주는 메소드                        기본                           V    -로그인 없이 가능
+	// 게시판 목록 뿌려주는 메소드                        기본                          V    -로그인 없이 가능
 	@RequestMapping("list")
 	public ModelAndView list(int page) {
 	

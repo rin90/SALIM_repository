@@ -11,75 +11,34 @@ import com.salim.vo.TipBoard;
 import page.page;
 
 public interface TipBoardService {
-
+	// 글등록
 	void tipInsert(TipBoard tipboard);
 
-	
+	// 글수정
+	void tipUpdate(TipBoard tipboard);
 
-	void tipUpdate(TipBoard tipboard);// 글수정
+	// 조회수증가
+	TipBoard clickUpdateint(int no);
 
-	void clickUpdateint(TipBoard tipboard);// 조회수증가
+	// 글삭제
+	void tipDelete(int no);
 
+	// no로 글 찾기(상세화면)
+	TipBoard selectByNo(int no);
 
+	// 글에대한 댓글 총개수
+	int selectCommentTotal(int no);
 
-	int tipDelete(int no);
+	// 좋아요증가
+	void goodUpdate(int no, int num);
 
-	int selectTotal(int no);// page처리를 우한 글총 개수
-
-	List<TipBoard> selectCurrentPage(int no, Map map);// page처리를 위한 현재페이지
-
-	int selectByNo(int no);// no로 글 찾기(상세화면)
-
-	int selectCommentTotal(int value);// 글에대한 댓글 총개수
-
+	// 글목록 페이징처리
 	Map getTipListBoard(int page);
 
+	// 제목으로검색과작성자검색총페이지
+	Map getTermsTipListBoard(int page, String category, String content);
 
-
+	TipBoard ModelAndselectByNo(int no);
 	
-
-
-	void goodUpdate(int no, int i);
-
-
-
-	void goodUpdate(TipBoard tipboard);
-
-
-
-	void tipinsert(TipBoard tipboard);
-
-
-
-
-
-
-
-	
-
-
-
-	
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
+	 Map selectTitleTotal(int no ,int page);
 }

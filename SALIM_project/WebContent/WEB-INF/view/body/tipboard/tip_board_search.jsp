@@ -21,6 +21,7 @@
 	<table border="1">
 		<thead>
 			<tr>
+			    <td>분류</td>
 				<td>번호</td>
 				<td>제목</td>
 				<td>작성자</td>
@@ -32,15 +33,16 @@
 		
 		<tbody id="tbody">
 			<!--  목록 뿌리기 -->
-			<c:forEach items="${requestScope.list }" var="freeBoard">
+			<c:forEach items="${requestScope.list }" var="tipBoard">
 				<tr>
-					<td>${freeBoard.no }</td>
-					<td><a 
-					href="${initParam.rootPath }/free/seleteDetail.do?no=${freeBoard.no}&page=${requestScope.pageBean.page}&category=${requestScope.category}">${freeBoard.title }</a></td>
-					<td>${freeBoard.memberId }</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${freeBoard.registerTime }"/></td>
-					<td>${freeBoard.click }</td>
-					<td>${freeBoard.good }</td>
+				   <td>${tipBoard.classification }</td>
+					<td>${tipBoard.no }</td>
+					<td> 
+					<a href="${initParam.rootPath }/selectByNo.do?no=${tipBoard.no}&page=${requestScope.pageBean.page}">${tipBoard.title }</a></td>
+					<td>${tipBoard.memberId }</td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${tipBoard.registerTime }"/></td>
+					<td>${tipBoard.click }</td>
+					<td>${tipBoard.good }</td>
 				</tr>
 			</c:forEach>
 			
@@ -52,7 +54,7 @@
 			<!-- 이전페이지 -->
 			<c:choose>
 				<c:when test="${requestScope.pageBean.previousGroup }">
-					<a href="${initParam.rootPath }/free/list.do?page=${requestScope.pageBean.beginPage-1}">◀&nbsp;</a>
+					<a href="${initParam.rootPath }/keyword.do?page=${requestScope.pageBean.beginPage-1}">◀&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 					◀&nbsp;
@@ -66,28 +68,28 @@
 						[${page }]
 					</c:when>
 					<c:otherwise>
-						<a href="${initParam.rootPath }/free/list.do?page=${page }">${page }</a>				
+						<a href="${initParam.rootPath }/keyword.do?page=${page }">${page }</a>				
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<!-- 다음페이지 -->
 			<c:choose>
 				<c:when test="${requestScope.pageBean.nextGroup }">
-					<a href="${initParam.rootPath }/free/list.do?page=${requestScope.pageBean.endPage+1 }">&nbsp;▶</a>
+					<a href="${initParam.rootPath }/keyword.do?page=${requestScope.pageBean.endPage+1 }">&nbsp;▶</a>
 				</c:when>
 				<c:otherwise>
 					&nbsp;▶				
 				</c:otherwise>
 			</c:choose>
 			
-			<form action="${initParam.rootPath }/free/form.do">
+			<form action="${initParam.rootPath }/form.do">
 			<input type="hidden" name="page" value="${requestScope.pageBean.page }">
 			&nbsp;&nbsp;&nbsp;<input type="submit" value="글쓰기">
 			</form>
 			
 			<p/>
 			
-			<form action="${initParam.rootPath }/free/keyword.do" method="post">
+			<form action="${initParam.rootPath }/keyword.do" method="post">
 			<select name="category">				
 				<c:forEach items="${requestScope.codes }" var="code">
 					<option>${code.code }</option> 					

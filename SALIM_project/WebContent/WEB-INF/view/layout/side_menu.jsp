@@ -20,7 +20,7 @@
 
 <a href="${initParam.rootPath }/test/time.do">Test</a><br>
 <a href="${initParam.rootPath }/free/list.do?page=1">자유게시판</a><br>
-<a href="${initParam.rootPath }/">Tip게시판</a><br>
+<a href="${initParam.rootPath }/list.do?page=1">Tip게시판</a><br>
 <a href="${initParam.rootPath }/">Q&A</a><br>
 
 

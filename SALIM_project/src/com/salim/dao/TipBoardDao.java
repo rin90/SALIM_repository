@@ -11,25 +11,48 @@ import com.salim.vo.FreeBoard;
 import com.salim.vo.TipBoard;
 
 public interface TipBoardDao {
-	void tipInsert(TipBoard tipboard);// 글쓰기완료
+	// 글삭제완료
+	void tipDelete(int no);
 
-	void tipUpdate(TipBoard tipboard);// 글수정완료
+	// page처리를 우한 글총 개수
+	int selectTotal();
 
-	void clickUpdateint(TipBoard tipboard);// 조회수증가
+	// page처리를 위한 현재페이지완료
+	List<TipBoard> selectCurrentPage(int page);
 
-	int goodUpdate(int no);// 좋아용 증가완료
+	// no로 글 찾기(상세화면)
+	TipBoard selectByNo(int no);
 
-	void tipDelete(int no);// 글삭제완료
+	// 글에대한 댓글 총개수
+	int selectCommentTotal(int no);
+	// 좋아요 증가
 
-	Map getTipBoardList(int page); //
+	int goodUpdate(int no, int num);
 
-	int selectTotal(int no);// page처리를 우한 글총 개수
+	// 조회수 증가
+	void clickUpdateint(int no);
 
-	List<TipBoard> selectCurrentPage(Map map);// page처리를 위한 현재페이지완료
+	// 조회 제목으로 검색
+	List<TipBoard> selectByTitle(int page, String content);
 
-	int selectByNo(int no);// no로 글 찾기(상세화면)
+	// page처리를 위한 글 총 개수
+	int selectCommentTotal(String content);
 
-	int selectCommentTotal(int no);// 글에대한 댓글 총개수
+	// 조회 제목으로 검색
+	List<TipBoard> selectByMemberId(int no, String content);
 
-	void goodUpdate(TipBoard tipboard);
+	// 글에대한 댓글 총개수
+	int selectMemberIdTotal(String content);
+
+	// 글수정
+	void tipUpdate(TipBoard tipboard);
+
+	// tip게시판 글등록 (글쓰기)
+	void tipInsert(TipBoard tipboard);
+
+	
+
+	List<TipBoard> selectTitleTotal(int no, int page);
+	
+
 }
