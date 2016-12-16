@@ -15,7 +15,6 @@ public class CardDaoImpl implements CardDao{
    @Autowired
    private SqlSessionTemplate session;
    
-   public CardDaoImpl(){}
    
    private String makeSql(String tagId){
       return "cardMapper."+tagId;

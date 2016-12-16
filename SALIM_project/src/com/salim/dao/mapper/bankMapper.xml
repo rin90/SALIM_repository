@@ -11,6 +11,9 @@
 	
 	<!-- insert -->
 	<insert id="insertBank" parameterType="bank">
+		<selectKey keyProperty="bankId" resultType="int" order="BEFORE">
+			select seq_bank_id.nextval from dual
+		</selectKey>
 		insert into bank values(#{memberId}, #{bankId}, #{bankType}, #{bankDescription})
 	</insert>
 	

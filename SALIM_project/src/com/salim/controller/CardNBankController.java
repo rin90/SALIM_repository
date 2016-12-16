@@ -3,6 +3,7 @@ package com.salim.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,20 +31,17 @@ public class CardNBankController {
    private CardService service;
    @Autowired
    private CodeService codeService;
-   
-   public String CardNBankRegister(){
-      return null;}
 
    //카드카드카드
    //카드추가..?
    @RequestMapping(value="cardNBankAdd.do", method=RequestMethod.POST)
-   public View add(String cardNaming, String bankList1, HttpSession session){
+   public String add(String cardNaming, String bankList1, HttpSession session, HttpServletRequest request){
 	   System.out.println("추가 정보 받은 것??? "+bankList1);
 	   String memberId = ((Member) session.getAttribute("login_info")).getMemberId();
 	   service.addCard(new Card(memberId, 0, bankList1, cardNaming));
-	   service.findCardByMemberId(memberId);
+	   request.setAttribute("cardList",  service.findCardByMemberId(memberId));
 	   
-	   return new InternalResourceView("/cardNBank/login/cardNBank.do");
+	   return "redirect:/cardNBank/login/cardNBank.do";
    }
    
    //카드삭제
@@ -90,5 +88,12 @@ public class CardNBankController {
 	   return new InternalResourceView("/cardNBank/login/cardNBank.do");
    }
  
-
+   
+   //통장
+   //통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장통장
+   
+  /* @RequestMapping(value="candNBank.do", method=RequestMethod.POST)
+   public View insert*/
+   
+   
 }

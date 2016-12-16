@@ -1,14 +1,21 @@
 package com.salim.service;
 
+import java.util.List;
+
 import com.salim.vo.Bank;
 
 public interface BankService {
 
-	/**
-	 * 멤버에 저장된 통장을 찾아주는 메서드.
-	 * 
-	 * @param MemberId
-	 * @return
-	 */
-	Bank findBankByMemberId(String MemberId);
+	//추가
+	public void addBank(Bank bank);
+	
+	//삭제
+	public void deleteBank(List<Integer> bankId);
+	
+	//수정
+	public void modify(Bank bank);
+	
+	//조회
+	List findBankByMemberId(String memberId);
+	
 }

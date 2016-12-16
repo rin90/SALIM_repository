@@ -13,7 +13,6 @@ public class BankDaoImpl implements BankDao{
 	@Autowired
 	private SqlSessionTemplate session;
 	
-	public BankDaoImpl(){}
 	
 	private String makeSql(String tagId){
 		return "bank."+tagId;
