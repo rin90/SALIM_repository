@@ -32,9 +32,8 @@ jQuery의   Fullcalendar
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<div id="dialog" title="Basic dialog" hidden="hidden">
-	<jsp:include page="./schedule.jsp"></jsp:include> 
-</div>
+
+<jsp:include page="./schedule.jsp"></jsp:include> 
 
 <script type='text/javascript'>
 
@@ -54,9 +53,17 @@ jQuery의   Fullcalendar
 			editable : true,
 			selectable : true,		// 달력에서 선택할 수 있게
 			selectHelper : true,	// 달력의 어느 부분이 선택되었는지 색으로 표시
- 			select : function(start, end){	// 날짜 선택시 수행할 일
- 				$( "#dialog" ).dialog();
- 				/* var title = prompt('Event Title : ');
+			select : function(start, end){	// 날짜 선택시 수행할 일
+ //				alert(start.format('YYYY-MM-DD') + " ~ " + end.format('YYYY-MM-DD'));
+				
+ 				// 다이얼로그에서 사용할 수 있게 셋팅해준거지요~
+ 				$('#selectDate').text(start.format('YYYY-MM-DD')+' 기준');
+ 				$('#dia_start').val(start);
+	 			$('#dia_end').val(end);
+	 			$( "#dialog" ).dialog("open");	
+ 				
+ 				/* 
+ 				 var title = prompt('Event Title : ');
 				var eventDate;
 				if(title) {
 					eventDate = {
@@ -66,7 +73,8 @@ jQuery의   Fullcalendar
 					};
 					$('#calendar').fullCalendar('renderEvent', eventDate, true);
 				}
-				$('#calendar').fullCalendar('unselect'); */
+				$('#calendar').fullCalendar('unselect');  
+				 */
 			}, 
 			eventLimit: true	// Event가 많이 등록되면 +n 형식으로 표시 
 		}); 

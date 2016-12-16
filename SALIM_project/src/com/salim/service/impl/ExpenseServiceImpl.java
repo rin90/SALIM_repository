@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.salim.dao.CategoryDao;
 import com.salim.dao.ExpenseDao;
+import com.salim.dao.IncomeDao;
 import com.salim.service.ExpenseService;
 import com.salim.service.NotesService;
 import com.salim.vo.BigCategory;
@@ -24,6 +25,8 @@ public class ExpenseServiceImpl implements ExpenseService{
 	
 	@Autowired
 	private ExpenseDao dao;
+	@Autowired
+	private IncomeDao incomeDao;
 	@Autowired
 	private CategoryDao categoryDao;
 	@Autowired
@@ -106,6 +109,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 		param.put("memberId", memberId);
 		param.put("dayDate", expenseDate);
 		param.put("expenseDate", expenseDate);
+		param.put("monthday", new SimpleDateFormat("yyyy-MM").format(expenseDate));
 		
 		//지출 조회
 		List<Expense> expenseList = dao.selectExpenseList(param);
@@ -120,12 +124,19 @@ public class ExpenseServiceImpl implements ExpenseService{
 		//메모 조회
 		Notes notes = notesService.findNotes(param);
 		
+		//수입 한달동안 누계
+		int incomeSum= incomeDao.selectForOneMonthIncome(param);
+		//지출 한달동안 누계
+		int expenseSum = dao.selectForOneMonthExpense(param);
+		
 		//지출 조회
 		Map result = new HashMap();
 		result.put("expenseList", expenseList);
 		result.put("bigCategoryList", bigCategoryList);
 		result.put("selectSmallCategoryList", selectSmallCategoryList);
 		result.put("notes", notes);
+		result.put("incomeSum", incomeSum);
+		result.put("expenseSum", expenseSum);
 		
 		return result;
 	}	
@@ -142,6 +153,14 @@ public class ExpenseServiceImpl implements ExpenseService{
 			map.put("memberId", memberId);
 			dao.deleteExpense(map);
 		}
+	}
+
+	/*============================================
+		일일 사용 내역 총액
+	  ============================================*/
+	@Override
+	public int selectDayExpense(Map map) {
+		return dao.selectDayExpense(map);
 	}
 	
 	

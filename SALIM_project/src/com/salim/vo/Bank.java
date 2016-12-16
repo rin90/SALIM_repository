@@ -8,6 +8,12 @@ public class Bank implements Serializable{
 	private String bankType;
 	private String bankDescription;
 	
+	
+	public Bank() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Bank(String memberId, int bankId, String bankType, String bankDescription) {
 		super();
 		this.memberId = memberId;

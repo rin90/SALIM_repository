@@ -32,7 +32,7 @@ import com.salim.vo.FreeComment;
 import com.salim.vo.Member;
 
 @Controller
-@RequestMapping("/free/")
+@RequestMapping("/free/login/")
 public class FreeBoardController {
 	/*
 	 * 나중에 시간 남으면 처리할 것들 1. 좋아요 F5처리 못함 -db생성해서 하기 ,쿠키로 할 경우에 사용자가 쿠키를 삭제할 수도
@@ -50,7 +50,7 @@ public class FreeBoardController {
 	private FreeCommentService commentService;
 
 	// 게시판 목록 뿌려주는 메소드 기본 V -로그인 없이 가능
-	@RequestMapping("login/list")
+	@RequestMapping("list")
 	public ModelAndView list(int page) {
 		Map map = service.getFreeBoardList(page);
 		map.put("codes", codeService.findCode("조회"));
@@ -63,7 +63,7 @@ public class FreeBoardController {
 	}
 
 	// 게시판 목록 뿌려주는 메소드 --- >>>> 검색 -제목 또는 제목으로 검색시 V -로그인 없이 가능
-	@RequestMapping("login/keyword")
+	@RequestMapping("keyword")
 	public ModelAndView selectByTitle(int page, String search, String category) {
 		Map map = null;
 		map = service.getTermsFreeBoardList(page, category, search);
@@ -84,7 +84,7 @@ public class FreeBoardController {
 	}
 
 	// 글 등록 form 이동 메소드 V - 로그인해야 가능
-	@RequestMapping("login/form")
+	@RequestMapping("form")
 	public String fromMove(int page, ModelMap map) {
 		map.addAttribute("page", page);
 		return "body/board/free_board_form.tiles";
@@ -105,7 +105,7 @@ public class FreeBoardController {
 	 * 방법은 Validator클래스를 만드는 방법이 있지만 이것이 더 유용
 	 */
 	// 글 등록 메소드 V -로그인해야 가능
-	@RequestMapping(value = "login/register", method = RequestMethod.POST)
+	@RequestMapping(value = "register", method = RequestMethod.POST)
 	public String insert(@ModelAttribute @Valid FreeBoard freeBoard, BindingResult errors, ModelMap map, int page,
 			HttpServletRequest request) throws IllegalStateException, IOException {
 		if (errors.hasErrors()) // 에러가 있는 경우 전달
@@ -136,7 +136,7 @@ public class FreeBoardController {
 	}
 
 	// 글 수정 form이동 메소드 V -로그인해야 가능
-	@RequestMapping("login/updateForm")
+	@RequestMapping("updateForm")
 	public String updateMove(int page, int no, String category, String search, ModelMap map) {
 		map.addAttribute("page", page);
 		map.addAttribute("freeBoard", service.selectByNo(no));
@@ -146,7 +146,7 @@ public class FreeBoardController {
 	}
 
 	// 글 수정 메소드 V - 로그인해야 가능
-	@RequestMapping("login/update")
+	@RequestMapping("update")
 	public String update(@ModelAttribute FreeBoard freeBoard, int page, String category, String search,
 			HttpServletRequest request, ModelMap map) throws IllegalStateException, IOException {
 		System.out.println("수정");
@@ -175,7 +175,7 @@ public class FreeBoardController {
 	}
 
 	// 글 삭제 메소드 V -로그인해야 가능
-	@RequestMapping("login/delete")
+	@RequestMapping("delete")
 	public String delete(int no, int page) {
 		System.out.println("삭제");
 		service.deleteFree(no);
@@ -188,7 +188,7 @@ public class FreeBoardController {
 	// no로 조회하는 메소드(상세화면) + 댓글 수 +조회수 +댓글 V member_id가 같을 경우 조회수 증가를 하면 안됨
 	// serviceImple에서 수정해야 할 부분(즉, 자기 자신의 글)
 	// -로그인 해야 가능
-	@RequestMapping("login/seleteDetail")
+	@RequestMapping("seleteDetail")
 	public String detail(int no, int page, String category, String search,
 			@CookieValue(required = false, defaultValue = "0") String read, HttpServletResponse response,
 			ModelMap map) {
@@ -220,7 +220,7 @@ public class FreeBoardController {
 
 	// 좋아요 수정 메소드 V view에서 ajax처리하기 -로그인 해야 가능 한 글에 대해 member_id는 한번만 좋아요 가능 즉,
 	// 글에 한 번씩만 좋아요 가능, member_id로 체크
-	@RequestMapping("login/good")
+	@RequestMapping("good")
 	@ResponseBody
 	public void goodUpdate(int no, String whether, HttpServletRequest request) {
 		System.out.println("좋아요");

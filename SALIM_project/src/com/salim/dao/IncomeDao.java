@@ -22,6 +22,9 @@ public interface IncomeDao {
 	//수입을 조회
 	List<Income> selectIncomeList(Map map);//memberId, incomeDate
 	
+
+	/*=================== << 일일 일정관련 부분용 >> ======================*/
+	int selectDayIncome(Map map);
 	
 	
 	/*=================== << 보고서용 >> ======================*/
@@ -41,4 +44,6 @@ public interface IncomeDao {
 	 */
 	List selectImportEachCategory(Map map);
 	
+	/*==================<< 한달 동안 수입 누계 >>====================*/
+	int selectForOneMonthIncome(Map map);
 }

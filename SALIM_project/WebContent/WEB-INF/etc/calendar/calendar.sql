@@ -30,6 +30,8 @@ insert into schedule values (seq_sch.nextval, '생일', '축하축하!',
 	to_date('2016-11-03 00:00:00', 'YYYY-MM-DD hh24:mi:ss'), to_date('2016-11-03 00:00:00', 'YYYY-MM-DD hh24:mi:ss'), 'tester2');
 insert into schedule values (seq_sch.nextval, '일정 구현', '언제 완성되는가...ㅠㅜ', 
 	to_date('2016-12-01 00:00:00', 'YYYY-MM-DD hh24:mi:ss'), to_date('2016-12-07 00:00:00', 'YYYY-MM-DD hh24:mi:ss'), 'tester2');
+insert into schedule values (seq_sch.nextval, 'dd생일', '축하축하!', 
+	to_date('2016-12-13 00:00:00', 'YYYY-MM-DD hh24:mi:ss'), to_date('2016-12-14 00:00:00', 'YYYY-MM-DD hh24:mi:ss'), 'tester2');
 
 --=============================== 조회 완성본 =============================================
 select no, title, detail, start_date, end_date, member_id

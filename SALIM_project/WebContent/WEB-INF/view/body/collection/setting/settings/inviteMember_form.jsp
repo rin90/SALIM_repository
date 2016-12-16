@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script type="text/javascript" src="${initParam.rootPath}/scripts/jquery.js"></script>
 <script type="text/javascript">
 var check=false;
@@ -56,10 +57,24 @@ $(document).ready(function(){
 		});
 
 
+<script type="text/javascript" >
+
+function messageKeep()
+{
+	 alert($("#emailMessage").val());
+}
+
+
 function emailClick()
 {
+
 	var keepMessage=$("#emailMessage").val();
 	alert(keepMessage+"초대장을 보냈습니다.");
+
+	var keepMessage=window.document.getElementsByIdName("emailMessage");
+	var m=$("#emailMessage").val(); 
+	alert(m+"초대장을 보냈습니다.");
+
 }
 /* function a()
 {
@@ -84,7 +99,10 @@ function emailClick()
 </tr>
 <tr>
 	<td>
-		<input type="text" name="email" id='emailMessage'> &nbsp;&nbsp;
+
+
+		<input type="text" name="email" id='emailMessage' onblur="messageKeep();">&nbsp;&nbsp;
+
 	</td>
 	
 	<td>

@@ -61,9 +61,17 @@
 	
 	
 	
+	<!-- ================================================================= -->
+	<!--		<<<< 하루치 총 수입 합 >>>>		-->
+	<select id="selectDayIncome" parameterType="map" resultType="_int">
+		select sum(income_money) income
+		from income 
+		where member_id=#{memberId} and to_char(income_date, 'YYYY-MM-DD') = #{day}
+	</select>
+	
 	
 	<!-- ==================================================================================== -->
-	<!-- 	<<<<<	보고서용 Qery	>>>>>	-->	
+	<!-- 	<<<<<	보고서용 Query	>>>>>	-->	
 	
 	<!-- 1년동안 각각의 달의 수입 금액의 총합 (특정 년도, 특정 ID 기준 )-->
 	<select id="selectImportEachMonth" parameterType="map" resultType="map">
@@ -95,5 +103,17 @@
 		order by big.big_code 
 	</select>	
 
+	
+	<!-- ====================================================== -->
+	
+	<!-- 1달 동안 수입의 합 -->
+	<select id="selectForOneMonthIncome" parameterType="map" resultType="_int">
+		select nvl(sum(income_money), 0) incomeSum
+		from income
+		where member_id=#{memberId}
+		and to_char(income_date, 'YYYY-MM')=#{monthday}
+	</select>
+	
+	
 	
 </mapper>

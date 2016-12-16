@@ -14,7 +14,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.salim.service.ExpenseService;
 import com.salim.service.GoalService;
+import com.salim.service.IncomeService;
+import com.salim.service.NotesService;
 import com.salim.service.ScheduleService;
 import com.salim.vo.Goal;
 import com.salim.vo.Schedule;
@@ -25,9 +28,16 @@ public class CalendarController {
 	
 	@Autowired
 	private GoalService gservice;
-	
 	@Autowired
 	private ScheduleService sservice;
+	
+	// Dialog에 일 단위로 정보 가지고 오기 위한 Service들
+	@Autowired
+	private NotesService nservice;	// 클릭시 받아오려구.
+	@Autowired
+	private ExpenseService eservice;
+	@Autowired
+	private IncomeService iservice;
 	
 	@RequestMapping("/load.do")
 	public String loadCalendar(String memberId, ModelMap map){	// ModelAttribute의 경우 자동으로 request scope속성으로 등록됨
@@ -73,5 +83,27 @@ public class CalendarController {
 		return result;
 //		return sservice.selectScheduleByMonth(param);
 	}
+
+	
+	@RequestMapping("/loadSchedule")
+	@ResponseBody
+	Map loadSchedule(String memberId, String startDate){		// 일자를 클릭하는 경우 해당 일자의 일정을 받아오는 것.
+		Map<String, Object> param = new HashMap();
+		param.put("day", startDate);
+		param.put("memberId", memberId);
+		param.put("dayDate", startDate);		// note용
+		
+		System.out.println("loadSchedule");
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("daySchedule", sservice.selectScheduleByDay(param));
+		result.put("dayNote", nservice.findNotes(param));
+		
+		result.put("dayExpense", (Integer)eservice.selectDayExpense(param));
+		result.put("dayIncome", (Integer)iservice.selectDayIncome(param));
+		
+		return result;
+	}
+	
 	
 }

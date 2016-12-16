@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.salim.service.CategoryService;
 import com.salim.service.IncomeService;
@@ -73,7 +74,7 @@ public class IncomeController {
 		String memberId = checkMemberId(session);
 		service.deleteIncome(incomeIdList, memberId);
 		return "redirect:/household/login/incomeSelect.do?incomeDate="+request.getParameter("incomeDate");
-	}
+	}	
 	
 	//그룹인지 개인인지 판별
 	public String checkMemberId(HttpSession session){
