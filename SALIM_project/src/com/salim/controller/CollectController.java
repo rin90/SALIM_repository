@@ -29,7 +29,7 @@ public class CollectController {
 	private CollectionServiceImpl service;
 	@Autowired
 	private MemberServiceImpl memberService;
-
+	
 
 	//가계부 추가 
 	@RequestMapping("/collection_add.do")
@@ -46,24 +46,34 @@ public class CollectController {
 		return "redirect:/collection/findAllCollectionList.do"; //로그인 성공페이지로 일단 ㄱㄱ 
 	}
 
-	//이건 main화면을 뿌려줄 때 사용할 컨트롤러인데,! - 돌아간다! 야호~ 'ㅅ'
+	//이건 main화면을 뿌려줄 때 사용할 컨트롤러
 	@RequestMapping("/findAllCollectionList.do")
 	public String collectShow(HttpSession session, ModelMap map)
 	{
-		
-		Member m=(Member)session.getAttribute("login_info");
+		System.out.println("문제의 /findAllCollectionList.do");
+		Member m=(Member)session.getAttribute("login_info"); //로그인 한 사람 session에 추가 
 		System.out.println(m.getMemberId());
-		List<Collect> collectionList=new ArrayList<Collect>();	
-		try {
-			collectionList=service.findCollectionByMemberId(m.getMemberId());
-			System.out.println(collectionList);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("collectionList가 없음!!ㄷㄷ");
-		}
-		
-		map.addAttribute("collectionList", collectionList);
+		service.findCollectionListIncludedOrInvited(map, m.getMemberId());
 		return "body/login_success.tiles";
+	}
+	//그룹 가계부 수락
+	@RequestMapping("/okay.do")
+	public String inviteOkay(String collectionId, String memberId)
+	{
+		
+		System.out.println("수락");
+		service.modifyByMemberIdAndCollectionId(collectionId,memberId,"true");
+		
+		return "redirect:/collection/findAllCollectionList.do";
+	}
+	
+	//그룹 가계부 거절
+	@RequestMapping("/refusal.do")
+	public String inviteRefusal(String collectionId, String memberId)
+	{
+		System.out.println("거절");
+		service.modifyByMemberIdAndCollectionId(collectionId,memberId,"refusal");
+		return "redirect:/collection/findAllCollectionList.do";
 	}
 	
 	@RequestMapping("/setSession.do")
@@ -121,7 +131,8 @@ public class CollectController {
 			session.removeAttribute("group_info");
 			List<Collect> groupList = service.selectByMemberIdNInvite(((Member)session.getAttribute("login_info")).getMemberId());
 			session.setAttribute("groupList", groupList);
-			return "redirect:/invite.do";
+		//	return "redirect:/invite.do";
+			return "redirect:/collection/findAllCollectionList.do";
 		}else
 		{
 			map.put("deletefailMessage", str);
@@ -132,7 +143,7 @@ public class CollectController {
 	}
 	
 	
-	//emailcheck - ajax 처리
+	//emailcheck - ajax 처리 
 	@RequestMapping("/emailCheck.do")
 	@ResponseBody
 	public HashMap<String,String> emailCheckAjax(String emailMessage, String memberId, String collectionId)
@@ -161,7 +172,7 @@ public class CollectController {
 			map.addAttribute("inviteMessage", "해당하는 이메일이 없습니다.");
 			//return "body/collection/setting/settings/inviteMember_form.tiles";
 		}
-		return "redirect:/invite.do";
+		return "redirect:/collection/inviteSetting.do";
 	}
 	
 	
@@ -184,6 +195,20 @@ public class CollectController {
 		}
 
 		return "redirect:/household/login/incomeSelect.do";
+	}
+	
+	//그룹 멤버 관리를 눌렀을 때 - 현재 회원 정보와 상태를 보여주는 곳 
+	@RequestMapping("/inviteSetting.do") 
+	public String showInviteSetting(HttpSession session, ModelMap map)
+	{
+		Collect collect=(Collect)session.getAttribute("group_info");
+		System.out.println(collect);//현재 세션에 있는 그룹을 받아온다.
+		
+		//2. business logic으로 'ㅅ' -> 해당 collectionId를 통해서 초대한 회원이나 현재 회원을 보여준다음 
+		//이걸 requestScope에 담아서 view로 이동하고, view 에서는 list에 담긴 정보를 뿌려주기만 하면 끝
+		service.showInviteSettingMemberList(map,collect);
+		
+		return "body/collection/setting/settings/inviteMember_form.tiles";
 	}
 		
 }

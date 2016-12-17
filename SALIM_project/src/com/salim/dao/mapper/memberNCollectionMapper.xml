@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" > 
 <mapper namespace= "memberNCollection"> 
 
+<resultMap type="member" id="getMember-name-email-birthday">
+<result column="name" property="name"/>
+<result column="email" property="email"/>
+<result column="birthday" property="birthday"/>
+</resultMap>
+
+<resultMap type="member" id="getMember-name-email-birthday-con">
+	<constructor>
+	<arg column="name" javaType="string"/>
+	<arg column="email" javaType="string"/>
+	<arg column="birthday" javaType="java.sql.Date"/>
+</constructor>
+</resultMap>
 <!-- 그룹 가계부 추가 --> 
  <insert id="insertmemberNCollection" parameterType="memberNCollection" >
  	insert into member_Collection values(#{memberId},#{collectionId},#{invite})
@@ -19,6 +32,15 @@
  	where member_collection.member_id=#{memberId} and member_collection.collection_id=#{collectionId}
  </select>
  
+ <!-- 그룹 가계부의 초대 invite 부분 수정 -->
+ <update id="updateByMemberIdAndCollectionId" parameterType="map">
+   
+   update member_collection
+   set member_collection.invite=#{invite}
+   where member_collection.member_id=#{memberId} and member_collection.collection_id=#{collectionId}
+
+	
+ </update>
  <!-- 그룹 가계부 list 조회! -->
  <select id="selectAllByCollectionId" parameterType="string" resultType="memberNCollection">
  	
@@ -27,5 +49,21 @@
  	where collection_id=#{value}
  
  </select>
+ 
+ <!-- 그룹 가계부의 회원들 조회하기 -->
+ <select id="selectAllCollectionMemberListByCollectionId" parameterType="map" resultMap="getMember-name-email-birthday">
+ select MEMBER.name, Member.email, Member.birthday
+	from Member,(
+	select mc.member_id memberId3, mc.collection_Id collectionId, mc.invite
+	from member_collection mc, (
+		select collection.collection_id collectionId2
+		from collection
+		where collection.collection_id=#{collectionId}
+		)
+	where mc.collection_id=collectionId2 and mc.invite=#{invite}
+	)
+where MEMBER.member_id=memberId3
+	
+</select>
 </mapper> 
 

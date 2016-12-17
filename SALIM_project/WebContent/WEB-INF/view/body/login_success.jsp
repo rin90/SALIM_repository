@@ -19,7 +19,7 @@
 
   #selectable .ui-selected { background: #F39814; color: white; }
 
-  #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 80%; }
 
   #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
   </style>
@@ -33,6 +33,15 @@ $(document).ready(function(){
 	
 	$(".mydiv").on("click","selectable",function(){
 		alert("dk");
+	});
+	
+	$("#okayClick").on("click",function(){
+		$("#form").prop("action","${initParam.rootPath }/collection/okay.do");
+		$("#form").submit();
+	});
+	$("#noClick").on("click",function(){
+		$("#form").prop("action","${initParam.rootPath }/collection/refusal.do");
+		$("#form").submit();
 	});
 	
 });
@@ -62,21 +71,51 @@ $(document).ready(function(){
 	
 </tr>
 <tr>
-	<th>
+<th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+	<th></th>
+	<th align='right'>
 		<form action="${initParam.rootPath }/collection.do" method='get'>
 			<input type='submit' value='그룹 가계부 추가'>
 		</form>	
 	</th>
 </tr>
+<tr>
+		<td>
+			<h3>나의 그룹 가계부</h3>
+		</td>
+	</tr>
 </table>
 
 <table>	
-	<c:if test="${requestScope.collectionList!=null}">
+
+	<c:if test="${requestScope.collectionListInviteTrue!=null}">
+	
+	
+		
+		<c:forEach  items="${requestScope.collectionListInviteTrue}" var="collection">	
+		<tr>	
+				<%@include file="collectionIncludedFile.jsp" %>	
+		</tr>
+		</c:forEach>
+		
+	
+	</c:if>
+</table>
+<br>
+
+<c:if test="${requestScope.collectionListInvitefalse!=null}">
+			
+					<h3>초대 받은 그룹 가계부</h3>
+			
+			</c:if>
+<table>
+		<c:if test="${requestScope.collectionListInvitefalse!=null}">
+	
 	<tr>
 		
-		<c:forEach  items="${requestScope.collectionList}" var="collectionList">	
+		<c:forEach  items="${requestScope.collectionListInvitefalse}" var="collection">	
 			
-				<%@include file="collectionIncludedFile.jsp" %>	
+				<%@include file="collectionIncludedFile2.jsp" %>	
 			
 		</c:forEach>
 		
