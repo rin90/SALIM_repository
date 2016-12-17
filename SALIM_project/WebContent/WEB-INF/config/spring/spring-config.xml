@@ -49,7 +49,7 @@
 	<!-- <mvc:view-controller path="/leaveMember.do" view-name="body/leave_member.tiles"/>
 	<mvc:view-controller path="/myPage.do" view-name="body/myPage.tiles"/>
  -->
-<!-- collection -->
+<!-- collection 그룹 추가 부분 -->
 	<mvc:view-controller path="/collection.do" view-name="body/collection_form.tiles"/> 
 <!-- collection 환경설정 -->
 	<mvc:view-controller path="/collectionSetting.do" view-name="body/collection/setting/settings/collectionSettingMain.tiles"/>

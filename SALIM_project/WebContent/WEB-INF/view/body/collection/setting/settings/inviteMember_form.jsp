@@ -76,10 +76,10 @@ function emailClick()
 	alert(m+"초대장을 보냈습니다.");
 
 }
-/* function a()
+function a()
 {
 	alert('${requestScope.inviteMessage}');
-} */
+}
 }); 
 </script>
 </head>

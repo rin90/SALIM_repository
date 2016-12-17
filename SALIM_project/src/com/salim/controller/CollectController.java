@@ -115,7 +115,7 @@ public class CollectController {
 		if(str.equals(""))
 		{
 			session.removeAttribute("group_info");
-			return "redirect:/invite.do";
+			return "redirect:/collection//findAllCollectionList.do";
 		}else
 		{
 			map.put("deletefailMessage", str);
