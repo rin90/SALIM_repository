@@ -18,7 +18,6 @@
 				<td>작성자</td>
 				<td>작성일</td>
 				<td>조회</td>
-				<td>좋아요</td>
 			</tr>
 		</thead>
 
@@ -33,7 +32,6 @@
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${freeBoard.registerTime }" /></td>
 					<td>${freeBoard.click }</td>
-					<td>${freeBoard.good }</td>
 				</tr>
 			</c:forEach>
 

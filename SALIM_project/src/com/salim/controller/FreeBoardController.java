@@ -54,14 +54,21 @@ public class FreeBoardController {
 	public ModelAndView list(int page) {
 		Map map = service.getFreeBoardList(page);
 		map.put("codes", codeService.findCode("조회"));
+		
+		System.out.println("확인:"+map.get("codes"));
+	
 		List<FreeBoard> list = (List<FreeBoard>) map.get("list");
+		
 		if(list.size() == 0){
 			page= page-1;
 			map=service.getFreeBoardList(page);
 		}
+		
 		if (page != 0) {
+			System.out.println("확인 2:"+map.get("codes"));
 			return new ModelAndView("body/board/free_board_list.tiles", map);
 		} else {
+			System.out.println("확인 2:"+map.get("codes"));
 			return new ModelAndView("body/board/non_view.tiles", map);
 		}
 	}
@@ -230,20 +237,6 @@ public class FreeBoardController {
 																	
 
 		return "body/board/free_board_detail.tiles";
-	}
-
-	// 좋아요 수정 메소드 V view에서 ajax처리하기 -로그인 해야 가능 한 글에 대해 member_id는 한번만 좋아요 가능 즉,
-	// 글에 한 번씩만 좋아요 가능, member_id로 체크
-	@RequestMapping("good")
-	@ResponseBody
-	public void goodUpdate(int no, String whether, HttpServletRequest request) {
-		System.out.println("좋아요");
-		if (whether.isEmpty()) {
-			service.updateGood(no, -1);
-		} else {
-			service.updateGood(no, 1);
-		}
-
 	}
 
 }

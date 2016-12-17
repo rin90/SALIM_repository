@@ -11,10 +11,9 @@
 			 &nbsp;&nbsp;&nbsp;
 			<input type="submit" value="±Û¾²±â">
 	</form>
-	
+	dsadas${requestScope.codes }
 		<form action="${initParam.rootPath }/free/login/keyword.do" method="post">
 		<select name="category">
-			
 			<c:forEach items="${requestScope.codes }" var="code">
 				<option>${code.code }</option>
 			</c:forEach>

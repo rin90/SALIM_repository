@@ -16,7 +16,6 @@ public class FreeBoard  implements Serializable{
  private MultipartFile fileRoot;
  private String fileName;
  private int click =0;
- private int good = 0;
  private Date registerTime = new Date();
  private String memberId;
  /*
@@ -31,8 +30,10 @@ public FreeBoard() {
 	super();
 }
 
-public FreeBoard(int no, String title, String content, MultipartFile fileRoot, String fileName, int click, int good,
-		Date registerTime, String memberId) {
+
+
+public FreeBoard(int no, String title, String content, MultipartFile fileRoot, String fileName, int click,
+		Date registerTime, String memberId, List<FreeComment> freeComment) {
 	super();
 	this.no = no;
 	this.title = title;
@@ -40,97 +41,129 @@ public FreeBoard(int no, String title, String content, MultipartFile fileRoot, S
 	this.fileRoot = fileRoot;
 	this.fileName = fileName;
 	this.click = click;
-	this.good = good;
 	this.registerTime = registerTime;
 	this.memberId = memberId;
-}
-
-public List<FreeComment> getFreeComment() {
-	return freeComment;
-}
-
-public void setFreeComment(List<FreeComment> freeComment) {
 	this.freeComment = freeComment;
 }
+
+
 
 public int getNo() {
 	return no;
 }
 
+
+
 public void setNo(int no) {
 	this.no = no;
 }
+
+
 
 public String getTitle() {
 	return title;
 }
 
+
+
 public void setTitle(String title) {
 	this.title = title;
 }
+
+
 
 public String getContent() {
 	return content;
 }
 
+
+
 public void setContent(String content) {
 	this.content = content;
 }
+
+
 
 public MultipartFile getFileRoot() {
 	return fileRoot;
 }
 
+
+
 public void setFileRoot(MultipartFile fileRoot) {
 	this.fileRoot = fileRoot;
 }
+
+
 
 public String getFileName() {
 	return fileName;
 }
 
+
+
 public void setFileName(String fileName) {
 	this.fileName = fileName;
 }
+
+
 
 public int getClick() {
 	return click;
 }
 
+
+
 public void setClick(int click) {
 	this.click = click;
 }
 
-public int getGood() {
-	return good;
-}
 
-public void setGood(int good) {
-	this.good = good;
-}
 
 public Date getRegisterTime() {
 	return registerTime;
 }
 
+
+
 public void setRegisterTime(Date registerTime) {
 	this.registerTime = registerTime;
 }
+
+
 
 public String getMemberId() {
 	return memberId;
 }
 
+
+
 public void setMemberId(String memberId) {
 	this.memberId = memberId;
 }
 
+
+
+public List<FreeComment> getFreeComment() {
+	return freeComment;
+}
+
+
+
+public void setFreeComment(List<FreeComment> freeComment) {
+	this.freeComment = freeComment;
+}
+
+
+
 @Override
 public String toString() {
 	return "FreeBoard [no=" + no + ", title=" + title + ", content=" + content + ", fileRoot=" + fileRoot
-			+ ", fileName=" + fileName + ", click=" + click + ", good=" + good + ", registerTime=" + registerTime
-			+ ", memberId=" + memberId + "]";
+			+ ", fileName=" + fileName + ", click=" + click + ", registerTime=" + registerTime + ", memberId="
+			+ memberId + ", freeComment=" + freeComment + "]";
 }
+
+
 
 @Override
 public int hashCode() {
@@ -140,13 +173,15 @@ public int hashCode() {
 	result = prime * result + ((content == null) ? 0 : content.hashCode());
 	result = prime * result + ((fileName == null) ? 0 : fileName.hashCode());
 	result = prime * result + ((fileRoot == null) ? 0 : fileRoot.hashCode());
-	result = prime * result + good;
+	result = prime * result + ((freeComment == null) ? 0 : freeComment.hashCode());
 	result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 	result = prime * result + no;
 	result = prime * result + ((registerTime == null) ? 0 : registerTime.hashCode());
 	result = prime * result + ((title == null) ? 0 : title.hashCode());
 	return result;
 }
+
+
 
 @Override
 public boolean equals(Object obj) {
@@ -174,7 +209,10 @@ public boolean equals(Object obj) {
 			return false;
 	} else if (!fileRoot.equals(other.fileRoot))
 		return false;
-	if (good != other.good)
+	if (freeComment == null) {
+		if (other.freeComment != null)
+			return false;
+	} else if (!freeComment.equals(other.freeComment))
 		return false;
 	if (memberId == null) {
 		if (other.memberId != null)

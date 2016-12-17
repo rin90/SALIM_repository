@@ -7,8 +7,8 @@
 
 <script type="text/javascript" src="/SALIM_project/lib/scripts/jquery.js"></script>
 <script type="text/javascript">
-</script>
 
+</script>
 
 
 	<table border="1">
@@ -19,7 +19,6 @@
 				<td>작성자</td>
 				<td>작성일</td>
 				<td>조회</td>
-				<td>좋아요</td>
 			</tr>
 		</thead>
 		
@@ -34,7 +33,6 @@
 					<td>${freeBoard.memberId }</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${freeBoard.registerTime }"/></td>
 					<td>${freeBoard.click }</td>
-					<td>${freeBoard.good }</td>
 				</tr>
 			</c:forEach>
 			
@@ -81,9 +79,9 @@
 			</form>
 			
 			<p/>
-				
+		
 			<form  action="${initParam.rootPath }/free/login/keyword.do" method="post">
-			<select  name="category">				
+			<select name="category">				
 				<c:forEach items="${requestScope.codes }" var="code">
 					<option>${code.code }</option> 					
 				</c:forEach>
