@@ -21,6 +21,9 @@
 	</insert> 
 	 -->
 	<insert id="insertSchedule" parameterType="schedule">
+		<selectKey keyProperty="no" resultType="_int" order="BEFORE">
+			select seq_sch.nextval from dual
+		</selectKey>
 		insert into schedule values (#{no}, #{title}, #{detail}, #{start}, #{end}, #{memberId})
 	</insert> 
 	

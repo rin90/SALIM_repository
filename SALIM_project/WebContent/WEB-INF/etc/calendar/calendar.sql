@@ -13,6 +13,7 @@ end_date Date not null,
 member_id varchar2(50) constraint sch_mem_fk references member not null
 );
 select * from schedule;
+delete from schedule;
 drop table schedule;
 
 -- Test Data
