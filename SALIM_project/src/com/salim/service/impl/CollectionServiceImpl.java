@@ -189,6 +189,13 @@ public class CollectionServiceImpl implements CollectionService{
 		}
 		
 	}
+
+	
+	//그룹 목록 조회 memberId, invite로 조회한 그룹 목록 뿌려주기
+	public List<Collect> selectByMemberIdNInvite(String memberId){
+		return dao.selectByMemberIdNInvite(memberId);
+	}
+	
 }
 
 

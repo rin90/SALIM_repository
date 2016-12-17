@@ -1,6 +1,7 @@
 package com.salim.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,4 +58,11 @@ public class CollectionDaoImpl implements CollectionDao{
 		return session.delete(makeSql("deleteCollectionByCollectionId"),collectionId);
 	}
 	
+	
+	
+	
+	//그룹조회(collect) - memberId, invite로..
+	public List<Collect> selectByMemberIdNInvite(String memberId){
+		return session.selectList(makeSql("selectByMemberIdNInvite"), memberId);
+	}
 }

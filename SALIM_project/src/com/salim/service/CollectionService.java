@@ -25,4 +25,8 @@ public interface CollectionService {
 
 	public void inviteMemberInCollection(String email, String collectionId);
 	
+
+	//memberId와 invite로 조회한 collection 객체 목록
+	List<Collect> selectByMemberIdNInvite(String memberId);
+	
 }

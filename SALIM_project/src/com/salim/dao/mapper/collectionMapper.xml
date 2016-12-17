@@ -54,4 +54,24 @@ where collection.collection_id =collectionId
 	where collection_id=#{value} 
  </delete>
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  <!-- select에서 선택하면 group_info 만들어주기 : invite(초대 수락여부  : true일때만 뿌려줌), member_id로 그룹조회 -->
+ <select id="selectByMemberIdNInvite" parameterType="string" resultType="collect">
+ 	select c.collection_id collectionId, c.collection_name collectionName, c.collection_intro collectionIntro, c.grant_id grantId
+	from collection c, 
+		(select m.member_id, mc.collection_id, mc.invite
+		 from member m, member_collection mc
+		 where m.member_id = mc.member_id
+	 	 and m.member_id = #{memberId}
+	 	 and mc.invite ='false') mc
+	where c.collection_id = mc.collection_id
+ </select>
+ 
 </mapper> 

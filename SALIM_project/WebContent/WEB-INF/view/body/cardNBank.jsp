@@ -10,7 +10,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 	$(document).ready(function() {
-		//전체 체크 박스
+		//전체 체크 박스 - 카드
 		$("#AllCheck").on("click", function() {
 			if ($("#AllCheck").prop("checked")) {
 				$("input[name=cardId]").prop("checked", true);
@@ -18,7 +18,7 @@
 				$("input[name=cardId]").prop("checked", false);
 			}
 		})
-		//전체 체크 박스
+		//전체 체크 박스 - 통장
 		$("#AllCheck2").on("click", function() {
 			if ($("#AllCheck2").prop("checked")) {
 				$("input[name=bankId]").prop("checked", true);
@@ -29,8 +29,8 @@
 
 	});
 
-	//체크된 것만 값 넘기기
-	function deleteCNB() {
+	//체크된 것만 값 넘기기 - 카드
+	function deleteCard() {
 		var checked = "";
 		$("input[name=cardId]:checked").each(function(idx) {
 			if ($("input[name=cardId]:checked").length - 1 == idx) {
@@ -42,13 +42,12 @@
 		if ($("input[name=cardId]:checked").length == 0) {
 			alert("삭제할 것을 선택해주세요.");
 		} else {
-			location.href = "/SALIM_project/cardNBank/cardNBankRemove.do?"+ checked;
+			location.href = "/SALIM_project/cardNBank/login/cardRemove.do?"+ checked;
 		}
 	};
 	
-	
-	//체크된 것만 값 넘기기
-	function deleteCNB2() {
+	//체크된 것만 값 넘기기 - 통장
+	function deleteBankbook() {
 		var checked = "";
 		$("input[name=bankId]:checked").each(function(idx) {
 			if ($("input[name=bankId]:checked").length - 1 == idx) {
@@ -60,17 +59,24 @@
 		if ($("input[name=bankId]:checked").length == 0) {
 			alert("삭제할 것을 선택해주세요.");
 		} else {
-			location.href = "/SALIM_project/cardNBank/login/cardNBankRemove2.do?"+ checked;
+			location.href = "/SALIM_project/cardNBank/login/bankRemove.do?"+ checked;
 		}
 	};
 
 	//등록을 눌렀을 때 카드 내용 안쓰면 등록 안되게 하기
- 	function naming() {
-		if ($("#naming").val().trim() == "") {
+ 	function cardAddCheck() {
+		if ($("#namingCard").val().trim() == "") {
 			alert("설명을 입력하세요.");
 			return false;
 		}
 	};
+	
+	function bankAddCheck(){
+		if($("#namingbank").val().trim() == ""){
+			alert("설명을 입력하세요.");
+			return false;
+		}
+	}; 
 
 	function naming2() {
 		if ($(".naming").val().trim() == "") {
@@ -78,30 +84,23 @@
 			return false;
 		}
 	}; 
-	
-	 function namingbank(){
-		if($("#namingbank").val().trim() == ""){
-			alert($("#namingbank").val());
-			alert("설명을 입력하세요.");
-			return false;
-		}
-	} 
+	 
 </script>
 </head>
 <body>
 
-	<form action="${initParam.rootPath}/cardNBank/cardNBankAdd.do"method="post">
+	<form action="${initParam.rootPath}/cardNBank/login//cardAdd.do"method="post">
 		<h2>카드 등록</h2>
 		<select name=bankList1>
 			<option value="기타">은행목록</option>
 			<c:forEach items="${requestScope.bankList }" var="bank">
 				<option value="${bank.code }">${bank.code }</option>
 			</c:forEach>
-		</select>&nbsp; <input type="text" name="cardNaming" id="naming" />&nbsp;&nbsp;
-		<input type="submit" value="등록" onclick="return naming()" />
+		</select>&nbsp; <input type="text" name="cardNaming" id="namingCard" />&nbsp;&nbsp;
+		<input type="submit" value="등록" onclick="return cardAddCheck()" />
 	</form>
 
-	<form action="${initParam.rootPath}/cardNBank/login/cardNBank2.do" method="post">
+	<form action="${initParam.rootPath}/cardNBank/login/bankAdd.do" method="post">
 		<h2>통장 등록</h2>
 		<select name=bankList2>
 			<option value="기타">은행목록</option>
@@ -110,10 +109,10 @@
 			</c:forEach>
 		</select>&nbsp; <input type="text" name="bankNaming" id="namingbank"/>&nbsp;&nbsp;
 		<!-- bankNaming -->
-		<input type="submit" value="등록" onclick="return namingbank()"/>
+		<input type="submit" value="등록" onclick="return bankAddCheck()"/>
 	</form>
 
-	<form action="/SALIM_project/cardNBank/login/cardUpdate.do" method="post">
+	<form action="/SALIM_project/cardNBank/login/cardModify.do" method="post">
 		<h2>등록된 카드 목록</h2>
 		<p>
 		<table border='1' style="width: 500px;">
@@ -128,12 +127,13 @@
 				<c:forEach items="${requestScope.cardList}" var="card"
 					varStatus="no">
 					<tr>
-						<td><input type="checkbox" name="cardId"
-							value="${card.cardId }"> <input type="hidden"
-							name="cardList[${no.index}].cardId" value="${card.cardId }">
-							<input type="hidden" name="cardList[${no.index}].memberId"
-							value="${sessionScope.login_info.memberId }"></td>
-						<td><select name="cardList[${no.index }].cardType">
+						<td>
+							<input type="checkbox" name="cardId" value="${card.cardId }"> 
+							<input type="hidden" name="cardList[${no.index}].cardId" value="${card.cardId }">
+							<input type="hidden" name="cardList[${no.index}].memberId" value="${sessionScope.login_info.memberId }">
+						</td>
+						<td>
+							<select name="cardList[${no.index }].cardType">
 								<option value="기타">은행목록</option>
 								<c:forEach items="${requestScope.bankList }" var="bank">
 									<c:choose>
@@ -145,17 +145,19 @@
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
-						</select></td>
-						<td><input type="text" name="cardList[${no.index}].cardDescription" value="${card.cardDescription}" placeholder="${card.cardDescription}" class="naming"></td>
+							</select>
+						</td>
+						<td>
+							<input type="text" name="cardList[${no.index}].cardDescription" value="${card.cardDescription}" placeholder="${card.cardDescription}" class="naming">
+						</td>
 					</tr>
 				</c:forEach>
-
 			</tbody>
 			<tfoot>
 				<tr>
 					<td colspan="3">
 						<input type="submit" value="수정" onclick="return naming2()"> 
-						<input type="button" value="삭제" onclick="deleteCNB()">
+						<input type="button" value="삭제" onclick="deleteCard()">
 					</td>
 				</tr>
 			</tfoot>
@@ -165,7 +167,7 @@
 	<br>
 
 
-	<form action="/SALIM_project/cardNBank/login/cardNBankModify.do" method="post">
+	<form action="/SALIM_project/cardNBank/login/bankModify.do" method="post">
 		<h2>등록된 통장 목록</h2>
 		<p>
 		<table border='1' style="width: 500px;">
@@ -179,10 +181,13 @@
 			<tbody id="listTbody">
 				<c:forEach items="${requestScope.bankBookList}" var="bank" varStatus="no">
 					<tr>
-						<td><input type="checkbox" name="bankId" value="${bank.bankId }"> 
+						<td>
+							<input type="checkbox" name="bankId" value="${bank.bankId }"> 
 							<input type="hidden" name="bankList[${no.index}].bankId" value="${bank.bankId }">
-							<input type="hidden" name="bankList[${no.index}].memberId" value="${sessionScope.login_info.memberId }"></td>
-						<td><select name="bankList[${no.index }].bankType">
+							<input type="hidden" name="bankList[${no.index}].memberId" value="${sessionScope.login_info.memberId }">
+						</td>
+						<td>
+							<select name="bankList[${no.index }].bankType">
 								<option value="기타">은행목록</option>
 								<c:forEach items="${requestScope.bankList }" var="bank2">
 									<c:choose>
@@ -194,8 +199,11 @@
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
-						</select></td>
-						<td><input type="text" name="bankList[${no.index}].bankDescription" value="${bank.bankDescription}" placeholder="${bank.bankDescription}" class="naming"></td>
+							</select>
+						</td>
+						<td>
+							<input type="text" name="bankList[${no.index}].bankDescription" value="${bank.bankDescription}" placeholder="${bank.bankDescription}" class="naming">
+						</td>
 					</tr>
 				</c:forEach>
 
@@ -204,7 +212,7 @@
 				<tr>
 					<td colspan="3">
 						<input type="submit" value="수정" onclick="return naming2()"> 
-						<input type="button" value="삭제" onclick="deleteCNB2()">
+						<input type="button" value="삭제" onclick="deleteBankbook()">
 					</td>
 				</tr>
 			</tfoot>
