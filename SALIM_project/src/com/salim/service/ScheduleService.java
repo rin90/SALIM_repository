@@ -9,6 +9,11 @@ public interface ScheduleService {
 	
 	
 	// 우선 조회먼저. CUD는 다음에
+	/**
+	 * 
+	 * @param list	수정 또는 추가하는데 필요한 객체들
+	 */
+	void updateSchedule(List<Schedule> list);
 	
 	/**
 	 * 특정한 달에 대한 일정 조회 
