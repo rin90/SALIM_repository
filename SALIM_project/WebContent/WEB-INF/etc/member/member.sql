@@ -69,13 +69,10 @@ select member_id memberId, collection_id collectionId, invite
  	where member_collection.collection_id='collectionId11'
 
 --collection 삭제!----------------------------------------
-
+--선 처리
 delete from MEMBER_COLLECTION
 where collection_id='collectionId29'
-
---일단 먼저 해야할... 삭제가 있어서.. 그거 하고 해야해 ㅠㅠ
-
-	
+--후 처리
 delete from COLLECTION
 where collection_id='collectionId29'
 
@@ -123,5 +120,53 @@ select COLLECTION.collection_id, COLLECTION.collection_name, COLLECTION.collecti
 	)
 	where collection.collection_id = collectionId
 
+---------------------------------------------------------------------------------------------------------------------------
 
+--그룹 아이디를 받아와서 회원 정보 뿌리기! 음, 그랭 ㅇㅋㅇㅋ
+select MEMBER.name, Member.email, Member.birthday
+from Member,(
+	select mc.member_id memberId3, mc.collection_Id collectionId, mc.invite
+	from member_collection mc, (
+		select collection.collection_id collectionId2
+		from collection
+		where collection.collection_id='collectionId49'
+		)
+where mc.collection_id=collectionId2 and mc.invite='true'
+)
+where MEMBER.member_id=memberId3
+	
+-----------------------------------------------------------------
+--로그인 했을 때, 화면 뿌려주는 부분에서 그룹을 이제 나눠서 뿌려줘야 함! -true인 경우!
+
+select collection.collection_id, collection.collection_name, collection.collection_intro, collection.grant_id
+from collection, (
+	select mc.collection_id collectionId2
+	from member_collection mc
+	where mc.member_id='mem2' and mc.invite='false'
+)
+where collection.collection_id=collectionId2
+
+---------------------------------------------------------------------------------------------------
+   update member_collection
+   set member_collection.invite='refusal'
+   where member_collection.member_id='mem4' and member_collection.collection_id='collectionId51'
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 

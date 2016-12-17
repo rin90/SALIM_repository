@@ -55,13 +55,6 @@ where collection.collection_id =collectionId
  </delete>
  
  
- 
- 
- 
- 
- 
- 
- 
   <!-- select에서 선택하면 group_info 만들어주기 : invite(초대 수락여부  : true일때만 뿌려줌), member_id로 그룹조회 -->
  <select id="selectByMemberIdNInvite" parameterType="string" resultType="collect">
  	select c.collection_id collectionId, c.collection_name collectionName, c.collection_intro collectionIntro, c.grant_id grantId
@@ -74,4 +67,16 @@ where collection.collection_id =collectionId
 	where c.collection_id = mc.collection_id
  </select>
  
+ 
+ <!-- 로그인 성공했을 때, 내가 속한 그룹 or 내가 초대 받은 그룹에 대한 처리를 하는 select 구문! invite쪽 value를 true, false에 따라서 다른  select 결과가 나옴! -->
+
+<select id="selectCollectionListIncludedOrInvited" parameterType="hashmap" resultType="collect">
+select collection.collection_id collectionId, collection.collection_name collectionName, collection.collection_intro collectionIntro, collection.grant_id grantId
+from collection, (
+	select mc.collection_id collectionId2
+	from member_collection mc
+	where mc.member_id=#{memberId} and mc.invite=#{invite}
+)
+where collection.collection_id=collectionId2
+</select>
 </mapper> 
