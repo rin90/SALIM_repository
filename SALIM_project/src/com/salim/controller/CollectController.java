@@ -3,6 +3,7 @@ package com.salim.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,8 +14,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.salim.service.impl.CollectionServiceImpl;
+import com.salim.service.impl.MemberServiceImpl;
 import com.salim.vo.Collect;
 import com.salim.vo.Member;
 
@@ -24,6 +27,8 @@ public class CollectController {
 
 	@Autowired
 	private CollectionServiceImpl service;
+	@Autowired
+	private MemberServiceImpl memberService;
 
 
 	//가계부 추가 
@@ -55,9 +60,7 @@ public class CollectController {
 			System.out.println("collectionList가 없음!!ㄷㄷ");
 		}
 		
-		map.addAttribute("collectionList", collectionList);//이걸 왜...request에 담았을까?..??으이..?
-		//session.setAttribute("collectionList", collectionList);
-
+		map.addAttribute("collectionList", collectionList);
 		return "body/login_success.tiles";
 	}
 	
@@ -78,6 +81,7 @@ public class CollectController {
 	}
 
 
+	//가계부 수정하기.
 	@RequestMapping(value="/collectionModify.do",method=RequestMethod.POST)
 	public String collectionModify(HttpSession session,String memberIdforGrant, @ModelAttribute Collect collect, ModelMap map)
 	{
@@ -100,27 +104,58 @@ public class CollectController {
 		return "body/collection/setting/settings/collectionSettingMain.tiles";
 	}
 	
+	//그룹 가계부 삭제하기
 	@RequestMapping(value="/removeCollection.do",method=RequestMethod.POST)
-	public String removeCollection(String collectionId)
+	public String removeCollection(HttpSession session,String memberIdforGrant, @ModelAttribute Collect collect, ModelMap map)
 	{
+		
 		System.out.println("삭제!!!!!!!!!!!!!");
-		if(service.removeCollection(collectionId)==1)
+	
+		String str=service.removeCollection(collect.getCollectionId(),memberIdforGrant);
+		if(str.equals(""))
 		{
-			System.out.println("여기는 removeCollecton.do 실행한 부분");
-			return "redirect:/collection/findAllCollectionList.do";
-		}
-		else
+			session.removeAttribute("group_info");
+			return "redirect:/invite.do";
+		}else
 		{
-			return null;
+			map.put("deletefailMessage", str);
+			return "body/collection/setting/settings/collectionSettingMain.tiles";
 		}
+		
 		
 	}
 	
-	@RequestMapping("/inviteMember.do")
-	public String inviteMember(String email)
+	
+	//emailcheck - ajax 처리
+	@RequestMapping("/emailCheck.do")
+	@ResponseBody
+	public HashMap<String,String> emailCheckAjax(String emailMessage, String memberId, String collectionId)
 	{
-		System.out.println(email+"dddddddddddd");
-		return "body/collection/setting/settings/inviteMember_form.tiles";
+		System.out.println("아작스 처리 부분");
+		HashMap<String,String> map=new HashMap<String,String>();	
+		String emailCheckMessage=service.findEmailForMemberInvited(emailMessage,memberId,collectionId);
+		System.out.println("emailCheckMessage:=> "+emailCheckMessage);
+		map.put("emailCheckMessage",emailCheckMessage);
+		return map;
+	}
+	
+	//초대하기
+	@RequestMapping(value="/inviteMember.do", method=RequestMethod.POST)
+	public String inviteMember(String email, String collectionId, ModelMap map)
+	{
+		//2.비지니스 로직 호출! 'ㅅ'
+		System.out.println("inviteMember()"+email+collectionId);
+		if(!(email==null||email.equals("")))
+		{
+			service.inviteMemberInCollection(email, collectionId);
+			//return "body/collection/setting/settings/inviteMember_form.tiles";	
+			//return "redirect:/invite.do";
+		}else
+		{
+			map.addAttribute("inviteMessage", "해당하는 이메일이 없습니다.");
+			//return "body/collection/setting/settings/inviteMember_form.tiles";
+		}
+		return "redirect:/invite.do";
 	}
 	
 	

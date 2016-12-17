@@ -1,12 +1,15 @@
 package com.salim.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.salim.dao.MemberNCollectionDao;
+import com.salim.vo.MemberNCollection;
 
 @Repository
 public class MemberNCollectionDaoImpl implements MemberNCollectionDao{
@@ -17,13 +20,23 @@ public class MemberNCollectionDaoImpl implements MemberNCollectionDao{
 	{
 		return "memberNCollection."+sql;
 	}
-	public void insertmemberNCollection(HashMap<String, String> map)
+	public void insertmemberNCollection(MemberNCollection collection)
 	{
-		 session.insert(makeSql("insertmemberNCollection"),map);
+		 session.insert(makeSql("insertmemberNCollection"),collection);
 	}
 	
 	public int deleteMemberNCollectionByCollectionId(String collectionId)
 	{
 		return session.delete(makeSql("deleteMemberNCollectionByCollectionId"),collectionId);
 	}
+	
+	public MemberNCollection selectByMemberIdAndCollectionId(HashMap<String,String> map)
+	{
+		return session.selectOne(makeSql("selectByMemberIdAndCollectionId"), map);
+	}
+	
+	public List<MemberNCollection> selectAllByCollectionId(String collectionId)
+	{
+		return session.selectList(makeSql("selectAllByCollectionId"),collectionId);
+	}	
 }

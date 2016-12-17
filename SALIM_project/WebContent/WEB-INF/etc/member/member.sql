@@ -45,12 +45,12 @@ grant_id varchar2(50) not null
 drop table collection CASCADE CONSTRAINTS;
 
 select * from collection;
-insert into collection values('g6','그룹이름','그룹 소개');
-insert into collection values('g7','그룹 이름','그룹 소개');
+insert into collection values('g1','그룹이름','그룹 소개','mem1');
+insert into collection values('g2','그룹 이름','그룹 소개','mem2');
 
 
 
-
+--초대하면서 이 부분을 처리해야 한다!!
 create table member_collection(--회원그룹
 member_id varchar2(50) constraint mco_col_fk references member,
 collection_id varchar2(50) constraint mco_mem_fk references collection,
@@ -60,19 +60,30 @@ constraint mc_pk primary key(member_id,collection_id)
 
 
 select * from MEMBER_COLLECTION;
-
 drop table member_collection;
+
+
+
+select member_id memberId, collection_id collectionId, invite
+ 	from member_collection
+ 	where member_collection.collection_id='collectionId11'
 
 --collection 삭제!----------------------------------------
 
 delete from MEMBER_COLLECTION
-where collection_id='collectionId46'
+where collection_id='collectionId29'
 
+--일단 먼저 해야할... 삭제가 있어서.. 그거 하고 해야해 ㅠㅠ
+
+	
 delete from COLLECTION
-where collection_id='collectionId46'
+where collection_id='collectionId29'
 
 
-
+-- 조회-----------------------------------------------------------------
+select member_id memberId, collection_id collectionId, invite
+ 	from member_collection
+ 	where collection_id='collectionId30'
 
 ---------------------------------------------------------------------------------------------------------------------------
 
