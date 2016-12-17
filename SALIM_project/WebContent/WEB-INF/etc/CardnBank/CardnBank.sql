@@ -8,9 +8,9 @@ create table card(
 
 drop table card;
 
-create sequence card_id
-select card_id.nextval from dual
-drop sequence card_id
+create sequence seq_card_id
+select seq_card_id.nextval from dual
+drop sequence seq_card_id
 
 create table bank(
 	member_id varchar2(50), 
@@ -21,6 +21,9 @@ create table bank(
 
 drop table bank;
 
-create sequence bank_id
-select bank_id.nextval from dual --조회
-drop sequence bank_id
+create sequence seq_bank_id
+select seq_bank_id.nextval from dual --조회
+drop sequence seq_bank_id
+
+
+select * from (select * from CARD where member_id=1 order by card_id desc) where rownum =1

@@ -1,5 +1,7 @@
 package com.salim.dao;
 
+import java.util.List;
+
 import com.salim.vo.Bank;
 
 public interface BankDao {
@@ -25,12 +27,12 @@ public interface BankDao {
 	 * @param BankId
 	 * @return
 	 */
-	int deleteBankByMemberId(String bankId);
+	int deleteBankByMemberId(int bankId);
 	
 	/**
 	 * 카드 선택(select)
 	 * @param BankId
 	 * @return
 	 */
-	Bank selectBankByMemberId(String bankId);
+	List selectBankByMemberId(String memberId);
 }

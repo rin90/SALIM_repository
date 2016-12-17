@@ -17,10 +17,7 @@ public class NotesServiceImpl implements NotesService{
 
 	//저장 & 수정
 	public void saveNotes(Notes notes) {
-		if(notes.getNo() == 0 && !notes.getContent().trim().isEmpty()){
-			System.out.println("저장한 객체.. - "+notes);
-			dao.insertNotes(notes);
-		}else{
+		if(notes.getNo() != 0){
 			if(notes.getContent().trim().isEmpty()){
 				System.out.println("메모 삭제"+notes);
 				dao.deleteNotes(notes.getNo());
@@ -28,6 +25,9 @@ public class NotesServiceImpl implements NotesService{
 				System.out.println("메모 수정"+notes);
 				dao.updateNotes(notes);
 			}
+		}else if(notes.getNo() == 0 && !notes.getContent().trim().isEmpty()){
+			System.out.println("저장한 객체.. - "+notes);
+			dao.insertNotes(notes);
 		}
 	}
 	

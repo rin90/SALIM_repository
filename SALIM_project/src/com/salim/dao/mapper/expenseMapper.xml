@@ -140,4 +140,19 @@
 		where i.month=s.month 
 		order by i.month
 	</select>
+	
+	
+	<!-- ====================================================== -->
+	
+	<!-- 1달 동안 지출의 합 -->
+	
+	<select id="selectForOneMonthExpense" parameterType="map" resultType="_int">
+		select nvl(sum(nvl(cash_expense, 0)+nvl(card_expense, 0)), 0) expenseSum
+		from expense
+		where member_id=#{memberId}
+		and to_char(expense_date, 'YYYY-MM')=#{monthday}
+	</select>
+	
+	
+	
 </mapper>

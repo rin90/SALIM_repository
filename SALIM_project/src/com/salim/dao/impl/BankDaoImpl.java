@@ -1,5 +1,7 @@
 package com.salim.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,10 +15,8 @@ public class BankDaoImpl implements BankDao{
 	@Autowired
 	private SqlSessionTemplate session;
 	
-	public BankDaoImpl(){}
-	
 	private String makeSql(String tagId){
-		return "bank."+tagId;
+		return "bankMapper."+tagId;
 	}
 	
 	@Override
@@ -26,17 +26,17 @@ public class BankDaoImpl implements BankDao{
 
 	@Override
 	public int updateBankByMemberId(Bank bank) {
-		return session.update(makeSql("updateBank"), bank);
+		return session.update(makeSql("updateBankByMemberId"), bank);
 	}
 
 	@Override
-	public int deleteBankByMemberId(String bankId) {
+	public int deleteBankByMemberId(int bankId) {
 		return session.delete(makeSql("deleteBankByMemberId"), bankId);
 	}
 
 	@Override
-	public Bank selectBankByMemberId(String bankId) {
-		return session.selectOne(makeSql("selectBankByMemberId"), bankId);
+	public List<Bank> selectBankByMemberId(String memberId) {
+		return session.selectList(makeSql("selectBankByMemberId"), memberId);
 	}
 	
 }

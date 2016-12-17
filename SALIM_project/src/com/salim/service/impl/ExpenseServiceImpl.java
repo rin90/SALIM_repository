@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.salim.dao.CategoryDao;
 import com.salim.dao.ExpenseDao;
+import com.salim.dao.IncomeDao;
+import com.salim.service.CardNBankService;
 import com.salim.service.ExpenseService;
 import com.salim.service.NotesService;
 import com.salim.vo.BigCategory;
@@ -25,13 +27,25 @@ public class ExpenseServiceImpl implements ExpenseService{
 	@Autowired
 	private ExpenseDao dao;
 	@Autowired
+	private IncomeDao incomeDao;
+	@Autowired
 	private CategoryDao categoryDao;
 	@Autowired
 	private NotesService notesService;
+	@Autowired
+	private CardNBankService CNBService;
 
 	//저장 및 수정
-	public void saveExpense(String memberId, ArrayList<Integer> expenseId, ArrayList<String> expenseExplain, ArrayList<Integer> cashExpense, 
-					ArrayList<Integer> cardExpense, ArrayList<Integer> codeId, Date expenseDate, String content, int no) {
+	public void saveExpense(String memberId, 
+							ArrayList<Integer> expenseId, 
+							ArrayList<String> expenseExplain, 
+							ArrayList<Integer> cashExpense, 
+							ArrayList<Integer> cardExpense, 
+							ArrayList<String> cardType, 
+							ArrayList<Integer> codeId, 
+							Date expenseDate, 
+							String content, 
+							int no) {
 
 		//검증
 		int max =1;
@@ -76,15 +90,14 @@ public class ExpenseServiceImpl implements ExpenseService{
 		}
 		//메모 객체 만들기
 		notesService.saveNotes(new Notes(no, expenseDate, content, memberId));
-
-			
+	
 		//저장할 객체 만들기 - 지출
 		List<Expense> expenseList = new ArrayList<> ();
 		for(int i=0; i<max; i++){
 			if(codeId.get(i)==18 && expenseExplain.get(i).trim().isEmpty() && cashExpense.get(i)==0 && cardExpense.get(i)==0){
 				//return "redirect:/household/login/expenseSelect.do?expenseDate="+new SimpleDateFormat("yyyy-MM-dd").format(expenseDate);
 			}else{
-				expenseList.add(new Expense(expenseId.get(i), memberId, codeId.get(i), expenseDate, expenseExplain.get(i), cashExpense.get(i), cardExpense.get(i), "카드타입"));
+				expenseList.add(new Expense(expenseId.get(i), memberId, codeId.get(i), expenseDate, expenseExplain.get(i), cashExpense.get(i), cardExpense.get(i), cardType.get(i)));
 			}
 		}		
 		//expenseId가 기존에 있으면 update, expenseId가 없으면 insert를 실행
@@ -106,6 +119,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 		param.put("memberId", memberId);
 		param.put("dayDate", expenseDate);
 		param.put("expenseDate", expenseDate);
+		param.put("monthday", new SimpleDateFormat("yyyy-MM").format(expenseDate));
 		
 		//지출 조회
 		List<Expense> expenseList = dao.selectExpenseList(param);
@@ -119,6 +133,13 @@ public class ExpenseServiceImpl implements ExpenseService{
 		}
 		//메모 조회
 		Notes notes = notesService.findNotes(param);
+		//해당 회원 id로 등록한 카드/통장 조회
+		List<String> cardTypeList = CNBService.findCardType(memberId);
+		
+		//수입 한달동안 누계
+		int incomeSum= incomeDao.selectForOneMonthIncome(param);
+		//지출 한달동안 누계
+		int expenseSum = dao.selectForOneMonthExpense(param);
 		
 		//지출 조회
 		Map result = new HashMap();
@@ -126,6 +147,12 @@ public class ExpenseServiceImpl implements ExpenseService{
 		result.put("bigCategoryList", bigCategoryList);
 		result.put("selectSmallCategoryList", selectSmallCategoryList);
 		result.put("notes", notes);
+		result.put("cardTypeList", cardTypeList);
+		result.put("incomeSum", incomeSum);
+		result.put("expenseSum", expenseSum);
+		
+		System.out.println("서비스에서 등록한 카드 타입 - "+cardTypeList);
+		System.out.println("지출 객체 - "+expenseList);
 		
 		return result;
 	}	

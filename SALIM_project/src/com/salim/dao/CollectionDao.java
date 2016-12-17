@@ -1,6 +1,7 @@
 package com.salim.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.salim.vo.Collect;
 
@@ -19,4 +20,9 @@ public interface CollectionDao {
 	public void updateCollection(Collect collect);
 	
 	public int deleteCollectionByCollectionId(String collectionId);
+	
+	
+	
+	//그룹 가계부 조회 - 아이디, 초대수락여부
+	List<Collect> selectByMemberIdNInvite(String memberId);//memberId, invite
 }

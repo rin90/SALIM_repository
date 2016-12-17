@@ -104,4 +104,16 @@
 	</select>	
 
 	
+	<!-- ====================================================== -->
+	
+	<!-- 1달 동안 수입의 합 -->
+	<select id="selectForOneMonthIncome" parameterType="map" resultType="_int">
+		select nvl(sum(income_money), 0) incomeSum
+		from income
+		where member_id=#{memberId}
+		and to_char(income_date, 'YYYY-MM')=#{monthday}
+	</select>
+	
+	
+	
 </mapper>

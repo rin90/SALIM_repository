@@ -1,13 +1,17 @@
 package com.salim.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Card implements Serializable{
 	private String memberId;
 	private int cardId;
 	private String cardType;
 	private String cardDescription;
-	
+	public Card() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Card(String memberId, int cardId, String cardType, String cardDescription) {
 		super();
 		this.memberId = memberId;
@@ -15,39 +19,35 @@ public class Card implements Serializable{
 		this.cardType = cardType;
 		this.cardDescription = cardDescription;
 	}
-
+	@Override
+	public String toString() {
+		return "Card [memberId=" + memberId + ", cardId=" + cardId + ", cardType=" + cardType + ", cardDescription="
+				+ cardDescription + "]";
+	}
 	public String getMemberId() {
 		return memberId;
 	}
-
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-
 	public int getCardId() {
 		return cardId;
 	}
-
 	public void setCardId(int cardId) {
 		this.cardId = cardId;
 	}
-
 	public String getCardType() {
 		return cardType;
 	}
-
 	public void setCardType(String cardType) {
 		this.cardType = cardType;
 	}
-
 	public String getCardDescription() {
 		return cardDescription;
 	}
-
 	public void setCardDescription(String cardDescription) {
 		this.cardDescription = cardDescription;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -58,7 +58,6 @@ public class Card implements Serializable{
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -88,10 +87,6 @@ public class Card implements Serializable{
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Card [memberId=" + memberId + ", cardId=" + cardId + ", cardType=" + cardType + ", cardDescription="
-				+ cardDescription + "]";
-	}
+	
 	
 }

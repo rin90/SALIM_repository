@@ -32,6 +32,11 @@
 		<mapper resource="com/salim/dao/mapper/codeMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/categoryMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/freeCommentMapper.xml"/> 
+		
+		
+		
+		<mapper resource="com/salim/dao/mapper/cardMapper.xml"/>
+		<mapper resource="com/salim/dao/mapper/bankMapper.xml"/>
 	</mappers>
 	
 	

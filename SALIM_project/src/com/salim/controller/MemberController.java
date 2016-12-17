@@ -2,6 +2,7 @@ package com.salim.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.salim.service.CollectionService;
 import com.salim.service.MemberService;
+import com.salim.vo.Collect;
 import com.salim.vo.Member;
 import com.salim.vo.validator.LoginCheck;
 import com.salim.vo.validator.MemberModifyCheck;
@@ -31,6 +34,8 @@ public class MemberController {
 
 	@Autowired
 	private MemberService service; //MemberService 타입으로 만드는거 맞나?
+	@Autowired
+	private CollectionService collectionService;
 	
 	//회원 가입
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
@@ -136,6 +141,12 @@ public class MemberController {
 			if(login.getPassword().equals(member.getPassword())) //비밀번호 체크
 			{
 				 session.setAttribute("login_info",member); // 비밀번호가 일치하는 경우 - 로그인 성공
+				 
+				 //로그인 성공시 회원 아이디로 개인과 그룹 목록 보여줌
+				 List<Collect> groupList = collectionService.selectByMemberIdNInvite(member.getMemberId());
+				 session.setAttribute("groupList", groupList);
+				 System.out.println("그룹  조회......"+groupList);
+				 
 				return "redirect:/collection/findAllCollectionList.do"; //로그인 성공화면
 			}else
 			{//비밀번호가 틀린 경우 - 다시 로그인 폼으로 돌아간다.
