@@ -104,6 +104,18 @@
 				}
 			});
 			
+			/* 권한자이면 클릭했을 때 수정가능하게 바꾸기 */
+			$("table").contents().on("click", function(){
+				var grantId = '<%=((Collect)session.getAttribute("group_info"))== null? "":((Collect)session.getAttribute("group_info")).getGrantId()%>';
+				var memberId = '<%=((Member)session.getAttribute("login_info")).getMemberId()%>';
+				if(grantId != "" && (grantId != memberId)){ //그룹권한자와 회원이 불일치	
+				}else{
+					$("input[readOnly=readOnly]").attr("readOnly", false);
+					$(".bigCategory").attr("disabled", false);
+					$(".smallCategory").attr("disabled", false);
+				}
+			});
+			
 		});
 	
 		/* 체크된 것만 컨트롤러로 넘기기 */
@@ -150,13 +162,9 @@
 					}else{
 						location.href = "/SALIM_project/household/login/incomeDelete.do?incomeDate="+$("#datepicker").val()+"&"+checkedArr;
 					}
-				}
-			}
 				
-
-			
-
-
+				}
+		}
 		
 		//저장시 숫자 포맷 체크
 		var inputs = window.document.getElementsByClassName("element");
@@ -169,11 +177,9 @@
 					return false;
 				}
 			}
+			$("select[disabled=disabled]").attr("disabled", false);
 			return true;
 		}
-		
-	
-		
 		
 		//글자수 체크
 		$(document).ready(function(){
@@ -194,8 +200,6 @@
 				}
 			});
 		});
-		
-		
 		
 		
 	
@@ -265,13 +269,13 @@
 							<input type="hidden" name="incomeId" value="${income.incomeId }"/>
 						</td>
 						<td>
-							<input type="text" name="explanation" class="explane" value="${income.explanation}" placeholder="${income.explanation}">
+							<input type="text" name="explanation" class="explane" value="${income.explanation}" readonly="readonly" placeholder="${income.explanation}">
 						</td>
 						<td>
-							<input type="text" class="element" name="incomeMoney" value="${income.incomeMoney}" placeholder="${income.incomeMoney}">
+							<input type="text" class="element" name="incomeMoney" value="${income.incomeMoney}" readonly="readonly" placeholder="${income.incomeMoney}">
 						</td>
 						<td>
-							<select name="bigCategory" class="bigCategory" id="selectBig">
+							<select name="bigCategory" class="bigCategory" id="selectBig" disabled="disabled">
 								<c:forEach items="${requestScope.bigCategoryList}" var="big">
 									<c:choose>
 										<c:when test="${big.bigCode == requestScope.selectSmallCategoryList[no.index].bigCategory.bigCode}">
@@ -283,7 +287,7 @@
 									</c:choose>
 								</c:forEach>
 							</select>
-							<select name="codeId" class="smallCategory">
+							<select name="codeId" class="smallCategory" disabled="disabled">
 								<option selected="selected" value="${requestScope.selectSmallCategoryList[no.index].smallCode}">${requestScope.selectSmallCategoryList[no.index].smallContent}</option>
 							</select>
 						</td>
@@ -302,18 +306,18 @@
 					<input type="checkbox" name="incomeId" value="0"/> <!-- 체크박스 하나하나 -->
 					<input type="hidden" name="incomeId" value="0"/>
 				</td>
-				<td><input type="text" name="explanation" class="explane"/></td>
-				<td><input type="text" name="incomeMoney" class="element" /></td>
+				<td><input type="text" name="explanation" class="explane" readonly="readonly"/></td>
+				<td><input type="text" name="incomeMoney" class="element" readonly="readonly"/></td>
 				
 				<!-- 여기서 부터 코드 선택 테이블 -->
 				<td>
-					<select class="bigCategory" name="bigCategory">
+					<select class="bigCategory" name="bigCategory" disabled="disabled">
 						<c:forEach items="${requestScope.bigCategoryList}" var="bigCategory">
 							<option value="${bigCategory.bigCode}">${bigCategory.bigContent}</option>
 						</c:forEach>
 					</select>
 					
-					<select name="codeId" class="smallCategory">
+					<select name="codeId" class="smallCategory" disabled="disabled">
 						<option value="1">미분류</option>
 					</select>
 				</td>
