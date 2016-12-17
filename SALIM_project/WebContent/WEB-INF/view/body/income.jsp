@@ -1,3 +1,5 @@
+<%@page import="com.salim.vo.Member"%>
+<%@page import="com.salim.vo.Collect"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.salim.vo.Income"%>
 <%@page import="com.salim.vo.Code"%>
@@ -106,24 +108,55 @@
 	
 		/* 체크된 것만 컨트롤러로 넘기기 */
 		function checkevent(){
-			var checkedArr = "";
-			$("input[name=incomeId]:checked").each(function(idx){
-				if($(this).val() != 0){
-					if($("input[name=incomeId]:checked").length-1 == idx){
-						checkedArr+="incomeIdList="+$(this).val();
+			var grantId = '<%=((Collect)session.getAttribute("group_info"))== null? "":((Collect)session.getAttribute("group_info")).getGrantId()%>';
+			var memberId = '<%=((Member)session.getAttribute("login_info")).getMemberId()%>';
+				if(grantId != ""){
+					if(grantId != memberId){
+						alert("삭제 권한이 없습니다. 해당 그룹 관리자에게 문의해주세요.");
 					}else{
-						checkedArr+="incomeIdList="+$(this).val()+"&";
+						var checkedArr = "";
+						$("input[name=incomeId]:checked").each(function(idx){
+							if($(this).val() != 0){
+								if($("input[name=incomeId]:checked").length-1 == idx){
+									checkedArr+="incomeIdList="+$(this).val();
+								}else{
+									checkedArr+="incomeIdList="+$(this).val()+"&";
+								}
+							}
+						});
+						if($("input[name=incomeId]:checked").length == 0){
+							alert("삭제할 것을 선택해주세요.");
+						}else if($("input[name=incomeId]:checked").val()==0){
+							alert("존재하지 않는 데이터입니다. 다시 선택해주세요.");
+						}else{
+							location.href = "/SALIM_project/household/login/incomeDelete.do?incomeDate="+$("#datepicker").val()+"&"+checkedArr;
+						}
+					}
+				}else{
+					var checkedArr = "";
+					$("input[name=incomeId]:checked").each(function(idx){
+						if($(this).val() != 0){
+							if($("input[name=incomeId]:checked").length-1 == idx){
+								checkedArr+="incomeIdList="+$(this).val();
+							}else{
+								checkedArr+="incomeIdList="+$(this).val()+"&";
+							}
+						}
+					});
+					if($("input[name=incomeId]:checked").length == 0){
+						alert("삭제할 것을 선택해주세요.");
+					}else if($("input[name=incomeId]:checked").val()==0){
+						alert("존재하지 않는 데이터입니다. 다시 선택해주세요.");
+					}else{
+						location.href = "/SALIM_project/household/login/incomeDelete.do?incomeDate="+$("#datepicker").val()+"&"+checkedArr;
 					}
 				}
-			});
-			if($("input[name=incomeId]:checked").length == 0){
-				alert("삭제할 것을 선택해주세요.");
-			}else if($("input[name=incomeId]:checked").val()==0){
-				alert("존재하지 않는 데이터입니다. 다시 선택해주세요.");
-			}else{
-				location.href = "/SALIM_project/household/login/incomeDelete.do?incomeDate="+$("#datepicker").val()+"&"+checkedArr;
 			}
-		}
+				
+
+			
+
+
 		
 		//저장시 숫자 포맷 체크
 		var inputs = window.document.getElementsByClassName("element");
