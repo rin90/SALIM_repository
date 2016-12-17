@@ -1,16 +1,16 @@
 package com.salim.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,6 +21,7 @@ import com.salim.service.NotesService;
 import com.salim.service.ScheduleService;
 import com.salim.vo.Goal;
 import com.salim.vo.Schedule;
+import com.salim.vo.ScheduleSet;
 
 @Controller
 @RequestMapping("/calendar")
@@ -105,5 +106,14 @@ public class CalendarController {
 		return result;
 	}
 	
+	@RequestMapping("/updateSchedule")
+	@ResponseBody
+	List<Schedule> updateSchedule(@ModelAttribute ScheduleSet list) throws UnsupportedEncodingException{
+		System.out.println(list.settingSchedule());
+		List<Schedule> slist = list.settingSchedule();
+		sservice.updateSchedule(slist);
+		System.out.println(slist);
+		return slist;
+	}
 	
 }

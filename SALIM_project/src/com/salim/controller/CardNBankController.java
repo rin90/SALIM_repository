@@ -83,8 +83,7 @@ public class CardNBankController {
 	   return "body/cardNBank.tiles";
    }
 
-   
-	//그룹인지 개인인지 판별 - 다 되면 링크 정리하고 처리하자...
+	//그룹인지 개인인지 판별 
 	public String checkMemberId(HttpSession session){
 		String memberId = null;
 		Collect collect = (Collect) session.getAttribute("group_info");

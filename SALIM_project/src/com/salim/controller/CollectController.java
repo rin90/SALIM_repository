@@ -41,6 +41,8 @@ public class CollectController {
 		String collectionId=service.findCollectionSeq();
 		Collect collect=new Collect(collectionId, collectionName, collectionIntro, m.getMemberId());
 		service.addCollection(collect,m);
+		List<Collect> groupList = service.selectByMemberIdNInvite(m.getMemberId());
+		session.setAttribute("groupList", groupList);
 		return "redirect:/collection/findAllCollectionList.do"; //로그인 성공페이지로 일단 ㄱㄱ 
 	}
 
@@ -108,6 +110,8 @@ public class CollectController {
 		else
 		{
 			session.setAttribute("group_info", collect);
+			List<Collect> groupList = service.selectByMemberIdNInvite(((Member)session.getAttribute("login_info")).getMemberId());
+			session.setAttribute("groupList", groupList);
 		}
 		System.out.println("grantMessage =  "+grantMessage);
 		
@@ -125,7 +129,10 @@ public class CollectController {
 		if(str.equals(""))
 		{
 			session.removeAttribute("group_info");
-			return "redirect:/collection//findAllCollectionList.do";
+			List<Collect> groupList = service.selectByMemberIdNInvite(((Member)session.getAttribute("login_info")).getMemberId());
+			session.setAttribute("groupList", groupList);
+		//	return "redirect:/invite.do";
+			return "redirect:/collection/findAllCollectionList.do";
 		}else
 		{
 			map.put("deletefailMessage", str);
