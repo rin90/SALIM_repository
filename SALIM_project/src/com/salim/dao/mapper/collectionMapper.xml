@@ -70,7 +70,7 @@ where collection.collection_id =collectionId
 		 from member m, member_collection mc
 		 where m.member_id = mc.member_id
 	 	 and m.member_id = #{memberId}
-	 	 and mc.invite ='false') mc
+	 	 and mc.invite ='true') mc
 	where c.collection_id = mc.collection_id
  </select>
  
