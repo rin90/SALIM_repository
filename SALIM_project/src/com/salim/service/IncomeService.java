@@ -27,4 +27,9 @@ public interface IncomeService {
 	//List<Income> selectIncome(String memberId, Date incomeDate);
 	Map selectIncome(String memberId, Date incomeDate);
 	
+	
+	
+	/*=================== << 일일 일정관련 부분용 >> ======================*/
+	int selectDayIncome(Map map);
+	
 }

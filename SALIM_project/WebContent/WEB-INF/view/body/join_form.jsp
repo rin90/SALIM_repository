@@ -60,7 +60,7 @@ $(document).ready(function(){
 				 {
 					 $("#idResult").html("<font color='red' size='2'>사용할 수 없는 아이디입니다.<font>")
 				 }
-			 },
+			 }
 			/*  "error":function()
 			 {
 				 alert("실패");
@@ -94,7 +94,7 @@ $(document).ready(function(){
 				 {
 					 $("#emailResult").html("<font color='red' size='2'>사용할 수 없는 이메일입니다.<font>")
 				 }
-			 },
+			 }
 			 /* "error":function()
 			 {
 				 alert("실패");
@@ -131,7 +131,7 @@ $(document).ready(function(){
 				 {
 				 	$("#passwordResult").html("<font color='red' size='2'>비밀번호가 일치하지 않습니다. 다시 입력해주세요.<font>")
 				 }
-			 },
+			 }
 		/* 	 "error":function()
 			 {
 				 alert("실패");
@@ -171,7 +171,7 @@ $(document).ready(function(){
 						 $("#age").val(age);
 					 }
 					 
-				 },
+				 }
 			
 			});
 			
@@ -201,7 +201,7 @@ $(document).ready(function(){
 	       			 "success":function(obj){
 	       				 var age= obj.age;
 	       				 $("#age").val(age);
-	       				 alert(age);
+	       				
 	       			 }
 	                	
 	                });

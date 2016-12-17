@@ -20,6 +20,8 @@ public interface ExpenseDao {
 	//지출 조회 - 조회해야하는 회원id, 지출일을 조회
 	List<Expense> selectExpenseList(Map map);//memberId, expenseDate
 	
+	/*=================== << 일일 일정관련 부분용 >> ======================*/
+	int selectDayExpense(Map map);
 	
 	/*=================== << 보고서용 >> ======================*/
 	/**
@@ -53,5 +55,8 @@ public interface ExpenseDao {
 	 * @return	
 	 */
 	List selectTotalMonthReport(Map map);
+	
+	/*=================== << 한달 동안 지출 누계 >> ======================*/
+	int selectForOneMonthExpense(Map map);
 }
 

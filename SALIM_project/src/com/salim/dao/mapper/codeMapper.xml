@@ -14,7 +14,7 @@
 		select id, collection, code
 		from code
 		where collection=#{value}
-	
+		order by id asc
 	</select>
 	
 	<select id="selectCodeById" parameterType="_int" resultMap="code-resultMap">

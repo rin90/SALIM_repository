@@ -1,5 +1,6 @@
 package com.salim.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.salim.dao.CategoryDao;
+import com.salim.dao.ExpenseDao;
 import com.salim.dao.IncomeDao;
 import com.salim.service.IncomeService;
 import com.salim.service.NotesService;
@@ -23,6 +25,8 @@ public class IncomeServiceImpl implements IncomeService{
 	
 	@Autowired
 	private IncomeDao dao;
+	@Autowired
+	private ExpenseDao expenseDao;
 	@Autowired
 	private CategoryDao categoryDao;
 	@Autowired
@@ -96,6 +100,7 @@ public class IncomeServiceImpl implements IncomeService{
 		param.put("memberId", memberId);
 		param.put("dayDate", incomeDate);
 		param.put("incomeDate", incomeDate);
+		param.put("monthday", new SimpleDateFormat("yyyy-MM").format(incomeDate));
 		
 		//수입 조회
 		List<Income> incomeList = dao.selectIncomeList(param); 
@@ -111,7 +116,12 @@ public class IncomeServiceImpl implements IncomeService{
 		}
 		
 		//메모 조회
-		Notes notes = notesService.findNotes(param);		
+		Notes notes = notesService.findNotes(param);	
+		
+		//수입 한달동안 누계
+		int incomeSum= dao.selectForOneMonthIncome(param);
+		//지출 한달동안 누계
+		int expenseSum = expenseDao.selectForOneMonthExpense(param);
 
 		//수입 조회에 다 조회
 		Map result = new HashMap();
@@ -119,6 +129,8 @@ public class IncomeServiceImpl implements IncomeService{
 		result.put("bigCategoryList", bigCategoryList);
 		result.put("selectSmallCategoryList", selectSmallCategoryList);
 		result.put("notes", notes);//==null?"":notes
+		result.put("incomeSum", incomeSum);
+		result.put("expenseSum", expenseSum);
 		
 		return result;
 	}
@@ -135,6 +147,14 @@ public class IncomeServiceImpl implements IncomeService{
 		map.put("memberId", memberId);
 		dao.deleteIncome(map);
 		}
+	}
+
+	/*============================================
+		일일 수입 내역 총액
+	  ============================================*/
+	@Override
+	public int selectDayIncome(Map map) {
+		return dao.selectDayIncome(map);
 	}
 
 

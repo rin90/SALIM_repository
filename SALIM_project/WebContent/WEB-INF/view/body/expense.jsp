@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>	
 <head>	
@@ -175,15 +176,15 @@
 		<tbody>
 			<tr>
 				<td>수입</td>
-				<td>얼마 들어왔는지 누계</td>
+				<td>${requestScope.incomeSum }</td>
 			</tr>
 			<tr>
 				<td>지출</td>
-				<td>얼마 나갔는지 누계</td>
+				<td>${requestScope.expenseSum }</td>
 			</tr>
 			<tr>
 				<td>누계</td>
-				<td>수입-지출</td>
+				<td>${requestScope.incomeSum - requestScope.expenseSum }</td>
 			</tr>
 		</tbody>
 	</table>
@@ -230,8 +231,18 @@
 							<input type="text" class="element" name="cardExpense" value="${expense.cardExpense}" placeholder="${expense.cardExpense}">
 						</td>
 						<td>	<!-- 통장/카드 선택하는거 나오게 하기 -->
-							<select>
-								<option>통장/카드 선택</option>
+							<select name="cardType">
+								<option value="미등록">미등록</option>
+								<c:forEach items="${requestScope.cardTypeList }" var="cnb">
+									<c:choose>
+										<c:when test="${cnb != expense.cardType}">
+											<option value="${cnb}">${cnb}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${expense.cardType}" selected="selected">${expense.cardType}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</select>
 						</td>
 						<td>
@@ -260,29 +271,39 @@
 		
 		
 		<!-- 아무 것도 안 뿌려준 입력창 -->
-			<tr>
-				<td>
-					<input type="checkbox" name="expenseId" value="0"/> <!-- 체크박스 하나하나 -->
-					<input type="hidden" name="expenseId" value="0"/>
-				</td>
-				<td><input type="text" name="expenseExplain" class="explane"/></td>
-				<td><input type="text" name="cashExpense" class="element"/></td>
-				<td><input type="text" name="cardExpense" class="element"/></td>
-				<td>통장/카드 선택</td>
+			<c:forEach begin="1" end="5">
+				<tr>
+					<td>
+						<input type="checkbox" name="expenseId" value="0"/> <!-- 체크박스 하나하나 -->
+						<input type="hidden" name="expenseId" value="0"/>
+					</td>
+					<td><input type="text" name="expenseExplain" class="explane"/></td>
+					<td><input type="text" name="cashExpense" class="element"/></td>
+					<td><input type="text" name="cardExpense" class="element"/></td>
+					<td><!-- 통장/카드 선택 -->
+						<select name="cardType">
+							<option value="미등록">미등록</option>
+							<c:forEach items="${requestScope.cardTypeList }" var="cnb">
+								<option value="${cnb}">${cnb}</option>
+							</c:forEach>
+						</select>
+					</td>
 				
-				<!-- 여기서 부터 코드 선택 테이블 -->
-				<td>
-					<select class="bigCategory">
-						<c:forEach items="${requestScope.bigCategoryList}" var="bigCategory">
-							<option value="${bigCategory.bigCode }">${bigCategory.bigContent}</option>
-						</c:forEach>
-					</select>
+					<!-- 여기서 부터 코드 선택 테이블 -->
+					<td>
+						<select class="bigCategory">
+							<c:forEach items="${requestScope.bigCategoryList}" var="bigCategory">
+								<option value="${bigCategory.bigCode }">${bigCategory.bigContent}</option>
+							</c:forEach>
+						</select>
 					
-					<select name="codeId" class="smallCategory">
-						<option value="18">미분류</option>
-					</select>
-				</td>
-			</tr>
+						<select name="codeId" class="smallCategory">
+							<option value="18">미분류</option>
+						</select>
+					</td>
+				</tr>
+			</c:forEach>
+			
 		</tfoot>
 	</table>
 	

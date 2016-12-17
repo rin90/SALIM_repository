@@ -201,7 +201,22 @@ insert into smallCategory values(seq_sma.nextval, '기타', (select big_code fro
 insert into smallCategory values(seq_sma.nextval, '이체/대체', (select big_code from bigCategory where big_content = '이체/대체'));
 
 
--- 변경
+---카드/통장 코드-> Code에 넣음. 카테고리 아님.----------------------------------------------------------------------------
 
+insert into code values(seq_cod.nextval, '은행', '신한');
+insert into code values(seq_cod.nextval, '은행', '씨티');
+insert into code values(seq_cod.nextval, '은행', '농협');
+insert into code values(seq_cod.nextval, '은행', '삼성');
+insert into code values(seq_cod.nextval, '은행', '현대');
+insert into code values(seq_cod.nextval, '은행', 'BC');
+insert into code values(seq_cod.nextval, '은행', 'KB국민');
+insert into code values(seq_cod.nextval, '은행', 'IBK기업');
+insert into code values(seq_cod.nextval, '은행', '우리');
+insert into code values(seq_cod.nextval, '은행', 'BNK부산');
+insert into code values(seq_cod.nextval, '은행', '우체국');
+insert into code values(seq_cod.nextval, '은행', '수협');
+insert into code values(seq_cod.nextval, '은행', '기타');
+
+delete CODE 
 
 

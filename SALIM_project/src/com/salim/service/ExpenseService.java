@@ -12,7 +12,8 @@ public interface ExpenseService {
 					 ArrayList<Integer> expenseId, 
 					 ArrayList<String> expenseExplain, 
 					 ArrayList<Integer> cashExpense, 
-					 ArrayList<Integer> cardExpense, 
+					 ArrayList<Integer> cardExpense,
+					 ArrayList<String> cardType, 
 					 ArrayList<Integer> codeId, 
 					 Date expenseDate, 
 					 String content, 
@@ -23,6 +24,10 @@ public interface ExpenseService {
 	
 	//지출 삭제
 	void deleteExpense(List<Integer> expenseIdList, String memberId);//List<Integer> expenseIdList, memberId
+	
+	
+	/*=================== << 일일 일정관련 부분용 >> ======================*/
+	int selectDayExpense(Map map);
 	
 	
 }
