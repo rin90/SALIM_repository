@@ -15,7 +15,6 @@ public class BankDaoImpl implements BankDao{
 	@Autowired
 	private SqlSessionTemplate session;
 	
-	
 	private String makeSql(String tagId){
 		return "bankMapper."+tagId;
 	}
@@ -32,7 +31,6 @@ public class BankDaoImpl implements BankDao{
 
 	@Override
 	public int deleteBankByMemberId(int bankId) {
-		System.out.println("통장 삭제 디에이오로 넘오옴 - "+bankId);
 		return session.delete(makeSql("deleteBankByMemberId"), bankId);
 	}
 

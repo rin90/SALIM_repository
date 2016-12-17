@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>	
 <head>	
@@ -230,8 +231,18 @@
 							<input type="text" class="element" name="cardExpense" value="${expense.cardExpense}" placeholder="${expense.cardExpense}">
 						</td>
 						<td>	<!-- 통장/카드 선택하는거 나오게 하기 -->
-							<select>
-								<option>통장/카드 선택</option>
+							<select name="cardType">
+								<option value="미등록">미등록</option>
+								<c:forEach items="${requestScope.cardTypeList }" var="cnb">
+									<c:choose>
+										<c:when test="${cnb != expense.cardType}">
+											<option value="${cnb}">${cnb}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${expense.cardType}" selected="selected">${expense.cardType}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</select>
 						</td>
 						<td>
@@ -269,7 +280,14 @@
 					<td><input type="text" name="expenseExplain" class="explane"/></td>
 					<td><input type="text" name="cashExpense" class="element"/></td>
 					<td><input type="text" name="cardExpense" class="element"/></td>
-					<td>통장/카드 선택</td>
+					<td><!-- 통장/카드 선택 -->
+						<select name="cardType">
+							<option value="미등록">미등록</option>
+							<c:forEach items="${requestScope.cardTypeList }" var="cnb">
+								<option value="${cnb}">${cnb}</option>
+							</c:forEach>
+						</select>
+					</td>
 				
 					<!-- 여기서 부터 코드 선택 테이블 -->
 					<td>

@@ -17,7 +17,7 @@
 <a href="${initParam.rootPath }/household/login/incomeSelect.do">수입&지출 입력</a><br>
 <a href="${initParam.rootPath }/household/login/findbudget.do">예산작성</a><br> 
 
-<a href="${initParam.rootPath }/cardNBank/login/cardNBank.do">카드/통장 등록</a><br>
+<a href="${initParam.rootPath }/cardNBank/login/cardNBankSelect.do">카드/통장 등록</a><br>
 
 <a href="${initParam.rootPath }/test/time.do">Test</a><br>
 <a href="${initParam.rootPath }/free/login/list.do?page=1">자유게시판</a><br>

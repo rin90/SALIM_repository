@@ -125,5 +125,24 @@ public class CollectController {
 	
 	
 	
+	
+	//상단의 select바로 이동하는 것
+	@RequestMapping("/moving.do")
+	public String moving(String selectId, HttpSession session){
+
+		Collect collect = null;
+		try {
+			collect = service.findCollectionByCollectionId(selectId);
+			if(collect == null){
+				session.removeAttribute("group_info");
+			}else{
+				session.setAttribute("group_info", collect);
+			}
+		} catch (Exception e) {
+			session.removeAttribute("group_info");
+		}
+
+		return "redirect:/household/login/incomeSelect.do";
+	}
 		
 }

@@ -27,7 +27,6 @@ public class CardDaoImpl implements CardDao{
 
    @Override
    public int updateCardByMemberId(Card card) {
-	   System.out.println("디에이오에서 받은 카드객체 - "+card);
       return session.update(makeSql("updateCardByMemberId"), card);
    }
 

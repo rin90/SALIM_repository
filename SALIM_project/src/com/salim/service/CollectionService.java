@@ -19,4 +19,8 @@ public interface CollectionService {
 	public String modifyCollection(Collect collect,String memberIdforGrant);
 
 	public int removeCollection(String collectionId);
+	
+	
+	//memberId와 invite로 조회한 collection 객체 목록
+	List<Collect> selectByMemberIdNInvite(String memberId);
 }

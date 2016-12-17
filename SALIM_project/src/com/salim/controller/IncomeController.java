@@ -47,6 +47,7 @@ public class IncomeController {
 						   HttpServletRequest request){
 		
 		String memberId = checkMemberId(session);
+		System.out.println("수입에 들어온 멤버 조회 - "+memberId);
 		service.saveIncome(memberId, incomeId, explanation, incomeMoney, codeId, incomeDate, request.getParameter("notes"), Integer.parseInt(request.getParameter("notesNum")));				
 		return "redirect:/household/login/incomeSelect.do?incomeDate="+new SimpleDateFormat("yyyy-MM-dd").format(incomeDate);
 	}
