@@ -211,32 +211,41 @@
 <form action="${initParam.rootPath }/household/login/income.do" method="post">
 	
 	<!-- 달력 - 날짜 선택 -->
-	<p>
-	<input type="text" id="datepicker" name="incomeDate" value="${requestScope.incomeDate }" placeholder="${requestScope.incomeDate }">
-	</p>
+	
+	<div class="row">
+		<div class="col-md-5">
+			<p>
+			<input type="text" id="datepicker" name="incomeDate" value="${requestScope.incomeDate }" placeholder="${requestScope.incomeDate }">
+			</p>
+		</div>
+		<div class="col-md-7">
+			<!-- 오늘 수입, 지출 불러오기 -->
+			<table border="1">
+				<thead>
+					<tr>
+						<td>이번달 오늘까지 누계</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>수입</td>
+						<td>${requestScope.incomeSum }</td>
+					</tr>
+					<tr>
+						<td>지출</td>
+						<td>${requestScope.expenseSum }</td>
+					</tr>
+					<tr>
+						<td>누계</td>
+						<td>${requestScope.incomeSum - requestScope.expenseSum }</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
 
-	<!-- 오늘 수입, 지출 불러오기 -->
-	<table border="1">
-		<thead>
-			<tr>
-				<td>이번달 오늘까지 누계</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>수입</td>
-				<td>${requestScope.incomeSum }</td>
-			</tr>
-			<tr>
-				<td>지출</td>
-				<td>${requestScope.expenseSum }</td>
-			</tr>
-			<tr>
-				<td>누계</td>
-				<td>${requestScope.incomeSum - requestScope.expenseSum }</td>
-			</tr>
-		</tbody>
-	</table>
+	
 	
 	<!-- 수입입력란 -->
 	<table border="1">

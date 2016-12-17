@@ -10,12 +10,17 @@
 <meta charset="UTF-8">	
 <title>예산 쓰기, 수정, 삭제</title>	
 
+<!-- 부트스트랩 등록 -->
+<link href="/SALIM_project/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
+
+<!-- j쿼리 등록 -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<script type="text/javascript">
-
+	
 	/* 년 월만 선택하게.. */
 	$(function(){
 		 $('.month-picker').datepicker({
@@ -353,6 +358,8 @@
 	<input type="submit" value="저장하기" onclick="return check();" />
 	
 </form>		
-	
+	<button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+  Loading state
+</button>
 </body>
 </html>
