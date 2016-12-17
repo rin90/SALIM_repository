@@ -15,7 +15,7 @@
 	
 	
 	<resultMap type="freeboard" id="freeBoard-freeComment-join-resultMap" extends="freeBoard-resultMap">
-		<collection property="freeComment" ofType="FreeComment">
+		<collection property="freeComment" ofType="freecomment">
 			<id column="id" property="id"/>
 			<result column="comment_content" property="commentContent"/>
 			<result column="comment_member_id" property="commentMemberId"/>		

@@ -34,6 +34,7 @@
 	<mvc:view-controller path="/calendar.do" view-name="body/calendar/calendar.tiles"/> 	
 	<mvc:view-controller path="/graph.do" view-name="body/graph.tiles"/>
 	<mvc:view-controller path="/body/income.do" view-name="body/income.tiles"/>
+	<mvc:view-controller path="/inquiry.do" view-name="inquiry.tiles"/>
 	
 	<!-- member -->
 
@@ -100,8 +101,8 @@
 	<bean name="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
 		p:host="smtp.gmail.com"
 		p:port="587"
-		p:username="gmail계정"
-		p:password="gmail 패스워드"
+		p:username="dlwocks1234@gmail.com"
+		p:password="zxc7539510"
 		p:javaMailProperties-ref="mailProperty"/>
 		
 	<util:properties id="mailProperty"> 

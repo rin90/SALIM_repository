@@ -1,17 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 
+
 <script type="text/javascript" src="/SALIM_project/lib/scripts/jquery.js"></script>
 <script type="text/javascript">
-
-
-
-
-
 </script>
 
 
@@ -19,17 +14,17 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<td>π¯»£</td>
-				<td>¡¶∏Ò</td>
-				<td>¿€º∫¿⁄</td>
-				<td>¿€º∫¿œ</td>
-				<td>¡∂»∏</td>
-				<td>¡¡æ∆ø‰</td>
+				<td>Î≤àÌò∏</td>
+				<td>Ï†úÎ™©</td>
+				<td>ÏûëÏÑ±Ïûê</td>
+				<td>ÏûëÏÑ±Ïùº</td>
+				<td>Ï°∞Ìöå</td>
+				<td>Ï¢ãÏïÑÏöî</td>
 			</tr>
 		</thead>
 		
 		<tbody id="tbody">
-			<!--  ∏Ò∑œ ª—∏Æ±‚ -->
+			<!--  Î™©Î°ù ÎøåÎ¶¨Í∏∞ -->
 		
 			<c:forEach items="${requestScope.list }" var="freeBoard">
 				<tr>
@@ -48,17 +43,17 @@
 			
 			
 			
-			<!-- ¿Ã¿¸∆‰¿Ã¡ˆ -->
+			<!-- Ïù¥Ï†ÑÌéòÏù¥ÏßÄ -->
 			<c:choose>
 				<c:when test="${requestScope.pageBean.previousGroup }">
-					<a href="${initParam.rootPath }/free/login/list.do?page=${requestScope.pageBean.beginPage-1}">¢∏&nbsp;</a>
+					<a href="${initParam.rootPath }/free/login/list.do?page=${requestScope.pageBean.beginPage-1}">‚óÄ&nbsp;</a>
 				</c:when>
 				<c:otherwise>
-					¢∏&nbsp;
+					‚óÄ&nbsp;
 				</c:otherwise>
 			</c:choose>
 			
-			<!-- ∆‰¿Ã¡ˆ ª—∏Æ±‚ -->
+			<!-- ÌéòÏù¥ÏßÄ ÎøåÎ¶¨Í∏∞ -->
 			<c:forEach begin="${requestScope.pageBean.beginPage }" end="${requestScope.pageBean.endPage }" var="page">
 				<c:choose>
 					<c:when test="${requestScope.pageBean.page == page }">
@@ -70,19 +65,19 @@
 				</c:choose>
 			</c:forEach>
 			
-			<!-- ¥Ÿ¿Ω∆‰¿Ã¡ˆ -->
+			<!-- Îã§ÏùåÌéòÏù¥ÏßÄ -->
 			<c:choose>
 				<c:when test="${requestScope.pageBean.nextGroup }">
-					<a href="${initParam.rootPath }/free/login/list.do?page=${requestScope.pageBean.endPage+1 }">&nbsp;¢∫</a>
+					<a href="${initParam.rootPath }/free/login/list.do?page=${requestScope.pageBean.endPage+1 }">&nbsp;‚ñ∂</a>
 				</c:when>
 				<c:otherwise>
-					&nbsp;¢∫				
+					&nbsp;‚ñ∂				
 				</c:otherwise>
 			</c:choose>
 			
 			<form action="${initParam.rootPath }/free/login/form.do">
 			<input type="hidden" name="page" value="${requestScope.pageBean.page }">
-			&nbsp;&nbsp;&nbsp;<input type="submit" value="±€æ≤±‚">
+			&nbsp;&nbsp;&nbsp;<input type="submit" value="Í∏ÄÏì∞Í∏∞">
 			</form>
 			
 			<p/>
@@ -94,7 +89,7 @@
 				</c:forEach>
 			</select>   
 			<input type="hidden" name="page" value="1">
-			<input type="text" name="search"> <input type="submit" value="∞Àªˆ"> 
+			<input type="text" name="search"> <input class="btn btn-info btn-sm" type="submit" value="Í≤ÄÏÉâ"> 
 			</form>
 
 

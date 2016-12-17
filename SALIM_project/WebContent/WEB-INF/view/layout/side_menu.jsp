@@ -21,7 +21,7 @@
 <a href="${initParam.rootPath }/test/time.do">Test</a><br>
 <a href="${initParam.rootPath }/free/login/list.do?page=1">자유게시판</a><br>
 <a href="${initParam.rootPath }/">Tip게시판</a><br>
-<a href="${initParam.rootPath }/">Q&A</a><br>
+<a href="${initParam.rootPath }/inquiry.do">문의하기</a>
 <a href="${initParam.rootPath }/collectionSetting.do">그룹 환경설정</a><br>
 
 

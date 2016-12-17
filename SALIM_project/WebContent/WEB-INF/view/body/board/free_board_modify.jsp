@@ -1,14 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script type="text/javascript"
+	src="${initParam.rootPath }/lib/scripts/jquery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	
+	
+	$("#b").on("click",function(){
+		var txt ="<input class='f' type='file'  value='사진' name='fileRoot'><input  id='fc' class='f'  type='button' value='파일 수정 취소'>"
+			
+		$("#b").hide();
+	
+		$("#t").html(txt);	
+
+	});
+	
+	$("#t").on("click","#fc", function(){
+		$(".f").hide();
+		$("#b").show();
+	});
+	
+	
+	
+	
+});
+
+
+</script>
 
 	<form action="${initParam.rootPath }/free/login/update.do" method="post" enctype="multipart/form-data">
 		<h4>자유게시판</h4>
 		 제목:<input type="text" name="title" value="${requestScope.freeBoard.title }"><br> 
 
-		파일첨부:<input type="file" value="사진" name="fileRoot" src="${requestScope.freeBoard.fileName }"><br>
-		<img src="${initParam.rootPath }/fileroute/${requestScope.freeBoard.fileName }"><br>
+ 		<img src="${initParam.rootPath }/fileroute/${requestScope.freeBoard.fileName }"><br>
+		<input id="b" type="button" value="파일첨부 수정">
+		<div id="t"></div>
+		<br >
+		
 		<textarea rows="10" cols="50" name="content">${requestScope.freeBoard.content }</textarea>
 
 		<br> 

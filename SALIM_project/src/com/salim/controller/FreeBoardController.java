@@ -153,8 +153,17 @@ public class FreeBoardController {
 	@RequestMapping("update")
 	public String update(@ModelAttribute FreeBoard freeBoard, int page, String category, String search,
 			HttpServletRequest request, ModelMap map) throws IllegalStateException, IOException {
+		
 		System.out.println("수정");
+
 		MultipartFile file = freeBoard.getFileRoot();
+		System.out.println(file);
+		
+		if(file == null){
+			freeBoard.setFileName(service.selectByNo(freeBoard.getNo()).getFileName());
+		}
+		
+		
 		if (file != null && !file.isEmpty()) {// 업로드 된 파일이 있다면
 
 			freeBoard.setFileName(file.getOriginalFilename());// 파일명
@@ -169,6 +178,7 @@ public class FreeBoardController {
 
 			file.transferTo(dest);// 파일이동
 		}
+		
 		service.updateFree(freeBoard);
 		if (category != null && !category.isEmpty() && search != null && !search.isEmpty()) {
 			return "redirect:/free/login/seleteDetail.do?no=" + freeBoard.getNo() + "&page=" + page + "category=" + category
