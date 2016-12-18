@@ -80,7 +80,8 @@ $(document).ready(function(){
 	<th></th>
 	<th align='right'>
 		<form action="${initParam.rootPath }/collection.do" method='get'>
-			<input type='submit' value='그룹 가계부 추가'>
+			<!-- <input type='submit' value='그룹 가계부 추가'> -->
+			<button type="submit" class="btn btn-default btn-lg">+그룹가계부 추가</button>
 		</form>	
 	</th>
 </tr>
