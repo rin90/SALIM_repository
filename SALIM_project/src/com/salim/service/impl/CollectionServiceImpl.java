@@ -178,7 +178,7 @@ public class CollectionServiceImpl implements CollectionService{
 	}
 	
 	
-	//회원 초대 전
+	//회원 초대 전 
 		public void showInviteSettingMemberList(ModelMap map,Collect collect)
 		{
 			//1.일단 collect의 id를 통해서 MemberNCollection 객체 List를 받아와서, 
@@ -191,10 +191,18 @@ public class CollectionServiceImpl implements CollectionService{
 			List<Member> list=new ArrayList<Member>();
 			HashMap<String,String> hashmapTrue=new HashMap<String,String>();
 			HashMap<String,String> hashmapFalse=new HashMap<String,String>();
+			HashMap<String,String>hashmapRefusal=new HashMap<String,String>();
+			
 			hashmapTrue.put("collectionId", collect.getCollectionId());
 			hashmapTrue.put("invite", "true");
+			
 			hashmapFalse.put("collectionId", collect.getCollectionId());
 			hashmapFalse.put("invite", "false");
+			
+			hashmapRefusal.put("collectionId", collect.getCollectionId());
+			hashmapRefusal.put("invite", "refusal");
+			
+			
 		
 			//1.true인 경우로 member 뽑아오기.
 			list=mncdao.selectAllCollectionMemberListByCollectionId(hashmapTrue);
@@ -214,6 +222,19 @@ public class CollectionServiceImpl implements CollectionService{
 				}
 				map.addAttribute("false_invitedMember",list);
 			}
+			
+			//3. refusal인 경우로  member뽑아오기!
+			list=mncdao.selectAllCollectionMemberListByCollectionId(hashmapRefusal);
+			if(list!=null)
+			{
+				for(int i=0; i<list.size();i++)
+				{
+					System.out.println("refusal인 경우! "+list);
+				}
+				map.addAttribute("refusal_invitedMember",list);
+			}
+			
+			
 		}
 	
 	//회원 초대!! 'ㅅ' 
@@ -242,23 +263,40 @@ public class CollectionServiceImpl implements CollectionService{
 	{
 		//여기가 소속된 곳
 		List <Collect> collectionListInviteTrue, collectionListInvitefalse=new ArrayList<Collect>();
-		HashMap <String,String> inviteTrueMap=new HashMap<String,String>();
+		HashMap <String, String> inviteTrueMap=new HashMap<String,String>();
+		HashMap <String, String> inviteFalseMap=new HashMap<String,String>();
+		//HashMap <String, String> inviteRefusalMap=new HashMap<String,String>();
 		inviteTrueMap.put("memberId", memberId);
 		inviteTrueMap.put("invite", "true");
-		collectionListInviteTrue=dao.selectCollectionListIncludedOrInvited(inviteTrueMap);
+
 		
+		collectionListInviteTrue=dao.selectCollectionListIncludedOrInvited(inviteTrueMap);
 		if(collectionListInviteTrue!=null)//내가 소속된 그룹! 보여줌
 		{
+			System.out.println(collectionListInviteTrue+"내가 소속된 그룹");
 			map.addAttribute("collectionListInviteTrue", collectionListInviteTrue);
 		}
 		//초대된 부분 requestScope에 추가!
-		inviteTrueMap.put("invite","false");
-		collectionListInvitefalse=dao.selectCollectionListIncludedOrInvited(inviteTrueMap);
+		inviteFalseMap.put("memberId", memberId);
+		inviteFalseMap.put("invite","false");
+		collectionListInvitefalse=dao.selectCollectionListIncludedOrInvited(inviteFalseMap);
 		System.out.println("값 오면 찍어라 :"+collectionListInvitefalse);
 		if(collectionListInvitefalse!=null)//내가 초대된 그룹! 보여주기
 		{
+			System.out.println(collectionListInvitefalse+"내가 초대된 그룹");
 			map.addAttribute("collectionListInvitefalse", collectionListInvitefalse);
 		}
+		
+/*		inviteRefusalMap.put("memberId", memberId);
+		inviteRefusalMap.put("invite","refusal");
+		collectionListInviteRefusal=dao.selectCollectionListIncludedOrInvited(inviteRefusalMap);
+		System.out.println("값 오면 찍어라 :"+collectionListInviteRefusal);
+		if(collectionListInviteRefusal!=null)//내가 초대된 그룹! 보여주기
+		{
+			System.out.println(collectionListInviteRefusal+"거절한 그룹");
+			map.addAttribute("collectionListInviteRefusal", collectionListInviteRefusal);
+		}*/
+		
 	}
 	
 	public void modifyByMemberIdAndCollectionId(String collectionId, String memberId, String invite)
@@ -271,6 +309,13 @@ public class CollectionServiceImpl implements CollectionService{
 		System.out.println("수정함.");
 	}
 	
+	public void removeRefusalMemberByCollectionId(String collectionId, String memberId)
+	{
+		HashMap<String,String>map=new HashMap<String,String>();
+		map.put("collectionId", collectionId);
+		map.put("memberId", memberId);
+		mncdao.deleteMemberCollection(map);
+	}
 
 }
 

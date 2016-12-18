@@ -21,5 +21,7 @@ public interface MemberNCollectionDao {
 	public List<Member>selectAllCollectionMemberListByCollectionId(HashMap<String,String> map);
 	
 	public void updateByMemberIdAndCollectionId(HashMap<String,String> map);
+	
+	public void deleteMemberCollection(HashMap<String, String>map);
 }
 

@@ -29,7 +29,7 @@ public class CollectController {
 	private CollectionServiceImpl service;
 	@Autowired
 	private MemberServiceImpl memberService;
-	
+
 
 	//가계부 추가 
 	@RequestMapping("/collection_add.do")
@@ -46,7 +46,7 @@ public class CollectController {
 		return "redirect:/collection/findAllCollectionList.do"; //로그인 성공페이지로 일단 ㄱㄱ 
 	}
 
-	//이건 main화면을 뿌려줄 때 사용할 컨트롤러
+	//이건 main화면을 뿌려줄 때 사용할 컨트롤러-가계부 조회
 	@RequestMapping("/findAllCollectionList.do")
 	public String collectShow(HttpSession session, ModelMap map)
 	{
@@ -162,6 +162,7 @@ public class CollectController {
 	{
 		//2.비지니스 로직 호출! 'ㅅ'
 		System.out.println("inviteMember()"+email+collectionId);
+		//
 		if(!(email==null||email.equals("")))
 		{
 			service.inviteMemberInCollection(email, collectionId);
@@ -174,8 +175,6 @@ public class CollectController {
 		}
 		return "redirect:/collection/inviteSetting.do";
 	}
-	
-	
 	
 	
 	//상단의 select바로 이동하는 것
@@ -201,14 +200,33 @@ public class CollectController {
 	@RequestMapping("/inviteSetting.do") 
 	public String showInviteSetting(HttpSession session, ModelMap map)
 	{
+		System.out.println("여기!!!!");
 		Collect collect=(Collect)session.getAttribute("group_info");
 		System.out.println(collect);//현재 세션에 있는 그룹을 받아온다.
 		
 		//2. business logic으로 'ㅅ' -> 해당 collectionId를 통해서 초대한 회원이나 현재 회원을 보여준다음 
 		//이걸 requestScope에 담아서 view로 이동하고, view 에서는 list에 담긴 정보를 뿌려주기만 하면 끝
-		service.showInviteSettingMemberList(map,collect);
+		service.showInviteSettingMemberList(map,collect); //현재 그룹이랑, map을 보냄
 		
 		return "body/collection/setting/settings/inviteMember_form.tiles";
 	}
+	
+	//초대 거부한 회원 삭제하기! 
+	@RequestMapping(value="/removeRefusalMember.do")
+	public String removeRefusalMember(HttpSession session,String email)
+	{
+		System.out.println("초대 거부한 회원 삭제하기 ㅠㅠ");
+		System.out.println(email);
+
+		Collect c=(Collect)session.getAttribute("group_info");
+		Member m=new Member();
+		m=memberService.findMemberByEmail(email);
+		//2.비지니스 로직 ㄱㄱ ㅠㅠ
+		service.removeRefusalMemberByCollectionId(c.getCollectionId(),m.getMemberId());
+
+		return "redirect:/collection/inviteSetting.do";
+		
+	}
+	
 		
 }

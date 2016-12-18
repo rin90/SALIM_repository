@@ -50,4 +50,9 @@ public class MemberNCollectionDaoImpl implements MemberNCollectionDao{
 	{
 		session.update(makeSql("updateByMemberIdAndCollectionId"), map);
 	}
+	
+	public void deleteMemberCollection(HashMap<String, String>map)
+	{
+		session.delete(makeSql("deleteMemberCollection"),map);
+	}
 }

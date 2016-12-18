@@ -20,6 +20,11 @@
  	insert into member_Collection values(#{memberId},#{collectionId},#{invite})
  </insert>
  
+ <delete id="deleteMemberCollection" parameterType="hashmap">
+delete from MEMBER_COLLECTION
+where COLLECTION_id=#{collectionId} and MEMBER_id=#{memberId}
+</delete>
+ 
  <delete id="deleteMemberNCollectionByCollectionId" parameterType="string">
  	delete from MEMBER_COLLECTION
 	where collection_id=#{value}
@@ -51,7 +56,7 @@
  </select>
  
  <!-- 그룹 가계부의 회원들 조회하기 -->
- <select id="selectAllCollectionMemberListByCollectionId" parameterType="map" resultMap="getMember-name-email-birthday">
+ <select id="selectAllCollectionMemberListByCollectionId" parameterType="hashmap" resultMap="getMember-name-email-birthday">
  select MEMBER.name, Member.email, Member.birthday
 	from Member,(
 	select mc.member_id memberId3, mc.collection_Id collectionId, mc.invite

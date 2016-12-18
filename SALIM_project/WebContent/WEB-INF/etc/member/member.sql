@@ -76,6 +76,10 @@ where collection_id='collectionId29'
 delete from COLLECTION
 where collection_id='collectionId29'
 
+--memberNCollection의 row 삭제
+
+delete from MEMBER_COLLECTION
+where COLLECTION_id='collectionId60' and MEMBER_id='mem1' 
 
 -- 조회-----------------------------------------------------------------
 select member_id memberId, collection_id collectionId, invite

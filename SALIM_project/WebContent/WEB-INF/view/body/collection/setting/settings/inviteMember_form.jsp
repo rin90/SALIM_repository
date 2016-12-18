@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +82,8 @@ function a()
 {
 	alert('${requestScope.inviteMessage}');
 }
+
+
 }); 
 </script>
 </head>
@@ -94,7 +97,7 @@ function a()
 </tr>
 <c:forEach items="${requestScope.true_invitedMember}" var="member">
 	<tr>
-		<th>${member.name}</th><th>${member.email}</th><th>${member.birthday}</th><th><font color='blue'>초대완료</font></th>
+		<th>${member.name}</th><th>${member.email}</th><th><fmt:formatDate value="${member.birthday}" pattern="yyyy년 MM월 dd일 "/></th><th><font color='blue'>초대완료</font></th>
 	</tr>
 </c:forEach>
 </c:if>
@@ -102,7 +105,18 @@ function a()
 
 <c:forEach items="${requestScope.false_invitedMember}" var="member">
 	<tr>
-		<th>-</th><th>${member.email}</th><th>-</th><th><font color='red'>초대중</font></th>
+		<th>-</th><th>${member.email}</th><th>-</th><th><font color='green'>초대중</font></th>
+	</tr>
+</c:forEach>
+</c:if>
+
+<c:if test="${fn:length(requestScope.refusal_invitedMember)!=0}">
+
+<c:forEach items="${requestScope.refusal_invitedMember}" var="member">
+	<tr>
+		<th>-</th><th>${member.email}</th><th>-</th><th><font color='red'>거절&nbsp;&nbsp;
+		</font><font color="black"><a id="hrefRemoveClick" href="${initParam.rootPath}/collection/removeRefusalMember.do?email=${member.email }">삭제하기</a></font>
+		</th>
 	</tr>
 </c:forEach>
 </c:if>
