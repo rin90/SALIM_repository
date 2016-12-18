@@ -8,8 +8,8 @@
 	
 		<input type="hidden" name="collectionId" value="${collection.collectionId }">
 
-			<input type='submit' value="이동">
-		    
+			<!-- <input type='submit' value="이동"> -->
+		    <button type="submit" class="btn btn-success">이동 <span class="badge">move</span></button>
 	
 	</form>
 	</li>

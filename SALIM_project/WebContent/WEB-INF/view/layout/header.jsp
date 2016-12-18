@@ -1,8 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h2 align="left">SALIM</h2>
+<c:choose><%--SALIM 로고 -로그인 여부에 따라 다른 처리(링크의 유무) --%>
+	<c:when test="${not empty sessionScope.login_info.memberId}">
+		<h2 align="left">
+			<a id="logo"
+				href="${initParam.rootPath }/collection/findAllCollectionList.do">SALIM</a>
+		</h2>
+	</c:when>
+	<c:otherwise>
+		<h2 align="left">
+			<a>SALIM</a>
+		</h2>
+	</c:otherwise>
+</c:choose>
 <!--여기, 로그인 여부에 따라서 header가 달라진다.-->
-
 
 
 <form method="post" action="${initParam.rootPath }/collection/moving.do">

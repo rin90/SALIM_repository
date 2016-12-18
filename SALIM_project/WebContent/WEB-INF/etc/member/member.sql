@@ -156,7 +156,17 @@ where collection.collection_id=collectionId2
    where member_collection.member_id='mem4' and member_collection.collection_id='collectionId51'
 
 	
-	
+select Member.member_Id memberId, MEMBER.name, Member.email, Member.birthday
+	from Member,(
+	select mc.member_id memberId3, mc.collection_Id collectionId, mc.invite
+	from member_collection mc, (
+		select collection.collection_id collectionId2
+		from collection
+		where collection.collection_id='collectionId2'
+		)
+	where mc.collection_id=collectionId2 and mc.invite='true'
+	)
+where Member.member_Id=memberId3	
 	
 	
 	

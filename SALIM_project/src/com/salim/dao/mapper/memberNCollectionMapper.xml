@@ -3,6 +3,7 @@
 <mapper namespace= "memberNCollection"> 
 
 <resultMap type="member" id="getMember-name-email-birthday">
+<result column="memberId" property="memberId"/>
 <result column="name" property="name"/>
 <result column="email" property="email"/>
 <result column="birthday" property="birthday"/>
@@ -57,7 +58,7 @@ where COLLECTION_id=#{collectionId} and MEMBER_id=#{memberId}
  
  <!-- 그룹 가계부의 회원들 조회하기 -->
  <select id="selectAllCollectionMemberListByCollectionId" parameterType="hashmap" resultMap="getMember-name-email-birthday">
- select MEMBER.name, Member.email, Member.birthday
+ select Member.member_Id memberId, MEMBER.name, Member.email, Member.birthday
 	from Member,(
 	select mc.member_id memberId3, mc.collection_Id collectionId, mc.invite
 	from member_collection mc, (

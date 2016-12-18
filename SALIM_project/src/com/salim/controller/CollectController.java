@@ -115,7 +115,7 @@ public class CollectController {
 		}
 		System.out.println("grantMessage =  "+grantMessage);
 		
-		return "body/collection/setting/settings/collectionSettingMain.tiles";
+		return "body/collection/collectionSettingMain.tiles";
 	}
 	
 	//그룹 가계부 삭제하기
@@ -136,7 +136,7 @@ public class CollectController {
 		}else
 		{
 			map.put("deletefailMessage", str);
-			return "body/collection/setting/settings/collectionSettingMain.tiles";
+			return "body/collection/collectionSettingMain.tiles";
 		}
 		
 		
@@ -208,7 +208,7 @@ public class CollectController {
 		//이걸 requestScope에 담아서 view로 이동하고, view 에서는 list에 담긴 정보를 뿌려주기만 하면 끝
 		service.showInviteSettingMemberList(map,collect); //현재 그룹이랑, map을 보냄
 		
-		return "body/collection/setting/settings/inviteMember_form.tiles";
+		return "body/collection/inviteMember_form.tiles";
 	}
 	
 	//초대 거부한 회원 삭제하기! 
