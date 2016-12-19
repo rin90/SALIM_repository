@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.salim.dao.MemberNCollectionDao;
+import com.salim.vo.Member;
 import com.salim.vo.MemberNCollection;
 
 @Repository
@@ -39,4 +40,19 @@ public class MemberNCollectionDaoImpl implements MemberNCollectionDao{
 	{
 		return session.selectList(makeSql("selectAllByCollectionId"),collectionId);
 	}	
+	
+	public List<Member>selectAllCollectionMemberListByCollectionId(HashMap<String,String> map)
+	{
+		return session.selectList(makeSql("selectAllCollectionMemberListByCollectionId"),map);
+	}
+	
+	public void updateByMemberIdAndCollectionId(HashMap<String,String> map)
+	{
+		session.update(makeSql("updateByMemberIdAndCollectionId"), map);
+	}
+	
+	public void deleteMemberCollection(HashMap<String, String>map)
+	{
+		session.delete(makeSql("deleteMemberCollection"),map);
+	}
 }

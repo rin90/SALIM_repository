@@ -59,7 +59,13 @@ public class Member implements Serializable{
 		this.email = email;
 	}
 
-	
+public Member(String name, Date birthday, String email) {
+		super();
+		this.name = name;
+		this.birthday = birthday;
+		this.email = email;
+	}
+
 	public String getPassword2() {
 		return password2;
 	}

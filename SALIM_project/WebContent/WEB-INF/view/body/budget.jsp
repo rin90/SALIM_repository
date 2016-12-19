@@ -1,3 +1,5 @@
+<%@page import="com.salim.vo.Member"%>
+<%@page import="com.salim.vo.Collect"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
@@ -34,6 +36,7 @@
 		            "data":{"budgetDate":$(".month-picker").val()},
 		            "dataType":"json",
 		            "success":function(obj){
+		            	$("thead tr td:eq(1)").text(obj.monthIncome);
 		            	//지출 달 별로 가져온 것
 		            	$("tbody tr td:eq(2)").text(obj.categoryExpense[7].SPEND_MONEY);
 			           	$("tbody tr td:eq(6)").text(obj.categoryExpense[12].SPEND_MONEY);
@@ -169,6 +172,19 @@
 		    });
 	});
 	
+	//권한있는 자만 작성 가능
+	$(document).ready(function(){
+		$("table").on("click", function(){
+			var grantId = '<%=((Collect)session.getAttribute("group_info"))== null? "":((Collect)session.getAttribute("group_info")).getGrantId()%>';
+			var memberId = '<%=((Member)session.getAttribute("login_info")).getMemberId()%>';
+			if(grantId != "" && (grantId != memberId)){ //그룹권한자와 회원이 불일치	
+			}else{
+				$(".element").attr("readOnly", false);
+			}
+		});
+
+	});
+	
 	//숫자 포맷 체크
 	var inputs = window.document.getElementsByClassName("element");
 	var regExp = /^[0-9]+$/;
@@ -206,21 +222,21 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<td>날짜/수입</td>
-				<td>날짜랑 저번달 수입나오게</td>
+				<td>전월 수입</td>
+				<td>${requestScope.monthIncome }</td>
 			</tr>
 			<tr>
 				<td>분류</td>
 				<td>예산</td>
 				<td>지출</td>
-				<td>남은 돈</td>
+				<td>차이(예산 - 지출)</td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td>식비</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.foodExpenses }" name="foodExpenses" placeholder="${requestScope.budget.foodExpenses }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.foodExpenses }" name="foodExpenses" readonly="readonly" placeholder="${requestScope.budget.foodExpenses }">
 				</td>
 				<td>${requestScope.categoryExpense[7].SPEND_MONEY }</td>
 				<td>${requestScope.budget.foodExpenses - requestScope.categoryExpense[7].SPEND_MONEY }</td>
@@ -228,7 +244,7 @@
 			<tr>
 				<td>주거/통신</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.dwellingCommunication }" name="dwellingCommunication" placeholder="${requestScope.budget.dwellingCommunication }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.dwellingCommunication }" name="dwellingCommunication" readonly="readonly" placeholder="${requestScope.budget.dwellingCommunication }">
 				</td>
 				<td>${requestScope.categoryExpense[12].SPEND_MONEY }</td>
 				<td>${requestScope.budget.dwellingCommunication - requestScope.categoryExpense[12].SPEND_MONEY }</td>
@@ -236,7 +252,7 @@
 			<tr>
 				<td>생활용품</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.householdgoods }" name="householdgoods" placeholder="${requestScope.budget.householdgoods }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.householdgoods }" name="householdgoods" readonly="readonly" placeholder="${requestScope.budget.householdgoods }">
 				</td>
 				<td>${requestScope.categoryExpense[5].SPEND_MONEY }</td>
 				<td>${requestScope.budget.householdgoods - requestScope.categoryExpense[5].SPEND_MONEY }</td>
@@ -244,7 +260,7 @@
 			<tr>
 				<td>의복/미용</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.clothBeauty }" name="clothBeauty" placeholder="${requestScope.budget.clothBeauty }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.clothBeauty }" name="clothBeauty" readonly="readonly" placeholder="${requestScope.budget.clothBeauty }">
 				</td>
 				<td>${requestScope.categoryExpense[9].SPEND_MONEY }</td>
 				<td>${requestScope.budget.clothBeauty - requestScope.categoryExpense[9].SPEND_MONEY }</td>
@@ -252,7 +268,7 @@
 			<tr>
 				<td>건강/문화</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.healthCulture }" name="healthCulture" placeholder="${requestScope.budget.healthCulture }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.healthCulture }" name="healthCulture" readonly="readonly" placeholder="${requestScope.budget.healthCulture }">
 				</td>
 				<td>${requestScope.categoryExpense[0].SPEND_MONEY }</td>
 				<td>${requestScope.budget.healthCulture - requestScope.categoryExpense[0].SPEND_MONEY }</td>
@@ -260,7 +276,7 @@
 			<tr>
 				<td>교육/육아</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.educationParenting }" name="educationParenting" placeholder="${requestScope.budget.educationParenting }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.educationParenting }" name="educationParenting" readonly="readonly" placeholder="${requestScope.budget.educationParenting }">
 				</td>
 				<td>${requestScope.categoryExpense[2].SPEND_MONEY }</td>
 				<td>${requestScope.budget.educationParenting - requestScope.categoryExpense[2].SPEND_MONEY }</td>
@@ -268,7 +284,7 @@
 			<tr>
 				<td>교통/차량</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.trafficVehicle }" name="trafficVehicle" placeholder="${requestScope.budget.trafficVehicle }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.trafficVehicle }" name="trafficVehicle" readonly="readonly" placeholder="${requestScope.budget.trafficVehicle }">
 				</td>
 				<td>${requestScope.categoryExpense[3].SPEND_MONEY }</td>
 				<td>${requestScope.budget.trafficVehicle - requestScope.categoryExpense[3].SPEND_MONEY }</td>
@@ -276,7 +292,7 @@
 			<tr>
 				<td>경조사/회비</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.holidayDues }" name="holidayDues" placeholder="${requestScope.budget.holidayDues }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.holidayDues }" name="holidayDues" readonly="readonly" placeholder="${requestScope.budget.holidayDues }">
 				</td>
 				<td>${requestScope.categoryExpense[1].SPEND_MONEY }</td>
 				<td>${requestScope.budget.holidayDues - requestScope.categoryExpense[1].SPEND_MONEY }</td>
@@ -284,7 +300,7 @@
 			<tr>
 				<td>세금/이자</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.taxInterest }" name="taxInterest" placeholder="${requestScope.budget.taxInterest }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.taxInterest }" name="taxInterest" readonly="readonly" placeholder="${requestScope.budget.taxInterest }">
 				</td>
 				<td>${requestScope.categoryExpense[6].SPEND_MONEY }</td>
 				<td>${requestScope.budget.taxInterest - requestScope.categoryExpense[6].SPEND_MONEY }</td>
@@ -292,7 +308,7 @@
 			<tr>
 				<td>용돈/기타</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.pinmoneyEtc }" name="pinmoneyEtc" placeholder="${requestScope.budget.pinmoneyEtc }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.pinmoneyEtc }" name="pinmoneyEtc" readonly="readonly" placeholder="${requestScope.budget.pinmoneyEtc }">
 				</td>
 				<td>${requestScope.categoryExpense[8].SPEND_MONEY }</td>
 				<td>${requestScope.budget.pinmoneyEtc - requestScope.categoryExpense[8].SPEND_MONEY }</td>
@@ -300,7 +316,7 @@
 			<tr>
 				<td>저축/보험</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.savingInsurance }" name="savingInsurance" placeholder="${requestScope.budget.savingInsurance }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.savingInsurance }" name="savingInsurance" readonly="readonly" placeholder="${requestScope.budget.savingInsurance }">
 				</td>
 				<td>${requestScope.categoryExpense[11].SPEND_MONEY }</td>
 				<td>${requestScope.budget.savingInsurance - requestScope.categoryExpense[11].SPEND_MONEY }</td>
@@ -308,7 +324,7 @@
 			<tr>
 				<td>카드대금</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.creditCard }" name="creditCard" placeholder="${requestScope.budget.creditCard }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.creditCard }" name="creditCard" readonly="readonly" placeholder="${requestScope.budget.creditCard }">
 				</td>
 				<td>${requestScope.categoryExpense[13].SPEND_MONEY }</td>
 				<td>${requestScope.budget.creditCard - requestScope.categoryExpense[13].SPEND_MONEY }</td>
@@ -316,7 +332,7 @@
 			<tr>
 				<td>미분류</td>
 				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.unclassified }" name="unclassified" placeholder="${requestScope.budget.unclassified }">
+					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.unclassified }" name="unclassified" readonly="readonly" placeholder="${requestScope.budget.unclassified }">
 				</td>
 				<td>${requestScope.categoryExpense[4].SPEND_MONEY }</td>
 				<td>${requestScope.budget.unclassified - requestScope.categoryExpense[4].SPEND_MONEY }</td>

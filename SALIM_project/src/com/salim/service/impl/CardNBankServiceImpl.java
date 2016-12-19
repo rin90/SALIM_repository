@@ -44,9 +44,11 @@ public class CardNBankServiceImpl implements CardNBankService{
 	//카드 수정 후 조회
 	public Map modifyCard(CardForm cardForm, String memberId) {
 		List<Card> cardList = cardForm.getCardList();
-		for(int i =0; i<cardList.size(); i++){
-			cardDao.updateCardByMemberId(cardList.get(i));
-		   }
+		if(cardList != null){
+			for(int i =0; i<cardList.size(); i++){
+				cardDao.updateCardByMemberId(cardList.get(i));
+			}
+		}
 		return findCardNBankbook(memberId);
 	}
 	
@@ -66,8 +68,10 @@ public class CardNBankServiceImpl implements CardNBankService{
 	//통장 수정 후 조회
 	public Map modifyBankbook(BankForm bankForm, String memberId) {
 		List<Bank> bankList = bankForm.getBankList();
-		for(int i=0; i<bankList.size(); i++){
-			bankDao.updateBankByMemberId(bankList.get(i));
+		if(bankList != null){
+			for(int i=0; i<bankList.size(); i++){
+				bankDao.updateBankByMemberId(bankList.get(i));
+			}
 		}
 		return findCardNBankbook(memberId);
 	}

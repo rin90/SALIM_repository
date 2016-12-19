@@ -1,6 +1,8 @@
 package com.salim.vo;
 
-public class Collect{
+import java.io.Serializable;
+
+public class Collect implements Serializable{
 
 	private String collectionId;
 	private String collectionName;
