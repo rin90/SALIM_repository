@@ -8,7 +8,6 @@ create table free_board( --자유게시판
  content varchar2(4000) not null,
  file_root varchar2(4000),  --파일 경로
  click	number not null,  --조회수
- good number not null,  --좋아요
  register_time date not null, --작성일
  member_id varchar2(50) constraint fre_mem_fk references member ON DELETE CASCADE not null--inline방식
 );
@@ -17,7 +16,7 @@ select * from free_board;
 drop table free_board;
 
 
-
+DROP TABLE free_board CASCADE CONSTRAINT
 
 create sequence seq_tip--sequence생성
 select seq_tip.nextval from dual  -- 조회 

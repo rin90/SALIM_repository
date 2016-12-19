@@ -21,40 +21,44 @@ $("#modifyBtn").on("click",function(){
 		if(message!="")
 		{
 			alert(message);
-		}
-		
-	
-			
+		}		
 	});
-$("#removeBtn").on("click",function(){
+/* $("#removeBtn").on("click",function(){
 	
-	var message='${requestScope.grantMessage}';
+	//var message=${requestScope.grantMessage};
 	
 
-	if(message=="")
-	{
+	//if(message=="")
+	//{
 		var selection=confirm("정말로 삭제하시겠습니까?");
 		if(selection==true)
 		{
-			alert("진짜 ?");
+			
 			$.ajax({
 				 "url":"${initParam.rootPath}/collection/removeCollection.do",
 				 "data":"collectionId="+'${sessionScope.group_info.collectionId}',
 				 "dataType":"text",
 				 "success":function(obj){
-					 var txt=obj;
-					 $("#formTag").prop("action","txt");
-					 $("#formTag").submit();
+					 var txt=obj.value;
+					 alert(txt);
+					 $("#collectionSetting").prop("action",txt);
+					 $("#collectionSetting").submit();
+				 },
+				 "error":function(){
+					 alert("실패");
 				 }
 			});
 			
+		}else
+		{
+			$("#collectionSetting").submit();
 		}
-	}else
-	{
-		alert(message);
-	}
+	//}else
+	//{
+	//	alert(message);
+	//}
 	
-	});	
+	});	 */
 });
 </script>
 </head>
@@ -109,5 +113,7 @@ $("#removeBtn").on("click",function(){
 <input type="hidden" id='collectionId' name="collectionId" value='${sessionScope.group_info.collectionId}'>
 <input type='hidden' name='memberIdforGrant' value='${sessionScope.login_info.memberId}'>
 </form>
+
+<form id="collectionSetting" action="" method="get"></form>
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.salim.dao.ScheduleDao;
 import com.salim.service.ScheduleService;
@@ -24,6 +25,18 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public List<Schedule> selectScheduleByDay(Map map) {	
 		return dao.selectScheduleByDay(map);
+	}
+
+	@Override @Transactional
+	public void updateSchedule(List<Schedule> list) {
+		for(Schedule temp : list){
+			System.out.println(temp.getNo());
+			if(temp.getNo()==0){
+				dao.insertSchedule(temp);
+			}else{
+				dao.updateSchedule(temp);
+			}
+		}
 	}
 
 }

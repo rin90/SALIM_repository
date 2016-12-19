@@ -54,10 +54,21 @@ public class FreeBoardController {
 	public ModelAndView list(int page) {
 		Map map = service.getFreeBoardList(page);
 		map.put("codes", codeService.findCode("조회"));
+		
+		System.out.println("확인:"+map.get("codes"));
+	
 		List<FreeBoard> list = (List<FreeBoard>) map.get("list");
-		if (list.size() != 0) {
+		
+		if(list.size() == 0){
+			page= page-1;
+			map=service.getFreeBoardList(page);
+		}
+		
+		if (page != 0) {
+			System.out.println("확인 2:"+map.get("codes"));
 			return new ModelAndView("body/board/free_board_list.tiles", map);
 		} else {
+			System.out.println("확인 2:"+map.get("codes"));
 			return new ModelAndView("body/board/non_view.tiles", map);
 		}
 	}
@@ -149,8 +160,17 @@ public class FreeBoardController {
 	@RequestMapping("update")
 	public String update(@ModelAttribute FreeBoard freeBoard, int page, String category, String search,
 			HttpServletRequest request, ModelMap map) throws IllegalStateException, IOException {
+		
 		System.out.println("수정");
+
 		MultipartFile file = freeBoard.getFileRoot();
+		System.out.println(file);
+		
+		if(file == null){
+			freeBoard.setFileName(service.selectByNo(freeBoard.getNo()).getFileName());
+		}
+		
+		
 		if (file != null && !file.isEmpty()) {// 업로드 된 파일이 있다면
 
 			freeBoard.setFileName(file.getOriginalFilename());// 파일명
@@ -165,6 +185,7 @@ public class FreeBoardController {
 
 			file.transferTo(dest);// 파일이동
 		}
+		
 		service.updateFree(freeBoard);
 		if (category != null && !category.isEmpty() && search != null && !search.isEmpty()) {
 			return "redirect:/free/login/seleteDetail.do?no=" + freeBoard.getNo() + "&page=" + page + "category=" + category
@@ -216,20 +237,6 @@ public class FreeBoardController {
 																	
 
 		return "body/board/free_board_detail.tiles";
-	}
-
-	// 좋아요 수정 메소드 V view에서 ajax처리하기 -로그인 해야 가능 한 글에 대해 member_id는 한번만 좋아요 가능 즉,
-	// 글에 한 번씩만 좋아요 가능, member_id로 체크
-	@RequestMapping("good")
-	@ResponseBody
-	public void goodUpdate(int no, String whether, HttpServletRequest request) {
-		System.out.println("좋아요");
-		if (whether.isEmpty()) {
-			service.updateGood(no, -1);
-		} else {
-			service.updateGood(no, 1);
-		}
-
 	}
 
 }

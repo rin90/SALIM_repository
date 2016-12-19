@@ -67,14 +67,14 @@ public class ExpenseController {
 							  @RequestParam ArrayList<String> expenseExplain,
 							  @RequestParam ArrayList<Integer> cashExpense,
 							  @RequestParam ArrayList<Integer> cardExpense,
-							  /* 카드 통장 타입 보여지게 하는 것은 나중에..*/
+							  @RequestParam ArrayList<String> cardType,
 							  @RequestParam ArrayList<Integer> codeId,
 							  @DateTimeFormat(pattern="yyyy-MM-dd") @RequestParam Date expenseDate,
 							  HttpSession session,
 							  HttpServletRequest request){
 		
 		String memberId = checkMemberId(session);
-		service.saveExpense(memberId, expenseId, expenseExplain, cashExpense, cardExpense, codeId, expenseDate, request.getParameter("notes"), Integer.parseInt(request.getParameter("notesNum")));
+		service.saveExpense(memberId, expenseId, expenseExplain, cashExpense, cardExpense, cardType, codeId, expenseDate, request.getParameter("notes"), Integer.parseInt(request.getParameter("notesNum")));
 		return "redirect:/household/login/expenseSelect.do?expenseDate="+new SimpleDateFormat("yyyy-MM-dd").format(expenseDate);
 	}
 	

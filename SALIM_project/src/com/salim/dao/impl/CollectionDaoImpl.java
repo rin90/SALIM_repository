@@ -1,6 +1,8 @@
 package com.salim.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,4 +59,14 @@ public class CollectionDaoImpl implements CollectionDao{
 		return session.delete(makeSql("deleteCollectionByCollectionId"),collectionId);
 	}
 	
+	//그룹조회(collect) - memberId, invite로..
+	public List<Collect> selectByMemberIdNInvite(String memberId){
+		return session.selectList(makeSql("selectByMemberIdNInvite"), memberId);
+	}
+	
+	//로그인 성공했을 때, 내가 속한 가계부 or 초대된 가계부 정보 보여주는 부분 처리
+	public List<Collect> selectCollectionListIncludedOrInvited(HashMap<String, String> map)
+	{
+		return session.selectList(makeSql("selectCollectionListIncludedOrInvited"),map);
+	}
 }

@@ -6,10 +6,12 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 	<!-- annotation을 이용한 bean생성 설정시 사용 -->
 	<context:component-scan base-package="com.salim.controller, com.salim.dao.impl, com.salim.service.impl, com.salim.interceptor"/>
@@ -33,6 +35,8 @@
 	<mvc:view-controller path="/graph.do" view-name="body/graph.tiles"/>
 	<mvc:view-controller path="/body/income.do" view-name="body/income.tiles"/>
 	
+	<mvc:view-controller path="/inquiry.do" view-name="inquiry.tiles"/>
+	
 	<!-- member -->
 
 	<mvc:view-controller path="/joinMember.do" view-name="body/join_form.tiles"/>	
@@ -49,11 +53,11 @@
 	<!-- <mvc:view-controller path="/leaveMember.do" view-name="body/leave_member.tiles"/>
 	<mvc:view-controller path="/myPage.do" view-name="body/myPage.tiles"/>
  -->
-<!-- collection -->
+<!-- collection 그룹 추가 부분 -->
 	<mvc:view-controller path="/collection.do" view-name="body/collection_form.tiles"/> 
 <!-- collection 환경설정 -->
-	<mvc:view-controller path="/collectionSetting.do" view-name="body/collection/setting/settings/collectionSettingMain.tiles"/>
-	<mvc:view-controller path="/inviteMember.do" view-name="body/collection/setting/settings/inviteMember_form.tiles"/>
+	<mvc:view-controller path="/collectionSetting.do" view-name="body/collection/collectionSettingMain.tiles"/>
+	<mvc:view-controller path="/invite.do" view-name="body/collection/inviteMember_form.tiles"/> 
 	<!-- ViewResolver등록 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="2"/>	
@@ -87,9 +91,43 @@
 	 <!-- SqlSessionTemplate 생성 - 생성자로 sqlSessionFactoryBean을 주입 -->
 	<bean name="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
 		      c:sqlSessionFactory-ref="sqlSessionFactory"/>
-
+	
 	<!-- Transaction 처리 -->
 	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 			  p:dataSource-ref="dataSource"/>
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!--  메일 처리 -->
+	<!-- https://www.google.com/settings/u/0/security/lesssecureapps 에서 보안수준을 낮춘다. -->
+	<bean name="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		p:host="smtp.gmail.com"
+		p:port="587"
+		p:username="dlwocks1234@gmail.com"
+		p:password="zxc7539510"
+		p:javaMailProperties-ref="mailProperty"/>
+		
+	<util:properties id="mailProperty"> 
+		<prop key="mail.transport.protocol">smtp</prop>
+		<prop key="mail.smtp.auth">true</prop>
+		<prop key="mail.smtp.starttls.enable">true</prop>
+		<prop key="mail.debug" >true</prop>
+	</util:properties>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </beans>

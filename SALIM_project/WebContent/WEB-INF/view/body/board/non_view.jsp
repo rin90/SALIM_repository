@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -11,10 +11,9 @@
 			 &nbsp;&nbsp;&nbsp;
 			<input type="submit" value="±Û¾²±â">
 	</form>
-	
+
 		<form action="${initParam.rootPath }/free/login/keyword.do" method="post">
 		<select name="category">
-			
 			<c:forEach items="${requestScope.codes }" var="code">
 				<option>${code.code }</option>
 			</c:forEach>

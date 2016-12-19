@@ -29,3 +29,49 @@ and day_date='2016-12-02';
 -- member와 join된 것 없애기
 alter table notes drop constraint nts_mem_fk;
 alter table notes drop constraint nts_mem_fk;
+
+
+
+
+select member_id, card_id, card_type, card_description from CARd
+where member_id=1;
+
+
+select member_id memberId, collection_id collectionId, invite
+from MEMBER_COLLECTION
+where member_id='1'
+
+select collection_id collectionId, collection_name collectionName, collection_intro collectionIntro
+from COLLECTION
+where collection_id = 'collectionId1'
+
+select member_id memberId, collection_id collectionId, invite
+from MEMBER_COLLECTION
+where member_id = '1'
+and invite = 'false'
+
+
+select COLLECTION.collection_id collectionId, COLLECTION.collection_name collectionName, COLLECTION.grant_Id grantId
+from COLLECTION, (
+				  select member_id memberId, collection_id collectionId, invite
+				  from MEMBER_COLLECTION
+				  where member_id = '1'
+				  and invite = 'false')
+where COLLECTION.collection_id = 'collectionId1'
+
+
+select m.member_id, mc.member_id, mc.collection_id, mc.invite
+from member m, member_collection mc
+where m.member_id = mc.member_id
+and m.member_id = '1'
+and mc.invite ='false'
+
+select c.collection_id, c.collection_name, c.collection_intro, c.grant_id, mc.member_id, mc.collection_id, mc.invite
+from collection c, 
+	(select m.member_id, mc.collection_id, mc.invite
+	 from member m, member_collection mc
+	 where m.member_id = mc.member_id
+	 and m.member_id = '1'
+	 and mc.invite ='false') mc
+where c.collection_id = mc.collection_id
+
