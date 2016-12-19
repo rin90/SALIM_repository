@@ -8,14 +8,13 @@
 		<result column="content" property="content"/>
 		<result column="file_root" property="fileName"/>
 		<result column="click" property="click"/>
-		<result column="good" property="good"/>
 		<result column="register_time" property="registerTime"/>
 		<result column="member_id" property="memberId"/>
 	</resultMap>
 	
 	
 	<resultMap type="freeboard" id="freeBoard-freeComment-join-resultMap" extends="freeBoard-resultMap">
-		<collection property="freeComment" ofType="FreeComment">
+		<collection property="freeComment" ofType="freecomment">
 			<id column="id" property="id"/>
 			<result column="comment_content" property="commentContent"/>
 			<result column="comment_member_id" property="commentMemberId"/>		
@@ -34,7 +33,7 @@
 		<selectKey keyProperty="no" resultType="_int" order="BEFORE">
 			select seq_free.nextval from dual
 		</selectKey>
-		insert into free_board values(#{no},#{title},#{content},#{fileName},#{click},#{good},#{registerTime},#{memberId}) 		
+		insert into free_board values(#{no},#{title},#{content},#{fileName},#{click},#{registerTime},#{memberId}) 		
 	</insert>
 
 	<!-- 자유게시판 글수정 -->
@@ -53,13 +52,6 @@
 		where no=#{no}
 	</update>
 	
-	<!-- 자유게시판 좋아요 증가 등록  -->
-	<update id="goodUpdate" parameterType="map">
-		update free_board
-		set good=good+#{num}
-		where no=#{no}
-	</update>
-	
 	<!-- 자유게시판 글삭제 -->
 	<delete id="freeDelete" parameterType="_int">
 		delete from free_board
@@ -68,7 +60,7 @@
 	
 	<!--(상세화면) 글 번호로 글 찾기(상세화면) - 조인연산 사용-->
 	<select id="selectByNo" parameterType="_int" resultMap="freeBoard-freeComment-join-resultMap">
-		select f.no,f.title,f.member_id ,f.register_time ,f.click,f.good,f.content,f.file_root 
+		select f.no,f.title,f.member_id ,f.register_time ,f.click,f.content,f.file_root 
 		,c.id,c.comment_content,c.comment_member_id ,c.no,c.comment_group ,c.group_level ,c.comment_register_time 
 		from free_board f,(
 					select id,no,comment_content,comment_member_id ,comment_group ,group_level ,comment_register_time 
@@ -80,14 +72,6 @@
 		and f.no=c.no(+)
 	</select>
 	
-	<!-- join안할 경우에 기냥 상세 조회 
-	<select id="selectByNo2" parameterType="_int" resultMap="freeBoard-resultMap">
-		select f.title,f.member_id memberId,f.register_time registerTime,f.click,f.good,f.content,f.file_root fileName
-		from free_board f
-		where f.no=#{value}
-	</select>
-	 -->
-	
 	<!-- Page처리를 위한 글 토탈 -->
 	<select id="selectTotal" resultType="_int">
 		select  count(no)
@@ -96,11 +80,11 @@
 	
 	<!-- page처리를 위한 현재 페이지 -->
 	<select id="selectCurrentPage" parameterType="map" resultType="freeboard">
-		select no, title,member_id memberId,register_time registerTime,click,good,file_root fileName 
+		select no, title,member_id memberId,register_time registerTime,click,file_root fileName 
 		from(
-				select ceil(rownum/#{current}) page,no, title,member_id,register_time,click,good,file_root 
+				select ceil(rownum/#{current}) page,no, title,member_id,register_time,click,file_root 
 				from (
-					select no,title,member_id,register_time,click,good,file_root
+					select no,title,member_id,register_time,click,file_root
 					from free_board
 					order by no desc
 				)
@@ -119,11 +103,11 @@
 	
 	<!-- 조회- 작성자로 검색  -->
 	<select id="selectByMemberid" parameterType="map" resultType="freeboard">
-		select no,title,member_id memberId,register_time registerTime,click,good,file_root fileName
+		select no,title,member_id memberId,register_time registerTime,click,file_root fileName
 		from(
-			select ceil(rownum/#{current}) page,no,title,member_id,register_time,click,good,file_root
+			select ceil(rownum/#{current}) page,no,title,member_id,register_time,click,file_root
 			from (
-					select no,title,member_id,register_time,click,good,file_root
+					select no,title,member_id,register_time,click,file_root
 					from free_board
 					order by no desc
 			)
@@ -144,11 +128,11 @@
 	
 	<!-- 조회 - 제목으로 검색 -->
 	<select id="selectByTitle" parameterType="map" resultType="freeboard">
-		select no,title,member_id memberId,register_time registerTime,click,good,file_root fileName
+		select no,title,member_id memberId,register_time registerTime,click,file_root fileName
 		from(
-			select ceil(rownum/#{current}) page,no,title,member_id,register_time,click,good,file_root 
+			select ceil(rownum/#{current}) page,no,title,member_id,register_time,click,file_root 
 			from (
-					select no,title,member_id,register_time,click,good,file_root
+					select no,title,member_id,register_time,click,file_root
 					from free_board
 					order by no desc
 			)

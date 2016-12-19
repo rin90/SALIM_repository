@@ -1,3 +1,5 @@
+<%@page import="com.salim.vo.Member"%>
+<%@page import="com.salim.vo.Collect"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -92,31 +94,73 @@
 			}
 		});
 		
-	});
-	
-	
-	//체크된 것만 컨트롤러로 넘기기
-	function checkevent(){
-		var checkedArr = "";
-		$("input[name=expenseId]:checked").each(function(idx){
-			if($(this).val()!=0){
-				if($("input[name=expenseId]:checked").length-1 == idx){
-					checkedArr = checkedArr+"expenseIdList="+$(this).val();
-				}else{
-					checkedArr = checkedArr+"expenseIdList="+$(this).val()+"&";
-				}	
+		/* 권한자이면 클릭했을 때 수정가능하게 바꾸기 */
+		$("table").contents().on("click", function(){
+			var grantId = '<%=((Collect)session.getAttribute("group_info"))== null? "":((Collect)session.getAttribute("group_info")).getGrantId()%>';
+			var memberId = '<%=((Member)session.getAttribute("login_info")).getMemberId()%>';
+			if(grantId != "" && (grantId != memberId)){ //그룹권한자와 회원이 불일치	
+			}else{
+				$("input[readOnly=readOnly]").attr("readOnly", false);
+				$("select[name=cardType]").attr("disabled", false);
+				$(".bigCategory").attr("disabled", false);
+				$(".smallCategory").attr("disabled", false);
 			}
 		});
-		if($("input[name=expenseId]:checked").length == 0){
-			alert("삭제할 것을 선택해주세요.");
-		}else if($("input[name=expenseId]:checked").val()==0){
-			alert("존재하지 않는 데이터입니다. 다시 선택해주세요.");
-		}
-		else{
-			var expenseIdList = {"expenseIdList":checkedArr};
-			location.href = "/SALIM_project/household/login/expenseDelete.do?"+checkedArr;
-		}
+		
+		
+	});
+	
+
+	/* 체크된 것만 컨트롤러로 넘기기 */
+	function checkevent(){
+		var grantId = '<%=((Collect)session.getAttribute("group_info"))== null? "":((Collect)session.getAttribute("group_info")).getGrantId()%>';
+		var memberId = '<%=((Member)session.getAttribute("login_info")).getMemberId()%>';
+			if(grantId != ""){
+				if(grantId != memberId){
+					alert("삭제 권한이 없습니다. 해당 그룹 관리자에게 문의해주세요.");
+				}else{
+					var checkedArr = "";
+					$("input[name=expenseId]:checked").each(function(idx){
+						if($(this).val() != 0){
+							if($("input[name=expenseId]:checked").length-1 == idx){
+								checkedArr+="expenseIdList ="+$(this).val();
+							}else{
+								checkedArr+="expenseIdList ="+$(this).val()+"&";
+							}
+						}
+					});
+					if($("input[name=expenseId]:checked").length == 0){
+						alert("삭제할 것을 선택해주세요.");
+					}else if($("input[name=expenseId]:checked").val()==0){
+						alert("존재하지 않는 데이터입니다. 다시 선택해주세요.");
+					}else{
+						var expenseIdList = {"expenseIdList":checkedArr};
+						location.href = "/SALIM_project/household/login/expenseDelete.do?"+checkedArr;
+					}
+				}
+			}else{
+				var checkedArr = "";
+				$("input[name=expenseId]:checked").each(function(idx){
+					if($(this).val() != 0){
+						if($("input[name=expenseId]:checked").length-1 == idx){
+							checkedArr+="expenseIdList ="+$(this).val();
+						}else{
+							checkedArr+="expenseIdList ="+$(this).val()+"&";
+						}
+					}
+				});
+				if($("input[name=expenseId]:checked").length == 0){
+					alert("삭제할 것을 선택해주세요.");
+				}else if($("input[name=expenseId]:checked").val()==0){
+					alert("존재하지 않는 데이터입니다. 다시 선택해주세요.");
+				}else{
+					var expenseIdList = {"expenseIdList":checkedArr};
+					location.href = "/SALIM_project/household/login/expenseDelete.do?"+checkedArr;
+				}
+			
+			}
 	}
+	
 	
 	//숫자 포맷 체크
 	var inputs = window.document.getElementsByClassName("element");
@@ -129,6 +173,7 @@
 					return false;			
 			}
 		}
+		$("select[disabled=disabled]").attr("disabled", false);
 		return true;
 	}; 
 	
@@ -222,16 +267,16 @@
 							<input type="hidden" name="expenseId" value="${expense.expenseId }"/>
 						</td>
 						<td>
-							<input type="text" class="explane" name="expenseExplain" value="${expense.expenseExplain}" placeholder="${expense.expenseExplain}">
+							<input type="text" class="explane" name="expenseExplain" value="${expense.expenseExplain}" readonly="readonly" placeholder="${expense.expenseExplain}">
 						</td>
 						<td>
-							<input type="text" class="element" name="cashExpense" value="${expense.cashExpense}" placeholder="${expense.cashExpense}">
+							<input type="text" class="element" name="cashExpense" value="${expense.cashExpense}" readonly="readonly" placeholder="${expense.cashExpense}">
 						</td>
 						<td>
 							<input type="text" class="element" name="cardExpense" value="${expense.cardExpense}" placeholder="${expense.cardExpense}">
 						</td>
 						<td>	<!-- 통장/카드 선택하는거 나오게 하기 -->
-							<select name="cardType">
+							<select name="cardType"  disabled="disabled">
 								<option value="미등록">미등록</option>
 								<c:forEach items="${requestScope.cardTypeList }" var="cnb">
 									<c:choose>
@@ -246,7 +291,7 @@
 							</select>
 						</td>
 						<td>
-							<select class="bigCategory" id="selectBig">
+							<select class="bigCategory" id="selectBig"  disabled="disabled">
 								<c:forEach items="${requestScope.bigCategoryList}" var="big">
 									<c:choose>
 										<c:when test="${big.bigCode == requestScope.selectSmallCategoryList[no.index].bigCategory.bigCode}">
@@ -258,7 +303,7 @@
 									</c:choose>
 								</c:forEach>
 							</select>
-							<select name="codeId" class="smallCategory">
+							<select name="codeId" class="smallCategory"  disabled="disabled">
 								<option selected="selected" value="${requestScope.selectSmallCategoryList[no.index].smallCode}">${requestScope.selectSmallCategoryList[no.index].smallContent}</option>
 							</select>
 						</td>
@@ -277,11 +322,11 @@
 						<input type="checkbox" name="expenseId" value="0"/> <!-- 체크박스 하나하나 -->
 						<input type="hidden" name="expenseId" value="0"/>
 					</td>
-					<td><input type="text" name="expenseExplain" class="explane"/></td>
-					<td><input type="text" name="cashExpense" class="element"/></td>
-					<td><input type="text" name="cardExpense" class="element"/></td>
+					<td><input type="text" name="expenseExplain" class="explane"  readonly="readonly"/></td>
+					<td><input type="text" name="cashExpense" class="element"  readonly="readonly"/></td>
+					<td><input type="text" name="cardExpense" class="element"  readonly="readonly"/></td>
 					<td><!-- 통장/카드 선택 -->
-						<select name="cardType">
+						<select name="cardType"  disabled="disabled">
 							<option value="미등록">미등록</option>
 							<c:forEach items="${requestScope.cardTypeList }" var="cnb">
 								<option value="${cnb}">${cnb}</option>
@@ -291,13 +336,13 @@
 				
 					<!-- 여기서 부터 코드 선택 테이블 -->
 					<td>
-						<select class="bigCategory">
+						<select class="bigCategory"  disabled="disabled">
 							<c:forEach items="${requestScope.bigCategoryList}" var="bigCategory">
 								<option value="${bigCategory.bigCode }">${bigCategory.bigContent}</option>
 							</c:forEach>
 						</select>
 					
-						<select name="codeId" class="smallCategory">
+						<select name="codeId" class="smallCategory"  disabled="disabled">
 							<option value="18">미분류</option>
 						</select>
 					</td>

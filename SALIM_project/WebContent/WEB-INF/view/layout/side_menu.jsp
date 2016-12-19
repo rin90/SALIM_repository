@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="today" class="java.util.Date"/>
 
 <a href="${initParam.rootPath }/calendar.do">일정</a><br>
@@ -22,9 +23,17 @@
 <a href="${initParam.rootPath }/test/time.do">Test</a><br>
 <a href="${initParam.rootPath }/free/login/list.do?page=1">자유게시판</a><br>
 <a href="${initParam.rootPath }/">Tip게시판</a><br>
-<a href="${initParam.rootPath }/">Q&A</a><br>
 <a href="${initParam.rootPath }/collectionSetting.do">그룹 환경설정</a><br>
 
 
+
+
+
+
+<!-- 동적으로 생성되는 메뉴 - DB에서 collection의 grant_id와 현재 로그인한 회원의 member_id가 일치한 경우만 메뉴를 보여줌 -->
+<c:if test="${sessionScope.group_info.grantId==sessionScope.login_info.memberId}">
+<a href="${initParam.rootPath }/collectionSetting.do">환경 설정</a><br>
+<a href="${initParam.rootPath }/collection/inviteSetting.do">그룹 멤버 관리</a><br>
+</c:if>
 
 

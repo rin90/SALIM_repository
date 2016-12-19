@@ -26,8 +26,6 @@ import com.salim.vo.Member;
 import com.salim.vo.validator.LoginCheck;
 import com.salim.vo.validator.MemberModifyCheck;
 
-
-
 @Controller
 @RequestMapping("/member/")
 public class MemberController {

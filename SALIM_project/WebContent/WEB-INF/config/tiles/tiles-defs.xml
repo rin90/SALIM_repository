@@ -18,6 +18,7 @@
 	<definition name="*.tiles" extends="template">
 		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp"/>
 	</definition>
+	
 	<definition name="*/*.tiles" extends="template">
 		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}.jsp"/>
 	</definition>
@@ -34,9 +35,9 @@
 	</definition>
 
 	
-	<definition name="*/*/*/*/*.tiles" extends="template">
+	<!-- <definition name="*/*/*/*/*.tiles" extends="template">
 		<put-attribute name="nav" value="/WEB-INF/view/layout/collectionSetting_side_menu.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}/{3}/{4}/{5}.jsp"/>
-	</definition>
+	</definition> -->
 
 </tiles-definitions>
