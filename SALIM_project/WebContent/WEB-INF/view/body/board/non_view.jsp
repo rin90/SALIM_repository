@@ -41,16 +41,18 @@
 
 
 <div>
+
 	<form action="${initParam.rootPath }/free/login/keyword.do"
 		method="post">
+		
 		<select name="category" class="btn btn-default dropdown-toggle">
 			<c:forEach items="${requestScope.codes }" var="code">
 				<option>${code.code }</option>
 			</c:forEach>
-		</select> <input type="hidden" name="page" value="1"> <input
-			type="text" name="search" value="${requestScope.search}"> <input
-			class="btn btn-info btn-sm" type="submit" value="검색"> <a
-			class="btn btn-default"
-			href="${initParam.rootpath }/free/login/form.do?page=1">글쓰기</a>
+		</select> <input type="hidden" name="page" value="1"> 
+		
+		<input type="text" name="search"> <input class="btn btn-info btn-sm" type="submit" value="검색"> 		
+		
+		<a class="btn btn-default" href="${initParam.rootPath }/free/login/form.do?page=1">글쓰기</a>
 	</form>
 </div>

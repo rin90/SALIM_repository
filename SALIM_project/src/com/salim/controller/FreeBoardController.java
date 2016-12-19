@@ -53,9 +53,7 @@ public class FreeBoardController {
 	@RequestMapping("list")
 	public ModelAndView list(int page) {
 		Map map = service.getFreeBoardList(page); //PagingBean객체와 현재페이지 리스트가 들어가 있는 map을 반환
-		
-		map.put("codes", codeService.findCode("조회")); // 자유게시판에서 글 조회 조건이 되는 조건들을 db에서 가져오는 코드 
-		
+				
 		List<FreeBoard> list = (List<FreeBoard>) map.get("list");  // 현재페이지 리스트를 가져옴
 		
 		//현재페이지에 대한 리스트가 없을 경우 전 페이지로 이동( 예) 3페이지에서 목록을 다 삭제 했을 경우 2페이지로 이동해서 2페이지 목록을 보여주기 위해)
@@ -64,10 +62,14 @@ public class FreeBoardController {
 			map=service.getFreeBoardList(page);
 		}
 		
+		map.put("codes", codeService.findCode("조회")); // 자유게시판에서 글 조회 조건이 되는 조건들을 db에서 가져오는 코드 
+		
 		//위에 if문에서 1페이지에 뿌려줄 리스트가 없을 경우 0페이지가 되는데 0페이지라는 것은 게시판에 글이 하나도 없다는 뜻으로 글이 없는 것을 알려주는 view로 이동 시킨다.
 		if (page != 0) {
+			System.out.println("확인1:::"+map.get("codes"));
 			return new ModelAndView("body/board/free_board_list.tiles", map);
 		} else {
+			System.out.println("확인2:::"+map.get("codes"));
 			return new ModelAndView("body/board/non_view.tiles", map);
 		}
 	}
