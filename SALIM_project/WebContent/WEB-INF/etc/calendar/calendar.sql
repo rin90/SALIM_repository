@@ -12,6 +12,7 @@ start_date Date not null,  --날짜 (년도-월-일 시간)
 end_date Date not null,
 member_id varchar2(50) constraint sch_mem_fk references member not null
 );
+alter table schedule drop constraint sch_mem_fk ;
 select * from schedule;
 delete from schedule;
 drop table schedule;
