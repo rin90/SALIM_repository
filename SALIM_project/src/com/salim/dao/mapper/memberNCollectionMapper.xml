@@ -3,6 +3,7 @@
 <mapper namespace= "memberNCollection"> 
 
 <resultMap type="member" id="getMember-name-email-birthday">
+<result column="memberId" property="memberId"/>
 <result column="name" property="name"/>
 <result column="email" property="email"/>
 <result column="birthday" property="birthday"/>
@@ -19,6 +20,11 @@
  <insert id="insertmemberNCollection" parameterType="memberNCollection" >
  	insert into member_Collection values(#{memberId},#{collectionId},#{invite})
  </insert>
+ 
+ <delete id="deleteMemberCollection" parameterType="hashmap">
+delete from MEMBER_COLLECTION
+where COLLECTION_id=#{collectionId} and MEMBER_id=#{memberId}
+</delete>
  
  <delete id="deleteMemberNCollectionByCollectionId" parameterType="string">
  	delete from MEMBER_COLLECTION
@@ -51,8 +57,8 @@
  </select>
  
  <!-- 그룹 가계부의 회원들 조회하기 -->
- <select id="selectAllCollectionMemberListByCollectionId" parameterType="map" resultMap="getMember-name-email-birthday">
- select MEMBER.name, Member.email, Member.birthday
+ <select id="selectAllCollectionMemberListByCollectionId" parameterType="hashmap" resultMap="getMember-name-email-birthday">
+ select Member.member_Id memberId, MEMBER.name, Member.email, Member.birthday
 	from Member,(
 	select mc.member_id memberId3, mc.collection_Id collectionId, mc.invite
 	from member_collection mc, (

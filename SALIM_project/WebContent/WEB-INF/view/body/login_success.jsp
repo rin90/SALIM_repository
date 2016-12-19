@@ -8,7 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>jQuery UI Selectable - Serialize</title>
-
+<!-- 부트스트랩 -->  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <!-- 부트스트랩  끝/--> 
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   <link rel="stylesheet" href="/resources/demos/style.css">
@@ -19,9 +24,9 @@
 
   #selectable .ui-selected { background: #F39814; color: white; }
 
-  #selectable { list-style-type: none; margin: 0; padding: 0; width: 80%; }
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
 
-  #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+  #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 30px; }
   </style>
   
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -75,7 +80,8 @@ $(document).ready(function(){
 	<th></th>
 	<th align='right'>
 		<form action="${initParam.rootPath }/collection.do" method='get'>
-			<input type='submit' value='그룹 가계부 추가'>
+			<!-- <input type='submit' value='그룹 가계부 추가'> -->
+			<button type="submit" class="btn btn-default btn-lg">+그룹가계부 추가</button>
 		</form>	
 	</th>
 </tr>

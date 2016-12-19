@@ -47,7 +47,7 @@ function barGraph(arr){
 function updateYear(year){
 //	alert($("#year").text());	// 년도 표시하는 곳의 text값
 	$.ajax({
-		url:"${initParam.rootPath}/report/updateYear.do",
+		url:"${initParam.rootPath}/report/login/updateYear.do",
 		type:"post",
 		data:{"year":year, "memberId":"tester2"},
 		dataType:"json",		// 오카지...? 항상 text로 받을 수밖에 없...ㅠㅜ

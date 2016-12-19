@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +82,8 @@ function a()
 {
 	alert('${requestScope.inviteMessage}');
 }
+
+
 }); 
 </script>
 </head>
@@ -88,21 +91,46 @@ function a()
 <h2>그룹 회원 관리</h2>
 <!-- 여기서 회원 조회를 해서 뿌려주는 부분! -->
 <table border='1'>
-<c:if test="${fn:length(requestScope.true_invitedMember)!=0}">
 <tr>
 		<th>멤버 이름</th><th>멤버 이메일</th><th>멤버 생일</th><th>멤버 초대 상태</th>
 </tr>
+<c:if test="${sessionScope.login_info.memberId==sessionScope.group_info.grantId }">
+<tr>
+	<th>${sessionScope.login_info.name}</th><th>${sessionScope.login_info.email}</th><th><fmt:formatDate value="${sessionScope.login_info.birthday}" pattern="yyyy년 MM월 dd일 "/></th><th>리더</th>
+</tr>
+</c:if>
+<c:if test="${fn:length(requestScope.true_invitedMember)!=0}">
+
 <c:forEach items="${requestScope.true_invitedMember}" var="member">
-	<tr>
-		<th>${member.name}</th><th>${member.email}</th><th>${member.birthday}</th><th><font color='blue'>초대완료</font></th>
-	</tr>
+<c:choose>
+	<c:when test="${member.memberId!=sessionScope.group_info.grantId}">
+		<tr>
+			<th>${member.name}</th><th>${member.email}</th><th><fmt:formatDate value="${member.birthday}" pattern="yyyy년 MM월 dd일 "/></th><th><font color='blue'>초대완료</font></th>
+		</tr>
+	</c:when>
+	<c:otherwise>
+		
+	</c:otherwise>
+</c:choose>
+	
 </c:forEach>
 </c:if>
 <c:if test="${fn:length(requestScope.false_invitedMember)!=0}">
 
 <c:forEach items="${requestScope.false_invitedMember}" var="member">
 	<tr>
-		<th>-</th><th>${member.email}</th><th>-</th><th><font color='red'>초대중</font></th>
+		<th>-</th><th>${member.email}</th><th>-</th><th><font color='green'>초대중</font></th>
+	</tr>
+</c:forEach>
+</c:if>
+
+<c:if test="${fn:length(requestScope.refusal_invitedMember)!=0}">
+
+<c:forEach items="${requestScope.refusal_invitedMember}" var="member">
+	<tr>
+		<th>-</th><th>${member.email}</th><th>-</th><th><font color='red'>거절&nbsp;&nbsp;
+		</font><font color="black"><a id="hrefRemoveClick" href="${initParam.rootPath}/collection/removeRefusalMember.do?email=${member.email }">삭제하기</a></font>
+		</th>
 	</tr>
 </c:forEach>
 </c:if>

@@ -7,6 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
 .errorMessage{
 	font-size: 12px;
@@ -16,10 +20,45 @@
 </style>
 </head>
 <body>
+<div class="col-md-8 col-md-offset-2">
+  <h1>로그인</h1><br>
+ <form action="${initParam.rootPath}/member/login.do " method="post">
+    <div class="form-group">
+    
+      <label for="email">아이디 입력&nbsp;&nbsp;&nbsp;&nbsp;</label><a href="${initParam.rootPath}/findId.do">(아이디를 잊으셨나요?)</a><br>
+      <span class="errorMessage">
+			<form:errors path="loginCheck.memberId"/>
+	</span>
+      <input type="text" class="form-control" id="email" name="memberId" placeholder="아이디를 입력하세요.">
+    </div>
+    
+    <div class="form-group">
+      <label for="pwd">비밀번호 입력&nbsp;&nbsp;</label><a href="${initParam.rootPath}/findPassword.do">(비밀번호를 잊으셨나요?)</a>
+      <div class="errorMessage">
+		<form:errors path="loginCheck.password" />
+	 </div>	
+      <input type="password" class="form-control" id="pwd" name="password" placeholder="비밀번호를 입력하세요.">
+    </div>
+    
+    <hr>
+    
+    <c:if test="${requestScope.error!=null}">
+						<span class="errorMessage">
+							${requestScope.error}
+						</span>
+		</c:if>
+		<br>
+    <button type="submit" class="btn btn-lg btn-success pull-right">로그인</button>
+    
+    <br><br><br><br><br><br><br><br><br><br>
+    <hr><div class="footer_left pull-left">Salim</div><div class="pull-right"><small>&copy; 2016-12.23 Salim.KOSTA</small></div>
+ 
+  </form>
+  
+</div>
 
-<h2> 로그인 </h2>
 
-<form action="${initParam.rootPath}/member/login.do " method="post">
+<%-- <form action="${initParam.rootPath}/member/login.do " method="post">
 <table>
 	<tr>
 		<td>
@@ -63,14 +102,14 @@
 		<td>
 
 		<c:if test="${requestScope.error!=null}">
-				<span class="errorMessage">
+						<span class="errorMessage">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${requestScope.error}
-				</span>
-</c:if>
-	
-						
-					
-	</td>
+						</span>
+		</c:if>
+
+
+
+				</td>
 		<td colspan="5" align="right">
 			<input type="submit" value="로그인"> 
 		</td>
@@ -78,6 +117,6 @@
 	
 	
 </table>
-</form>
+</form> --%>
 </body>
 </html>

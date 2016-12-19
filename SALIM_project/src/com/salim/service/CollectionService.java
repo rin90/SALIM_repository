@@ -36,4 +36,6 @@ public interface CollectionService {
 	
 	//그룹 가계부 수락-거절 버튼을 눌럿을 경우 처리하는 메서드 
 	public void modifyByMemberIdAndCollectionId(String collectionId, String memberId, String invite);
+	
+	public void removeRefusalMemberByCollectionId(String collectionId, String memberId);
 }
