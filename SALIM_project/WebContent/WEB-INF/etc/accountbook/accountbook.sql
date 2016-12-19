@@ -29,7 +29,7 @@ expense_date Date not null,  --지출일
 expense_explain Varchar2(60),  --사용내역
 cash_expense Number,  --현금지출액
 card_expense Number,  -- 카드지출액
-card_type Varchar2(20)  --카드종류
+card_type Varchar2(120)  --카드종류
 );
 
 select * from expense;
