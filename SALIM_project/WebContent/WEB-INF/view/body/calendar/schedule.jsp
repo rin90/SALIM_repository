@@ -42,7 +42,7 @@
 	</nav>
 	<section style="width:65%;min-height:100px;">
 		<b>메모</b>
-		&nbsp;<textarea rows="10" cols="50" id="dia_memo" name="dia_memo" placeholder="메모 등록하려면 이곳에 써주세여."></textarea>
+		&nbsp;<textarea class="form-control" rows="10" id="dia_memo" name="dia_memo" placeholder="메모 등록하려면 이곳에 써주세여."></textarea>
 	</section>
 	
 	<div id="layer"></div>	<!-- data값 확인하는 용도로 쓰인 것 -->

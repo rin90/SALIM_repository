@@ -48,7 +48,7 @@
 		이번달 목표 :<br>
 		<!--   disabled="disabled"  onmouseover="" ondblclick="" -->
 		<div id="textArea" style="background-color: blue;">
-			<textarea name="goal" id="goal" cols="60" rows="3" disabled="disabled" placeholder="아직 설정된 목표가 없습니다." >${requestScope.goal.goal }</textarea>
+			<textarea class="form-control" name="goal" id="goal" rows="3" disabled="disabled" placeholder="아직 설정된 목표가 없습니다." >${requestScope.goal.goal }</textarea>
 			<button id="btnRegisterGoal" hidden="true">등록</button>
 		</div>
 	</div>
