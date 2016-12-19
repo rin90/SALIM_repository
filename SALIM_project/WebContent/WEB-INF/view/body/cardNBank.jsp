@@ -8,8 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/SALIM_project/scripts/jquery.js"></script>
 <script>
 	$(document).ready(function() {
 		//전체 체크 박스 - 카드
@@ -30,13 +29,32 @@
 		})
 		
 		//권한이 있으면 등록, 수정, 삭제할 수 있게 해주기
-		var grantId = '<%=((Collect)session.getAttribute("group_info"))== null? "":((Collect)session.getAttribute("group_info")).getGrantId()%>';
-		var memberId = '<%=((Member)session.getAttribute("login_info")).getMemberId()%>';
-		if(grantId != null && (grantId != memberId)){
-		}else{ 
-			$("input[readOnly=readOnly]").attr("readOnly", false);
-			$("select[disabled=disabled]").attr("disabled", false);
-		}
+ 		var grantId = '<%=((Collect)session.getAttribute("group_info"))== null? "":((Collect)session.getAttribute("group_info")).getGrantId()%>';
+		var memberId = '<%=((Member)session.getAttribute("login_info")).getMemberId()%>'; 
+			if(grantId != "" && (grantId != memberId)){
+			}else{
+				$("input[readOnly=readOnly]").attr("readOnly", false);
+				$("select[disabled=disabled]").attr("disabled", false);
+			} 
+		
+		//카드&통장 설명 글자수 체크	
+		$(".explane").keyup(function(e){
+			var content = $(this).val();
+			if(content.length>20){
+				alert("30자 이내로 작성해주세요.");
+				$(this).focus();
+			}
+		});	
+		
+		//카드&통장 수정시 글자수 체크
+		$(".naming").keyup(function(e){
+			var content = $(this).val();
+			if(content.length>20){
+				alert("30자 이내로 작성해주세요.");
+				$(this).focus();
+			}
+		});
+		
 
 	});
 
@@ -45,7 +63,7 @@
 	
 	//체크된 것만 값 넘기기 - 카드
 	function deleteCard() {
-		if(grantId != null && (grantId != memberId)){
+		if(grantId != "" && (grantId != memberId)){
 			alert("카드 삭제 권한이 없습니다. 해당 그룹 관리자에게 문의해주세요.");
 		}else{ 
 			$("select[disabled=disabled]").attr("disable", false);
@@ -68,7 +86,7 @@
 	
 	//체크된 것만 값 넘기기 - 통장
 	function deleteBankbook() {
-		if(grantId != null && (grantId != memberId)){
+		if(grantId != "" && (grantId != memberId)){
 			alert("통장 삭제 권한이 없습니다. 해당 그룹 관리자에게 문의해주세요.");
 		}else{ //삭제 권한이 있으므로 input readOnly, disable 관리
 			//$("input[readOnly=readOnly]").attr("readOnly", false);
@@ -92,7 +110,7 @@
 
 	//등록 - 카드
  	function cardAddCheck() {
-		if(grantId != null && (grantId != memberId)){
+		if(grantId != "" && (grantId != memberId)){
 			alert("카드 등록 권한이 없습니다. 해당 그룹 관리자에게 문의해주세요.");
 			return false;
 		}else{
@@ -107,7 +125,7 @@
 	
 	//등록 - 통장
 	function bankAddCheck(){
-		if(grantId != null && (grantId != memberId)){
+		if(grantId != "" && (grantId != memberId)){
 			alert("카드 등록 권한이 없습니다. 해당 그룹 관리자에게 문의해주세요.");
 			return false;
 		}else{
@@ -120,7 +138,7 @@
 	
 	//통장 목록 - 수정
 	function naming2() {
-		if(grantId != null && (grantId != memberId)){
+		if(grantId != "" && (grantId != memberId)){
 			alert("수정 권한이 없습니다. 해당 그룹 관리자에게 문의해주세요.");
 			return false;
 		}else{
@@ -144,7 +162,7 @@
 				<option value="${bank.code }">${bank.code }</option>
 			</c:forEach>
 		</select>&nbsp; 
-		<input type="text" name="cardNaming" id="namingCard" readonly="readonly"/>&nbsp;&nbsp;
+		<input type="text" name="cardNaming" id="namingCard" readonly="readonly" class="explane"/>&nbsp;&nbsp;
 		<input type="submit" value="등록" onclick="return cardAddCheck()" />
 	</form>
 
@@ -156,7 +174,7 @@
 				<option value="${bank.code }">${bank.code }</option>
 			</c:forEach>
 		</select>&nbsp; 
-		<input type="text" name="bankNaming" id="namingbank" readonly="readonly"/>&nbsp;&nbsp;
+		<input type="text" name="bankNaming" id="namingbank" readonly="readonly" class="explane"/>&nbsp;&nbsp;
 		<!-- bankNaming -->
 		<input type="submit" value="등록" onclick="return bankAddCheck()"/>
 	</form>

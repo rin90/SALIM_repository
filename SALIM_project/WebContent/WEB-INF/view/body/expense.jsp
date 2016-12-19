@@ -3,18 +3,13 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>	
 <head>	
 <meta charset="UTF-8">	
 <title>SALIM - 지출 입력</title>	
 </head>
-
-<!-- datepicker 넣기 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
   <script>
 	$(document).ready(function(){
@@ -58,7 +53,6 @@
 				});
 			});
 		
-		
 		//소분류 클릭하면 나오게 - 아작스
 		$(".smallCategory").on("click", function(){
 			var sma = this;
@@ -77,7 +71,6 @@
 				}
 			});
 		});
-		
 		
 		//맨 위의 체크박스 누르면 다 선택되게 하기
 		$("#checkAll").on("click", function(){
@@ -107,60 +100,54 @@
 			}
 		});
 		
+		//지출내역 글자수 체크
+		$(".explane").keyup(function(e){
+			var content = $(this).val();
+			if(content.length>20){
+				alert("글자수는 20자를 초과할 수 없습니다.");
+				$(this).focus();
+			}
+		});
+		
+		//메모 글자수 체크
+		$("#notes").keyup(function(e){
+			var content = $(this).val();
+			if(content.length>1000){
+				alert("글자수는 1000자를 초과할 수 없습니다.");
+				$(this).focus();
+			}
+		});
 		
 	});
 	
+	var grantId = '<%=((Collect)session.getAttribute("group_info"))== null? "":((Collect)session.getAttribute("group_info")).getGrantId()%>';
+	var memberId = '<%=((Member)session.getAttribute("login_info")).getMemberId()%>';
 
 	/* 체크된 것만 컨트롤러로 넘기기 */
 	function checkevent(){
-		var grantId = '<%=((Collect)session.getAttribute("group_info"))== null? "":((Collect)session.getAttribute("group_info")).getGrantId()%>';
-		var memberId = '<%=((Member)session.getAttribute("login_info")).getMemberId()%>';
-			if(grantId != ""){
-				if(grantId != memberId){
-					alert("삭제 권한이 없습니다. 해당 그룹 관리자에게 문의해주세요.");
-				}else{
-					var checkedArr = "";
-					$("input[name=expenseId]:checked").each(function(idx){
-						if($(this).val() != 0){
-							if($("input[name=expenseId]:checked").length-1 == idx){
-								checkedArr+="expenseIdList ="+$(this).val();
-							}else{
-								checkedArr+="expenseIdList ="+$(this).val()+"&";
-							}
-						}
-					});
-					if($("input[name=expenseId]:checked").length == 0){
-						alert("삭제할 것을 선택해주세요.");
-					}else if($("input[name=expenseId]:checked").val()==0){
-						alert("존재하지 않는 데이터입니다. 다시 선택해주세요.");
+		if(grantId != "" && grantId != memberId){
+			alert("삭제 권한이 없습니다. 해당 그룹 관리자에게 문의해주세요.");
+		}else{
+			var checkedArr = "";
+			$("input[name=expenseId]:checked").each(function(idx){
+				if($(this).val() != 0){
+					if($("input[name=expenseId]:checked").length-1 == idx){
+						checkedArr+="expenseIdList ="+$(this).val();
 					}else{
-						var expenseIdList = {"expenseIdList":checkedArr};
-						location.href = "/SALIM_project/household/login/expenseDelete.do?"+checkedArr;
+						checkedArr+="expenseIdList ="+$(this).val()+"&";
 					}
 				}
+			});
+			if($("input[name=expenseId]:checked").length == 0){
+				alert("삭제할 것을 선택해주세요.");
+			}else if($("input[name=expenseId]:checked").val()==0){
+				alert("존재하지 않는 데이터입니다. 다시 선택해주세요.");
 			}else{
-				var checkedArr = "";
-				$("input[name=expenseId]:checked").each(function(idx){
-					if($(this).val() != 0){
-						if($("input[name=expenseId]:checked").length-1 == idx){
-							checkedArr+="expenseIdList ="+$(this).val();
-						}else{
-							checkedArr+="expenseIdList ="+$(this).val()+"&";
-						}
-					}
-				});
-				if($("input[name=expenseId]:checked").length == 0){
-					alert("삭제할 것을 선택해주세요.");
-				}else if($("input[name=expenseId]:checked").val()==0){
-					alert("존재하지 않는 데이터입니다. 다시 선택해주세요.");
-				}else{
-					var expenseIdList = {"expenseIdList":checkedArr};
-					location.href = "/SALIM_project/household/login/expenseDelete.do?"+checkedArr;
-				}
-			
+				var expenseIdList = {"expenseIdList":checkedArr};
+				location.href = "/SALIM_project/household/login/expenseDelete.do?"+checkedArr;
 			}
+		}
 	}
-	
 	
 	//숫자 포맷 체크
 	var inputs = window.document.getElementsByClassName("element");
@@ -176,26 +163,6 @@
 		$("select[disabled=disabled]").attr("disabled", false);
 		return true;
 	}; 
-	
-	
-	$(document).ready(function(){
-		//지출내역 글자수 체크
-		$(".explane").keyup(function(e){
-			var content = $(this).val();
-			if(content.length>20){
-				alert("글자수는 20자를 초과할 수 없습니다.");
-				$(this).focus();
-			}
-		});
-		//메모 글자수 체크
-		$("#notes").keyup(function(e){
-			var content = $(this).val();
-			if(content.length>1000){
-				alert("글자수는 1000자를 초과할 수 없습니다.");
-				$(this).focus();
-			}
-		});
-	});
 	
   </script>
 
@@ -221,15 +188,21 @@
 		<tbody>
 			<tr>
 				<td>수입</td>
-				<td>${requestScope.incomeSum }</td>
+				<td>
+					<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.incomeSum }"/>
+				</td>
 			</tr>
 			<tr>
 				<td>지출</td>
-				<td>${requestScope.expenseSum }</td>
+				<td>
+					<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.expenseSum }"/>
+				</td>
 			</tr>
 			<tr>
 				<td>누계</td>
-				<td>${requestScope.incomeSum - requestScope.expenseSum }</td>
+				<td>
+					<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.incomeSum - requestScope.expenseSum }"/>
+				</td>
 			</tr>
 		</tbody>
 	</table>
