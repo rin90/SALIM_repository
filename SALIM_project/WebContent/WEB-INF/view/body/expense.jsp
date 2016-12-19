@@ -9,6 +9,7 @@
 <head>	
 <meta charset="UTF-8">	
 <title>SALIM - 지출 입력</title>	
+
 </head>
   
   <script>

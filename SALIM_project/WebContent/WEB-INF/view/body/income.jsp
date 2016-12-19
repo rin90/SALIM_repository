@@ -16,6 +16,7 @@
 <head>	
 <meta charset="UTF-8">	
 <title>SALIM - 수입 입력</title>	
+
 </head>       		 
 
 <!-- datepicker 넣기 -->
