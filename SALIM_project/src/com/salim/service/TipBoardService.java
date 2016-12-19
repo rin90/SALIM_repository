@@ -20,17 +20,16 @@ public interface TipBoardService {
 	// 조회수증가
 	TipBoard clickUpdateint(int no);
 
+	// 좋아요증가
+	void goodUpdate(int no, int num);
+
 	// 글삭제
 	void tipDelete(int no);
 
 	// no로 글 찾기(상세화면)
 	TipBoard selectByNo(int no);
 
-	// 글에대한 댓글 총개수
-	int selectCommentTotal(int no);
 
-	// 좋아요증가
-	void goodUpdate(int no, int num);
 
 	// 글목록 페이징처리
 	Map getTipListBoard(int page);
@@ -40,5 +39,4 @@ public interface TipBoardService {
 
 	TipBoard ModelAndselectByNo(int no);
 	
-	 Map selectTitleTotal(int no ,int page);
 }

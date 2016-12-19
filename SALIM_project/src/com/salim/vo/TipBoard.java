@@ -1,8 +1,8 @@
 package com.salim.vo;
 
 import java.io.Serializable;
-
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,111 +18,123 @@ public class TipBoard implements Serializable{
 	private Date registerTime =new Date(); //작성일
 	private String memberId;
 	
+	//join연산을 위한 instance변수
+	private List<TipComment> tipComment;
 	
 	public TipBoard() {
 		super();
 	}
 
+	public TipBoard(int no, String title, String content, MultipartFile fileRoot, String fileName, int click, int good,
+			String classification, Date registerTime, String memberId) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.content = content;
+		this.fileRoot = fileRoot;
+		this.fileName = fileName;
+		this.click = click;
+		this.good = good;
+		this.classification = classification;
+		this.registerTime = registerTime;
+		this.memberId = memberId;
+	}
 
 	public int getNo() {
 		return no;
 	}
 
-
 	public void setNo(int no) {
 		this.no = no;
 	}
-
 
 	public String getTitle() {
 		return title;
 	}
 
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 
 	public String getContent() {
 		return content;
 	}
 
-
 	public void setContent(String content) {
 		this.content = content;
 	}
-
 
 	public MultipartFile getFileRoot() {
 		return fileRoot;
 	}
 
-
 	public void setFileRoot(MultipartFile fileRoot) {
 		this.fileRoot = fileRoot;
 	}
-
 
 	public String getFileName() {
 		return fileName;
 	}
 
-
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
 
 	public int getClick() {
 		return click;
 	}
 
-
 	public void setClick(int click) {
 		this.click = click;
 	}
-
 
 	public int getGood() {
 		return good;
 	}
 
-
 	public void setGood(int good) {
 		this.good = good;
 	}
-
 
 	public String getClassification() {
 		return classification;
 	}
 
-
 	public void setClassification(String classification) {
 		this.classification = classification;
 	}
-
 
 	public Date getRegisterTime() {
 		return registerTime;
 	}
 
-
 	public void setRegisterTime(Date registerTime) {
 		this.registerTime = registerTime;
 	}
-
 
 	public String getMemberId() {
 		return memberId;
 	}
 
-
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
 
+	public List<TipComment> getTipComment() {
+		return tipComment;
+	}
+
+	public void setTipComment(List<TipComment> tipComment) {
+		this.tipComment = tipComment;
+	}
+
+	@Override
+	public String toString() {
+		return "TipBoard [no=" + no + ", title=" + title + ", content=" + content + ", fileRoot=" + fileRoot
+				+ ", fileName=" + fileName + ", click=" + click + ", good=" + good + ", classification="
+				+ classification + ", registerTime=" + registerTime + ", memberId=" + memberId + ", tipComment="
+				+ tipComment + "]";
+	}
 
 	@Override
 	public int hashCode() {
@@ -137,10 +149,10 @@ public class TipBoard implements Serializable{
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + no;
 		result = prime * result + ((registerTime == null) ? 0 : registerTime.hashCode());
+		result = prime * result + ((tipComment == null) ? 0 : tipComment.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -187,6 +199,11 @@ public class TipBoard implements Serializable{
 				return false;
 		} else if (!registerTime.equals(other.registerTime))
 			return false;
+		if (tipComment == null) {
+			if (other.tipComment != null)
+				return false;
+		} else if (!tipComment.equals(other.tipComment))
+			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
@@ -195,29 +212,6 @@ public class TipBoard implements Serializable{
 		return true;
 	}
 
-
-	@Override
-	public String toString() {
-		return "TipBoard [no=" + no + ", title=" + title + ", content=" + content + ", fileRoot=" + fileRoot
-				+ ", fileName=" + fileName + ", click=" + click + ", good=" + good + ", classification="
-				+ classification + ", registerTime=" + registerTime + ", memberId=" + memberId + "]";
-	}
-
-
-	public TipBoard(int no, String title, String content, MultipartFile fileRoot, String fileName, int click, int good,
-			String classification, Date registerTime, String memberId) {
-		super();
-		this.no = no;
-		this.title = title;
-		this.content = content;
-		this.fileRoot = fileRoot;
-		this.fileName = fileName;
-		this.click = click;
-		this.good = good;
-		this.classification = classification;
-		this.registerTime = registerTime;
-		this.memberId = memberId;
-	}
 
 
 	

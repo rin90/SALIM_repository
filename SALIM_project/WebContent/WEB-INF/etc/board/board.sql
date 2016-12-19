@@ -18,6 +18,7 @@ drop table free_board;
 
 
 
+
 create sequence seq_tip--sequence생성
 select seq_tip.nextval from dual  -- 조회 
 drop sequence seq_tip--삭제
@@ -60,6 +61,38 @@ create table free_comments(  --댓글
 
 
 drop table free_comments;
+
+
+create sequence seq_com_t--sequence생성 id용
+select seq_com_t.nextval from dual  -- 조회 
+drop sequence seq_com_t--삭제
+
+--보류
+create sequence seq_cog_t--sequence생성 commentGroup용
+select seq_cog_t.nextval from dual  -- 조회 
+drop sequence seq_cog_t--삭제
+
+create table tip_comments(  --댓글
+	id number primary key,
+	comment_content varchar2(400) not null,
+	comment_member_id varchar2(50) constraint tco_mem_fk references member ON DELETE CASCADE not null,
+	no number constraint tco_tre_fk references TIP_BOARD ON DELETE CASCADE not null,  -- 어떤 글인지 번호
+	comment_group number not null,
+	group_level number not null,
+	comment_register_time date not null
+);
+
+drop table tip_comments;
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -23,10 +23,8 @@ public interface TipBoardDao {
 	// no로 글 찾기(상세화면)
 	TipBoard selectByNo(int no);
 
-	// 글에대한 댓글 총개수
-	int selectCommentTotal(int no);
-	// 좋아요 증가
 
+	// 좋아요 증가
 	int goodUpdate(int no, int num);
 
 	// 조회수 증가
@@ -35,24 +33,26 @@ public interface TipBoardDao {
 	// 조회 제목으로 검색
 	List<TipBoard> selectByTitle(int page, String content);
 
-	// page처리를 위한 글 총 개수
-	int selectCommentTotal(String content);
-
-	// 조회 제목으로 검색
+	// 조회 작성자로 검색
 	List<TipBoard> selectByMemberId(int no, String content);
 
 	// 글에대한 댓글 총개수
-	int selectMemberIdTotal(String content);
+	int selectTitleTotal(String content);
 
 	// 글수정
 	void tipUpdate(TipBoard tipboard);
 
 	// tip게시판 글등록 (글쓰기)
 	void tipInsert(TipBoard tipboard);
-
 	
+	//작성자로 검색시 총 조회된 수
+	int selectByMemberIdTotal(String memberId);
 
-	List<TipBoard> selectTitleTotal(int no, int page);
+	//분류로 검색시 총 조회된 글의 수
+	int selectClassificationTotal(String content);
+	
+	//분류로 검색 - 현재 페이지
+	List<TipBoard> selectByClassification(String content,int page);
 	
 
 }

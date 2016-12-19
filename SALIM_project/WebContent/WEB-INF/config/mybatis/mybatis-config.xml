@@ -17,9 +17,9 @@
 		<mapper resource="com/salim/dao/mapper/freeMapper.xml"/> 
 		<mapper resource="com/salim/dao/mapper/quenstionAndAnswerMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/tipMapper.xml"/>
-		<mapper resource="com/salim/dao/mapper/incomeMapper.xml"/>
+	<!-- 	<mapper resource="com/salim/dao/mapper/incomeMapper.xml"/> -->
 		<mapper resource="com/salim/dao/mapper/expenseMapper.xml"/>
-		<mapper resource="com/salim/dao/mapper/budgetMapper.xml"/>
+		<!-- <mapper resource="com/salim/dao/mapper/budgetMapper.xml"/> -->
 
 
 		
@@ -37,6 +37,7 @@
 		<mapper resource="com/salim/dao/mapper/codeMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/categoryMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/freeCommentMapper.xml"/> 
+		<mapper resource="com/salim/dao/mapper/tipCommentMapper.xml"/>
 	</mappers>
 	
 	

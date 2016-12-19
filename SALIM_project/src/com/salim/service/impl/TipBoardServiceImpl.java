@@ -19,62 +19,53 @@ import com.salim.vo.TipBoard;
 import page.page;
 
 @Service
-public  class TipBoardServiceImpl implements TipBoardService {
+public class TipBoardServiceImpl implements TipBoardService {
 
 	@Autowired
 	private TipBoardDao dao;
-	
 
+	@Override
+	public void tipInsert(TipBoard tipboard) {
+		dao.tipInsert(tipboard);
+	}
 
 	@Override
 	public void tipUpdate(TipBoard tipboard) {
 		dao.tipUpdate(tipboard);
-	
+
 	}
 
 	@Override
 	public TipBoard clickUpdateint(int no) {
-	
+
 		dao.clickUpdateint(no);
-	return dao.selectByNo(no);	
+		return dao.selectByNo(no);
 	}
 
 	@Override
-	public void goodUpdate(int no,int num) {
-		
+	public void goodUpdate(int no, int num) {
+
 		dao.goodUpdate(no, num);
 	}
 
 	@Override
 	public void tipDelete(int no) {
 		dao.tipDelete(no);
-		
-		
-		
-	}
-public TipBoard ModelAndselectByNo(int no){
-	
-	return dao.selectByNo(no);
-}
-	
 
-	
- 
-	@Override
-	public TipBoard selectByNo(int no) {
-	     dao.clickUpdateint(no);
+	}
+
+	public TipBoard ModelAndselectByNo(int no) {
+
 		return dao.selectByNo(no);
 	}
 
 	@Override
-	public int selectCommentTotal(int no) {
-	
-		return 	dao.selectCommentTotal(no);
+	public TipBoard selectByNo(int no) {
+		dao.clickUpdateint(no);
+		return dao.selectByNo(no);
 	}
 
-	
-
-	@Override//글목록 페이징처리
+	@Override // 글목록 페이징처리
 	public Map getTipListBoard(int page) {
 		HashMap<String, Object> map = new HashMap();
 		List<TipBoard> list = dao.selectCurrentPage(page);
@@ -84,106 +75,43 @@ public TipBoard ModelAndselectByNo(int no){
 		return map;
 	}
 
-	public Map getTermsTipListBoard(int page, String category, String content ) {
+	public Map getTermsTipListBoard(int page, String category, String content) {
 		HashMap<String, Object> map = new HashMap();
 		List<TipBoard> list = null;
 		PagingBean pageBean = null;
-		
+
 		// category는 검색 기준입니다.
-		if (category.equals("제목")) {    
-			System.out.println("제목 실행");
-			list = dao.selectByTitle(page, content);
-			pageBean = new PagingBean(page, dao.selectCommentTotal(content));
+		if (category.equals("제목")) {
 			
-		} else if (category.equals("작성자")) {
-			System.out.println("if 작성자 실행");
-			list = dao.selectByMemberId(page, content);
-			System.out.println("Service내용 ::::"+ content);
-			System.out.println("Service페이지::::"+page);
-			System.out.println("if 작성자 list"+dao.selectByMemberId(page, content));
-			pageBean = new PagingBean(page, dao.selectMemberIdTotal(content));
+			System.out.println("제목 실행");
+			
+			list = dao.selectByTitle(page, content);
+			
+			pageBean = new PagingBean(page, dao.selectTitleTotal(content));
 		
-		} else if(category.equals("분류")){
+
+		} else if (category.equals("작성자")) {
+			
+			System.out.println("if 작성자 실행");
+			
+			list = dao.selectByMemberId(page, content);
+			
+			pageBean = new PagingBean(page, dao.selectByMemberIdTotal(content));
+
+		} else if (category.equals("분류")) {
+			
+			System.out.println("분류 실행");
+			
+			list = dao.selectByClassification(content, page);
+			
+			pageBean = new PagingBean(page,dao.selectClassificationTotal(content));
 			
 		}
-		
+
 		map.put("list", list);
 		map.put("pageBean", pageBean);
-		System.out.println("Service카테고리:"+category);
-		System.out.println("총페이지:"+pageBean.getTotalPage());
-		System.out.println("작성자"+dao.selectMemberIdTotal(content));
-		System.out.println("제목:"+dao.selectCommentTotal(content));
+
 		return map;
 	}
 
-	@Override
-	public void tipInsert(TipBoard tipboard) {
-		dao.tipInsert(tipboard);
-		
-	}
-
-	@Override
-	public Map selectTitleTotal(int no, int page) {
-		HashMap<String, Object> map = new HashMap();
-		List<TipBoard> list = dao.selectTitleTotal(no,page);
-		map.put("list", list);
-		PagingBean pageBean = new PagingBean(page, dao.selectTotal());
-		map.put("pageBean", pageBean);
-		return map;
-		
-	}
-
-
-
-	
-
-
-
-	
-
-
-
-
-	
-	}
-
-	
-	
-
-
-
-
-
-
-
-
-	
-
-
-
-
-	
-
-	
-	
-
-
-	
-
-
-	
-
-
-
-	
-
-
-
-	
-
-
-
-	
-
-
-	
+}

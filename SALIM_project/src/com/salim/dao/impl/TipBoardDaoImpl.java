@@ -7,12 +7,10 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 
 import com.salim.dao.TipBoardDao;
 import com.salim.util.Constants;
-import com.salim.vo.FreeBoard;
 import com.salim.vo.TipBoard;
 
 @Repository
@@ -26,8 +24,18 @@ public class TipBoardDaoImpl implements TipBoardDao{
 	}
 	
 
-	
+	@Override
+	public void tipInsert(TipBoard tipboard) {
+		session.insert(make("tipInsert"),tipboard);
+	}
 
+
+	@Override
+	public void tipUpdate(TipBoard tipboard) {
+		session.update(make("tipUpdate"),tipboard);
+		
+	}
+	
 	@Override
 	public void clickUpdateint(int no) {
 		session.update(make("clickUpdate"),no);
@@ -40,7 +48,6 @@ public class TipBoardDaoImpl implements TipBoardDao{
 		map.put("no", no);
 		map.put("num", num);
 		return session.update("goodUpdate",map);
-		
 	}
 
 	@Override
@@ -48,9 +55,15 @@ public class TipBoardDaoImpl implements TipBoardDao{
 		session.delete(make("tipDelete"),no);
 	}
 
+	
+	@Override
+	public TipBoard selectByNo(int no) {
+		return 	session.selectOne(make("selectByNo"),no);
+	}
+	
+	
 	@Override
 	public int selectTotal() {
-		
 		return session.selectOne(make("selectTotal"));
 	}
 
@@ -65,27 +78,12 @@ public class TipBoardDaoImpl implements TipBoardDao{
 	
 
 	
-
 	@Override
-	public TipBoard selectByNo(int no) {
-
-		return 	session.selectOne(make("selectByNo"),no);
-	}
-
-	@Override
-	public int selectCommentTotal(int content) {
-		return session.selectOne("selectTitleTotal",content);
-	}
-
-
-
+	public int selectTitleTotal(String content) {
+		System.out.println("dao에서 확인 제목:"+session.selectOne(make("selectTitleTotal"),content));
+		return session.selectOne(make("selectTitleTotal"),content);
 	
-
-
-
-	
-
-
+	}
 
 	@Override
 	public List<TipBoard> selectByTitle(int page, String content) {
@@ -96,65 +94,43 @@ public class TipBoardDaoImpl implements TipBoardDao{
 		return session.selectList(make("selectByTitle"),map);
 	}
 
-
-	@Override
-	public int selectCommentTotal(String content) {
-		return session.selectOne(make("selectTotal"));
-	}
-		
-
 	
-
-
 	@Override
-	public int selectMemberIdTotal(String content) {
-		return session.selectOne(make("selectTitleTotal"),content);
+	public int selectByMemberIdTotal(String memberId) {
+		return session.selectOne(make("selectMemberIdTotal"),memberId);
+	}
 	
-	}
-
-
-
-
-	@Override
-	public void tipUpdate(TipBoard tipboard) {
-		session.update(make("tipUpdate"),tipboard);
-		
-	}
-
-
-
-
-	
-
-	@Override
-	public void tipInsert(TipBoard tipboard) {
-		session.insert(make("tipInsert"),tipboard);
-	}
-
 	@Override
 	public List<TipBoard> selectByMemberId(int page,String content) {
 		HashMap map = new HashMap();
 		map.put("current", Constants.ITEMS);
 		map.put("page", page);
 		map.put("memberId", content);
-		System.out.println("DAO내용 ::::"+ content);
-		System.out.println("DAO페이지::::"+page);
-		System.out.println("DAO 작성자 실행");
-		System.out.println("DAO::::::::::"+session.selectList(make("selectByMemberid"),map));
-		return session.selectList(make("selectByMemberid"),map);
+		return session.selectList(make("selectByMemberId"),map);
 	}
 
 
+	
 
 
 	@Override
-	public List<TipBoard> selectTitleTotal(int no ,int page){
-		HashMap map = new HashMap();
-		map.put("current", Constants.ITEMS);
-		map.put("no", no);
-		map.put("page", page);
-		return session.selectList(make("selectTitleTotal"),map);
+	public int selectClassificationTotal(String content) {
+		return session.selectOne(make("selectByClassificationTotal"),content);
 	}
+
+
+	@Override
+	public List<TipBoard> selectByClassification(String content, int page) {
+		Map map = new HashMap();
+		map.put("current", Constants.ITEMS);
+		map.put("classification", content);
+		map.put("page", page);
+		return session.selectList(make("selectByClassification"),map);
+	}
+
+
+
+
 
 
 

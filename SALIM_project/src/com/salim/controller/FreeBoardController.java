@@ -46,7 +46,6 @@ public class FreeBoardController {
 	@Autowired
 	private CodeService codeService;
 
-
 	@Autowired
 	private FreeCommentService commentService;
 

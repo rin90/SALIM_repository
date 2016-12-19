@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tipCommentMapper">
+	
+		<!-- 댓글 등록 -->
+	<insert id="comRegister" parameterType="tipcomment">
+	<selectKey keyProperty="id" resultType="_int" order="BEFORE" >
+		select seq_com_t.nextval from dual
+	</selectKey>
+		insert into tip_comments values(#{id},#{commentContent},#{commentMemberId},#{no},#{commentGroup},#{groupLevel},#{commentRegisterTime})	
+	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="comUpdate" parameterType="tipcomment">
+		update tip_comments 
+		set comment_content=#{commentContent},
+			comment_register_time=#{commentRegisterTime}
+		where	id=#{id}
+	</update>
+
+	<!-- 댓글 삭제  -->
+	<delete id="comDelete" parameterType="_int">
+		delete from tip_comments
+		where id=#{id}
+	</delete>
+	
+	<!-- 그룹번호 증가  -->
+	<select id="comGroupUpdate" resultType="_int">
+		select seq_cog_t.nextval
+		from dual
+	</select>
+
+	
+	<!-- 글의 총댓글 개수 (상세화면)-->
+	<select id="selectCommentTotal" parameterType="_int" resultType="_int">
+		select count(id)
+		from tip_comments
+		where no =#{value}
+	</select>
+	
+	<!-- id로 댓글 찾기 -->
+<!-- 	<select id="contentById" parameterType="_int" resultType="string">
+	select content
+	from free_comments
+	where id=#{value}
+	</select> -->
+	
+	
+	
+		<!--  해당 글에 댓글 뿌리는거 작성하기-상세화면들어갈 때 실행  - freeMapper에서 조인연산했음-->
+<!-- 	<select id="comList" parameterType="_int" resultType="freecomment">
+		select id,content,memberId,fontGroup,groupLevel,registerTime		
+		from(
+			select id,content,member_id memberId,font_group fontGroup,group_level groupLevel, register_time registerTime
+			from free_comments
+			where font_no=#{value}  해당 글에 대한 댓글 모두 가져오기
+			)
+		order by fontGroup,id   가져온 글에 그룹번호로 정렬(그룹번호는 입력될때마다 증가한다. 그래서 즉 위에(먼저)입력한사람의 그룹 번호가 더 낮다.
+	</select>
+	 -->
+	
+
+</mapper>

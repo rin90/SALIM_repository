@@ -1,144 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="tipMapper">
-	
+
+	<resultMap type="tipboard" id="tipBoard-resultMap">
+		<id column="no" property="no" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="file_root" property="fileName" />
+		<result column="click" property="click" />
+		<result column="good" property="good" />
+		<result column="classification" property="classification"/>
+		<result column="register_time" property="registerTime" />
+		<result column="member_id" property="memberId" />
+	</resultMap>
+
+
+	<resultMap type="tipboard" id="tipBoard-tipComment-join-resultMap"
+		extends="tipBoard-resultMap">
+		<collection property="tipComment" ofType="tipcomment">
+			<id column="id" property="id" />
+			<result column="comment_content" property="commentContent" />
+			<result column="comment_member_id" property="commentMemberId" />
+			<result column="no" property="no" />
+			<result column="comment_group" property="commentGroup" />
+			<result column="group_level" property="groupLevel" />
+			<result column="comment_register_time" property="commentRegisterTime" />
+		</collection>
+	</resultMap>
+
+
+
+
+
+
+
 	<!-- tip게시판 글 등록( 글 쓰기) -->
 	<insert id="tipInsert" parameterType="tipboard">
 		<selectKey keyProperty="no" resultType="_int" order="BEFORE">
-			select seq_tip.nextval from dual
+			select
+			seq_tip.nextval from dual
 		</selectKey>
-		insert into tip_board values(#{no},#{title},#{content},#{fileName},#{click},#{good},#{classification},#{registerTime},#{memberId})
+		insert into tip_board
+		values(#{no},#{title},#{content},#{fileName},#{click},#{good},#{classification},#{registerTime},#{memberId})
 	</insert>
-	
-	<!-- 글수정  -->
+
+	<!-- 글수정 -->
 	<update id="tipUpdate" parameterType="tipboard">
-		update tip_board 
-		set title=#{title},
-			content=#{content},
-			file_root=#{fileName},
-			classification=#{classification}
+		update tip_board
+		set
+		title=#{title},
+		content=#{content},
+		file_root=#{fileName},
+		classification=#{classification}
 		where no=#{no}
 	</update>
-	
+
 	<!-- 조회수 증가 -->
 	<update id="clickUpdate" parameterType="_int">
 		update tip_board
-		set click=click+1
+		set
+		click=click+1
 		where no=#{no}
 	</update>
-	
+
 	<!-- 좋아용 증가 -->
 	<update id="goodUpdate" parameterType="map">
 		update tip_board
-		set good=good+#{num}
+		set
+		good=good+#{num}
 		where no=#{no}
 	</update>
-	
+
 	<!-- 글 삭제 -->
 	<delete id="tipDelete" parameterType="_int">
 		delete from tip_board
-		where no=#{no}
+		where
+		no=#{no}
 	</delete>
 	
+	<!--(상세화면) 글 번호로 글 찾기(상세화면) - 조인연산 사용-->
+	<select id="selectByNo" parameterType="_int" resultMap="tipBoard-tipComment-join-resultMap">
+		select t.classification,t.no,t.title,t.member_id ,t.register_time ,t.click,t.good,t.content,t.file_root 
+		,c.id,c.comment_content,c.comment_member_id ,c.no,c.comment_group ,c.group_level ,c.comment_register_time 
+		from tip_board t,(
+					select id,no,comment_content,comment_member_id ,comment_group ,group_level ,comment_register_time 
+					from tip_comments
+					where no=#{value} <!--해당 글에 대한 댓글 모두 가져오기-->
+					order by comment_group,id <!--가져온 글에 그룹번호로 정렬그룹번호는 입력될때마다 증가한다. 그래서 즉 위에(먼저)입력한사람의 그룹 번호가 더 낮다.-->
+				) c
+		where t.no=#{value}
+		and t.no=c.no(+)
+	</select>
+
+	<!-- no로 글 찾기(상세화면) -->
+	<!-- <select id="selectByNo" parameterType="_int" resultType="tipboard"> 
+		select no,classification,title,register_time registerTime, member_id memberId,file_root 
+		fileName,content,click from tip_board where no=#{no} 
+		</select> -->
+
 	<!-- page처리를 위한 글 총 개수 -->
 	<select id="selectTotal" resultType="_int">
 		select count(no)
-		from tip_board
-	</select>	
-	
+		from
+		tip_board
+	</select>
+
 	<!-- page처리를 위한 현재 페이지 -->
 	<select id="selectCurrentPage" parameterType="map" resultType="tipboard">
-		select classification,no,title,member_id memberId,register_time registerTime,click,good
+		select classification,no,title,member_id memberId,register_time
+		registerTime,click,good
 		from (
-			select ceil(rownum/#{currentPage}) page,no,classification,title,member_id,register_time,click,good
-			from tip_board
+		select ceil(rownum/#{currentPage})
+		page,no,classification,title,member_id,register_time,click,good
+		from
+		tip_board
 		)
-		where page=#{page} 
+		where page=#{page}
 	</select>
-	
-	<!-- no로 글 찾기(상세화면)  -->
-	<select id="selectByNo" parameterType="_int" resultType="tipboard">
-		select no,classification,title,register_time registerTime, member_id memberId,file_root fileName,content,click
-		from tip_board
-		where no=#{no}
-	</select>
-	
-	
-		<!-- Page처리를 위한 글 토탈 - 제목으로 검색 -->
-	<select id="selectTitleTotal"   parameterType="string"  resultType="_int">
-		select  count(no)
+
+
+
+
+	<!-- Page처리를 위한 글 토탈 - 제목으로 검색 -->
+	<select id="selectTitleTotal" parameterType="string" resultType="_int">
+		select count(no)
 		from tip_board
 		where title like '%'||#{value}||'%'
 	</select>
-	
+
 	<!-- 조회 - 제목으로 검색 -->
 	<select id="selectByTitle" parameterType="map" resultType="tipboard">
-		select classification,no,title,member_id memberId,register_time registerTime,click,good,file_root fileName
+		select classification,no,title,member_id memberId,register_time
+		registerTime,click,good,file_root fileName
 		from(
-			select ceil(rownum/#{current}) page,classification,no,title,member_id,register_time,click,good,file_root 
-			from (
-					select classification,no,title,member_id,register_time,click,good,file_root
-					from tip_board
-					where title like '%'||#{title}||'%'
-					order by no desc
-			)
+		select
+		ceil(rownum/#{current})
+		page,classification,no,title,member_id,register_time,click,good,file_root
+		from (
+		select
+		classification,no,title,member_id,register_time,click,good,file_root
+		from tip_board
+		where title like '%'||#{title}||'%' 
+		order by no desc
+		)
 		)
 		where page=#{page}
 	</select>
-	
-	
-	
-	
-	
-		<!-- Page처리를 위한 글 토탈-작성자로 검색  -->
-	<select id="selectMemberIdTotal"  parameterType="string" resultType="_int">
-		select  count(no)
+
+
+
+
+
+	<!-- Page처리를 위한 글 토탈-작성자로 검색 -->
+	<select id="selectMemberIdTotal" parameterType="string"
+		resultType="_int">
+		select count(no)
 		from tip_board
 		where member_id=#{value}
 	</select>
-	
-	<!-- 조회- 작성자로 검색  -->
-	<select id="selectByMemberid" parameterType="map" resultType="freeboard">
-		select classification,no,title,member_id memberId,register_time registerTime,click,good,file_root fileName
+
+	<!-- 조회- 작성자로 검색 -->
+	<select id="selectByMemberId" parameterType="map" resultType="tipboard">
+		select classification,no,title,member_id memberId,register_time
+		registerTime,click,good,file_root fileName
 		from(
-			select ceil(rownum/#{current}) page,classification,no,title,member_id,register_time,click,good,file_root
-			from (
-					select classification,no,title,member_id,register_time,click,good,file_root
-					from tip_board
-					where member_id=#{memberId}
-					order by no desc
-			)
+		select
+		ceil(rownum/#{current})
+		page,classification,no,title,member_id,register_time,click,good,file_root
+		from (
+		select
+		classification,no,title,member_id,register_time,click,good,file_root
+		from tip_board
+		where member_id=#{memberId} 
+		order by no desc
 		)
-		where page=#{page}
+		)
+		where
+		page=#{page}
 	</select>
-	
+
 	<!-- page처리를 위한 글 토탈 -분류로 검색 -->
-	<select id="selectByClassificationTotal" parameterType="string" resultType="_int">
+	<select id="selectByClassificationTotal" parameterType="string"
+		resultType="_int">
 		select count(no)
 		from tip_board
 		where classification=#{value}
 	</select>
-	
+
 	<!-- 조회 - 분류로 검색 -->
-	<select id="selectByClassification" parameterType="map" resultType="freeboard">
-			select classification,no,title,memberId,registerTime,click,good
-			from(	
-				select ceil(rownum/#{current}) page,classification,no,title,memberId,registerTime,click,good
-				from(
-					select classification,no,title,member_id memberId,register_time registerTime,click,good
-					from tip_board
-					where classification=#{classification}
-					order by no desc
-					)
-				)	
-			where page=#{page}	
+	<select id="selectByClassification" parameterType="map"
+		resultType="tipboard">
+		select
+		classification,no,title,memberId,registerTime,click,good
+		from(
+		select
+		ceil(rownum/#{current})
+		page,classification,no,title,memberId,registerTime,click,good
+		from(
+		select classification,no,title,member_id memberId,register_time
+		registerTime,click,good
+		from tip_board
+		where
+		classification=#{classification}
+		order by no desc
+		)
+		)
+		where page=#{page}
 	</select>
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 
 </mapper>
