@@ -55,7 +55,7 @@ public class IncomeController {
 	//수입 조회
 	@RequestMapping(value="/login/incomeSelect.do")
 	public String selectIncome(@DateTimeFormat(pattern="yyyy-MM-dd")Date incomeDate, HttpSession session, ModelMap modelMap){
-
+		
 		if(incomeDate == null){
 			Date now = new Date();
 			int year = now.getYear();
@@ -63,6 +63,7 @@ public class IncomeController {
 			int day = now.getDate();
 			incomeDate = new Date(year, month, day);
 		}
+		
 		String memberId = checkMemberId(session);
 		modelMap.addAllAttributes(service.selectIncome(memberId, incomeDate));
 		modelMap.addAttribute("incomeDate", new SimpleDateFormat("yyyy-MM-dd").format(incomeDate));
