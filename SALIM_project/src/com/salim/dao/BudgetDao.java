@@ -15,4 +15,7 @@ public interface BudgetDao {
 	//예산 조회
 	Budget selectBudget(Map map);
 	
+	//예산 삭제 - 멤버id로
+	int deleteBudgetBymemberId(String memberId);
+	
 }

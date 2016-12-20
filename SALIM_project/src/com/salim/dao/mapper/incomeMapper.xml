@@ -39,6 +39,11 @@
 		and member_id=#{memberId}
 	</delete>
 	
+	<!-- 수입 delete memberId로-->
+	<delete id="deleteIncomeByMemberId" parameterType="String">
+		delete from income 
+		where member_id=#{memberId}
+	</delete>
 	
 	<!-- resultMap -->
 	<resultMap type="income" id="income-resultMap">

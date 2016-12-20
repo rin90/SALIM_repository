@@ -31,6 +31,11 @@ public class ScheduleDaoImpl implements ScheduleDao{
 	}
 
 	@Override
+	public int deleteScheuldeBasedMemberId(String memberId) {
+		return session.delete("scheduleMapper.deleteScheduleBasedMemberId", memberId);
+	}
+	
+	@Override
 	public List<Schedule> selectScheduleByMonth(Map map) {
 		return session.selectList("scheduleMapper.selectScheduleByMonth", map);
 	}
@@ -40,4 +45,6 @@ public class ScheduleDaoImpl implements ScheduleDao{
 		return session.selectList("scheduleMapper.selectScheduleByDay", map);
 	}
 
+
+	
 }

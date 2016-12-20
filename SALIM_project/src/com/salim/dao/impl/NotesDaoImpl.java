@@ -34,6 +34,11 @@ public class NotesDaoImpl implements NotesDao{
 	public int deleteNotes(int no) {
 		return session.delete("notesMapper.deleteNotes", no);
 	}
+
+	@Override
+	public int deleteNotes(String memberId) {
+		return session.delete("notesMapper.deleteNoteBasedMemberId", memberId);
+	}
 	
 	
 }

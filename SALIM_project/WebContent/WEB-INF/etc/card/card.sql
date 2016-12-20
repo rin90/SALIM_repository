@@ -6,6 +6,8 @@ create table card(
 	card_description varchar2(100) not null --33자까지 입력
 );
 
+
+
 drop table card;
 
 create sequence seq_card_id

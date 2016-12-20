@@ -30,13 +30,19 @@ public class BankDaoImpl implements BankDao{
 	}
 
 	@Override
-	public int deleteBankByMemberId(int bankId) {
-		return session.delete(makeSql("deleteBankByMemberId"), bankId);
+	public int deleteBankByBankId(int bankId) {
+		return session.delete(makeSql("deleteBankByBankId"), bankId);
 	}
 
 	@Override
 	public List<Bank> selectBankByMemberId(String memberId) {
 		return session.selectList(makeSql("selectBankByMemberId"), memberId);
 	}
+
+	@Override
+	public int deleteBankByMemberId(String memberId) {
+		return session.delete(makeSql("deleteBankByMemberId"), memberId);
+	}
+	
 	
 }

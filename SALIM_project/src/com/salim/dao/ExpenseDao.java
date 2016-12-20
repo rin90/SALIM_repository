@@ -58,5 +58,8 @@ public interface ExpenseDao {
 	
 	/*=================== << 한달 동안 지출 누계 >> ======================*/
 	int selectForOneMonthExpense(Map map);
+	
+	//memberId로 지출 삭제
+	int deleteExpenseByMemberId(String memberId);
 }
 
