@@ -69,13 +69,13 @@
 	 
 	 <!-- 예산 delete -->
 	 <delete id="deleteBudget" parameterType="_int">
-	 	delte from budget 
+	 	delete from budget 
 	 	where num=#{num}
 	 </delete>
 	 
 	 <!-- 예산 delete -->
 	 <delete id="deleteBudgetBymemberId" parameterType="String">
-	 	delte from budget 
+	 	delete from budget 
 	 	where member_id=#{memberId}
 	 </delete>
 	 
