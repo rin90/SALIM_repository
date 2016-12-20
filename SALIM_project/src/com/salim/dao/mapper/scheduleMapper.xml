@@ -48,6 +48,9 @@
 		delete from schedule where no=#{value}
 	</delete>
 	
+	<delete id="deleteScheduleBasedMemberId" parameterType="string">
+		delete from schedule where member_id=#{value}
+	</delete>
 	
 	<select id="selectScheduleByMonth" parameterType="map" resultMap="schedule-resultMap">
 		<include refid="schedule-select"/>

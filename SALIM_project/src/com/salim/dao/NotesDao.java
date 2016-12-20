@@ -17,5 +17,5 @@ public interface NotesDao {
 	
 	//메모 삭제
 	int deleteNotes(int no);
-
+	int deleteNotes(String memberId);
 }
