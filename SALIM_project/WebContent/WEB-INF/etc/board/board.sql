@@ -6,7 +6,7 @@ create table free_board( --자유게시판
  no number primary key,
  title varchar2(300) not null,
  content varchar2(4000) not null,
- file_root varchar2(4000),  --파일 경로
+ file_root varchar2(3000),  --파일 이름
  click	number not null,  --조회수
  register_time date not null, --작성일
  member_id varchar2(50) constraint fre_mem_fk references member ON DELETE CASCADE not null--inline방식
@@ -24,15 +24,15 @@ drop sequence seq_tip--삭제
 
 create table tip_board(  --tip게시판
 	no number primary key,
-	title varchar2(3000) not null,
+	title varchar2(300) not null,
 	content varchar2(4000) not null,
 	file_root varchar2(4000),  -- 파일 경로
 	click number not null,   -- 조회수 
-	good number not null,   -- 좋아요
 	classification varchar2(20) not null, --분류
 	register_time date not null, -- 작성일
 	member_id varchar2(50) constraint tip_mem_fk references member ON DELETE CASCADE not null--inline방식
 );
+
 select * from tip_board;
 drop table tip_board;
 

@@ -6,7 +6,7 @@ drop sequence seq_cod--삭제
 create table code(--분류&카테고리&수입&지출카테고리
 id Number primary key,--기본키
 collection varchar2(50) not null,--그룹
-code varchar2(300)not null--코드
+code varchar2(60)not null--코드
 );
 drop table code;
 select * from code;
@@ -73,7 +73,7 @@ drop sequence seq_sma;
 create table smallCategory(
 	small_code number primary key,
 	small_content varchar2(30) not null,
-	big_code number constraint sma_big_fk references bigCategory
+	big_code number constraint sma_big_fk references bigCategory not null
 );
 select * from smallCategory;
 drop table smallCategory;
