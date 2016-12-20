@@ -19,7 +19,7 @@
 
 <!-- 보고서 -->
 <a href="${initParam.rootPath }/report/login/loadMonth.do">월 지출 내역</a><br>
-<a href="${initParam.rootPath }/report/login/loadYear.do">년간 가계 내역</a><br>
+<a href="${initParam.rootPath }/report/login/loadYear.do">연간 가계 내역</a><br>
 
 <%-- <a href="${initParam.rootPath }/cardNBank/login/cardNBankSelect.do">카드/통장 등록</a><br> --%>
 

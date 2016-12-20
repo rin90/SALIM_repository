@@ -10,9 +10,10 @@ title varchar2(60) not null,  --일정제목
 detail varchar2(300) not null,  --상세내용
 start_date Date not null,  --날짜 (년도-월-일 시간)
 end_date Date not null,
-member_id varchar2(50) constraint sch_mem_fk references member not null
+member_id varchar2(50) not null
 );
-alter table schedule drop constraint sch_mem_fk ;
+
+--alter table schedule drop constraint sch_mem_fk ; 위에 테이블을 수정했음
 select * from schedule;
 delete from schedule where member_id='tester';
 drop table schedule;
@@ -63,9 +64,9 @@ create table goals(--목표
 num number primary key,--목표번호
 y_m varchar2(7) not null,--목표달
 goal varchar2(1000) not null,--내용
-member_id varchar2(50) constraint goa_mem_fk references member not null--회원id
+member_id varchar2(50) not null--회원id
 );
-alter table goals drop constraint goa_mem_fk ;
+--alter table goals drop constraint goa_mem_fk ; 위에 테이블을 수정했음
 drop table goals;
 
 insert into goals values(seq_goa.nextval, '201612', '일정언제 완성해??=ㅅ= 완성하고 싶다...', 'tester2');

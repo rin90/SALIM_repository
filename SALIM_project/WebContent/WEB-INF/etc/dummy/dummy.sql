@@ -1,10 +1,10 @@
 
 --code테이블  Tip게시판 분류 insert
-insert into code values(seq_cod.nextval,'free','지출');
-insert into code values(seq_cod.nextval,'free','수입');
-insert into code values(seq_cod.nextval,'free','저축');
-insert into code values(seq_cod.nextval,'free','보험');
-insert into code values(seq_cod.nextval,'free','생활');
+insert into code values(seq_cod.nextval,'분류','지출');
+insert into code values(seq_cod.nextval,'분류','수입');
+insert into code values(seq_cod.nextval,'분류','저축');
+insert into code values(seq_cod.nextval,'분류','보험');
+insert into code values(seq_cod.nextval,'분류','생활');
 
 
 --code테이블 Q&A게시판 분류 insert

@@ -53,11 +53,9 @@ public class ExpenseController {
 			int day = date.getDate();
 			expenseDate = new Date(year, month, day);
 		}
-
-		String memberId = checkMemberId(session);
-		modelMap.addAllAttributes(service.selectExpense(memberId, expenseDate));
+		modelMap.addAllAttributes(service.selectExpense(checkMemberId(session), expenseDate));
 		modelMap.addAttribute("expenseDate", new SimpleDateFormat("yyyy-MM-dd").format(expenseDate));
-		return "body/expense.tiles";
+		return "body/writing/expense.tiles";
 	}
 	
 	
@@ -72,9 +70,7 @@ public class ExpenseController {
 							  @DateTimeFormat(pattern="yyyy-MM-dd") @RequestParam Date expenseDate,
 							  HttpSession session,
 							  HttpServletRequest request){
-		
-		String memberId = checkMemberId(session);
-		service.saveExpense(memberId, expenseId, expenseExplain, cashExpense, cardExpense, cardType, codeId, expenseDate, request.getParameter("notes"), Integer.parseInt(request.getParameter("notesNum")));
+		service.saveExpense(checkMemberId(session), expenseId, expenseExplain, cashExpense, cardExpense, cardType, codeId, expenseDate, request.getParameter("notes"), Integer.parseInt(request.getParameter("notesNum")));
 		return "redirect:/household/login/expenseSelect.do?expenseDate="+new SimpleDateFormat("yyyy-MM-dd").format(expenseDate);
 	}
 	
@@ -82,8 +78,7 @@ public class ExpenseController {
 	//지출 삭제
 	@RequestMapping(value="/login/expenseDelete.do")
 	public String deleteExpense(@RequestParam ArrayList<Integer> expenseIdList, HttpSession session, HttpServletRequest request){
-		String memberId = checkMemberId(session);
-		service.deleteExpense(expenseIdList, memberId);
+		service.deleteExpense(expenseIdList, checkMemberId(session));
 		return "redirect:/household/login/expenseSelect.do?expenseDate="+request.getParameter("expenseDate");
 	}
 	

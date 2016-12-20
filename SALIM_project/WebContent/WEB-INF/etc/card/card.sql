@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------------------------- 11.30 타이허
 create table card(
-	member_id varchar2(50),
+	member_id varchar2(50) not null,
 	card_id Number primary key,
 	card_Type varchar2(50) not null,
 	card_description varchar2(100) not null --33자까지 입력
@@ -15,7 +15,7 @@ select seq_card_id.nextval from dual
 drop sequence seq_card_id
 
 create table bank(
-	member_id varchar2(50), 
+	member_id varchar2(50) not null, 
 	bank_id Number primary key,
 	bank_Type varchar2(50) not null,
 	bank_description varchar2(100) not null

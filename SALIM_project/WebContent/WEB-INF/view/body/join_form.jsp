@@ -142,20 +142,13 @@ $(document).ready(function(){
 		
 	});
 	
-	$("#reset").on("click",function(){
-		$("#idResult").empty();
-		$("#passwordResult").empty();
-		$("#emailResult").empty();
-	});
-		
-	
 		 
- 		 $("#birthday").on("click",function(){
+ 		/*  $("#birthday").on("click",function(){
 			 $("#birthdayResult").empty();
 			 alert("생년월일은 공백없이 8자리를 입력하세요.예)19910101")
-		 });
+		 }); */
 		 
-		$("#birthday").on("blur",function(){
+		 $("#birthday").on("blur",function(){
 			 $("#birthdayResult").empty();
 			 $.ajax({
 				 "url":"${initParam.rootPath}/member/birthday.do",
@@ -219,7 +212,7 @@ $(document).ready(function(){
 </head>
 
 <body>
-<h2>새 계정 만들기</h2>
+<%-- <h2>새 계정 만들기</h2>
 <form method="post" action="${initParam.rootPath}/member/join.do" method="POST">
 	<table style="width:1000px"  >
 		<tr>
@@ -250,7 +243,7 @@ $(document).ready(function(){
 				<span id='passwordResult'></span>
 				<span class="errorMessage">
 						<form:errors path="member.password2"/>
-					</span>
+				</span>
 			
 			</td>
 			
@@ -301,11 +294,75 @@ $(document).ready(function(){
 	<input type="submit" value="회원가입">
 	
 	<p>
+</form> --%>
+
+<div class="col-md-10 col-md-offset-2">
+<h2>새 계정 만들기</h2><br><br>
+<form class="form-horizontal" method="post" action="${initParam.rootPath}/member/join.do" method="POST">
+  <div class="form-group">
+    <h4><label class="control-label col-sm-2" >아이디 입력</label></h4>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="memberId" id="memberId" placeholder="salim">
+    </div>
+  </div>
+  <div class="form-group">
+    <h4><label class="control-label col-sm-2" for="pwd">비밀번호 입력</label></h4>
+    <div class="col-sm-10"> 
+      <input type="password" class="form-control"  id="password" name="password" placeholder="********">
+     <font color="gray">8~20자의 영문 대/소문자,숫자,특수문자 혼용가능</font>    <br><br>
+    </div>
+
+    <h4><label class="control-label col-sm-2" for="pwd">비밀번호 확인</label></h4>
+    <div class="col-sm-10"> 
+      <input type="password" class="form-control"  id="password2" name="password2" placeholder="비밀번호를 다시 입력해주세요.">
+      <p class="help-block"><small>다른 유저의 유저이름과 중복되도 상관없으며, 나중에 변경할 수 있습니다.</small><mark style="display:none;" class="pull-right"><small>한 글자 이상의 사용자 이름을 입력해주세요</small></mark></p>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <h4><label class="control-label col-sm-2" >이름</label></h4>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="name" name="name" placeholder="홍길동">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <h4><label class="control-label col-sm-2" >생일</label></h4>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="birthday" name="birthday" placeholder="clik">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <h4><label class="control-label col-sm-2" >나이</label></h4>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="age" name="age" placeholder="생년월일 입력 시 자동으로 입력되오니 나이를 확인해주세요.">
+    </div>
+  </div>
+  
+   <div class="form-group">
+    <h4><label class="control-label col-sm-2" >이메일</label></h4>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="email" name="email" placeholder="salim@google.com">
+      <font color="gray">이메일은 그룹 초대를 받을 때 사용될 수 있습니다.</font>
+    </div>
+  </div>
+  
+ <!--  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label><input type="checkbox"> Remember me</label>
+      </div>
+    </div>
+  </div> -->
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-lg btn-success pull-right">새 계정 만들기</button>
+    </div>
+  </div>
 </form>
 
-
-
-
+</div>
 
 
 

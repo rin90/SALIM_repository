@@ -216,205 +216,212 @@
 <body>
 	
 <form action="/SALIM_project/household/login/budget.do?" method="post">
-	
-	<input type="text" class="month-picker" name="budgetDate" value="${requestScope.budgetDate}" placeholder="${requestScope.budgetDate }">
-	<p>
-    
-	<input type="hidden" name="num" value="${requestScope.budgetNum }">
-	<input type="hidden" name="memberId" value="${empty sessionScope.group_info.collectionId? sessionScope.login_info.memberId:sessionScope.group_info.collectionId}">
-
-
-	<table border="1">
-		<thead>
-			<tr>
-				<td>전월 수입</td>
-				<td>
-					<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.monthIncome }"/>
-				</td>
-			</tr>
-			<tr>
-				<td>분류</td>
-				<td>예산</td>
-				<td>지출</td>
-				<td>차이(예산 - 지출)</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>식비</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.foodExpenses }" name="foodExpenses" readonly="readonly" placeholder="${requestScope.budget.foodExpenses }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[7].SPEND_MONEY }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.foodExpenses - requestScope.categoryExpense[7].SPEND_MONEY }">	
-				</td>
-			</tr>
-			<tr>
-				<td>주거/통신</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.dwellingCommunication }" name="dwellingCommunication" readonly="readonly" placeholder="${requestScope.budget.dwellingCommunication }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[12].SPEND_MONEY }">	
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.dwellingCommunication - requestScope.categoryExpense[12].SPEND_MONEY }">	
-				</td>
-			</tr>
-			<tr>
-				<td>생활용품</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.householdgoods }" name="householdgoods" readonly="readonly" placeholder="${requestScope.budget.householdgoods }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[5].SPEND_MONEY }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.householdgoods - requestScope.categoryExpense[5].SPEND_MONEY }">
-				</td>
-			</tr>
-			<tr>
-				<td>의복/미용</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.clothBeauty }" name="clothBeauty" readonly="readonly" placeholder="${requestScope.budget.clothBeauty }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[9].SPEND_MONEY }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.clothBeauty - requestScope.categoryExpense[9].SPEND_MONEY }">	
-				</td>
-			</tr>
-			<tr>
-				<td>건강/문화</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.healthCulture }" name="healthCulture" readonly="readonly" placeholder="${requestScope.budget.healthCulture }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[0].SPEND_MONEY }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.healthCulture - requestScope.categoryExpense[0].SPEND_MONEY }">
-				</td>
-			</tr>
-			<tr>
-				<td>교육/육아</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.educationParenting }" name="educationParenting" readonly="readonly" placeholder="${requestScope.budget.educationParenting }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[2].SPEND_MONEY }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.educationParenting - requestScope.categoryExpense[2].SPEND_MONEY }">
-				</td>
-			</tr>
-			<tr>
-				<td>교통/차량</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.trafficVehicle }" name="trafficVehicle" readonly="readonly" placeholder="${requestScope.budget.trafficVehicle }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[3].SPEND_MONEY }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.trafficVehicle - requestScope.categoryExpense[3].SPEND_MONEY }">
-				</td>
-			</tr>
-			<tr>
-				<td>경조사/회비</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.holidayDues }" name="holidayDues" readonly="readonly" placeholder="${requestScope.budget.holidayDues }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[1].SPEND_MONEY }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.holidayDues - requestScope.categoryExpense[1].SPEND_MONEY }">
-				</td>
-			</tr>
-			<tr>
-				<td>세금/이자</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.taxInterest }" name="taxInterest" readonly="readonly" placeholder="${requestScope.budget.taxInterest }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[6].SPEND_MONEY }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.taxInterest - requestScope.categoryExpense[6].SPEND_MONEY }">
-				</td>
-			</tr>
-			<tr>
-				<td>용돈/기타</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.pinmoneyEtc }" name="pinmoneyEtc" readonly="readonly" placeholder="${requestScope.budget.pinmoneyEtc }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[8].SPEND_MONEY }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.pinmoneyEtc - requestScope.categoryExpense[8].SPEND_MONEY }">
-				</td>
-			</tr>
-			<tr>
-				<td>저축/보험</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.savingInsurance }" name="savingInsurance" readonly="readonly" placeholder="${requestScope.budget.savingInsurance }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[11].SPEND_MONEY }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.savingInsurance - requestScope.categoryExpense[11].SPEND_MONEY }">
-				</td>
-			</tr>
-			<tr>
-				<td>카드대금</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.creditCard }" name="creditCard" readonly="readonly" placeholder="${requestScope.budget.creditCard }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[13].SPEND_MONEY }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.creditCard - requestScope.categoryExpense[13].SPEND_MONEY }">
-				</td>
-			</tr>
-			<tr>
-				<td>미분류</td>
-				<td>
-					<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.unclassified }" name="unclassified" readonly="readonly" placeholder="${requestScope.budget.unclassified }">
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.categoryExpense[4].SPEND_MONEY }">	
-				</td>
-				<td>
-					<input type="text" class="urea" value="${requestScope.budget.unclassified - requestScope.categoryExpense[4].SPEND_MONEY }">	
-				</td>
-			</tr>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td>합계</td>
-				<td>
-					<fmt:formatNumber type="currency" currencySymbol="￦" value="${empty requestScope.budget? 0:requestScope.budget.budget }"/>
-				</td>
-				<td>
-					<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.monthExpense[0].TOTAL }"/>
-				</td>
-				<td>
-					<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.budget.budget - requestScope.monthExpense[0].TOTAL }"/>
-				</td>
-			</tr>
-		</tfoot>
-	</table>
-	
-	<input type="submit" value="저장하기" onclick="return check();" />
-	
+	<div class="container text-center">
+		<div class="row" style="margin-top: 30px; margin-bottom: 100px; margin-left: 30px;" align="left" >
+			<div class="col-md-4">
+				<input type="text" class="month-picker" name="budgetDate" value="${requestScope.budgetDate}" placeholder="${requestScope.budgetDate }">
+				<p>
+				<input type="hidden" name="num" value="${requestScope.budgetNum }">
+				<input type="hidden" name="memberId" value="${empty sessionScope.group_info.collectionId? sessionScope.login_info.memberId:sessionScope.group_info.collectionId}">
+    		</div>
+    		<div class="col-md-8">
+    			<h1> &lt; 예 산 작 성 &gt; </h1>
+    		</div>
+    	</div>
+    	<div class="row">
+		
+			<table class="table table-bordered" style="size:80%">
+				<thead>
+					<tr>
+						<td>전월 수입</td>
+						<td>
+							<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.monthIncome }"/>
+						</td>
+					</tr>
+					<tr>
+						<td>분류</td>
+						<td>예산</td>
+						<td>지출</td>
+						<td>차이(예산 - 지출)</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>식비</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.foodExpenses }" name="foodExpenses" readonly="readonly" placeholder="${requestScope.budget.foodExpenses }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[7].SPEND_MONEY }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.foodExpenses - requestScope.categoryExpense[7].SPEND_MONEY }">	
+						</td>
+					</tr>
+					<tr>
+						<td>주거/통신</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.dwellingCommunication }" name="dwellingCommunication" readonly="readonly" placeholder="${requestScope.budget.dwellingCommunication }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[12].SPEND_MONEY }">	
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.dwellingCommunication - requestScope.categoryExpense[12].SPEND_MONEY }">	
+						</td>
+					</tr>
+					<tr>
+						<td>생활용품</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.householdgoods }" name="householdgoods" readonly="readonly" placeholder="${requestScope.budget.householdgoods }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[5].SPEND_MONEY }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.householdgoods - requestScope.categoryExpense[5].SPEND_MONEY }">
+						</td>
+					</tr>
+					<tr>
+						<td>의복/미용</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.clothBeauty }" name="clothBeauty" readonly="readonly" placeholder="${requestScope.budget.clothBeauty }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[9].SPEND_MONEY }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.clothBeauty - requestScope.categoryExpense[9].SPEND_MONEY }">	
+						</td>
+					</tr>
+					<tr>
+						<td>건강/문화</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.healthCulture }" name="healthCulture" readonly="readonly" placeholder="${requestScope.budget.healthCulture }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[0].SPEND_MONEY }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.healthCulture - requestScope.categoryExpense[0].SPEND_MONEY }">
+						</td>
+					</tr>
+					<tr>
+						<td>교육/육아</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.educationParenting }" name="educationParenting" readonly="readonly" placeholder="${requestScope.budget.educationParenting }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[2].SPEND_MONEY }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.educationParenting - requestScope.categoryExpense[2].SPEND_MONEY }">
+						</td>
+					</tr>
+					<tr>
+						<td>교통/차량</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.trafficVehicle }" name="trafficVehicle" readonly="readonly" placeholder="${requestScope.budget.trafficVehicle }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[3].SPEND_MONEY }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.trafficVehicle - requestScope.categoryExpense[3].SPEND_MONEY }">
+						</td>
+					</tr>
+					<tr>
+						<td>경조사/회비</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.holidayDues }" name="holidayDues" readonly="readonly" placeholder="${requestScope.budget.holidayDues }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[1].SPEND_MONEY }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.holidayDues - requestScope.categoryExpense[1].SPEND_MONEY }">
+						</td>
+					</tr>
+					<tr>
+						<td>세금/이자</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.taxInterest }" name="taxInterest" readonly="readonly" placeholder="${requestScope.budget.taxInterest }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[6].SPEND_MONEY }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.taxInterest - requestScope.categoryExpense[6].SPEND_MONEY }">
+						</td>
+					</tr>
+					<tr>
+						<td>용돈/기타</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.pinmoneyEtc }" name="pinmoneyEtc" readonly="readonly" placeholder="${requestScope.budget.pinmoneyEtc }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[8].SPEND_MONEY }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.pinmoneyEtc - requestScope.categoryExpense[8].SPEND_MONEY }">
+						</td>
+					</tr>
+					<tr>
+						<td>저축/보험</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.savingInsurance }" name="savingInsurance" readonly="readonly" placeholder="${requestScope.budget.savingInsurance }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[11].SPEND_MONEY }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.savingInsurance - requestScope.categoryExpense[11].SPEND_MONEY }">
+						</td>
+					</tr>
+					<tr>
+						<td>카드대금</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.creditCard }" name="creditCard" readonly="readonly" placeholder="${requestScope.budget.creditCard }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[13].SPEND_MONEY }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.creditCard - requestScope.categoryExpense[13].SPEND_MONEY }">
+						</td>
+					</tr>
+					<tr>
+						<td>미분류</td>
+						<td>
+							<input class="element" type="text" value="${empty requestScope.budget? 0:requestScope.budget.unclassified }" name="unclassified" readonly="readonly" placeholder="${requestScope.budget.unclassified }">
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.categoryExpense[4].SPEND_MONEY }">	
+						</td>
+						<td>
+							<input type="text" class="urea" value="${requestScope.budget.unclassified - requestScope.categoryExpense[4].SPEND_MONEY }">	
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td>합계</td>
+						<td>
+							<fmt:formatNumber type="currency" currencySymbol="￦" value="${empty requestScope.budget? 0:requestScope.budget.budget }"/>
+						</td>
+						<td>
+							<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.monthExpense[0].TOTAL }"/>
+						</td>
+						<td>
+							<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.budget.budget - requestScope.monthExpense[0].TOTAL }"/>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+			
+			<input type="submit" value="저장하기" onclick="return check();" />
+		</div>
+	</div>
 </form>		
 	<button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
   Loading state
