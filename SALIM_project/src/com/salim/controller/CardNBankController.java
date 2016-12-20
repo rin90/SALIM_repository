@@ -30,56 +30,49 @@ public class CardNBankController {
    //카드 추가
    @RequestMapping(value="login/cardAdd.do", method=RequestMethod.POST)
    public String add(String cardNaming, String bankList1, HttpSession session, ModelMap modelmap){
-	   String memberId = checkMemberId(session);
-	   CNBService.addCard(new Card(memberId, 0, bankList1, cardNaming));
+	   CNBService.addCard(new Card(checkMemberId(session), 0, bankList1, cardNaming));
 	   return "redirect:/cardNBank/login/cardNBankSelect.do";
    }
    
    //카드삭제
    @RequestMapping(value="login/cardRemove.do")
    public String delete(@RequestParam ArrayList<Integer> cardIdList, HttpSession session, ModelMap modelmap){
-	   String memberId = checkMemberId(session);
-	   modelmap.addAllAttributes(CNBService.deleteCard(cardIdList, memberId));
+	   modelmap.addAllAttributes(CNBService.deleteCard(cardIdList, checkMemberId(session)));
 	   return "body/writing/cardNBank.tiles";
    }
    
    //카드조회&통장조회
    @RequestMapping(value="login/cardNBankSelect.do")
    public String select(HttpSession session, ModelMap modelmap){
-	   String memberId = checkMemberId(session);
-	   modelmap.addAllAttributes(CNBService.findCardNBankbook(memberId));
+	   modelmap.addAllAttributes(CNBService.findCardNBankbook(checkMemberId(session)));
 	   return "body/writing/cardNBank.tiles";
    }
    
    //카드 수정   
    @RequestMapping(value="login/cardModify.do")
    public String update(@ModelAttribute CardForm cardForm, HttpSession session, ModelMap modelmap){
-	   String memberId = checkMemberId(session);
-	   modelmap.addAllAttributes(CNBService.modifyCard(cardForm, memberId));
+	   modelmap.addAllAttributes(CNBService.modifyCard(cardForm, checkMemberId(session)));
 	   return "body/writing/cardNBank.tiles";
    }
  
    //통장 추가
    @RequestMapping(value="login/bankAdd.do", method=RequestMethod.POST)
    public String insert(String bankNaming, String bankList2, HttpSession session, ModelMap modelmap){
-	   String memberId = checkMemberId(session);
-	   CNBService.addBankbook(new Bank(memberId, 0, bankList2, bankNaming));
+	   CNBService.addBankbook(new Bank(checkMemberId(session), 0, bankList2, bankNaming));
 	  return "redirect:/cardNBank/login/cardNBankSelect.do";
    }
    
    //통장 삭제
    @RequestMapping(value="login/bankRemove.do")
    public String delete2(@RequestParam ArrayList<Integer> bankIdList, HttpSession session, ModelMap modelmap){
-	   String memberId = checkMemberId(session);
-	   modelmap.addAllAttributes(CNBService.deleteBankbook(bankIdList, memberId));
+	   modelmap.addAllAttributes(CNBService.deleteBankbook(bankIdList, checkMemberId(session)));
 	   return "body/writing/cardNBank.tiles";
    }
    
    //통장 수정
    @RequestMapping(value="login/bankModify.do")
    public String update2(@ModelAttribute BankForm bankForm, HttpSession session, ModelMap modelmap){
-	   String memberId = checkMemberId(session);
-	   modelmap.addAllAttributes(CNBService.modifyBankbook(bankForm, memberId));
+	   modelmap.addAllAttributes(CNBService.modifyBankbook(bankForm, checkMemberId(session)));
 	   return "body/writing/cardNBank.tiles";
    }
 
