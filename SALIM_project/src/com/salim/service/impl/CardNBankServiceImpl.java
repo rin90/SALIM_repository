@@ -55,7 +55,7 @@ public class CardNBankServiceImpl implements CardNBankService{
 	//카드 삭제 후 조회
 	public Map deleteCard(List<Integer> cardIdList, String memberId) {
 		for(int i=0; i<cardIdList.size(); i++){  
-			cardDao.deleteCardByMemberId(cardIdList.get(i));
+			cardDao.deleteCardByCardId(cardIdList.get(i));
 	    }
 		return findCardNBankbook(memberId);
 	}
@@ -79,7 +79,7 @@ public class CardNBankServiceImpl implements CardNBankService{
 	//통장 삭제 후 조회
 	public Map deleteBankbook(List<Integer> bankIdList, String memberId) {
 		for(int i=0; i<bankIdList.size(); i++){
-			bankDao.deleteBankByMemberId(bankIdList.get(i));
+			bankDao.deleteBankByBankId(bankIdList.get(i));
 		}
 		return findCardNBankbook(memberId);
 	}

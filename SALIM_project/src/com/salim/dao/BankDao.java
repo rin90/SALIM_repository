@@ -27,7 +27,7 @@ public interface BankDao {
 	 * @param BankId
 	 * @return
 	 */
-	int deleteBankByMemberId(int bankId);
+	int deleteBankByBankId(int bankId);
 	
 	/**
 	 * 카드 선택(select)
@@ -35,4 +35,7 @@ public interface BankDao {
 	 * @return
 	 */
 	List selectBankByMemberId(String memberId);
+	
+	//memberId로 삭제
+	int deleteBankByMemberId(String memberId);
 }
