@@ -1,5 +1,6 @@
 package com.salim.service.impl;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -73,6 +74,11 @@ public class BudgetServiceImpl implements BudgetService{
 		result.put("monthExpense", monthExpense);
 		result.put("budgetNum", budgetNum);
 		result.put("monthIncome", monthIncome);
+		
+		result.put("monthIncomeFormat", new DecimalFormat("#,###").format(monthIncome));
+		//result.put("budgetFormat", new DecimalFormat("#,###").format((budget==null? 0:budget.getBudget())));
+		
+		//NumberUtil.getCurrencyNationNumber(123456.123, 3) 
 		
 		System.out.println("전달 수입 - "+monthIncome);
 		

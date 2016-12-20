@@ -6,12 +6,12 @@
 
 <script type="text/javascript" src="${initParam.rootPath }/lib/scripts/jquery.js"></script>
 
-<h1 align="center">
+<h2 align="center">
  	 <button onclick="updateYear($('#year').text()-1)">◀ </button> 
-	 <label id="year">${requestScope.year}</label>년도
+	 &nbsp;<label id="year">${requestScope.year}</label>년도&nbsp;
  	 <button onclick="updateYear(+$('#year').text()+1)"> ▶</button> 	<!-- jQuery의 경우 +연산자의 피연산자들 중 하나가 문자열이면 문자열 잇기 수행. -->
-</h1>
-<h1 align="center">수입 & 지출 내역 보고서</h1>
+</h2>
+<h2 align="center">수입 & 지출 내역 보고서</h2>
 
 <div id="chart" style="width=1000px"></div>
 
@@ -47,7 +47,7 @@ function barGraph(arr){
 function updateYear(year){
 //	alert($("#year").text());	// 년도 표시하는 곳의 text값
 	$.ajax({
-		url:"${initParam.rootPath}/report/updateYear.do",
+		url:"${initParam.rootPath}/report/login/updateYear.do",
 		type:"post",
 		data:{"year":year, "memberId":"tester2"},
 		dataType:"json",		// 오카지...? 항상 text로 받을 수밖에 없...ㅠㅜ
@@ -123,7 +123,7 @@ $(document).ready(function(){
 <br>
 <p><hr>
 <h3>1년간의 총 수입 * 지출 금액</h3>
-<table id="total" border="1" ></table>
+<table id="total" border="1"  class="table table-striped"></table>
 <p><hr>
 <h3>상세내역</h3>
-<table id="detail" border="1" ></table>
+<table id="detail" border="1"  class="table table-striped"></table>

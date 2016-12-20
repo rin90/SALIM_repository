@@ -39,4 +39,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 		}
 	}
 
+	@Override
+	public void deleteSchedule(int[] no) {
+		for(int i=0; i<no.length; i++){
+			dao.deleteSchedule(no[i]);
+		}
+	}
+
 }
