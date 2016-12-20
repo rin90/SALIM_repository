@@ -58,9 +58,6 @@ $(document).ready(function(){
 </head>
 <body>
 
-
-
-
 <table>
 <tr>
 	<td></td>
