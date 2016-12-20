@@ -18,11 +18,11 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter{//intercept
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws Exception {//handler메소드 호출전에 호출
-		HttpSession session = request.getSession();
+			HttpSession session = request.getSession();
 		
 			if(session.getAttribute("login_info")==null){
 				System.out.println(session.getAttribute("login_info"));
-				throw new ModelAndViewDefiningException(new ModelAndView("/login_form.jsp", "error_message", "로그인 먼저 하세요."));
+				throw new ModelAndViewDefiningException(new ModelAndView("/body/login_form.jsp", "error_message", "로그인 먼저 하세요."));
 			}
 			return true;
 		}
