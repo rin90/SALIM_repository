@@ -6,6 +6,11 @@ import com.salim.vo.FreeBoard;
 
 public interface FreeBoardDao {
 
+
+	
+
+
+
 	// 글 등록
 	void insertFree(FreeBoard freeBoard);
 
@@ -42,3 +47,4 @@ public interface FreeBoardDao {
 	int selectSeq();
 
 }
+
