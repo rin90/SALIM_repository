@@ -27,7 +27,7 @@ public interface CardDao {
     * @param CardId
     * @return
     */
-   int deleteCardByMemberId(int cardId);
+   int deleteCardByCardId(int cardId);
    
    /**
     * 카드 선택(select)
@@ -35,5 +35,8 @@ public interface CardDao {
     * @return
     */
    List selectCardByMemberId(String memberId);
+   
+   //카드 멤버id로 삭제
+   int deleteCardByMemberId(String memberId);
 
 }

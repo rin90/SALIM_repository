@@ -74,4 +74,3 @@ from collection c,
 	 and m.member_id = '1'
 	 and mc.invite ='false') mc
 where c.collection_id = mc.collection_id
-

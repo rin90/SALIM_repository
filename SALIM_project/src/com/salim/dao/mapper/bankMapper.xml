@@ -20,8 +20,13 @@
 	</update>
 	
 	<!-- delete -->
-	<delete id="deleteBankByMemberId" parameterType="_int">
+	<delete id="deleteBankByBankId" parameterType="_int">
 		delete from bank where bank_id = #{bankId}
+	</delete>
+	
+	<!-- delete memberId로 삭제-->
+	<delete id="deleteBankByMemberId" parameterType="String">
+		delete from bank where member_id = #{memberId}
 	</delete>
 	
 	<!-- select -->

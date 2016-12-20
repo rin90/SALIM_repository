@@ -3,11 +3,6 @@
 
 <mapper namespace = "budgetMapper">
 	
-	<!-- 
-		예산 insert
-		예산 update 
-		예산 select
-	 -->
 	 
 	 <!-- 예산 insert -->
 	 <insert id="insertBudget" parameterType="budget">
@@ -72,5 +67,16 @@
 	 	and budget_date=#{budgetDate}
 	 </select>
 	 
+	 <!-- 예산 delete -->
+	 <delete id="deleteBudget" parameterType="_int">
+	 	delte from budget 
+	 	where num=#{num}
+	 </delete>
+	 
+	 <!-- 예산 delete -->
+	 <delete id="deleteBudgetBymemberId" parameterType="String">
+	 	delte from budget 
+	 	where member_id=#{memberId}
+	 </delete>
 	 
 </mapper>

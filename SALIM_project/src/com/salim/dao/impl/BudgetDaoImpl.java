@@ -29,6 +29,11 @@ public class BudgetDaoImpl implements BudgetDao{
 	public Budget selectBudget(Map map) {
 		return session.selectOne("budgetMapper.selectBudget", map);
 	}
+
+	@Override
+	public int deleteBudgetBymemberId(String memberId) {
+		return session.delete("budgetMapper.deleteBudgetBymemberId", memberId);
+	}
 	
 	
 	
