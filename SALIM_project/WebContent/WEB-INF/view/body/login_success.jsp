@@ -59,7 +59,7 @@ $(document).ready(function(){
 <body>
 
 
-<h3><font color='coral'>${sessionScope.login_info.memberId}님 환영합니다!</font></h3>
+
 
 <table>
 <tr>
