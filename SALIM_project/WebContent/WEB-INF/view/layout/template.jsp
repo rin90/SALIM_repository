@@ -1,10 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <!-- tiles 설정을 호출할 tiles 제공 Tag 라이브러리 등록 -->
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
 <meta charset="UTF-8">
 <title>SALIM 가계부</title>
 <style type="text/css">

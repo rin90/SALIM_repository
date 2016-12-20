@@ -29,8 +29,9 @@ expense_date Date not null,  --지출일
 expense_explain Varchar2(60),  --사용내역
 cash_expense Number,  --현금지출액
 card_expense Number,  -- 카드지출액
-card_type Varchar2(20)  --카드종류
+card_type Varchar2(120)  --카드종류
 );
+alter table expense drop constraint exp_mem_fk ;
 
 select * from expense;
 
@@ -50,6 +51,7 @@ income_date date not null, --수입일
 explanation Varchar2(60) not null,  --수입내역, 20자까지 쓸수있게
 income_money Number not null --수입금액
 );
+alter table income drop constraint inc_mem_fk ;
 
 select * from income;
 

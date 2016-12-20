@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="/SALIM_project/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
+
+
 <script type="text/javascript" src="${initParam.rootPath }/scripts/jquery.js"></script>
 <script type="text/javascript">
 var err;
@@ -87,9 +87,33 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<div class="col-md-8 col-md-offset-2"><br><br>
+  <h1>비밀번호를 잊으셨나요?</h1><br><br><br>
+ 
+    <div class="form-group">
+    
+      <label for="email">계정 생성시 사용한 아이디를 입력해주세요.&nbsp;&nbsp;&nbsp;&nbsp;</label>
+      <input type="text" class="form-control" name="id" id="id" placeholder="salim">
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="pwd">계정 생성시 사용한 이메일을 입력해주세요.&nbsp;&nbsp;</label>      
+      <input type="password" class="form-control" name="email" id="email" placeholder="salim@google.com">
+    </div>
+    
+    <hr>
+    
+		<br>
+    <button type="submit" class="btn btn-lg btn-success pull-right">비밀번호 찾기</button>
+    
+    <br><br><br><br><br><br><br><br><br><br>
+    <hr><div class="footer_left pull-left">Salim</div><div class="pull-right"><small>&copy; 2016-12.23 Salim.KOSTA</small></div>
+ 
 
-<h2>비밀번호를 잊으셨나요?</h2>
-<%-- <form action="${initParam.rootPath}/member/findPassword.do" method="post"> --%>
+  
+</div>
+<%-- <h2>비밀번호를 잊으셨나요?</h2>
+<form action="${initParam.rootPath}/member/findPassword.do" method="post">
 <table>
 	<tr>
 		<td>
@@ -152,7 +176,7 @@ $(document).ready(function(){
 		</td>
 	</tr>
 
-</table>
+</table> --%>
 <!-- </form> -->
 
 </body>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,26 +9,8 @@
 	src="/SALIM_project/lib/scripts/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#good").css("color","red")
-	$("#good").on("click",function(){		
-					$.ajax({	
-				"url":"${initParam.rootPath}/free/login/good.do",
-				"type":"post",
-				"data":"whether="+$("#good").val()+"&no="+${requestScope.freeBoard.no},
-				"beforeSend":function(){
-					if(!$("#good").val()){
-						
-						$("#good").text("♡ 0");
-						$("#good").prop("value","false");
-					
-					}else {	
-			
-						$("#good").text("♥ 1");
-						$("#good").prop("value","");
-					}		
-				}
-			});//ajax
-	});//event
+
+	
 
 	
 	
@@ -133,10 +115,6 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 <br>${requestScope.freeBoard.content }
 <p />
 댓글 &nbsp;${requestScope.commentTotal }&nbsp;&nbsp;조회&nbsp;${requestScope.freeBoard.click }&nbsp;&nbsp;
-좋아요 &nbsp; ${requestScope.freeBoard.good }
-
-
-	<button hidden="" id="good" type="button" value="false">♡&nbsp;0</button>
 	
 	<%--영구적으로하면 hidden제거 --%>
 		<hr> <br>

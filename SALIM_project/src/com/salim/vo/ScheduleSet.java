@@ -18,8 +18,6 @@ public class ScheduleSet implements Serializable{	// Schudule부분에서 사용
 	public List<Schedule> settingSchedule(){
 		List<Schedule> list = new ArrayList<Schedule>();
 		for(int i=0; i<no.length; i++){
-			System.out.println("셋팅 전 : " + Date.valueOf(end[i]));
-//			System.out.println("셋팅 시도 : " + Date.valueOf(end[i]));
 			list.add(new Schedule(no[i], title[i], detail[i], Date.valueOf(start), Date.valueOf(end[i]), memberId));
 		}
 		return list;

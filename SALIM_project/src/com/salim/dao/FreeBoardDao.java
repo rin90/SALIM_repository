@@ -15,9 +15,6 @@ public interface FreeBoardDao {
 	// 글 조회수 증가
 	void updateClick(int no);
 
-	// 글 좋아요 증가
-	void updateGood(int no, int num);
-
 	// 글 삭제
 	void deleteFree(int no);
 

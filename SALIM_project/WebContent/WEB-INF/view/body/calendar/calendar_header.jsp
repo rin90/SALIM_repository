@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-
+<%-- <%@ include file="./calendar.jsp" %> --%>
 
 <!-- 
 jQuery의   Fullcalendar
@@ -36,7 +36,7 @@ jQuery의   Fullcalendar
 <jsp:include page="./schedule.jsp"></jsp:include> 
 
 <script type='text/javascript'>
-
+	
 	$(document).ready(function() {
 
 		var today = new Date();
@@ -70,34 +70,70 @@ jQuery의   Fullcalendar
 			eventLimit: true	// Event가 많이 등록되면 +n 형식으로 표시 
 		}); 
 		
+		
+		
 		// 처음 달 기준으로 받아올 때 사용.
-		$.ajax({
-			"url":'${initParam.rootPath}/calendar/reload.do',
+		 $.ajax({
+			"url":'${initParam.rootPath}/calendar/login/reload.do',
 			"dataType":"json",
 			"data":{"memberId":"tester2", "date":current},
 			"success":function(list){
-				$("#calendar").fullCalendar("addEventSource", list);
+				
+				$("#calendar").fullCalendar("removeEvents");
+				displayCalendar(list);
+				//$("#calendar").fullCalendar("addEventSource", list);
 			}
-		});
+		}); 
 		
-		
- 		$('.fc-center').on("click", '.fc-prev-button, .fc-next-button', function(){			// 동적으로 변했을 때도 적용할 수 있게!
-	 			$.ajax({
-					url:"${initParam.rootPath}/calendar/reload.do",
-					type:"post",
-					data:{"memberId":"tester2", "date":$('#calendar').fullCalendar('getDate').format('YYYY-MM')},
-					dataType:"json",
-					success:function(list){
-						//alert(list);
-						$('#calendar').fullCalendar('removeEvents');
-						$('#calendar').fullCalendar('addEventSource', list);
-					},
-					error:function(request, status, error){
-						alert("앞/뒤 달 관련 일정 받아오는 부분. \ncode : " + request.status + "\nerror : " + error);
-					}
-				});
+		$('.fc-center').on("click", '.fc-prev-button, .fc-next-button', function(){			// 동적으로 변했을 때도 적용할 수 있게!
+ 			 $.ajax({
+				url:"${initParam.rootPath}/calendar/login/reload.do",
+				type:"post",
+				data:{"memberId":"tester2", "date":$('#calendar').fullCalendar('getDate').format('YYYY-MM')},
+				dataType:"json",
+				success:function(list){
+					//alert(list);
+					$('#calendar').fullCalendar('removeEvents');
+					//$('#calendar').fullCalendar('addEventSource', list);
+					
+					displayCalendar(list);
+				},
+				error:function(request, status, error){
+					alert("앞/뒤 달 관련 일정 받아오는 부분. \ncode : " + request.status + "\nerror : " + error);
+				}
+			}); 
 		});
 	});
+	
+	function displayCalendar(list){
+		  
+		$('#calendar').fullCalendar('addEventSource', function(start, end, timezone, callback){
+			 var events=[];
+			 $.each(list, function(index, item){
+				 if(item.start == item.end){
+					 events.push({
+						 id:item.no,
+						 title:item.title,
+						 start:item.start,
+						 end:item.end,
+						 allDay : true
+					 }); 
+				 }else{
+					 var endTime = $.fullCalendar.moment(item.end).add(1, 'days');
+					//alert(endTime.format('YYYY-MM-DD'));
+					 events.push({
+						 id:item.no,
+						 title:item.title,
+						 start:item.start,
+						 end:endTime,
+						 allDay : true
+					 });
+				 }
+			 });
+			callback(events);
+		 });
+	
+	}
 </script>
 
 

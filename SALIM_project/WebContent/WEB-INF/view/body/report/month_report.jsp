@@ -44,7 +44,7 @@
 		//alert($('#monthpicker').monthpicker('getDate').getFullYear() + '-' + (month<10? '0'+month : month));
 		  
 		$.ajax({
-			url:"${initParam.rootPath}/report/updateMonth.do",
+			url:"${initParam.rootPath}/report/login/updateMonth.do",
 			type:"post",
 			data:{"month":target, "memberId":"tester2"},
 			dataType:"json",
