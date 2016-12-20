@@ -26,15 +26,15 @@
 <a href="${initParam.rootPath }/tip/login/list.do?page=1">Tip게시판</a><br>
 
 <a href="${initParam.rootPath }/free/login/list.do?page=1">자유게시판</a><br>
-<<<<<<< HEAD
+
 
 
 
 <a href="${initParam.rootPath }/collectionSetting.do">그룹 환경설정</a><br>
-=======
+
 <a href="${initParam.rootPath }/">Tip게시판</a><br>
 <a href="${initParam.rootPath }/collectionSetting.do">그룹 환경설정</a><br>
->>>>>>> branch 'master' of https://github.com/rin90/SALIM_repository.git
+
 
 
 

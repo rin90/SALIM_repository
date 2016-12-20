@@ -16,4 +16,5 @@
 		</select> <input type="hidden" name="page" value="1"> <input
 			type="text" name="search" value="${requestScope.search }"><input
 			type="submit" value="검색">
+			
 	</form>

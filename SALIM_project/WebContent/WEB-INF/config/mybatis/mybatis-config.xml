@@ -37,15 +37,15 @@
 		<mapper resource="com/salim/dao/mapper/codeMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/categoryMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/freeCommentMapper.xml"/> 
-<<<<<<< HEAD
+
 		<mapper resource="com/salim/dao/mapper/tipCommentMapper.xml"/>
-=======
+
 		
 		
 		
 		<mapper resource="com/salim/dao/mapper/cardMapper.xml"/>
 		<mapper resource="com/salim/dao/mapper/bankMapper.xml"/>
->>>>>>> branch 'master' of https://github.com/rin90/SALIM_repository.git
+
 	</mappers>
 	
 	

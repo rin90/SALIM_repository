@@ -11,8 +11,10 @@
 </script>
 
 
-
-	<table border="1">
+<div class="container">
+  <h2>Tip 게시판</h2>
+  <p>안녕하세요 Tip게시판입니다</p>            
+  <table class="table table-bordered">
 		<thead>
 			<tr>
 			    <td>분류</td>
@@ -24,6 +26,11 @@
 				<td>좋아요</td>
 			</tr>
 		</thead>
+		
+		
+ 
+
+		
 
 		<tbody id="tbody">
 			<!--  목록 뿌리기 -->
@@ -35,13 +42,13 @@
 					<a href="${initParam.rootPath }/tip/login/seleteDetail.do?no=${tipBoard.no}&page=${requestScope.pageBean.page}">${tipBoard.title }</a></td>
 					<td>${tipBoard.memberId }</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${tipBoard.registerTime }"/></td>
-					<td>${tipBoard.click }></td> 
+					<td>${tipBoard.click }</td> 
 					<td>${tipBoard.good }</td>
 				</tr>
 			</c:forEach>
 			
 		</tbody>	
-	</table>
+	
 			
 			
 			
@@ -84,7 +91,7 @@
 			<p/>
 			
 			<form action="${initParam.rootPath }/tip/login/keyword.do" method="post">
-			<select name="category">				
+			<select name="category" class="btn btn-primary dropdown-toggle">				
 				<c:forEach items="${requestScope.codes }" var="code">
 					<option>${code.code }</option> 					
 				</c:forEach>
@@ -93,4 +100,5 @@
 			<input type="text" name="search"> <input type="submit" value="검색"class= "btn btn-primary btn-sm Small">
 			
 			</form>
-
+  </table>
+</div>

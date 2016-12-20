@@ -2,123 +2,120 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 
-<script type="text/javascript" src="${initParam.rootPath }/lib/scripts/jquery.js"></script>
+<script type="text/javascript"
+	src="${initParam.rootPath }/lib/scripts/jquery.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-	
-/* 	$("#good").css("color","red")
-	
-	$("#good").on("click",function(){		
-					$.ajax({	
-				"url":"${initParam.rootPath}/free/login/good.do",
-				"type":"post",
-				"data":"whether="+$("#good").val()+"&no="+${requestScope.freeBoard.no},
-				"beforeSend":function(){
-					if(!$("#good").val()){
-						
-						$("#good").text("♡ 0");
-						$("#good").prop("value","false");
-					
-					}else {	
-			
-						$("#good").text("♥ 1");
-						$("#good").prop("value","");
-					}		
-				} */
-	//		});//ajax
-//	});//event
+	$(document).ready(
+			function() {
 
-	
-	
-	//document에서 새로고침 방지 그러나 F12화면 새로고침 방지가 안됨  -> 그래서 쿠키로 합니다 ... 새로고침 방지하는 이유는 값이 그대로 보존되서 조회수가 올라감 .좋아요도redirect해서
-	//옮기면서 해도 결국 같을거야 왜냐하면 어차피 똑같이 값을 주기 때문에 insert,update,delete같은 경우는 insert,update,delete로 다시 안돌아 가자나
-	/* $(document).keydown(function (e) {
-	     
-        if (e.which === 116 || e.which === 123) { //116->f5키를 뜻함 123 -> f12키를 뜻함 :::막음
-        	if (typeof event == "object") {
-                event.keyCode = 0;
-            }
-            return false;
-        } else if (e.which === 82 && e.ctrlKey) {
-            return false;
-        }
+				/* 	$("#good").css("color","red")
+				
+				 $("#good").on("click",function(){		
+				 $.ajax({	
+				 "url":"${initParam.rootPath}/free/login/good.do",
+				 "type":"post",
+				 "data":"whether="+$("#good").val()+"&no="+${requestScope.freeBoard.no},
+				 "beforeSend":function(){
+				 if(!$("#good").val()){
+				
+				 $("#good").text("♡ 0");
+				 $("#good").prop("value","false");
+				
+				 }else {	
+				
+				 $("#good").text("♥ 1");
+				 $("#good").prop("value","");
+				 }		
+				 } */
+				//		});//ajax
+				//	});//event
 
-	});   근데 이런 보안은 오용이랍니다. 그래서 cooki를 이용합시다.*/ 
-	
-	$("#a").css("background","gray")
-	
-	$(".update").on("click",function(){// 댓글 수정 버튼 눌렀을시  누른 댓글만 텍스트에어리어 생김
-		
-		$("span.secondComment").show().next().next().next().hide()
-		
-		// 순서:  기존 댓글 보이게 하기 -> 그리고 span.commentInfo의 형제를 감추기(수정텍스트에어리어)
-		$("span.commentInfo").show().next().hide(); //원상복귀
-		
-		//이벤트소스(수정버튼)의 부모를 감추기(댓글내용) ->그리고 spon의 형제를 보이게하기(form)
-		$(this).parent().hide().next().show();  // 보이게하기
-		
-	 });
-	
-	$(".second").on("click",function(){ //답글 버튼 클릭했을 때
-		
-		$("span.commentInfo").show().next().hide();
-		
-		$("span.secondComment").show().next().next().next().hide()
-		
-		$(this).parent().hide().next().next().next().show();
-		
-		
-		
-	});
-	
-	
-	$("#register").on("submit",function(){ //댓글 폼 글 체크
-		alert("확인")
-		if($("#comment0").val().length == 0){
-			alert("내용을입력해주세요");
-			return false;
-		}	 
-	
-	});
-	
-	$(".secondRegister").on("submit",function(){ //답글 폼 글 체크
-		
-		var t=$(this).find("textarea").val()//form에서 자식인 textarea를 찾는다.
-		//event소스에서 찾는게 좋다.
-		
-		/* if($(".secondText").val().length == 0){ //이것은 secondText라는 이름을 가진 클래스를 다 가지고와서 배열로 갖고있는다.
-													//그래서 첫번째 것만 값을 가져옴 다른 for문을 돌려서 값체크 해야됨
-			alert("내용을 입력해주세요");
-			return false;
-		} */
-		
-		if(t.length == 0){
-			alert("내용을 입력해주세요");
-			return false;
-		}
-		
-	});
+				//document에서 새로고침 방지 그러나 F12화면 새로고침 방지가 안됨  -> 그래서 쿠키로 합니다 ... 새로고침 방지하는 이유는 값이 그대로 보존되서 조회수가 올라감 .좋아요도redirect해서
+				//옮기면서 해도 결국 같을거야 왜냐하면 어차피 똑같이 값을 주기 때문에 insert,update,delete같은 경우는 insert,update,delete로 다시 안돌아 가자나
+				/* $(document).keydown(function (e) {
+				     
+				    if (e.which === 116 || e.which === 123) { //116->f5키를 뜻함 123 -> f12키를 뜻함 :::막음
+				    	if (typeof event == "object") {
+				            event.keyCode = 0;
+				        }
+				        return false;
+				    } else if (e.which === 82 && e.ctrlKey) {
+				        return false;
+				    }
 
-	
-	$(".scodCancel").on("click",function(){ //답글 취소 버튼 처리
-		//먼가 변화되는 값이 없으니 서버로 갈 이유가 없다. 기냥 다시 답글 Form을 안보이게 해주고 답글 버튼을 보여주게 처리
-		//ajax처리를 할 때는 서버를 가야하는 이유가 있고 원페이지를 처리할 때이다.
-		$(this).parent().hide().prev().prev().prev().show();			
-	});
-	
-	$(".updateCancel").on("click",function(){//수정 취소 버튼
-		$(this).parent().find("textarea").val($(this).parent().find(".scope").val())
-		$(this).parent().hide().prev().show();
-		
-	});
+				});   근데 이런 보안은 오용이랍니다. 그래서 cooki를 이용합시다.*/
 
-	
-	
- });
+				$("#a").css("background", "gray")
 
+				$(".update").on("click", function() {// 댓글 수정 버튼 눌렀을시  누른 댓글만 텍스트에어리어 생김
+
+					$("span.secondComment").show().next().next().next().hide()
+
+					// 순서:  기존 댓글 보이게 하기 -> 그리고 span.commentInfo의 형제를 감추기(수정텍스트에어리어)
+					$("span.commentInfo").show().next().hide(); //원상복귀
+
+					//이벤트소스(수정버튼)의 부모를 감추기(댓글내용) ->그리고 spon의 형제를 보이게하기(form)
+					$(this).parent().hide().next().show(); // 보이게하기
+
+				});
+
+				$(".second").on("click", function() { //답글 버튼 클릭했을 때
+
+					$("span.commentInfo").show().next().hide();
+
+					$("span.secondComment").show().next().next().next().hide()
+
+					$(this).parent().hide().next().next().next().show();
+
+				});
+
+				$("#register").on("submit", function() { //댓글 폼 글 체크
+					alert("확인")
+					if ($("#comment0").val().length == 0) {
+						alert("내용을입력해주세요");
+						return false;
+					}
+
+				});
+
+				$(".secondRegister").on("submit", function() { //답글 폼 글 체크
+
+					var t = $(this).find("textarea").val()//form에서 자식인 textarea를 찾는다.
+					//event소스에서 찾는게 좋다.
+
+					/* if($(".secondText").val().length == 0){ //이것은 secondText라는 이름을 가진 클래스를 다 가지고와서 배열로 갖고있는다.
+																//그래서 첫번째 것만 값을 가져옴 다른 for문을 돌려서 값체크 해야됨
+						alert("내용을 입력해주세요");
+						return false;
+					} */
+
+					if (t.length == 0) {
+						alert("내용을 입력해주세요");
+						return false;
+					}
+
+				});
+
+				$(".scodCancel").on("click", function() { //답글 취소 버튼 처리
+					//먼가 변화되는 값이 없으니 서버로 갈 이유가 없다. 기냥 다시 답글 Form을 안보이게 해주고 답글 버튼을 보여주게 처리
+					//ajax처리를 할 때는 서버를 가야하는 이유가 있고 원페이지를 처리할 때이다.
+					$(this).parent().hide().prev().prev().prev().show();
+				});
+
+				$(".updateCancel").on(
+						"click",
+						function() {//수정 취소 버튼
+							$(this).parent().find("textarea").val(
+									$(this).parent().find(".scope").val())
+							$(this).parent().hide().prev().show();
+
+						});
+
+			});
 </script>
 
 
@@ -135,6 +132,7 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 <p />
 댓글 &nbsp;${requestScope.commentTotal }&nbsp;&nbsp;조회&nbsp;${requestScope.tipBoard.click }&nbsp;&nbsp;
 좋아요 &nbsp; ${requestScope.tipBoard.good }
+
 
 
 	<button hidden="" id="good" type="button" value="false">♡&nbsp;0</button>
@@ -224,14 +222,14 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 		<!-- 댓글 -->
 		<form id="register" action="${initParam.rootPath }/tip/comment/login/insert.do" method="post">
 		
-			★&nbsp;&nbsp;<textarea id="comment0" name="commentContent" rows="2" cols="10"></textarea>
+			★&nbsp;&nbsp;<textarea id="comment0" name="commentContent" rows="2" cols="140"></textarea>
 			<input type="hidden" name="commentMemberId" value="${sessionScope.login_info.memberId }">
 			<input type="hidden" name="no" value="${requestScope.tipBoard.no }">
 			<input type="hidden" name="groupLevel" value="0">
 			<input type="hidden" name="page" value="${requestScope.page }">
 			<input type="hidden" name="category" value="${requestScope.category }">
 			<input type="hidden" name="search" value="${requestScope.search }">
-			<input type="submit" value="등록"class="btn btn-info Info">
+			<input type="submit" value="등록"class="btn btn-primary btn-sm Small">
 		</form>
 		
 		
