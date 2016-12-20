@@ -14,7 +14,7 @@ member_id varchar2(50) constraint sch_mem_fk references member not null
 );
 alter table schedule drop constraint sch_mem_fk ;
 select * from schedule;
-delete from schedule;
+delete from schedule where member_id='tester';
 drop table schedule;
 
 -- Test Data
@@ -74,4 +74,5 @@ delete from goals where num=42 or num=43;
 select * from goals where member_id='tester' and y_m='201612';
 select * from goals;
 
-
+select * from goals where member_id='tester2';
+delete from goals where member_id='tester2';

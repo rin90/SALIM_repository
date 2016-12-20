@@ -29,6 +29,10 @@
 		delete goals where num=#{value}
 	</delete>
 	
+	<delete id="deleteGoalBasedMemberId" parameterType="string">
+		delete goals where member_id=#{value}
+	</delete>
+	
 	<select id="selectGoal" parameterType="map" resultMap="goal-resultMap">
 		<include refid="goal-select"/>
 		where member_id=#{memberId} and y_m=#{month}
