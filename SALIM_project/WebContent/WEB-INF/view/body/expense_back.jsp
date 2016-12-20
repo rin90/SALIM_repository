@@ -117,8 +117,11 @@
 		
 	});
 	
-	var grantId = '<%=((Collect) session.getAttribute("group_info")) == null ? "" : ((Collect) session.getAttribute("group_info")).getGrantId()%>';
-	var memberId = '<%=((Member) session.getAttribute("login_info")).getMemberId()%>';
+	var grantId = '<%=((Collect) session.getAttribute("group_info")) == null
+					? ""
+					: ((Collect) session.getAttribute("group_info")).getGrantId()%>';
+	var memberId = '<%=((Member) session.getAttribute("login_info")).getMemberId()%>
+	';
 
 	/* 체크된 것만 컨트롤러로 넘기기 */
 	function checkevent() {
@@ -177,7 +180,9 @@
 					<div class="col-md-5">
 						<!-- 날짜 선택창 -->
 						<p>
-							<input type="text" id="datepicker" name="expenseDate" value="${requestScope.expenseDate }" placeholder="${requestScope.expenseDate }">
+							<input type="text" id="datepicker" name="expenseDate"
+								value="${requestScope.expenseDate }"
+								placeholder="${requestScope.expenseDate }">
 						</p>
 					</div>
 					<div class="col-md-7">
@@ -191,15 +196,18 @@
 							<tbody>
 								<tr>
 									<td>수입</td>
-									<td><fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.incomeSum }" /></td>
+									<td><fmt:formatNumber type="currency" currencySymbol="￦"
+											value="${requestScope.incomeSum }" /></td>
 								</tr>
 								<tr>
 									<td>지출</td>
-									<td><fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.expenseSum }" /></td>
+									<td><fmt:formatNumber type="currency" currencySymbol="￦"
+											value="${requestScope.expenseSum }" /></td>
 								</tr>
 								<tr>
 									<td>누계</td>
-									<td><fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.incomeSum - requestScope.expenseSum }" />
+									<td><fmt:formatNumber type="currency" currencySymbol="￦"
+											value="${requestScope.incomeSum - requestScope.expenseSum }" />
 									</td>
 								</tr>
 							</tbody>
@@ -207,12 +215,12 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12 " >
+					<div class="col-md-12 " style="margin-left: 30px;">
 						<!-- 지출입력란 -->
-						<table class="table table-bordered">
+						<table class="table table-bordered" style="width: 100%">
 							<thead>
 								<tr>
-									<td colspan="6" align="left"><a href="${initParam.rootPath }/household/login/expenseSelect.do">
+									<td colspan="2" align="left"><a href="${initParam.rootPath }/household/login/expenseSelect.do">
 										<input type="button" value="지출" />
 									</a> 
 									<a href="${initParam.rootPath }/household/login/incomeSelect.do">
@@ -224,9 +232,9 @@
 								<tr>
 									<td><input type="checkbox" id="checkAll" />
 									<!--체크박스 체크하면 전체 선택  --></td>
-									<td  width="18">지출내역</td>
-									<td width="18">현금 지출금액</td>
-									<td width="18">카드 지출금액</td>
+									<td>지출내역</td>
+									<td>현금 지출금액</td>
+									<td>카드 지출금액</td>
 									<td>통장/카드선택</td>
 									<!-- select로 뿌려주기 -->
 									<td>지출분류</td>
@@ -234,17 +242,26 @@
 							</tbody>
 							<tfoot>
 								<c:if test="${requestScope.expenseList != null }">
-									<c:forEach items="${requestScope.expenseList }" var="expense" varStatus="no">
+									<c:forEach items="${requestScope.expenseList }" var="expense"
+										varStatus="no">
 										<tr>
-											<td><input type="checkbox" name="expenseId" value="${expense.expenseId }" /> <!-- 체크박스 하나하나 --> 
-												<input type="hidden" name="expenseId" value="${expense.expenseId }" />
+											<td><input type="checkbox" name="expenseId"
+												value="${expense.expenseId }" /> <!-- 체크박스 하나하나 --> <input
+												type="hidden" name="expenseId" value="${expense.expenseId }" />
 											</td>
-											<td ><input size="18" type="text" class="explane" name="expenseExplain" value="${expense.expenseExplain}" readonly="readonly" placeholder="${expense.expenseExplain}"></td>
-											<td ><input size="18" type="text" class="element" name="cashExpense" value="${expense.cashExpense}" readonly="readonly" placeholder="${expense.cashExpense}"></td>
-											<td ><input size="18" type="text" class="element" name="cardExpense" value="${expense.cardExpense}" placeholder="${expense.cardExpense}"></td>
+											<td><input type="text" class="explane"
+												name="expenseExplain" value="${expense.expenseExplain}"
+												readonly="readonly" placeholder="${expense.expenseExplain}">
+											</td>
+											<td><input type="text" class="element" name="cashExpense"
+												value="${expense.cashExpense}" readonly="readonly"
+												placeholder="${expense.cashExpense}"></td>
+											<td><input type="text" class="element" name="cardExpense"
+												value="${expense.cardExpense}"
+												placeholder="${expense.cardExpense}"></td>
 											<td>
-												<!-- 통장/카드 선택하는거 나오게 하기 --> 
-												<select name="cardType" disabled="disabled">
+												<!-- 통장/카드 선택하는거 나오게 하기 --> <select name="cardType"
+												disabled="disabled">
 													<option value="미등록">미등록</option>
 													<c:forEach items="${requestScope.cardTypeList }" var="cnb">
 														<c:choose>
@@ -258,10 +275,12 @@
 													</c:forEach>
 											</select>
 											</td>
-											<td><select class="bigCategory" id="selectBig" disabled="disabled">
+											<td><select class="bigCategory" id="selectBig"
+												disabled="disabled">
 													<c:forEach items="${requestScope.bigCategoryList}" var="big">
 														<c:choose>
-															<c:when test="${big.bigCode == requestScope.selectSmallCategoryList[no.index].bigCategory.bigCode}">
+															<c:when
+																test="${big.bigCode == requestScope.selectSmallCategoryList[no.index].bigCategory.bigCode}">
 																<option selected="selected" value="${big.bigCode}">${big.bigContent}</option>
 															</c:when>
 															<c:otherwise>
@@ -269,11 +288,11 @@
 															</c:otherwise>
 														</c:choose>
 													</c:forEach>
-												</select> 
-												<select name="codeId" class="smallCategory" disabled="disabled">
-													<option selected="selected" value="${requestScope.selectSmallCategoryList[no.index].smallCode}">${requestScope.selectSmallCategoryList[no.index].smallContent}</option>
-												</select>
-											</td>
+											</select> <select name="codeId" class="smallCategory"
+												disabled="disabled">
+													<option selected="selected"
+														value="${requestScope.selectSmallCategoryList[no.index].smallCode}">${requestScope.selectSmallCategoryList[no.index].smallContent}</option>
+											</select></td>
 										</tr>
 									</c:forEach>
 								</c:if>
@@ -286,32 +305,32 @@
 								<c:forEach begin="1" end="5">
 									<tr>
 										<td><input type="checkbox" name="expenseId" value="0" /> <!-- 체크박스 하나하나 -->
-											<input type="hidden" name="expenseId" value="0" />
-										</td>
-										<td><input size="18" type="text" name="expenseExplain" class="explane" readonly="readonly" /></td>
-										<td ><input size="18" type="text" name="cashExpense" class="element" readonly="readonly" /></td>
-										<td><input size="18" type="text" name="cardExpense" class="element" readonly="readonly" /></td>
+											<input type="hidden" name="expenseId" value="0" /></td>
+										<td><input type="text" name="expenseExplain"
+											class="explane" readonly="readonly" /></td>
+										<td><input type="text" name="cashExpense" class="element"
+											readonly="readonly" /></td>
+										<td><input type="text" name="cardExpense" class="element"
+											readonly="readonly" /></td>
 										<td>
-											<!-- 통장/카드 선택 --> 
-											<select name="cardType" disabled="disabled">
+											<!-- 통장/카드 선택 --> <select name="cardType" disabled="disabled">
 												<option value="미등록">미등록</option>
 												<c:forEach items="${requestScope.cardTypeList }" var="cnb">
 													<option value="${cnb}">${cnb}</option>
 												</c:forEach>
-											</select>
+										</select>
 										</td>
 	
 										<!-- 여기서 부터 코드 선택 테이블 -->
-										<td>
-											<select class="bigCategory" disabled="disabled">
-												<c:forEach items="${requestScope.bigCategoryList}" var="bigCategory">
+										<td><select class="bigCategory" disabled="disabled">
+												<c:forEach items="${requestScope.bigCategoryList}"
+													var="bigCategory">
 													<option value="${bigCategory.bigCode }">${bigCategory.bigContent}</option>
 												</c:forEach>
-											</select> 
-											<select name="codeId" class="smallCategory" disabled="disabled">
+										</select> <select name="codeId" class="smallCategory"
+											disabled="disabled">
 												<option value="18">미분류</option>
-											</select>
-										</td>
+										</select></td>
 									</tr>
 								</c:forEach>
 	
@@ -322,14 +341,17 @@
 			</div>
 			<div class="col-md-2" style="margin-top: 100px;">
 				<!-- 메모장 -->
-				<h4>&lt;메 모 란&gt;</h4> 
-				<textarea rows="20" cols="45" name="notes" id="notes">${requestScope.notes.content }</textarea>
+				&lt;메 모 란&gt; <textarea rows="20" cols="50" name="notes" id="notes">${requestScope.notes.content }</textarea>
 				<input type="hidden" name="notesNum" value="${empty requestScope.notes.no? 0:requestScope.notes.no }">
 			</div>
 		</div>
-		<div class="col-md-2" align="center">
-			<!-- 저장버튼 -->
-			<input type="submit" value="저장" id="submitExpense" onclick="return checkFormat();" /> <input type="button" value="선택삭제" id="deleteExpense" onclick="checkevent();" />
+		<div class="row">
+			<div class="col-md-2" align="center">
+				<!-- 저장버튼 -->
+				<input type="submit" value="저장" id="submitExpense"
+					onclick="return checkFormat();" /> <input type="button"
+					value="선택삭제" id="deleteExpense" onclick="checkevent();" />
+			</div>
 		</div>
 
 	</div>

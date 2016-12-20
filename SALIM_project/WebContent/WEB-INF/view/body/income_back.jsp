@@ -177,8 +177,8 @@
 	
 <div class="container text-center">
 	<div class="row">
-    	<div class="col-md-10">
-        	<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+    	<div class="col-md-8">
+        	<div class="row" style="margin-top: 30px; margin-bottom: 100px; "margin-left: 30px"">
             	<div class="col-md-5" >
                 	<!-- 달력 - 날짜 선택 -->
 					<!-- <div class="row" style="margin-top: 30px; margin-bottom: 180px; margin-left:50px;"> -->
@@ -188,12 +188,9 @@
                 </div>
                 <div class="col-md-7" >
                 	<!-- 오늘 수입, 지출 불러오기 -->
-					<table class="table table-bordered">
+					<table border="1" class="table">
 						<thead>
 							<tr>
-								<div style="margin-bottom: 30px">
-									<h1 align="left"> &lt; 수 입  작 성 &gt; </h1>
-								</div>
 								<td colspan="2">이번달 오늘까지 누계</td>
 							</tr>
 						</thead>
@@ -220,13 +217,13 @@
 					</table>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 " style="margin-left: 30px;">
 				<!-- 수입입력란 -->
-				<table class="table table-bordered">
+				<table border="1">
 				
 					<thead>
 						<tr>
-							<td colspan="4" align="left">
+							<td>
 								<a href="${initParam.rootPath }/household/login/expenseSelect.do"><input type="button" value="지출"/></a>
 								<a href="${initParam.rootPath }/household/login/incomeSelect.do"><input type="button" value="수입"/></a>
 							</td>
@@ -235,7 +232,7 @@
 					<tbody>
 						<tr>
 							<td>
-								<input type="checkbox" id="checkAll"><!--체크박스 체크하면 전체 선택  -->
+								<input type="checkbox" id="checkAll"/>선택삭제<!--체크박스 체크하면 전체 선택  -->
 							</td>
 							<td>수입내역</td>
 							<td>수입금액</td>
@@ -310,7 +307,7 @@
 				</table>
             </div>
         </div>
-        <div class="col-md-2" style="margin-top: 100px;">
+        <div class="col-md-4" style="margin-top: 100px;">
         	<!-- 메모장 -->
         	<h4><메 모 란></h4>
 			<textarea rows="20" cols="50" name="notes" id="notes">${requestScope.notes.content }</textarea>
