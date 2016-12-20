@@ -119,6 +119,19 @@ public class MemberController {
 		
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//로그인 -끝
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String login(@Valid LoginCheck login, BindingResult errors, HttpSession session, ModelMap map)
