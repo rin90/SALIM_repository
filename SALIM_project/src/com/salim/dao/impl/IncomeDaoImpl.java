@@ -67,5 +67,12 @@ public class IncomeDaoImpl implements IncomeDao{
 		return session.selectOne("incomeMapper.selectForOneMonthIncome", map);
 	}
 
+	//memberId로 수입 삭제
+	@Override
+	public int deleteIncomeByMemberId(String memberId) {
+		return session.delete("incomeMapper.deleteIncomeByMemberId", memberId);
+	}
+	
+	
 	
 }

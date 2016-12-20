@@ -46,4 +46,7 @@ public interface IncomeDao {
 	
 	/*==================<< 한달 동안 수입 누계 >>====================*/
 	int selectForOneMonthIncome(Map map);
+	
+	//memberId로 수입 삭제
+	int deleteIncomeByMemberId(String memberId);
 }

@@ -41,6 +41,12 @@
 		and member_id=#{memberId}
 	</delete>
 	
+	<!-- 지출 delete memberId로 삭제-->
+	<delete id="deleteExpenseByMemberId" parameterType="String">
+		delete from expense
+		where member_id=#{memberId}
+	</delete>
+	
 	<!-- 지출 select -->
 	<resultMap type="expense" id="expense-resultMap">
 		<id column="expense_id" property="expenseId"/>
