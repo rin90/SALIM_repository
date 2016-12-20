@@ -32,10 +32,17 @@ public class GoalDaoImpl implements GoalDao{
 	public int deleteGoal(int num) {
 		return session.delete("goalsMapper.deleteGoal", num);
 	}
+	
+	@Override
+	public int deleteScheuldeBasedMemberId(String memberId) {
+		return session.delete("goalsMapper.deleteGoalBasedMemberId", memberId);
+	}
 
 	@Override
 	public Goal selectGoal(Map map) {	// month, memberId 
 		return session.selectOne("goalsMapper.selectGoal", map);
 	}
+
 	 
+	
 }

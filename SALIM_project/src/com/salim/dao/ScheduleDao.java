@@ -9,6 +9,7 @@ public interface ScheduleDao {
 	int insertSchedule(Schedule schedule);
 	int updateSchedule(Schedule schedule);
 	int deleteSchedule(int no);
+	int deleteScheuldeBasedMemberId(String memberId);
 	
 	List<Schedule> selectScheduleByMonth(Map map);
 	List<Schedule> selectScheduleByDay(Map map);

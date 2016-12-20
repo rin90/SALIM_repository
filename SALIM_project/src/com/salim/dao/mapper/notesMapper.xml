@@ -13,8 +13,6 @@
 		<result property="content" column="content"/>
 		<result property="memberId" column="member_id"/>
 	</resultMap>
-	
-	
 	 
 	<!-- 메모 insert -->
 	 <insert id="insertNotes" parameterType="notes">
@@ -48,5 +46,9 @@
 	 <delete id="deleteNotes" parameterType="_int">
 	 	delete from notes 
 	 	where no=#{value}
+	 </delete>
+	 
+	 <delete id="deleteNoteBasedMemberId" parameterType="string">
+	 	delete from notes where member_id=#{value}
 	 </delete>
 </mapper>
