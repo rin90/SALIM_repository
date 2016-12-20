@@ -50,7 +50,7 @@ jQuery의   Fullcalendar
 				center : 'prev, title, next',
 				right : 'month,listMonth'
 			},
-			editable : true,
+			//editable : true,
 			selectable : true,		// 달력에서 선택할 수 있게
 			selectHelper : true,	// 달력의 어느 부분이 선택되었는지 색으로 표시
 			select : function(start, end){	// 날짜 선택시 수행할 일
