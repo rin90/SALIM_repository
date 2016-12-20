@@ -7,11 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style type="text/css">
+
+<link href="/SALIM_project/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
+  
+ 
+ <style type="text/css">
 .errorMessage{
 	font-size: 12px;
 	color: red
@@ -20,8 +21,8 @@
 </style>
 </head>
 <body>
-<div class="col-md-8 col-md-offset-2">
-  <h1>로그인</h1><br>
+<div class="col-md-8 col-md-offset-2"><br><br>
+  <h1>로그인</h1><br><br><br>
  <form action="${initParam.rootPath}/member/login.do " method="post">
     <div class="form-group">
     
@@ -29,15 +30,15 @@
       <span class="errorMessage">
 			<form:errors path="loginCheck.memberId"/>
 	</span>
-      <input type="text" class="form-control" id="email" name="memberId" placeholder="아이디를 입력하세요.">
+      <input type="text" class="form-control" id="email" name="memberId" placeholder="salim">
     </div>
-    
+    <br>
     <div class="form-group">
       <label for="pwd">비밀번호 입력&nbsp;&nbsp;</label><a href="${initParam.rootPath}/findPassword.do">(비밀번호를 잊으셨나요?)</a>
       <div class="errorMessage">
 		<form:errors path="loginCheck.password" />
 	 </div>	
-      <input type="password" class="form-control" id="pwd" name="password" placeholder="비밀번호를 입력하세요.">
+      <input type="password" class="form-control" id="pwd" name="password" placeholder="********">
     </div>
     
     <hr>

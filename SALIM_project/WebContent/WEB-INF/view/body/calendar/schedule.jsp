@@ -42,7 +42,7 @@
 	</nav>
 	<section style="width:65%;min-height:100px;">
 		<b>메모</b>
-		&nbsp;<textarea rows="10" cols="50" id="dia_memo" name="dia_memo" placeholder="메모 등록하려면 이곳에 써주세여."></textarea>
+		&nbsp;<textarea class="form-control" rows="10" id="dia_memo" name="dia_memo" placeholder="메모 등록하려면 이곳에 써주세여."></textarea>
 	</section>
 	
 	<div id="layer"></div>	<!-- data값 확인하는 용도로 쓰인 것 -->
@@ -216,9 +216,9 @@ $(document).ready(function(){
 	
 	$('#dia_btnDiv').on('click', '#plusBtn', function(){
 		var txt = '<tr class="target"><th hidden="hidden"><input type="hidden" name="no" value="0"></th><th width="5%"><input type="checkbox" name="minus"></th>'
-					+'<td width="20%"><input type="text" class="datepicker" name="end" value='+$("#dia_end").val()+'></td>'
-					+'<td width="30%"><input type="text" name="title"></td>'
-					+'<td width="45%"><input type="text" name="detail"></td></tr>';
+					+'<td width="20%"><input type="text" size="13" class="datepicker" name="end" value='+$("#dia_end").val()+'></td>'
+					+'<td width="30%"><input type="text" size="21" name="title"></td>'
+					+'<td width="45%"><input type="text" size="35" name="detail"></td></tr>';
 		if($('#dia_tbody tr td:first').text()=='등록된 내용이 없습니다.'){
 			$('#dia_tbody').html(txt);
 		}else{
@@ -304,9 +304,9 @@ $(document).ready(function(){
 			var detail = $(this).children('td').last().text();
 			// 각 td들에 input type의 tag생성
 			$(this).children('td').not('input')
-							.first().html('<input name="end" class="datepicker" value="'+end+'">')
-							.next().html('<input name="title" value="'+title+'">')
-							.next().html('<input name="detail" value="'+detail+'">');
+							.first().html('<input name="end" size="13" class="datepicker" value="'+end+'">')
+							.next().html('<input name="title"  size="21" value="'+title+'">')
+							.next().html('<input name="detail" size="35"  value="'+detail+'">');
 		}
 	});
 	

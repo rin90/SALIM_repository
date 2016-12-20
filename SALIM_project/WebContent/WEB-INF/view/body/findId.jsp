@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/SALIM_project/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
+
+
 <script type="text/javascript" src="/SALIM_project/scripts/jquery.js"></script>
 <script type="text/javascript">
 var err;
@@ -58,9 +62,29 @@ $(document).ready(function(){
 </head>
 <body>
 
-<h2>아이디를 잊으셨나요?</h2>
+
+<div class="col-md-8 col-md-offset-2"><br><br>
+  <h1>아이디를 잊으셨나요?</h1><br><br><br>
+ <form action="${initParam.rootPath}/member/findId.do" method="post">
+    <div class="form-group">
+    
+      <label for="email">계정 생성시 사용한 이메일 주소를 입력해주세요.&nbsp;&nbsp;&nbsp;&nbsp;</label>
+      <input type="text" class="form-control" id="email" name="email" placeholder="salim@google.com">
+    </div>
+   
+	<br>
+    <button id="findIdBtn" type="submit" class="btn btn-lg btn-success pull-right">아이디 찾기</button>
+    <div id="result">	
+			</div>
+    <br><br><br><br><br><br><br><br><br><br>
+    <hr><div class="footer_left pull-left">Salim</div><div class="pull-right"><small>&copy; 2016-12.23 Salim.KOSTA</small></div>
+ 
+  </form>
+  
+</div>
 <%-- <form action="${initParam.rootPath}/member/findId.do" method="post"> --%>
-<table>
+
+<%--<table>
 	<tr>
 		<td>
 			<h3>이메일 주소 입력</h3>
@@ -75,7 +99,8 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td>
-			<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --><input type="text" name="email" id="email" size="70" >
+			<input type="text" class="form-control" id="email" name="email" placeholder="salim@google.com">
+			
 			
 		</td>
 		<td>
@@ -86,7 +111,8 @@ $(document).ready(function(){
 
 	<tr>
 		<td align="right">
-			<button id="findIdBtn">아이디 찾기</button>
+			<button id="findIdBtn" type="submit" class="btn btn-lg btn-success pull-right">아이디 찾기</button>
+			
 		<td>
 	</tr>
 	<tr>
@@ -96,7 +122,8 @@ $(document).ready(function(){
 		</td>
 	</tr>
 
-</table>
+</table> --%>
+
 <%-- </form> --%>
 
 </body>
