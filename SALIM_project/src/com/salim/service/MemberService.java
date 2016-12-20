@@ -19,15 +19,14 @@ public interface MemberService {
 	public void joinMember(Member member)/*throws IOException*/;
 	
 	//회원 탈퇴 -leave
-	public void leaveMember(String id);
+	public void leaveMember(String memberId);
 	
 	//회원 수정- modify
 	
 	//로그인 -login
 	public HashMap<String, Object> loginMember(HashMap<String, String> map);
 	
-	//로그아웃 -logout
-	
+
 	
 	//회원 1사람 id로 조회
 	public Member findMemberById(String memberId);

@@ -74,6 +74,12 @@ public class ExpenseDaoImpl implements ExpenseDao{
 	public int selectForOneMonthExpense(Map map) {
 		return session.selectOne("expenseMapper.selectForOneMonthExpense", map);
 	}
+
+	//memberId로 지출 삭제
+	@Override
+	public int deleteExpenseByMemberId(String memberId) {
+		return session.delete("expenseMapper.deleteExpenseByMemberId", memberId);
+	}
 	
 	
 	

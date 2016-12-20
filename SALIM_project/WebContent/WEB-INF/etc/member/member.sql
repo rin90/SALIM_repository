@@ -52,7 +52,7 @@ insert into collection values('g2','그룹 이름','그룹 소개','mem2');
 
 --초대하면서 이 부분을 처리해야 한다!!
 create table member_collection(--회원그룹
-member_id varchar2(50) constraint mco_col_fk references member,
+member_id varchar2(50) constraint mco_col_fk references member ON DELETE CASCADE,
 collection_id varchar2(50) constraint mco_mem_fk references collection,
 invite varchar2(50) not null, --초대여부
 constraint mc_pk primary key(member_id,collection_id) 

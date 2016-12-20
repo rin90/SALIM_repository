@@ -31,14 +31,20 @@ public class CardDaoImpl implements CardDao{
    }
 
    @Override
-   public int deleteCardByMemberId(int cardId) {
-      return session.delete(makeSql("deleteCardByMemberId"), cardId);
+   public int deleteCardByCardId(int cardId) {
+      return session.delete(makeSql("deleteCardByCardId"), cardId);
    }
 
    @Override
    public List<Card> selectCardByMemberId(String memberId) {
       return session.selectList(makeSql("selectCardByMemberId"), memberId);
    }
+
+   @Override
+	public int deleteCardByMemberId(String memberId) {
+	return session.delete(makeSql("deleteCardByMemberId"), memberId);
+}
+   
    
    
 }

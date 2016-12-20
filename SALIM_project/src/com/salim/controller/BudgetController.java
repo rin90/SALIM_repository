@@ -63,7 +63,7 @@ public class BudgetController {
 		modelMap.addAllAttributes(result);
 		modelMap.addAttribute("budgetDate", sdf.format(budgetDate));//budgetDate
 		
-		return "body/budget.tiles";
+		return "body/writing/budget.tiles";
 	}
 	
 	
