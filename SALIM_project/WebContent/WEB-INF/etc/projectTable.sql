@@ -11,17 +11,7 @@ create table notes(  --메모
 
 drop table notes;
 
-		
-select f.no,f.title,f.member_id memberId,f.register_time registerTime,f.click,f.good,f.content,f.file_root fileName
-		,c.id,c.content,c.memberId,c.no,c.commentGroup,c.groupLevel,c.registerTime
-		from free_board f,(
-					select id,no,content,member_id memberId,comment_group commentGroup,group_level groupLevel,register_time registerTime
-					from free_comments
-					where no=2--해당 글에 대한 댓글 모두 가져오기-->
-					order by commentGroup,id --가져온 글에 그룹번호로 정렬그룹번호는 입력될때마다 증가한다. 그래서 즉 위에(먼저)입력한사람의 그룹 번호가 더 낮다.-->
-				) c
-		where f.no=2
-		and f.no=c.no(+)
+
 		
 
 

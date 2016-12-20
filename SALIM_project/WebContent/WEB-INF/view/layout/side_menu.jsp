@@ -23,8 +23,19 @@
 
 <%-- <a href="${initParam.rootPath }/cardNBank/login/cardNBankSelect.do">카드/통장 등록</a><br> --%>
 
+
 <!-- 게시판 -->
+<a href="${initParam.rootPath }/tip/login/list.do?page=1">Tip게시판</a><br>
 <a href="${initParam.rootPath }/free/login/list.do?page=1">자유게시판</a><br>
-<a href="${initParam.rootPath }/">Tip게시판</a><br>
+
+
+
+
+
+
+
+
+
+
 
 

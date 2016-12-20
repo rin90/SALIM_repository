@@ -52,23 +52,24 @@ public class FreeBoardController {
 	// 게시판 목록 뿌려주는 메소드 기본 V -로그인 없이 가능
 	@RequestMapping("list")
 	public ModelAndView list(int page) {
-		Map map = service.getFreeBoardList(page);
-		map.put("codes", codeService.findCode("조회"));
+		Map map = service.getFreeBoardList(page); //PagingBean객체와 현재페이지 리스트가 들어가 있는 map을 반환
+				
+		List<FreeBoard> list = (List<FreeBoard>) map.get("list");  // 현재페이지 리스트를 가져옴
 		
-		System.out.println("확인:"+map.get("codes"));
-	
-		List<FreeBoard> list = (List<FreeBoard>) map.get("list");
-		
+		//현재페이지에 대한 리스트가 없을 경우 전 페이지로 이동( 예) 3페이지에서 목록을 다 삭제 했을 경우 2페이지로 이동해서 2페이지 목록을 보여주기 위해)
 		if(list.size() == 0){
 			page= page-1;
 			map=service.getFreeBoardList(page);
 		}
 		
+		map.put("codes", codeService.findCode("조회")); // 자유게시판에서 글 조회 조건이 되는 조건들을 db에서 가져오는 코드 
+		
+		//위에 if문에서 1페이지에 뿌려줄 리스트가 없을 경우 0페이지가 되는데 0페이지라는 것은 게시판에 글이 하나도 없다는 뜻으로 글이 없는 것을 알려주는 view로 이동 시킨다.
 		if (page != 0) {
-			System.out.println("확인 2:"+map.get("codes"));
+			System.out.println("확인1:::"+map.get("codes"));
 			return new ModelAndView("body/board/free_board_list.tiles", map);
 		} else {
-			System.out.println("확인 2:"+map.get("codes"));
+			System.out.println("확인2:::"+map.get("codes"));
 			return new ModelAndView("body/board/non_view.tiles", map);
 		}
 	}
@@ -76,28 +77,39 @@ public class FreeBoardController {
 	// 게시판 목록 뿌려주는 메소드 --- >>>> 검색 -제목 또는 제목으로 검색시 V -로그인 없이 가능
 	@RequestMapping("keyword")
 	public ModelAndView selectByTitle(int page, String search, String category) {
+		
 		Map map = null;
-		map = service.getTermsFreeBoardList(page, category, search);
-		List list = (List) map.get("list");
+		
+		map = service.getTermsFreeBoardList(page, category, search);//pagingBean객체와 검색 조건에 맞는 현재페이지 리스트를 map에 담아 리턴해줌
+		
+		List list = (List) map.get("list");// 현재페이지 리스트를 가져옴
+		//현재페이지에 대한 리스트가 없을 경우 전 페이지로 이동( 예) 3페이지에서 목록을 다 삭제 했을 경우 2페이지로 이동해서 2페이지 목록을 보여주기 위해)
 		if (list.size() == 0) {
 			page = page - 1;
 			map = service.getTermsFreeBoardList(page, category, search);
 		}
-		map.put("codes", codeService.findCode("조회"));
-		map.put("category", category);
+		
+		map.put("codes", codeService.findCode("조회"));// 자유게시판에서 글 조회 조건이 되는 조건들을 db에서 가져오는 코드
+		
+		map.put("category", category); //검색해서 가져온 리스트를 유지하기 위해 검색 조건이 되는 카테고리와 검색 내용을 같이 준다.
+		
 		map.put("search", search);
+		
 		PagingBean p = (PagingBean) map.get("pageBean");
+		
+		//PagingBean객체에서 전체 페이지가 0일 경우 검색된 내용이 없다는 뜻으로 검색 결과가 없는 페이지를 보여준다.
 		if (p.getTotalPage() == 0) {
 			return new ModelAndView("body/board/non_view.tiles", map);
 		} else {
 			return new ModelAndView("body/board/free_board_terms_list.tiles", map);
 		}
+	
 	}
 
 	// 글 등록 form 이동 메소드 V - 로그인해야 가능
 	@RequestMapping("form")
 	public String fromMove(int page, ModelMap map) {
-		map.addAttribute("page", page);
+		map.addAttribute("page", page); //현재 페이지를 유지하기 위해 글 등록폼으로 이동할 때 현재 페이지를 같이 전달한다.
 		return "body/board/free_board_form.tiles";
 	}
 
@@ -119,30 +131,28 @@ public class FreeBoardController {
 	@RequestMapping(value = "register", method = RequestMethod.POST)
 	public String insert(@ModelAttribute @Valid FreeBoard freeBoard, BindingResult errors, ModelMap map, int page,
 			HttpServletRequest request) throws IllegalStateException, IOException {
+		
 		if (errors.hasErrors()) // 에러가 있는 경우 전달
 		{
 			map.addAttribute("page", page);
 			return "body/board/free_board_form.tiles";
 		}
-		System.out.println("요청파라미터 number값:" + freeBoard.getNo());
 
-		System.out.println("123" + freeBoard.getFileRoot());
 		MultipartFile file = freeBoard.getFileRoot();
 
 		if (file != null && !file.isEmpty()) {// 업로드 된 파일이 있다면
-			System.out.println("파일");
-			freeBoard.setFileName(file.getOriginalFilename());// 파일명
-			System.out.println("이름" + freeBoard.getFileName());
-			String dir = request.getServletContext().getRealPath("/fileroute");// 파일
-																				// 저장되는
-																				// 곳
 
+			freeBoard.setFileName(file.getOriginalFilename());// 파일명
+			
+			String dir = request.getServletContext().getRealPath("/fileroute");// 파일 저장되는 곳
+																				
 			File dest = new File(dir, file.getOriginalFilename());
 
 			file.transferTo(dest);// 파일이동
 		}
 
 		service.insertFree(freeBoard);
+		
 		return "redirect:/free/login/seleteDetail.do?no=" + freeBoard.getNo() + "&page=" + page;
 	}
 
@@ -161,10 +171,8 @@ public class FreeBoardController {
 	public String update(@ModelAttribute FreeBoard freeBoard, int page, String category, String search,
 			HttpServletRequest request, ModelMap map) throws IllegalStateException, IOException {
 		
-		System.out.println("수정");
 
 		MultipartFile file = freeBoard.getFileRoot();
-		System.out.println(file);
 		
 		if(file == null){
 			freeBoard.setFileName(service.selectByNo(freeBoard.getNo()).getFileName());
@@ -178,8 +186,6 @@ public class FreeBoardController {
 			String dir = request.getServletContext().getRealPath("/fileroute");// 파일
 																				// 저장되는
 																				// 곳
-
-			System.out.println("진짜 파일 경로::" + dir);
 
 			File dest = new File(dir, file.getOriginalFilename());
 
@@ -198,7 +204,7 @@ public class FreeBoardController {
 	// 글 삭제 메소드 V -로그인해야 가능
 	@RequestMapping("delete")
 	public String delete(int no, int page) {
-		System.out.println("삭제");
+
 		service.deleteFree(no);
 		return "redirect:/free/login/list.do?page=" + page;// redirect방식으로 처리해야함 안그러면
 														// 새로고침하면 계속 브라우저가 url을

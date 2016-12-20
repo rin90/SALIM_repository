@@ -44,8 +44,10 @@ public class PagingBean {
 	// 현재 페이지가 속한 페이지 그룹을 반환
 	public int getCurrentPageGroup() {
 		if (page % currentPageGroup != 0) {
+			System.out.println("+1");
 			return page / currentPageGroup + 1;
 		} else {
+			System.out.println("0");
 			return page / currentPageGroup;
 		}
 	}
