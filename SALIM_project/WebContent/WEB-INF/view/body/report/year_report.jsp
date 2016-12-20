@@ -7,9 +7,9 @@
 <script type="text/javascript" src="${initParam.rootPath }/lib/scripts/jquery.js"></script>
 
 <h2 align="center">
- 	 <button onclick="updateYear($('#year').text()-1)">◀ </button> 
-	 &nbsp;<label id="year">${requestScope.year}</label>년도&nbsp;
- 	 <button onclick="updateYear(+$('#year').text()+1)"> ▶</button> 	<!-- jQuery의 경우 +연산자의 피연산자들 중 하나가 문자열이면 문자열 잇기 수행. -->
+ 	 <button class="btn btn-success btn-sm" onclick="updateYear($('#year').text()-1)">◀ </button> 
+	  &nbsp;<label id="year">${requestScope.year}</label>년도&nbsp;
+ 	 <button class="btn btn-success btn-sm" onclick="updateYear(+$('#year').text()+1)"> ▶</button> 	<!-- jQuery의 경우 +연산자의 피연산자들 중 하나가 문자열이면 문자열 잇기 수행. -->
 </h2>
 <h2 align="center">수입 & 지출 내역 보고서</h2>
 
