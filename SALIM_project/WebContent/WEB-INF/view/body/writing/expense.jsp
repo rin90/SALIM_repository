@@ -173,7 +173,7 @@
 	<div class="container text-center">
 		<div class="row">
 			<div class="col-md-10">
-				<div class="row" style="margin-top: 30px; margin-bottom: 100px;">
+				<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
 					<div class="col-md-5">
 						<!-- 날짜 선택창 -->
 						<p>
@@ -185,6 +185,9 @@
 						<table class="table table-bordered">
 							<thead>
 								<tr>
+									<div style="margin-bottom: 30px">
+										<h1 align="left"> &lt; 지 출  작 성 &gt; </h1>
+									</div>
 									<td colspan="2">이번달 오늘까지 누계</td>
 								</tr>
 							</thead>

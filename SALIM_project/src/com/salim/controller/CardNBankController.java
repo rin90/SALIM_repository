@@ -40,7 +40,7 @@ public class CardNBankController {
    public String delete(@RequestParam ArrayList<Integer> cardIdList, HttpSession session, ModelMap modelmap){
 	   String memberId = checkMemberId(session);
 	   modelmap.addAllAttributes(CNBService.deleteCard(cardIdList, memberId));
-	   return "body/cardNBank.tiles";
+	   return "body/writing/cardNBank.tiles";
    }
    
    //카드조회&통장조회
@@ -48,7 +48,7 @@ public class CardNBankController {
    public String select(HttpSession session, ModelMap modelmap){
 	   String memberId = checkMemberId(session);
 	   modelmap.addAllAttributes(CNBService.findCardNBankbook(memberId));
-	   return "body/cardNBank.tiles";
+	   return "body/writing/cardNBank.tiles";
    }
    
    //카드 수정   
@@ -56,7 +56,7 @@ public class CardNBankController {
    public String update(@ModelAttribute CardForm cardForm, HttpSession session, ModelMap modelmap){
 	   String memberId = checkMemberId(session);
 	   modelmap.addAllAttributes(CNBService.modifyCard(cardForm, memberId));
-	   return "body/cardNBank.tiles";
+	   return "body/writing/cardNBank.tiles";
    }
  
    //통장 추가
@@ -72,7 +72,7 @@ public class CardNBankController {
    public String delete2(@RequestParam ArrayList<Integer> bankIdList, HttpSession session, ModelMap modelmap){
 	   String memberId = checkMemberId(session);
 	   modelmap.addAllAttributes(CNBService.deleteBankbook(bankIdList, memberId));
-	   return "body/cardNBank.tiles";
+	   return "body/writing/cardNBank.tiles";
    }
    
    //통장 수정
@@ -80,7 +80,7 @@ public class CardNBankController {
    public String update2(@ModelAttribute BankForm bankForm, HttpSession session, ModelMap modelmap){
 	   String memberId = checkMemberId(session);
 	   modelmap.addAllAttributes(CNBService.modifyBankbook(bankForm, memberId));
-	   return "body/cardNBank.tiles";
+	   return "body/writing/cardNBank.tiles";
    }
 
 	//그룹인지 개인인지 판별 

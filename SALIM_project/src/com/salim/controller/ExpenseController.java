@@ -57,7 +57,7 @@ public class ExpenseController {
 		String memberId = checkMemberId(session);
 		modelMap.addAllAttributes(service.selectExpense(memberId, expenseDate));
 		modelMap.addAttribute("expenseDate", new SimpleDateFormat("yyyy-MM-dd").format(expenseDate));
-		return "body/expense.tiles";
+		return "body/writing/expense.tiles";
 	}
 	
 	

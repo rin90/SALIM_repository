@@ -23,7 +23,7 @@ public class CategoryController {
 	@RequestMapping("/allCode.do")
 	public ModelAndView findBigAndSmallCode(int smallCode){
 		SmallCategory smallCategory = service.selectBigCodeBySmallCode(smallCode);
-		return new ModelAndView("body/income.tiles", "smallCategory", smallCategory);
+		return new ModelAndView("body/writing/income.tiles", "smallCategory", smallCategory);
 	}
 	
 	//대분류 코드 조회 ->  대분류를 부르자.
@@ -34,7 +34,7 @@ public class CategoryController {
 		//수입의 대분류, 지출의 대분류
 		List<BigCategory> bigCategoryList = service.selectBigCode(bigCategory.getBigCode());
 		
-		return new ModelAndView("body/income.tiles", "bigCategoryList", bigCategoryList);
+		return new ModelAndView("body/writing/income.tiles", "bigCategoryList", bigCategoryList);
 	}
 	
 	//대분류 코드로 소분류 코드 조회 -> 소분류
@@ -52,6 +52,6 @@ public class CategoryController {
 		BigCategory bigCategory = service.selectHighCode("지출");
 		//지출의 대분류
 		List<BigCategory> bigCategoryList = service.selectBigCode(bigCategory.getBigCode());
-		return new ModelAndView("body/expense.tiles", "bigCategoryList", bigCategoryList);
+		return new ModelAndView("body/writing/expense.tiles", "bigCategoryList", bigCategoryList);
 	}
 }

@@ -22,7 +22,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter{//intercept
 		
 			if(session.getAttribute("login_info")==null){
 				System.out.println(session.getAttribute("login_info"));
-				throw new ModelAndViewDefiningException(new ModelAndView("/body/login_form.jsp", "error_message", "로그인 먼저 하세요."));
+				throw new ModelAndViewDefiningException(new ModelAndView("/body/login_form.tiles", "error_message", "로그인 먼저 하세요."));
 			}
 			return true;
 		}

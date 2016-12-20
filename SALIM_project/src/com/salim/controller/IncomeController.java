@@ -45,10 +45,7 @@ public class IncomeController {
 						   @DateTimeFormat(pattern="yyyy-MM-dd") @RequestParam Date incomeDate, 
 						   HttpSession session,
 						   HttpServletRequest request){
-		
-		String memberId = checkMemberId(session);
-		System.out.println("수입에 들어온 멤버 조회 - "+memberId);
-		service.saveIncome(memberId, incomeId, explanation, incomeMoney, codeId, incomeDate, request.getParameter("notes"), Integer.parseInt(request.getParameter("notesNum")));				
+		service.saveIncome(checkMemberId(session), incomeId, explanation, incomeMoney, codeId, incomeDate, request.getParameter("notes"), Integer.parseInt(request.getParameter("notesNum")));				
 		return "redirect:/household/login/incomeSelect.do?incomeDate="+new SimpleDateFormat("yyyy-MM-dd").format(incomeDate);
 	}
 	
@@ -63,17 +60,15 @@ public class IncomeController {
 			int day = now.getDate();
 			incomeDate = new Date(year, month, day);
 		}
-		String memberId = checkMemberId(session);
-		modelMap.addAllAttributes(service.selectIncome(memberId, incomeDate));
+		modelMap.addAllAttributes(service.selectIncome(checkMemberId(session), incomeDate));
 		modelMap.addAttribute("incomeDate", new SimpleDateFormat("yyyy-MM-dd").format(incomeDate));
-		return "body/income.tiles";
+		return "body/writing/income.tiles";
 	}
 	
 	//수입 삭제
 	@RequestMapping(value="/login/incomeDelete.do")
 	public String deleteIncome(@RequestParam ArrayList<Integer> incomeIdList, HttpSession session, HttpServletRequest request){
-		String memberId = checkMemberId(session);
-		service.deleteIncome(incomeIdList, memberId);
+		service.deleteIncome(incomeIdList, checkMemberId(session));
 		return "redirect:/household/login/incomeSelect.do?incomeDate="+request.getParameter("incomeDate");
 	}	
 	
