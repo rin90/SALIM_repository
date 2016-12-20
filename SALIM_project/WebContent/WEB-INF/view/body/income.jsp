@@ -182,50 +182,50 @@
 
 <form action="${initParam.rootPath }/household/login/income.do" method="post">
 	
-	<!-- 달력 - 날짜 선택 -->
-	<div class="container-fluid">
-		<div class="row" style="margin-top: 30px; margin-bottom: 180px; margin-left:50px;">
-			<div class="col-md-4">
-				<p>
-				<input type="text" id="datepicker" name="incomeDate" value="${requestScope.incomeDate }" placeholder="${requestScope.incomeDate }">
-				</p>
-			</div>
-			<div class="col-md-4">
-				<!-- 오늘 수입, 지출 불러오기 -->
-				<table border="1">
-					<thead>
-						<tr>
-							<td colspan="2">이번달 오늘까지 누계</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>수입</td>
-							<td>
-								<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.incomeSum }"/>
-							</td>
-						</tr>
-						<tr>
-							<td>지출</td>
-							<td>
-								<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.expenseSum }"/>
-							</td>
-						</tr>
-						<tr>
-							<td>누계</td>
-							<td>
-								<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.incomeSum - requestScope.expenseSum }"/>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
 	
-	<div class="container-fluid">
-		<div class="row" style="margin-left:50px;">
-			<div class="col-md-8">
+<div class="container text-center">
+	<div class="row">
+    	<div class="col-md-8">
+        	<div class="row" style="margin-top: 30px; margin-bottom: 100px; "margin-left: 30px"">
+            	<div class="col-md-5" >
+                	<!-- 달력 - 날짜 선택 -->
+					<!-- <div class="row" style="margin-top: 30px; margin-bottom: 180px; margin-left:50px;"> -->
+					<p>
+					<input type="text" id="datepicker" name="incomeDate" value="${requestScope.incomeDate }" placeholder="${requestScope.incomeDate }">
+					</p>
+                </div>
+                <div class="col-md-7" >
+                	<!-- 오늘 수입, 지출 불러오기 -->
+					<table border="1" class="table">
+						<thead>
+							<tr>
+								<td colspan="2">이번달 오늘까지 누계</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>수입</td>
+								<td>
+									<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.incomeSum }"/>
+								</td>
+							</tr>
+							<tr>
+								<td>지출</td>
+								<td>
+									<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.expenseSum }"/>
+								</td>
+							</tr>
+							<tr>
+								<td>누계</td>
+								<td>
+									<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.incomeSum - requestScope.expenseSum }"/>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+                </div>
+            </div>
+            <div class="col-md-12 " style="    margin-left: 30px;">
 				<!-- 수입입력란 -->
 				<table border="1">
 				
@@ -313,29 +313,27 @@
 						
 					</tfoot>
 				</table>
-			</div>
-			
-		</div>
-		
-		<div class="col-md-4">
-			<!-- 메모장 -->
-			<textarea rows="25" cols="60" name="notes" id="notes">${requestScope.notes.content }</textarea>
+            </div>
+        </div>
+        <div class="col-md-4" style="margin-top: 100px;">
+        	<!-- 메모장 -->
+        	<h4><메 모 란></h4>
+			<textarea rows="20" cols="50" name="notes" id="notes">${requestScope.notes.content }</textarea>
 			<input type="hidden" name="notesNum" value="${empty requestScope.notes.no? 0:requestScope.notes.no }">
-		</div>
-		
-		<div class="row">
-			<div class="col-md-2" margin="auto">
+        </div>
+    
+    </div>
+    
+    	<div class="row" >
+			<div class="col-md-2" align="center">
 				<!-- 저장버튼 -->
 				<input type="submit" value="저장" id="submitIncome" onclick="return checkFormat()"/>
 				<input type="button" value="선택삭제" id="deleteIncome" onclick="checkevent()"/>
 			</div>
 		</div>
-	</div>
-	
-	
-	
-	
-	
+    
+</div>
+
 
 </form>
 </body>

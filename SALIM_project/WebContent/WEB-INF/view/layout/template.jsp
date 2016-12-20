@@ -11,7 +11,7 @@
 <title>SALIM 가계부</title>
 <style type="text/css">
 header{
-	background-color:skyblue;
+	background-color:#00001E;
 	text-align:center;
 	padding: 5px;
 }

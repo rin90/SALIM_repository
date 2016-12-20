@@ -27,14 +27,13 @@
  
   	<c:choose><%--SALIM 로고 -로그인 여부에 따라 다른 처리(링크의 유무) --%>
 	<c:when test="${not empty sessionScope.login_info.memberId}">
-		<h2 align="left">
-			<a id="logo"
-				href="${initParam.rootPath }/collection/findAllCollectionList.do">SALIM</a>
+		<h2 align="left" >
+			<a id="logo" href="${initParam.rootPath }/collection/findAllCollectionList.do"><font color="#ffffff">SALIM</font></a>
 		</h2>
 	</c:when>
 	<c:otherwise>
 		<h2 align="left">
-			<a>SALIM</a>
+			<a><font color="#ffffff">SALIM</font></a>
 		</h2>
 	</c:otherwise>
 </c:choose>
