@@ -38,7 +38,6 @@
 	<mvc:view-controller path="/inquiry.do" view-name="inquiry.tiles"/>
 	
 	<!-- member -->
-
 	<mvc:view-controller path="/joinMember.do" view-name="body/join_form.tiles"/>	
 	<mvc:view-controller path="/join_success.do" view-name="body/join_success.tiles"/>	
 	<mvc:view-controller path="/loginMember.do" view-name="body/login_form.tiles"/>
@@ -50,9 +49,6 @@
 	<mvc:view-controller path="/leaveMember.do" view-name="body/my/page/leave_member.tiles"/>
 	<mvc:view-controller path="/myInfo_modify.do" view-name="body/my/page/myInfo_modify.tiles"/>
 
-	<!-- <mvc:view-controller path="/leaveMember.do" view-name="body/leave_member.tiles"/>
-	<mvc:view-controller path="/myPage.do" view-name="body/myPage.tiles"/>
- -->
 <!-- collection 그룹 추가 부분 -->
 	<mvc:view-controller path="/collection.do" view-name="body/collection_form.tiles"/> 
 <!-- collection 환경설정 -->
