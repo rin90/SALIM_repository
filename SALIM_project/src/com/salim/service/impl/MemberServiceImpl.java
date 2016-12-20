@@ -7,8 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.salim.dao.BankDao;
+import com.salim.dao.BudgetDao;
+import com.salim.dao.CardDao;
+import com.salim.dao.ExpenseDao;
+import com.salim.dao.GoalDao;
+import com.salim.dao.IncomeDao;
 import com.salim.dao.MemberDao;
-
+import com.salim.dao.NotesDao;
+import com.salim.dao.ScheduleDao;
 import com.salim.service.MemberService;
 import com.salim.vo.Member;
 
@@ -18,6 +25,28 @@ public class MemberServiceImpl implements MemberService{
 
 	@Autowired
 	private MemberDao memberdao;
+	@Autowired
+	private CardDao carddao;
+	@Autowired
+	private BudgetDao budgetdao;
+	@Autowired
+	private BankDao bankdao;
+	
+	@Autowired 
+	private ScheduleDao scheduledao;
+	
+	@Autowired 
+	private GoalDao  goaldao;
+	
+	@Autowired
+	private NotesDao notesdao;
+	
+	@Autowired
+	private IncomeDao incomedao;
+	
+	@Autowired
+	private ExpenseDao expensedao;
+	
 	
 	
 	//회원가입 모듈
@@ -30,12 +59,22 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	//회원 탈퇴
-	public void leaveMember(String id) 
+	@Override
+	public void leaveMember(String memberId) 
 	{
-		memberdao.deleteMember(id);
+		memberdao.deleteMember(memberId);
+		carddao.deleteCardByMemberId(memberId);
+		budgetdao.deleteBudgetBymemberId(memberId);
+		bankdao.deleteBankByMemberId(memberId);
+		scheduledao.deleteScheuldeBasedMemberId(memberId);
+		goaldao.deleteScheuldeBasedMemberId(memberId);
+		notesdao.deleteNotes(memberId);
+		incomedao.deleteIncomeByMemberId(memberId);
+		expensedao.deleteExpenseByMemberId(memberId);
 	}
 	
 	//회원 조회
+	@Override
 	public Member findMemberById(String memberId)
 	{
 		Member member=null;
@@ -44,6 +83,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	//로그인 
+	@Override
 	public HashMap<String, Object> loginMember(HashMap<String, String> map)
 	{
 		String id=map.get("memberId");
@@ -87,6 +127,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	//이메일 중복 체크 서비스!
+	@Override
 	public boolean findMemberForEmailCheck(String email)
 	{
 		Member member=memberdao.selectMemberByEmail(email);
