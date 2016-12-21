@@ -37,7 +37,6 @@ public class BudgetController {
 	//예산 저장 & 수정
 	@RequestMapping(value="/login/budget.do", method=RequestMethod.POST)
 	public String saveBudget(@ModelAttribute Budget budget, HttpSession session){
-		String memberId = checkMemberId(session);
 		service.saveBudget(budget);
 		return "redirect:/household/login/findbudget.do?budgetDate="+new SimpleDateFormat("yyyy-MM").format(budget.getBudgetDate())+"&budgetNum="+budget.getNum();
 	}
@@ -45,9 +44,7 @@ public class BudgetController {
 	//예산 조회
 	@RequestMapping(value="/login/findbudget.do")
 	public String findBudget(HttpSession session, HttpServletRequest request, ModelMap modelMap) throws ParseException{
-		
-		String memberId = checkMemberId(session);
-		
+
 		Date budgetDate = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		if(request.getParameter("budgetDate") == null){
@@ -59,8 +56,7 @@ public class BudgetController {
 			budgetDate = (Date)sdf.parse(request.getParameter("budgetDate"));
 		}
 		
-		Map result = service.findBudget(memberId, budgetDate);
-		modelMap.addAllAttributes(result);
+		modelMap.addAllAttributes(service.findBudget(checkMemberId(session), budgetDate));
 		modelMap.addAttribute("budgetDate", sdf.format(budgetDate));//budgetDate
 		
 		return "body/writing/budget.tiles";
@@ -70,28 +66,9 @@ public class BudgetController {
 	//예산 조회 아작스 처리
 	@RequestMapping(value="/login/findbudgetMonth.do")
 	@ResponseBody
-	public Map findBudgetMonth(@DateTimeFormat(pattern="yyyy-MM")@RequestParam Date budgetDate, HttpSession session, HttpServletRequest request){
-		
-		
-		//memberId에 개인id인지 그룹id인지 파악
-		String memberId = checkMemberId(session);
-		
+	public Map findBudgetMonth(@DateTimeFormat(pattern="yyyy-MM")@RequestParam Date budgetDate, HttpSession session, HttpServletRequest request){			
 		//예산, 월별 지출액, 월별 지출 총계 조회
-		Map result = service.findBudget(memberId, budgetDate);
-		
-		//새로고침시 데이터 유지를 위해서
-		/*request.setAttribute("budgetDate", budgetDate);
-		System.out.println(budgetDate);
-		System.out.println(((Budget)result.get("budget")).getNum());*/
-/*		
-		Budget budget = (Budget) result.get("budget");	
-		int budgetNum=0;
-		if(budget != null){
-			budgetNum = budget.getNum();
-		}
-		request.setAttribute("budgetNum", budgetNum);*/
-		
-		return result;
+		return service.findBudget(checkMemberId(session), budgetDate);
 	}
 	
 	//그룹인지 개인인지 판별

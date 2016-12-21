@@ -42,7 +42,9 @@ function emailFormCheck(email){
 		<input type="hidden" name="from" value="${sessionScope.login_info.email }">
 		<input type="hidden" name="to" value="dlwocks1234@naver.com">
 	<table>
-		
+		<tr>
+		<td><h2>문의하기</h2></td>
+		</tr>
 		<tr>
 			<td>제목</td><td><input type="text" size="30" name="subject"></td>
 		</tr>
