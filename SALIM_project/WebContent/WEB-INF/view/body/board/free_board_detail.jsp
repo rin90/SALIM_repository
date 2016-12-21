@@ -120,10 +120,23 @@ $(document).ready(function(){
 
 </script>
 
+<div class="col-md-8 col-md-offset-2">
+<h1>글 확인</h1><br>
+	<hr>
+	<label for="sel1">글 제목</label>
+ &nbsp;&nbsp;&nbsp;
+ <table>
+ 	
+ 	<tr>
+ 		<td><h3>${requestScope.freeBoard.title }</h3></td>
+ 		<td>&nbsp;&nbsp;&nbsp;</td>
+ 		<td><h4><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
+	value="${requestScope.freeBoard.registerTime }" /></h4></td>
+ 	</tr>
+ 	 
+ </table>
 
-${requestScope.freeBoard.title } &nbsp;&nbsp;&nbsp;
-<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
-	value="${requestScope.freeBoard.registerTime }" />
+
 <hr>
 ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 <p />
@@ -133,6 +146,7 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 </c:if>
 <br>${requestScope.freeBoard.content }
 <p />
+
 댓글 &nbsp;${requestScope.commentTotal }&nbsp;&nbsp;조회&nbsp;${requestScope.freeBoard.click }&nbsp;&nbsp;
 	
 	
@@ -265,7 +279,7 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 			</c:if>
 			
 
-
+</div>
 
 
 
