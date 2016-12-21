@@ -170,7 +170,7 @@ where Member.member_Id=memberId3
 	
 	
 	
-	
+select * from Member
 	
 	
 	
