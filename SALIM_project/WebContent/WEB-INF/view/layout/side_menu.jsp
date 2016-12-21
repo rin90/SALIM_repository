@@ -7,6 +7,7 @@
 <!-- 동적으로 생성되는 메뉴 - DB에서 collection의 grant_id와 현재 로그인한 회원의 member_id가 일치한 경우만 메뉴를 보여줌 -->
 <c:if test="${sessionScope.group_info.grantId==sessionScope.login_info.memberId}">
 	<a href="${initParam.rootPath }/collectionSetting.do">환경 설정</a><br>
+	<a href="${initParam.rootPath }/cardNBank/login/cardNBankSelect.do">그룹 통장 관리</a><br>
 	<a href="${initParam.rootPath }/collection/inviteSetting.do">그룹 멤버 관리</a><br>
 </c:if>
 
