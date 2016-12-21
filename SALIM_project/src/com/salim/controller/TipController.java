@@ -164,7 +164,11 @@ public class TipController {
 			HttpServletRequest request, ModelMap map) throws IllegalStateException, IOException {
 		
 			MultipartFile file = tipBoard.getFileRoot();
-		
+			
+			if(file == null){
+				tipBoard.setFileName(tipBoardService.selectByNo(tipBoard.getNo()).getFileName());
+			}
+			
 			if (file != null && !file.isEmpty()) {// 업로드 된 파일이 있다면
 			
 			tipBoard.setFileName(file.getOriginalFilename());// 파일명

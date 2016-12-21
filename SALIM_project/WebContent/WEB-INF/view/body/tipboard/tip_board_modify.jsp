@@ -6,13 +6,24 @@
 	src="/SALIM_project/lib/scripts/jquery.js"></script>
 
 <script type="text/javascript">
-	
+$(document).ready(function() {
+	$("#b").on("click",function(){
+		var txt = "<input class='f' type='file'  value='사진' name='fileRoot'><input  id='fc' class='f'  type='button' value='파일 수정 취소'>"
+			$("#b").hide();
+			$("#t").html(txt);
+			$
+	});							
+	$("#t").on("click", "#fc", function() {
+		$(".f").hide();
+		$("#b").show();
+	});																				
+});
+		
 </script>
 
-
+	<h4>Tip게시판</h4>
 	<form id="registerForm" action="${initParam.rootPath}/tip/login/update.do"
 		method="post" enctype="multipart/form-data">
-		<h4>Tip게시판</h4>
 		
 		제목:<input type="text" name="title" value="${requestScope.tipBoard.title}">
 		
@@ -23,11 +34,16 @@
 		</select>
 		
 		<br> 
-		파일첨부:<input type="file" value="사진" name="fileRoot">${requestScope.tipBoard.fileRoot }<br>
+		<c:if test="${requestScope.freeBoard.fileName != null }">
+		<img
+			src="${initParam.rootPath }/tipFileRoute/${requestScope.freeBoard.fileName }">
+		</c:if>
+		 <input id="b" type="button" value="파일첨부 수정">
+		 <div id="t"></div><br>
 		
 		<textarea rows="10" cols="50" name="content">${requestScope.tipBoard.content }</textarea>
 		
-		내용 :${requestScope.search }  카테고리 ${requestScope.category }
+	
 		
 		<br>
 		<input type="hidden" name="no" value="${requestScope.tipBoard.no }">

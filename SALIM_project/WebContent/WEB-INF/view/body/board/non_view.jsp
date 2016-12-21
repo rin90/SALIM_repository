@@ -15,7 +15,7 @@
 		<tbody id="tbody">
 			<c:choose>
 				<c:when test="${empty requestScope.category }">
-					<tr>
+					<tr align="center">
 						<td>등록된 글이 없습니다.</td>
 						<td></td>
 						<td></td>
@@ -24,7 +24,7 @@
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<tr>
+					<tr align="center">
 						<td>검색결과가없습니다.</td>
 						<td></td>
 						<td></td>
