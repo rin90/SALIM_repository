@@ -15,6 +15,14 @@
 	#monthpicker {
 		width: 60px;
 	}
+	select{
+		color:#000 !important;
+	}
+	.mtz-monthpicker-widgetcontainer{
+	
+		width: 115px !important;
+	}
+	
 </style>
 <script type="text/javascript" src="${initParam.rootPath }/lib/monthpicker/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${initParam.rootPath }/lib/monthpicker/js/jquery-ui.min.js"></script>

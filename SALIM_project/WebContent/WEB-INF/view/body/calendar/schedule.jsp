@@ -2,7 +2,13 @@
 <style>
     label, input { display:block; }
     input.text { margin-bottom:12px; width:95%; padding: .4em; }
-    fieldset { padding:0; border:0; margin-top:5px;  min-height:250px;  }
+    fieldset { padding:0; border:0; margin-top:5px;  min-height:240px;  }
+	/* .dia_check{	position: absolute !important;    margin: 0px 0 0 !important;	width: 100% !important;} */
+	.dia_check{width: 70% !important;  margin: 0px 0 0 0 !important;}
+	.input-sm {	height: 23px !important;	}
+	#dia_nav {	min-height: 43% !important; 	}
+	#dia_sec {	margin-left: 15px;	}	
+	
 </style>
 
 <div id="dialog" title="Basic dialog" hidden="hidden">
@@ -13,7 +19,7 @@
 			<thead>
 				<tr>
 					<th hidden="hidden">일정번호</th>	
-					<th width="5%"><input type="checkbox" id="allClick" ></th>
+					<th width="5%"><input class="dia_check" type="checkbox" id="allClick" ></th>
 					<th width="20%">종료일</th>
 					<th width="30%">&nbsp;일정&nbsp;&nbsp;</th>
 					<th width="45%">상세내용</th>
@@ -26,7 +32,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<div align="right" id="dia_btnDiv"><button id="minusBtn" type="button">-</button>&nbsp;<button id="plusBtn" type="button">+</button></div>
+		<div align="right" id="dia_btnDiv"><button id="minusBtn" type="button">-</button> <button id="plusBtn" type="button">+</button></div>
 		
 		<!-- Dialog에서 셋팅한 버튼 -->
 		<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
@@ -34,11 +40,11 @@
 		
 		
 	<hr>
-	<nav style="width:30%; min-height:200px;line-height: 20px;">
+	<nav id="dia_nav" style="width:30%; min-height:200px;line-height: 20px;">
 		<p>오늘의 내역</p>
 		<table id="dia_totalMoney" class="table table-condensed"></table>
 	</nav>
-	<section style="width:65%;min-height:100px;">
+	<section id="dia_sec" style="width:65%;min-height:100px;">
 		<b>메모</b>
 		&nbsp;<textarea class="form-control" rows="10" id="dia_memo" name="dia_memo" placeholder="메모 등록하려면 이곳에 써주세여."></textarea>
 	</section>
@@ -80,7 +86,7 @@ function updateSchedule(){
 			var value = $(this).prop("value").trim();
 			var message = '';
 			// input에 값이 없는 경우 저장해달라고 알림
-			if(value==''){	message = "입력되지 않은 부분이 있습니다. 확인해주세요.";		}
+			if(value==''){	message = "입력되지 않은 부분이 있습니다. 확인해주세요.";	}
 			if(name=='title' && value.length > 20){
 				message = "20자 이내로 입력하세요.";
 			}
@@ -180,7 +186,7 @@ function loadDayCalendar(){
 				var turn = result.daySchedule.length;
 				var str = '';
 				for(var i=0; i<turn; i++){
-					str += '<tr><th hidden="hidden"><input type="hidden" name="no" value='+result.daySchedule[i].no+'></th><th width="5%"><input type="checkbox" name="minus"></th><td width="20%">'
+					str += '<tr><th hidden="hidden"><input type="hidden" name="no" value='+result.daySchedule[i].no+'></th><th width="5%"><input class="dia_check" type="checkbox" name="minus"></th><td width="20%">'
 								+result.daySchedule[i].end+'</td><td width="30%">'
 								+result.daySchedule[i].title+'</td><td width="45%">'
 								+result.daySchedule[i].detail+'</td></tr>';
@@ -243,7 +249,7 @@ dialog = $("#dialog").dialog({
 $(document).ready(function(){
 	
 	$('#dia_btnDiv').on('click', '#plusBtn', function(){
-		var txt = '<tr class="target"><th hidden="hidden"><input type="hidden" name="no" value="0"></th><th width="5%"><input type="checkbox" name="minus"></th>'
+		var txt = '<tr class="target"><th hidden="hidden"><input type="hidden" name="no" value="0"></th><th width="5%"><input class="dia_check" type="checkbox" name="minus"></th>'
 					+'<td width="20%"><input type="text" size="10" class="datepicker" name="end" value='+$("#dia_end").val()+'></td>'
 					+'<td width="30%"><input type="text" size="20" name="title"></td>'
 					+'<td width="45%"><input type="text" size="35" name="detail"></td></tr>';
@@ -278,7 +284,7 @@ $(document).ready(function(){
 				//alert($(this).parent("th").prev().children('input').val());
 				queryString += "no"+"="+$(this).parent("th").prev().children('input').val()+"&";
 			});
-			$("#layer").text(queryString);
+			//$("#layer").text(queryString);
 		}
 		
 		// ajax를 통해 controller에 값을 전달해서 받아옴
