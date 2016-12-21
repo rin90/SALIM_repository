@@ -123,6 +123,7 @@ public class TipController {
 			File dest = new File(dir, file.getOriginalFilename());
 
 			file.transferTo(dest);
+			
 		}
 		tipBoardService.tipInsert(tipboard);
 		return "redirect:/tip/login/seleteDetail.do?no=" + tipboard.getNo() + "&page=" + page;
