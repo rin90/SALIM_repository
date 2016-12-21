@@ -125,9 +125,10 @@ ${requestScope.tipBoard.title } &nbsp;&nbsp;&nbsp;
 <hr>
 ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 <p />
-
+<c:if test="${requestScope.tipBoard.fileName != null }">
 <img
 	src="${initParam.rootPath }/tipFileRoute/${requestScope.tipBoard.fileName }">
+</c:if>
 <br>${requestScope.tipBoard.content }
 <p />
 ´ñ±Û &nbsp;${requestScope.commentTotal }&nbsp;&nbsp;Á¶È¸&nbsp;${requestScope.tipBoard.click }&nbsp;&nbsp;
