@@ -6,6 +6,12 @@
 
 <script type="text/javascript" src="${initParam.rootPath }/lib/scripts/jquery.js"></script>
 
+<style>
+	th{	background-color: #E7E7E7;	}	/*옅은 회색*/
+	.month_total th{	 background-color: #E0FFDB;	}	/*옅은 연두색*/
+</style>
+
+
 <h2 align="center">
  	 <button class="btn btn-success btn-sm" onclick="updateYear($('#year').text()-1)">◀ </button> 
 	  &nbsp;<label id="year">${requestScope.year}</label>년도&nbsp;
@@ -16,6 +22,7 @@
 <div id="chart" style="width=1000px"></div>
 
 <script type="text/javascript">
+
 function barGraph(arr){
 	c3.generate({
 		bindto: '#chart',
@@ -44,6 +51,7 @@ function barGraph(arr){
 		}  
 	}); 
 }
+
 function updateYear(year){
 //	alert($("#year").text());	// 년도 표시하는 곳의 text값
 	$.ajax({
@@ -65,18 +73,21 @@ function updateYear(year){
 function display(totalList, importList, spendList){
 	// 1년간의 총 수입*지출 금액
 	var month = '<tr><td></td>';
-	var income_month_total = '<tr style="background-color: lime;"><td>수입 총액</td>';
-	var spend_month_total = '<tr style="background-color: lime;"><td>지출 총액</td>';
+	var income_month_total = '<tr class="month_total" style="background-color: #E0FFDB;"><th>수입 총액</th>';
+	var spend_month_total = '<tr class="month_total" style="background-color: #E0FFDB;"><th>지출 총액</th>';
+	var sum = '<tr><th>합계</th>'
 
 	for(var i=0; i<12; i++){
-		month += '<td>'+totalList[i].MONTH+'</td>';
-		income_month_total += '<td>'+totalList[i].INCOME_MONTH_TOTAL +'</td>';
-		spend_month_total += '<td>'+totalList[i].SPEND_MONTH_TOTAL+'</td>';
+		month += '<th>'+totalList[i].MONTH+'</th>';
+		income_month_total += '<td>'+totalList[i].INCOME_MONTH_TOTAL.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',') +' </td>';
+		spend_month_total += '<td>'+totalList[i].SPEND_MONTH_TOTAL.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+' </td>';
+		sum += '<td>'+(totalList[i].INCOME_MONTH_TOTAL-totalList[i].SPEND_MONTH_TOTAL).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+' </td>';
 	}
 	month += '</tr>';
 	income_month_total += '</tr>';
 	spend_month_total += '</tr>';
-	$('#total').html(month+income_month_total+spend_month_total);
+	sum += '</tr>';
+	$('#total').html(month+income_month_total+spend_month_total+sum);
 	
 	// 수입&지출의 Detail부분 관련
 	var iresult, sresult;
@@ -88,9 +99,9 @@ function display(totalList, importList, spendList){
 		iresult += '<tr>';
 		for(var i=0; i<12; i++){	// 12월까지 이니까.
 			if(i==0){
-				iresult += '<td>'+importList[i][j].CATEGORY+'</td>';
+				iresult += '<th>'+importList[i][j].CATEGORY+'</th>';
 			}
-			iresult += '<td>'+importList[i][j].INCOME_TOTAL+'</td>';
+			iresult += '<td>'+importList[i][j].INCOME_TOTAL.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+' </td>';
 		}
 		iresult += '</tr>';
 	}
@@ -100,9 +111,9 @@ function display(totalList, importList, spendList){
 		sresult += '<tr>';
 		for(var i=0; i<12; i++){	// 12월까지 이니까.
 			if(i==0){
-				sresult += '<td>'+spendList[i][j].CATEGORY+'</td>';
+				sresult += '<th>'+spendList[i][j].CATEGORY+'</th>';
 			}
-			sresult += '<td>'+spendList[i][j].SPEND_MONEY+'</td>';
+			sresult += '<td>'+spendList[i][j].SPEND_MONEY.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+' </td>';
 		}
 		sresult += '</tr>';
 	}
@@ -116,6 +127,10 @@ function display(totalList, importList, spendList){
 $(document).ready(function(){
 	barGraph(${requestScope.total});
 	display(${requestScope.total}, ${requestScope.detailImport}, ${requestScope.detailSpend});
+
+	/*========= 정렬 =========*/
+	$('#total th, #detail th').prop("align", "center");
+	$('td').prop("align", "right");
 });
 
 </script>

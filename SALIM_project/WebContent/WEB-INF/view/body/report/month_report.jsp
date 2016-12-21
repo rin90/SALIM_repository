@@ -6,7 +6,9 @@
 </h2>
 <br>
 <div id="chart" style="width=1000px"></div>
+<hr>
 
+<table id="spend_top5_table"></table>
 
 <%--=================================  MonthPicker 처리하는 부분 ================================= --%>
 <!-- monthpicker설정을 위한 script부분 -->
@@ -57,7 +59,8 @@
 			data:{"month":target, "memberId":"tester2"},
 			dataType:"json",
 			success:function(result){
-				graph(result);
+				graph(result.list);
+				spendMoneyTop5(result.top5);
 			},
 			error:function(request, status, error){
 				alert("code:"+request.Status+"\nerror:"+error);
@@ -107,6 +110,22 @@ function graph(arr){
 
 $(document).ready(function(){
 	graph(${requestScope.result});
+	spendMoneyTop5(${requestScope.top5});
 });
 
+// request에 있는 내용을 바탕으로 Table구성
+function spendMoneyTop5(list){
+	//alert(list.length);
+	if(list.length == 0){
+		$('#spend_top5_table').html('<tr><td>아직 등록된 정보가 없습니다.</td></tr>');
+		return false;
+	}
+	//alert(list.length);
+	var turn = list.length<5 ? list.length:5;
+	var row = '';
+	for(var i=0; i<turn; i++){
+		row += '<tr><th>'+(i+1)+'위</th><td>'+list[i].BIG_CONTENT+'</td><td>'+list[i].TOTAL+'</td></tr>';
+	}
+	$('#spend_top5_table').html(row);
+}
 </script>

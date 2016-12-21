@@ -6,7 +6,7 @@
 		보내줘야 하는 값 : memberId, 년도월 (예-201611)-id:yM, textarea에 있는 값-id:goal
 		ajax처리 요망
 		button의 경우 내용에 변화가 있는 경우에 활성화.
-	-->
+-->
 <script type="text/javascript">
 	$(document).ready(function() {
 		/* 목표 관련 등록하는 부분 */

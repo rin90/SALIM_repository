@@ -66,4 +66,14 @@ public class ReportServiceImpl implements ReportService{
 		}
 		return list;
 	}
+
+	// 1달동안 사용한 내역들 중 사용금액이 많은 순서대로 조회 (대분류 기준)
+	@Override
+	public List selectSpendOrderByMoney(Map map) {
+		List temp = edao.selectSpendOrderByMoney(map);
+		System.out.println("Service : " + temp);
+		return temp;
+	}
+	
+	
 }

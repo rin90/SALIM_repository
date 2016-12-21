@@ -91,6 +91,22 @@ from bigcategory big,
 where big.big_code=small.big_code
 group by big.big_code;
 
+-- [최종] 대분류별 지출 금액 정산
+select b.big_content, s.total 
+from bigcategory b, 
+	(	select big.big_code, sum(small.total) total
+		from bigcategory big, 
+			(select s.small_code, e.total, s.big_code
+			 from smallcategory s, 
+				(select code_id, nvl(sum(cash_expense),0)+nvl(sum(card_expense),0) total
+					from expense
+					where to_char(expense_date, 'YYYY-MM')='2016-12' and member_id='tester2'
+					group by code_id) e
+		 	 where s.small_code = e. code_id) small
+		where big.big_code=small.big_code
+		group by big.big_code	) s 
+where b.big_code = s.big_code
+order by s.total desc;
 
 -- smallCategory에 특정 달에 smallCategory별 지출합을 구하고 해당하는 카테고리의 명과 소속 big_code를 알아오기
 select s.small_code, s.small_content, e.total, s.big_code
