@@ -57,21 +57,51 @@ function test(){
 /*=================== 일정 등록 및 수정에 관한 처리하는 부분 ===========================*/
 function updateSchedule(){
 	var queryString = "";
+	var input = true;
 	var go = false;
 	
+	
 	// 메모에 관한 부분은 추가적으로 확인
-	if($('#dia_memo').val().length>0 && $('#dia_memo').val()!=note){
+	if($('#dia_memo').val()!=note){
 		note = $('#dia_memo').val();
 		go = true;
+	}
+	
+	if($('#dia_memo').val().length > 1000){
+		alert("메모는 1000자 이하로 입력해주세요");
+		$(this).focus();
+		return false;
 	}
 	
 	// 변경된 내용이 있는지 여부 확인
 	if($('#dia_tbody tr.target input').length > 0){
 		$('#dia_tbody tr.target input').each(function(idx){
-			queryString += $(this).prop("name")+"="+$(this).prop("value")+"&";
+			var name = $(this).prop("name");
+			var value = $(this).prop("value").trim();
+			var message = '';
+			// input에 값이 없는 경우 저장해달라고 알림
+			if(value==''){	message = "입력되지 않은 부분이 있습니다. 확인해주세요.";		}
+			if(name=='title' && value.length > 20){
+				message = "20자 이내로 입력하세요.";
+			}
+			if(name=="detail" && value.length > 100){
+				message = "100자 이내로 입력하세요.";
+			}
+			if(message != ''){
+				alert(message);
+				$(this).val('');	
+				$(this).focus();
+				input = false; 		
+				return false;
+			}
+			queryString += name+"="+value+"&";
 		});
 		go = true;
 	//	$("#layer").text(queryString);
+	}
+	
+	if(!input){
+		return false;
 	}
 	
 	if(!go){	// tbody에 input태그가 존재하지 않으면 등록할 내용이 없다고 알림.
@@ -237,7 +267,6 @@ $(document).ready(function(){
 	});
 	
 	$('#dia_btnDiv').on('click', '#minusBtn', function(){
-		alert('삭제할 정보들 가져오는 작업 필요');
 		
 		// 삭제 대상 확인 및 대상들의 정보 가져오기
 		var queryString = "";
@@ -259,7 +288,7 @@ $(document).ready(function(){
 			data:queryString,
 			dataType:"json",
 			success:function(no){
-				alert(no);
+				//alert(no);
 				
 				/*--------------------dialog에 적용----------------------*/
 				
