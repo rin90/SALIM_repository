@@ -83,19 +83,17 @@
 		});
 		
 		/* 권한자이면 클릭했을 때 수정가능하게 바꾸기 */
-		$("table").contents().on("click", function(){
-			var grantId = '<%=((Collect) session.getAttribute("group_info")) == null
-					? ""
-					: ((Collect) session.getAttribute("group_info")).getGrantId()%>';
-			var memberId = '<%=((Member) session.getAttribute("login_info")).getMemberId()%>';
-			if(grantId != "" && (grantId != memberId)){ //그룹권한자와 회원이 불일치	
-			}else{
-				$("input[readOnly=readOnly]").attr("readOnly", false);
-				$("select[name=cardType]").attr("disabled", false);
-				$(".bigCategory").attr("disabled", false);
-				$(".smallCategory").attr("disabled", false);
-			}
-		});
+
+		var grantId = '<%=((Collect) session.getAttribute("group_info")) == null? "": ((Collect) session.getAttribute("group_info")).getGrantId()%>';
+		var memberId = '<%=((Member) session.getAttribute("login_info")).getMemberId()%>';
+		if(grantId != "" && (grantId != memberId)){ //그룹권한자와 회원이 불일치	
+			alert("그룹의 리더만 작성 가능합니다. 열람만 가능합니다.");
+		}else{
+			$("input[readOnly=readOnly]").attr("readOnly", false);
+			$("select[name=cardType]").attr("disabled", false);
+			$(".bigCategory").attr("disabled", false);
+			$(".smallCategory").attr("disabled", false);
+		};
 		
 		//지출내역 글자수 체크
 		$(".explane").keyup(function(e){
@@ -143,8 +141,7 @@
 				var expenseIdList = {
 					"expenseIdList" : checkedArr
 				};
-				location.href = "/SALIM_project/household/login/expenseDelete.do?"
-						+ checkedArr;
+				location.href = "/SALIM_project/household/login/expenseDelete.do?"+ checkedArr;
 			}
 		}
 	}
@@ -152,11 +149,20 @@
 	//숫자 포맷 체크
 	var inputs = window.document.getElementsByClassName("element");
 	var regExp = /^[0-9]+$/;
+	var selects = window.document.getElementsByClassName("smallCategory");
+	var bigSelects = window.document.getElementsByClassName("bigCategory");
 	function checkFormat() {
 		for (var i = 0; i < inputs.length; i++) {
 			if (!(inputs[i].value == "") && !(regExp.test(inputs[i].value))) {
 				alert("숫자만 써주세요.");
 				inputs[i].focus();
+				return false;
+			}
+		}
+		//소분류가 미분류이면 선택해달라고 하기
+		for(var i=0; i<selects.length; i++){
+			if(selects[i].value == 18 && bigSelects[i].value != 8){
+				alert("소분류를 선택해주세요");
 				return false;
 			}
 		}
