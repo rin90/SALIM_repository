@@ -4,7 +4,7 @@
 <div>
 	<table class="table table-condensed">
 		<thead>
-			<tr>
+			 <tr class="active">
 				<td>번호</td>
 				<td>제목</td>
 				<td>작성자</td>
