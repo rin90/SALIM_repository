@@ -13,7 +13,6 @@ public class TipBoard implements Serializable{
 	private MultipartFile fileRoot;
 	private String fileName;
 	private int click =0;
-	private int good =0;
 	private String classification;//분류
 	private Date registerTime =new Date(); //작성일
 	private String memberId;
@@ -25,8 +24,8 @@ public class TipBoard implements Serializable{
 		super();
 	}
 
-	public TipBoard(int no, String title, String content, MultipartFile fileRoot, String fileName, int click, int good,
-			String classification, Date registerTime, String memberId) {
+	public TipBoard(int no, String title, String content, MultipartFile fileRoot, String fileName, int click,
+			String classification, Date registerTime, String memberId, List<TipComment> tipComment) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -34,10 +33,10 @@ public class TipBoard implements Serializable{
 		this.fileRoot = fileRoot;
 		this.fileName = fileName;
 		this.click = click;
-		this.good = good;
 		this.classification = classification;
 		this.registerTime = registerTime;
 		this.memberId = memberId;
+		this.tipComment = tipComment;
 	}
 
 	public int getNo() {
@@ -88,14 +87,6 @@ public class TipBoard implements Serializable{
 		this.click = click;
 	}
 
-	public int getGood() {
-		return good;
-	}
-
-	public void setGood(int good) {
-		this.good = good;
-	}
-
 	public String getClassification() {
 		return classification;
 	}
@@ -131,9 +122,8 @@ public class TipBoard implements Serializable{
 	@Override
 	public String toString() {
 		return "TipBoard [no=" + no + ", title=" + title + ", content=" + content + ", fileRoot=" + fileRoot
-				+ ", fileName=" + fileName + ", click=" + click + ", good=" + good + ", classification="
-				+ classification + ", registerTime=" + registerTime + ", memberId=" + memberId + ", tipComment="
-				+ tipComment + "]";
+				+ ", fileName=" + fileName + ", click=" + click + ", classification=" + classification
+				+ ", registerTime=" + registerTime + ", memberId=" + memberId + ", tipComment=" + tipComment + "]";
 	}
 
 	@Override
@@ -145,7 +135,6 @@ public class TipBoard implements Serializable{
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((fileName == null) ? 0 : fileName.hashCode());
 		result = prime * result + ((fileRoot == null) ? 0 : fileRoot.hashCode());
-		result = prime * result + good;
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + no;
 		result = prime * result + ((registerTime == null) ? 0 : registerTime.hashCode());
@@ -185,8 +174,6 @@ public class TipBoard implements Serializable{
 				return false;
 		} else if (!fileRoot.equals(other.fileRoot))
 			return false;
-		if (good != other.good)
-			return false;
 		if (memberId == null) {
 			if (other.memberId != null)
 				return false;
@@ -212,6 +199,7 @@ public class TipBoard implements Serializable{
 		return true;
 	}
 
+	
 
 
 	

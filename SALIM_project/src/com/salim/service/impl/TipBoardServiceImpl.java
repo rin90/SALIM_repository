@@ -43,12 +43,6 @@ public class TipBoardServiceImpl implements TipBoardService {
 	}
 
 	@Override
-	public void goodUpdate(int no, int num) {
-
-		dao.goodUpdate(no, num);
-	}
-
-	@Override
 	public void tipDelete(int no) {
 		dao.tipDelete(no);
 

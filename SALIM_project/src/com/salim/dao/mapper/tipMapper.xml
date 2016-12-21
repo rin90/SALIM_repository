@@ -8,7 +8,6 @@
 		<result column="content" property="content" />
 		<result column="file_root" property="fileName" />
 		<result column="click" property="click" />
-		<result column="good" property="good" />
 		<result column="classification" property="classification"/>
 		<result column="register_time" property="registerTime" />
 		<result column="member_id" property="memberId" />
@@ -41,7 +40,7 @@
 			seq_tip.nextval from dual
 		</selectKey>
 		insert into tip_board
-		values(#{no},#{title},#{content},#{fileName},#{click},#{good},#{classification},#{registerTime},#{memberId})
+		values(#{no},#{title},#{content},#{fileName},#{click},#{classification},#{registerTime},#{memberId})
 	</insert>
 
 	<!-- 글수정 -->
@@ -63,14 +62,6 @@
 		where no=#{no}
 	</update>
 
-	<!-- 좋아용 증가 -->
-	<update id="goodUpdate" parameterType="map">
-		update tip_board
-		set
-		good=good+#{num}
-		where no=#{no}
-	</update>
-
 	<!-- 글 삭제 -->
 	<delete id="tipDelete" parameterType="_int">
 		delete from tip_board
@@ -80,7 +71,7 @@
 	
 	<!--(상세화면) 글 번호로 글 찾기(상세화면) - 조인연산 사용-->
 	<select id="selectByNo" parameterType="_int" resultMap="tipBoard-tipComment-join-resultMap">
-		select t.classification,t.no,t.title,t.member_id ,t.register_time ,t.click,t.good,t.content,t.file_root 
+		select t.classification,t.no,t.title,t.member_id ,t.register_time ,t.click,t.content,t.file_root 
 		,c.id,c.comment_content,c.comment_member_id ,c.no,c.comment_group ,c.group_level ,c.comment_register_time 
 		from tip_board t,(
 					select id,no,comment_content,comment_member_id ,comment_group ,group_level ,comment_register_time 
@@ -108,10 +99,10 @@
 	<!-- page처리를 위한 현재 페이지 -->
 	<select id="selectCurrentPage" parameterType="map" resultType="tipboard">
 		select classification,no,title,member_id memberId,register_time
-		registerTime,click,good
+		registerTime,click
 		from (
 		select ceil(rownum/#{currentPage})
-		page,no,classification,title,member_id,register_time,click,good
+		page,no,classification,title,member_id,register_time,click
 		from
 		tip_board
 		)
@@ -131,14 +122,14 @@
 	<!-- 조회 - 제목으로 검색 -->
 	<select id="selectByTitle" parameterType="map" resultType="tipboard">
 		select classification,no,title,member_id memberId,register_time
-		registerTime,click,good,file_root fileName
+		registerTime,click,file_root fileName
 		from(
 		select
 		ceil(rownum/#{current})
-		page,classification,no,title,member_id,register_time,click,good,file_root
+		page,classification,no,title,member_id,register_time,click,file_root
 		from (
 		select
-		classification,no,title,member_id,register_time,click,good,file_root
+		classification,no,title,member_id,register_time,click,file_root
 		from tip_board
 		where title like '%'||#{title}||'%' 
 		order by no desc
@@ -162,14 +153,14 @@
 	<!-- 조회- 작성자로 검색 -->
 	<select id="selectByMemberId" parameterType="map" resultType="tipboard">
 		select classification,no,title,member_id memberId,register_time
-		registerTime,click,good,file_root fileName
+		registerTime,click,file_root fileName
 		from(
 		select
 		ceil(rownum/#{current})
-		page,classification,no,title,member_id,register_time,click,good,file_root
+		page,classification,no,title,member_id,register_time,click,file_root
 		from (
 		select
-		classification,no,title,member_id,register_time,click,good,file_root
+		classification,no,title,member_id,register_time,click,file_root
 		from tip_board
 		where member_id=#{memberId} 
 		order by no desc
@@ -191,14 +182,14 @@
 	<select id="selectByClassification" parameterType="map"
 		resultType="tipboard">
 		select
-		classification,no,title,memberId,registerTime,click,good
+		classification,no,title,memberId,registerTime,click
 		from(
 		select
 		ceil(rownum/#{current})
-		page,classification,no,title,memberId,registerTime,click,good
+		page,classification,no,title,memberId,registerTime,click
 		from(
 		select classification,no,title,member_id memberId,register_time
-		registerTime,click,good
+		registerTime,click
 		from tip_board
 		where
 		classification=#{classification}

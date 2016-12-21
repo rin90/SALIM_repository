@@ -24,6 +24,7 @@ create table bigCategory(
 	big_content varchar2(30) not null,
 	high_code number 
 );
+drop table bigCategory
 select * from bigCategory;
 drop table bigCategory cascade constraint;
 

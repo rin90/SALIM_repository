@@ -24,7 +24,6 @@
 				<td>작성자</td>
 				<td>작성일</td>
 				<td>조회</td>
-				<td>좋아요</td>
 			</tr>
 		</thead>
 
@@ -40,7 +39,6 @@
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${tipBoard.registerTime }" /></td>
 					<td>${tipBoard.click }</td>
-					<td>${tipBoard.good }</td>
 				</tr>
 			</c:forEach>
 
