@@ -9,6 +9,7 @@
 <script type="text/javascript">
 	
 </script>
+
 <style type="text/css">
 .errorMessage{
 	font-size: 12px;
@@ -17,11 +18,11 @@
 
 </style>
 
-
+	<h4>자유게시판</h4>
 	<form id="registerForm" action="${initParam.rootPath}/free/login/register.do"
 		method="post" enctype="multipart/form-data">
 
-		<h4>자유게시판</h4>
+		
 	 	제목:<input type="text" name="title"><br> <div class="errorMessage"><form:errors path="freeBoard.title" /></div>
 
 		파일첨부:<input type="file" value="사진" name="fileRoot"><br>
