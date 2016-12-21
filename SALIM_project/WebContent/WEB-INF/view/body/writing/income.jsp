@@ -92,16 +92,15 @@
 			});
 			
 			/* 권한자이면 클릭했을 때 수정가능하게 바꾸기 */
-			$("table").contents().on("click", function(){
-				var grantId = '<%=((Collect)session.getAttribute("group_info"))== null? "":((Collect)session.getAttribute("group_info")).getGrantId()%>';
-				var memberId = '<%=((Member)session.getAttribute("login_info")).getMemberId()%>';
-				if(grantId != "" && (grantId != memberId)){ //그룹권한자와 회원이 불일치	
-				}else{
-					$("input[readOnly=readOnly]").attr("readOnly", false);
-					$(".bigCategory").attr("disabled", false);
-					$(".smallCategory").attr("disabled", false);
-				}
-			});
+			var grantId = '<%=((Collect)session.getAttribute("group_info"))== null? "":((Collect)session.getAttribute("group_info")).getGrantId()%>';
+			var memberId = '<%=((Member)session.getAttribute("login_info")).getMemberId()%>';
+			if(grantId != "" && (grantId != memberId)){ //그룹권한자와 회원이 불일치	
+				alert("그룹의 리더만 작성 가능합니다.");
+			}else{
+				$("input[readOnly=readOnly]").attr("readOnly", false);
+				$(".bigCategory").attr("disabled", false);
+				$(".smallCategory").attr("disabled", false);
+			}
 			
 			//수입내역 글자수 체크	
 			$(".explane").keyup(function(e){
@@ -155,6 +154,8 @@
 		//저장시 숫자 포맷 체크
 		var inputs = window.document.getElementsByClassName("element");
 		var regExp = /^[0-9]+$/;
+		var selects = window.document.getElementsByClassName("smallCategory");
+		var bigSelects = window.document.getElementsByClassName("bigCategory");
 		function checkFormat(){
 			for(var i=0; i<inputs.length; i++){
 				if(!(inputs[i].value=="") && !(regExp.test(inputs[i].value))){
@@ -163,6 +164,13 @@
 					return false;
 				} 
 			} 
+			//소분류가 미분류이면 선택해달라고 하기
+			for(var i=0; i<selects.length; i++){
+				if(selects[i].value == 1 && bigSelects[i].value != 3){
+					alert("소분류를 선택해주세요");
+					return false;
+				}
+			}
 			$("select[disabled=disabled]").attr("disabled", false);
 			return true;
 		}
