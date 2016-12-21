@@ -217,17 +217,5 @@ public class TipController {
 		return "body/tipboard/tip_board_detail.tiles";
 	}
 
-	// 좋아요 증가
-	@RequestMapping("good")
-	@ResponseBody
-	public void goodUpdate(int no, String whether, HttpServletRequest request) {
-		System.out.println("왓??");
-		if (whether.isEmpty()) {
-			tipBoardService.goodUpdate(no, -1);
-		} else {
-			tipBoardService.goodUpdate(no, 1);
-		}
-
-	}
 
 }

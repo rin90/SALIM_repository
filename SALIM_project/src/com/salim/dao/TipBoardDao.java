@@ -24,8 +24,6 @@ public interface TipBoardDao {
 	TipBoard selectByNo(int no);
 
 
-	// 좋아요 증가
-	int goodUpdate(int no, int num);
 
 	// 조회수 증가
 	void clickUpdateint(int no);

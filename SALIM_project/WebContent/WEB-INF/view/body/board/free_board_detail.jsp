@@ -109,14 +109,15 @@ ${requestScope.freeBoard.title } &nbsp;&nbsp;&nbsp;
 <hr>
 ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 <p />
-
+<c:if test="${requestScope.freeBoard.fileName != null }">
 <img
 	src="${initParam.rootPath }/fileroute/${requestScope.freeBoard.fileName }">
+</c:if>
 <br>${requestScope.freeBoard.content }
 <p />
 댓글 &nbsp;${requestScope.commentTotal }&nbsp;&nbsp;조회&nbsp;${requestScope.freeBoard.click }&nbsp;&nbsp;
 	
-	<%--영구적으로하면 hidden제거 --%>
+	
 		<hr> <br>
 	
 		<div id="d">

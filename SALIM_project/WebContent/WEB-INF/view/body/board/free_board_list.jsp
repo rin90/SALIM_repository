@@ -50,21 +50,23 @@
 		<c:otherwise>
 					◀&nbsp;
 				</c:otherwise>
-	</c:choose>
+	</c:choose> 
 
 	<!-- 페이지 뿌리기 -->
-	<c:forEach begin="${requestScope.pageBean.beginPage }"
-		end="${requestScope.pageBean.endPage }" var="page">
-		<c:choose>
-			<c:when test="${requestScope.pageBean.page == page }">
-						[${page }]
-					</c:when>
-			<c:otherwise>
-				<a href="${initParam.rootPath }/free/login/list.do?page=${page }">${page }</a>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-
+	<ul class="pagination">
+		<c:forEach begin="${requestScope.pageBean.beginPage }"
+			end="${requestScope.pageBean.endPage }" var="page">
+			<c:choose>
+				<c:when test="${requestScope.pageBean.page == page }">
+							[${page }]
+						</c:when>
+				<c:otherwise>
+					<li><a href="${initParam.rootPath }/free/login/list.do?page=${page }">${page }</a></li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	</ul>
+	
 	<!-- 다음페이지 -->
 	<c:choose>
 		<c:when test="${requestScope.pageBean.nextGroup }">
@@ -84,9 +86,10 @@
 		<c:forEach items="${requestScope.codes }" var="code">
 			<option>${code.code }</option>
 		</c:forEach>
-	</select> <input type="hidden" name="page" value="1"> <input type="text"
-		name="search"> <input class="btn btn-info btn-sm"
-		type="submit" value="검색"> 
+	</select> 
+	<input type="hidden" name="page" value="1"> 
+	<input type="text" name="search" > 
+	<input class="btn btn-info btn-sm" type="submit" value="검색">
 	<a class="btn btn-default" href="${initParam.rootPath }/free/login/form.do?page=${requestScope.pageBean.page}">글쓰기</a>
 </form>
 </div>

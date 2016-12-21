@@ -131,13 +131,12 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 <br>${requestScope.tipBoard.content }
 <p />
 댓글 &nbsp;${requestScope.commentTotal }&nbsp;&nbsp;조회&nbsp;${requestScope.tipBoard.click }&nbsp;&nbsp;
-좋아요 &nbsp; ${requestScope.tipBoard.good }
 
 
 
-	<button hidden="" id="good" type="button" value="false">♡&nbsp;0</button>
+
 	
-	<%--영구적으로하면 hidden제거 --%>
+
 		<hr> <br>
 	
 		<div id="a">

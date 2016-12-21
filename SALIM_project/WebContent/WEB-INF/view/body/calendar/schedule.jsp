@@ -2,17 +2,14 @@
 <style>
     label, input { display:block; }
     input.text { margin-bottom:12px; width:95%; padding: .4em; }
-    fieldset { padding:0; border:0; margin-top:25px; min-height:200px;  }
+    fieldset { padding:0; border:0; margin-top:5px;  min-height:250px;  }
 </style>
-  
-  
-<div id="dialog" title="Basic dialog" hidden="hidden">
-	<p id="selectDate" align="right"></p>
 
-	<input type="hidden" id="dia_start" >
-	<input type="hidden" id="dia_end">
+<div id="dialog" title="Basic dialog" hidden="hidden">
+	<label id="selectDate"></label>
+	<input type="hidden" id="dia_start">	<input type="hidden" id="dia_end">
 	<fieldset>
-		<table id="scheduleTable" style="width:100%" border="1">
+		<table id="scheduleTable" style="width:100%;"  class="table table-condensed">
 			<thead>
 				<tr>
 					<th hidden="hidden">일정번호</th>	
@@ -31,14 +28,15 @@
 		</table>
 		<div align="right" id="dia_btnDiv"><button id="minusBtn" type="button">-</button>&nbsp;<button id="plusBtn" type="button">+</button></div>
 		
+		<!-- Dialog에서 셋팅한 버튼 -->
 		<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 	</fieldset>
 		
 		
 	<hr>
-	<nav style="width:20%; min-height:200px;line-height: 20px;">
+	<nav style="width:30%; min-height:200px;line-height: 20px;">
 		<p>오늘의 내역</p>
-		<table id="dia_totalMoney"></table>
+		<table id="dia_totalMoney" class="table table-condensed"></table>
 	</nav>
 	<section style="width:65%;min-height:100px;">
 		<b>메모</b>
@@ -189,7 +187,7 @@ dialog = $("#dialog").dialog({
 		loadDayCalendar();
     },
     buttons: {
-        "일정 등록": updateSchedule,
+        "저장": updateSchedule,
         "확인": function() {
         	// 메모가 변경됐는지, 수정된 내용이 있는지 확인
         	if($('#dia_memo').val()!=note || $('#dia_tbody tr.target input').length > 0){
@@ -216,8 +214,8 @@ $(document).ready(function(){
 	
 	$('#dia_btnDiv').on('click', '#plusBtn', function(){
 		var txt = '<tr class="target"><th hidden="hidden"><input type="hidden" name="no" value="0"></th><th width="5%"><input type="checkbox" name="minus"></th>'
-					+'<td width="20%"><input type="text" size="13" class="datepicker" name="end" value='+$("#dia_end").val()+'></td>'
-					+'<td width="30%"><input type="text" size="21" name="title"></td>'
+					+'<td width="20%"><input type="text" size="10" class="datepicker" name="end" value='+$("#dia_end").val()+'></td>'
+					+'<td width="30%"><input type="text" size="20" name="title"></td>'
 					+'<td width="45%"><input type="text" size="35" name="detail"></td></tr>';
 		if($('#dia_tbody tr td:first').text()=='등록된 내용이 없습니다.'){
 			$('#dia_tbody').html(txt);
@@ -225,6 +223,7 @@ $(document).ready(function(){
 			$('#dia_tbody').append(txt);
 		}
 		
+		$("input").addClass("form-control input-sm");
 	});
 
 	$('#allClick').on('click', function(){
@@ -304,10 +303,12 @@ $(document).ready(function(){
 			var detail = $(this).children('td').last().text();
 			// 각 td들에 input type의 tag생성
 			$(this).children('td').not('input')
-							.first().html('<input name="end" size="13" class="datepicker" value="'+end+'">')
-							.next().html('<input name="title"  size="21" value="'+title+'">')
+							.first().html('<input name="end" size="10" class="datepicker" value="'+end+'">')
+							.next().html('<input name="title"  size="20" value="'+title+'">')
 							.next().html('<input name="detail" size="35"  value="'+detail+'">');
 		}
+		
+		$("input").addClass("form-control input-sm");
 	});
 	
 	$('#dia_tbody').on('focus', '.datepicker', function(){

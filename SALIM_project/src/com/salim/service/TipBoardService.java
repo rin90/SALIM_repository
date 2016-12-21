@@ -20,9 +20,6 @@ public interface TipBoardService {
 	// 조회수증가
 	TipBoard clickUpdateint(int no);
 
-	// 좋아요증가
-	void goodUpdate(int no, int num);
-
 	// 글삭제
 	void tipDelete(int no);
 

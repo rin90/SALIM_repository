@@ -40,15 +40,6 @@ public class TipBoardDaoImpl implements TipBoardDao{
 	public void clickUpdateint(int no) {
 		session.update(make("clickUpdate"),no);
 	}
-	
-
-	@Override
-	public int goodUpdate(int no ,int  num) {
-		HashMap map = new HashMap();
-		map.put("no", no);
-		map.put("num", num);
-		return session.update("goodUpdate",map);
-	}
 
 	@Override
 	public void tipDelete(int no) {
