@@ -119,7 +119,7 @@ create table goals(--목표
 target number primary key,--목표번호
 y_m Date not null,--목표달
 gool varchar2(1000) not null,--내용
-member_id varchar2(50) constraint goa_mem_fk references member not null--회원id
+member_id varchar2(50) not null--회원id
 );
 
 drop table goals;

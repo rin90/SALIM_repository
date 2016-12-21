@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
@@ -20,6 +21,8 @@
 	color: red
 }
 
+.smallerror{color:red;}
+.smallokay{color:blue;}
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -55,55 +58,18 @@ $(document).ready(function(){
 				 var result= obj.flag;
 				 if(result)
 				 {
-				 	$("#idResult").html("<font color='blue' size='2'>사용할 수 있는 아이디입니다.<font>")
+				 	$("#idResult").html("<mark class='pull-right'><small class='smallokay'>사용할 수 있는 아이디입니다!</small></mark>")
 				 }else
 				 {
-					 $("#idResult").html("<font color='red' size='2'>사용할 수 없는 아이디입니다.<font>")
+					 $("#idResult").html("<mark class='pull-right'><small class='smallerror'>이미 사용 중인 아이디입니다!</small></mark>");
 				 }
 			 }
-			/*  "error":function()
-			 {
-				 alert("실패");
-			 }
-				 */
+		
 		});
 		
 		
 	});
-	$("#email").on("blur", function(){
-		$("#emailResult").empty();
-		$.ajax({
-			 "url":"${initParam.rootPath}/member/checkingDuplicatedEmail.do",
-			 "data":"email="+$("#email").val(),
-			 "dataType":"json",
-			 "beforeSend":function(){
-				 
-				 if(!$('#email').val())
-			     {
-			        alert("이메일을 입력하세요.");
-			        return false;
-			     }
-			 },
-			 "success":function(obj){
-				 
-				 var result= obj.flag;
-				 if(result)
-				 {
-				 	$("#emailResult").html("<font color='blue' size='2'>사용할 수 있는 이메일입니다.<font>")
-				 }else
-				 {
-					 $("#emailResult").html("<font color='red' size='2'>사용할 수 없는 이메일입니다.<font>")
-				 }
-			 }
-			 /* "error":function()
-			 {
-				 alert("실패");
-			 } */
-				
-		});
-		
-		
-	});
+	
 	
 	$("#password2").on("blur", function(){
 		$("#passwordResult").empty();
@@ -129,7 +95,7 @@ $(document).ready(function(){
 				 var result= obj.passwordResult;
 				 if(!result)
 				 {
-				 	$("#passwordResult").html("<font color='red' size='2'>비밀번호가 일치하지 않습니다. 다시 입력해주세요.<font>")
+				 	$("#passwordResult").html("<mark class='pull-right'><small class='smallerror'>비밀번호를 다시 확인해주세요!</small></mark>")
 				 }
 			 }
 		/* 	 "error":function()
@@ -203,6 +169,38 @@ $(document).ready(function(){
 	          
 	         });
 		 
+		 $("#email").on("blur", function(){
+				$("#emailResult").empty();
+				$.ajax({
+					 "url":"${initParam.rootPath}/member/checkingDuplicatedEmail.do",
+					 "data":"email="+$("#email").val(),
+					 "dataType":"json",
+					 "beforeSend":function(){
+						 
+						 if(!$('#email').val())
+					     {
+					        alert("이메일을 입력하세요.");
+					        return false;
+					     }
+					 },
+					 "success":function(obj){
+						 
+						 var result= obj.flag;
+						 if(!result)
+						 {
+							 $("#emailResult").html("<mark class='pull-right'><small class='smallerror'>이미 사용 중인 이메일입니다!</small></mark>")
+						 }
+					 }
+					 /* "error":function()
+					 {
+						 alert("실패");
+					 } */
+						
+				});
+				
+				
+			});
+		 
 		 
 });
 </script>
@@ -254,7 +252,7 @@ $(document).ready(function(){
 				<input type="text" id="name" name="name" size='21'>
 				<span class="errorMessage">
 						<form:errors path="member.name"/>
-					</span>
+				</span>
 			</td>
 		</tr>
 		<tr>
@@ -297,25 +295,32 @@ $(document).ready(function(){
 </form> --%>
 
 <div class="col-md-10 col-md-offset-2">
-<h2>새 계정 만들기</h2><br><br>
+<h2>새 계정 만들기</h2>
+
+<%-- <c:if test="${not empty requestScope.joinFail}">
+	${requestScope.joinFail}
+</c:if> --%>
 <form class="form-horizontal" method="post" action="${initParam.rootPath}/member/join.do" method="POST">
   <div class="form-group">
     <h4><label class="control-label col-sm-2" >아이디 입력</label></h4>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="memberId" id="memberId" placeholder="salim">
+      <p id="idResult" class="help-block"></p>
+      
     </div>
   </div>
   <div class="form-group">
     <h4><label class="control-label col-sm-2" for="pwd">비밀번호 입력</label></h4>
     <div class="col-sm-10"> 
       <input type="password" class="form-control"  id="password" name="password" placeholder="********">
-     <font color="gray">8~20자의 영문 대/소문자,숫자,특수문자 혼용가능</font>    <br><br>
+     <font color="gray">8~20자의 영문 대/소문자,숫자,특수문자 혼용가능</font>
+     <br><br>
     </div>
 
     <h4><label class="control-label col-sm-2" for="pwd">비밀번호 확인</label></h4>
     <div class="col-sm-10"> 
       <input type="password" class="form-control"  id="password2" name="password2" placeholder="비밀번호를 다시 입력해주세요.">
-      <p class="help-block"><small>다른 유저의 유저이름과 중복되도 상관없으며, 나중에 변경할 수 있습니다.</small><mark style="display:none;" class="pull-right"><small>한 글자 이상의 사용자 이름을 입력해주세요</small></mark></p>
+      <p id="passwordResult" class="help-block"></p>
     </div>
   </div>
   
@@ -344,7 +349,7 @@ $(document).ready(function(){
     <h4><label class="control-label col-sm-2" >이메일</label></h4>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="email" name="email" placeholder="salim@google.com">
-      <font color="gray">이메일은 그룹 초대를 받을 때 사용될 수 있습니다.</font>
+      <font color="gray">이메일은 그룹 초대를 받을 때 사용될 수 있습니다.</font><p id="emailResult" class="help-block"></p>
     </div>
   </div>
   
