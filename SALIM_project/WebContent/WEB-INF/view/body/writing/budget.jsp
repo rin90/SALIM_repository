@@ -237,6 +237,8 @@
 					<tr>
 						<td>전월 수입</td>
 						<td colspan="3" align="left">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.monthIncome }"/>
 						</td>
 					</tr>

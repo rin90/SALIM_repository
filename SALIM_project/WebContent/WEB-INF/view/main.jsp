@@ -163,19 +163,19 @@ footer {
 	 					<!-- 이미지 넣는 곳 -->
 	  					<div class="carousel-inner" role="listbox">
 	    					<div class="item active">
-	      						<img src="/SALIM_project_test/img/portfolio/pic1.PNG" width="820" alt="그림이 없을 때 나오는 설명">
+	      						<img src="/SALIM_project/img/portfolio/pic1.PNG" width="820" alt="그림이 없을 때 나오는 설명">
 	      						<div class="carousel-caption">
 	        						사진 위에 설명 나오게 하는 곳
 	      						</div>
 	    					</div>
 	   						<div class="item">
-	      						<img src="/SALIM_project_test/img/portfolio/pic2.PNG" width="358" alt="그림이 없을 때 나오는 설명">
+	      						<img src="/SALIM_project/img/portfolio/pic2.PNG" width="358" alt="그림이 없을 때 나오는 설명">
 	      						<div class="carousel-caption">
 	        						사진 위에 설명 나오게 하는 곳
 	      						</div>
 	    					</div>
 			    			<div class="item">
-			      				<img src="/SALIM_project_test/img/portfolio/pic3.PNG" width="817" alt="그림이 없을 때 나오는 설명">
+			      				<img src="/SALIM_project/img/portfolio/pic3.PNG" width="817" alt="그림이 없을 때 나오는 설명">
 			      				<div class="carousel-caption">
 			        				사진 위에 설명 나오게 하는 곳
 			      				</div>
