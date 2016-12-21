@@ -14,43 +14,27 @@
 
 
 
-<div class="container">
+<div class="container" style="min-height: 1300px;">
 	<div class="panel-group" id="accordion">
 	
-		<%-- <div class="panel panel-default">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-						일정
-					</a>
-				</h4>
-			</div>
-			<div id="collapse1" class="panel-collapse collapse"> <!-- in -->
-				<div class="panel-body">
-					<a href="${initParam.rootPath }/calendar/login/load.do">일정</a><br>
+		<c:if test="${sessionScope.group_info.grantId==sessionScope.login_info.memberId}">
+			<div style="width: 18%">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+							그룹 환경 설정   
+						</a>
+					</h4>
 				</div>
-			</div>
-		</div> --%>	
-		
-		
-		<div style="width: 18%">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
-						그룹 환경 설정   
-					</a>
-				</h4>
-			</div>
-			<div id="collapse5" class="panel-collapse collapse">
-				<div class="panel-body">
-					<c:if test="${sessionScope.group_info.grantId==sessionScope.login_info.memberId}">
+				<div id="collapse5" class="panel-collapse collapse">
+					<div class="panel-body">
 						<a href="${initParam.rootPath }/collectionSetting.do"> 환경 설정</a><br>
 						<a href="${initParam.rootPath }/cardNBank/login/cardNBankSelect.do"> 그룹 통장 관리</a><br>
 						<a href="${initParam.rootPath }/collection/inviteSetting.do"> 그룹 멤버 관리</a><br>
-					</c:if>
+					</div>
 				</div>
 			</div>
-		</div>
+		</c:if>
 		
 		<div style="width: 18%">
 			<div class="panel-heading">
@@ -66,9 +50,6 @@
 				</div>
 			</div>
 		</div>
-		
-		
-		
 		
 		<div style="width: 18%">
 			<div class="panel-heading">
@@ -120,7 +101,6 @@
 				</div>
 			</div>
 		</div>
-
 		
 	</div>
 </div>
