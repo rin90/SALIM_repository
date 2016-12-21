@@ -228,18 +228,14 @@
 					</table>
                 </div>
             </div>
+       
             <div class="col-md-12">
 				<!-- 수입입력란 -->
+				<ul class="nav nav-tabs">
+				  <li><a href="${initParam.rootPath }/household/login/expenseSelect.do">지출</a></li>
+				  <li class="active"><a href="${initParam.rootPath }/household/login/incomeSelect.do" style="background-color:#EAEAEA">수입</a></li>
+				</ul> 
 				<table class="table table-bordered">
-				
-					<thead>
-						<tr>
-							<td colspan="4" align="left">
-								<a href="${initParam.rootPath }/household/login/expenseSelect.do"><input type="button" value="지출"/></a>
-								<a href="${initParam.rootPath }/household/login/incomeSelect.do"><input type="button" value="수입"/></a>
-							</td>
-						</tr>
-					</thead>
 					<tbody>
 						<tr>
 							<td>
@@ -286,9 +282,6 @@
 						</c:if> 
 			
 					
-					
-					
-					
 					<!-- 아무 것도 안 뿌려준 입력창 -->
 					<c:forEach begin="1" end="5">
 						<tr>
@@ -316,25 +309,30 @@
 						
 					</tfoot>
 				</table>
+				<div class="col-md-12" align="right">
+					<!-- 저장버튼 -->
+					<input type="submit" value="저장" id="submitIncome" onclick="return checkFormat()" class="btn right"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" value="선택삭제" id="deleteIncome" onclick="checkevent()" class="btn btn-md  pull-right"/>
+				</div>
             </div>
         </div>
-        <div class="col-md-2" style="margin-top: 100px;">
+        <div class="col-md-2" style="margin-top: 220px;">
         	<!-- 메모장 -->
-        	<h4><메 모 란></h4>
-			<textarea rows="20" cols="50" name="notes" id="notes">${requestScope.notes.content }</textarea>
+        	<h4> &lt; 메 모 란 &gt;</h4>
+			<textarea rows="20" cols="40" name="notes" id="notes" >${requestScope.notes.content }</textarea>
 			<input type="hidden" name="notesNum" value="${empty requestScope.notes.no? 0:requestScope.notes.no }">
         </div>
     
     </div>
-    
+<!--     
     	<div class="row" >
-			<div class="col-md-2" align="center">
-				<!-- 저장버튼 -->
-				<input type="submit" value="저장" id="submitIncome" onclick="return checkFormat()"/>
-				<input type="button" value="선택삭제" id="deleteIncome" onclick="checkevent()"/>
+			<div class="col-md-9" align="right">
+				저장버튼
+				<input type="submit" value="저장" id="submitIncome" onclick="return checkFormat()" class="btn btn-success btn-md  right"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" value="선택삭제" id="deleteIncome" onclick="checkevent()" class="btn btn-danger btn-md  pull-right"/>
 			</div>
 		</div>
-    
+     -->
 </div>
 
 
