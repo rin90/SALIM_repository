@@ -53,7 +53,7 @@
 	</c:choose> 
 
 	<!-- 페이지 뿌리기 -->
-	<ul class="pagination">
+	
 		<c:forEach begin="${requestScope.pageBean.beginPage }"
 			end="${requestScope.pageBean.endPage }" var="page">
 			<c:choose>
@@ -61,11 +61,11 @@
 							[${page }]
 						</c:when>
 				<c:otherwise>
-					<li><a href="${initParam.rootPath }/free/login/list.do?page=${page }">${page }</a></li>
+					<a href="${initParam.rootPath }/free/login/list.do?page=${page }">${page }</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-	</ul>
+	
 	
 	<!-- 다음페이지 -->
 	<c:choose>

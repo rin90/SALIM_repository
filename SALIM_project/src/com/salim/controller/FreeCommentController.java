@@ -23,13 +23,16 @@ public class FreeCommentController {
 	
 	//댓글 등록  -> 답글 도 이 Controller를 통해 처리 --월요일에 ajax처리하기 쿼리랑 dao,service,controller정상 작동
  	@RequestMapping("login/insert")
-	public String commentRegister(@ModelAttribute @Valid FreeComment comment,BindingResult result,int page,String category,String search,ModelMap map) throws Exception{
+	public String commentRegister(@ModelAttribute FreeComment comment,BindingResult result,int page,String category,String search,ModelMap map) throws Exception{
+ 		
  		System.out.println("comment등록 도착");
  		System.out.println("그룹:"+comment.getCommentGroup());
+ 		
  		if(comment.getCommentGroup() ==0){
  			comment.setCommentGroup(service.comGroupUp()); 			
  		}
-		service.comRegister(comment);
+	
+ 		service.comRegister(comment);
 		System.out.println("카테고리comment:"+category);
 		System.out.println("내용comment:"+search);
 		return "redirect:/free/login/seleteDetail.do?no="+comment.getNo()+"&page="+page+"&search="+search+"&category="+URLEncoder.encode(category, "UTF-8");
@@ -41,7 +44,7 @@ public class FreeCommentController {
  	
  	//수정  ->모든 댓글
 	@RequestMapping("login/update")
-	public String comUpdate(@ModelAttribute FreeComment comment,int page,String category,String search){
+	public String comUpdate(@ModelAttribute FreeComment comment,BindingResult result,int page,String category,String search){
 		System.out.println("댓글 수정 도착"+comment.getId());
 		System.out.println(comment.getCommentContent());
 		service.comUpdate(comment);
