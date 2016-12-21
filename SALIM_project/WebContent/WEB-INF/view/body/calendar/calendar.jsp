@@ -8,63 +8,45 @@
 		button의 경우 내용에 변화가 있는 경우에 활성화.
 	-->
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						/* 목표 관련 등록하는 부분 */
-						$("#btnRegisterGoal")
-								.on(
-										"click",
-										function() {
-											$
-													.ajax({
-														url : "${initParam.rootPath}/goal/login/applyDB.do",
-														type : "post",
-														data : {
-															"memberId" : "tester2", //  {sessionScope.login_info.memberId}, 
-															"yM" : $(
-																	"#calendar")
-																	.fullCalendar(
-																			'getDate')
-																	.format(
-																			'YYYY-MM'), // 캘린더에서 현재 보고있는 년도와 달을 받아와야함.
-															"goal" : $("#goal")
-																	.val()
-														},
-														dataType : "text",
-														success : function(obj) {
-															// 버튼을 비활성화 시킬 수 있게. textarea를 변경 불가능하게.
-															$("#goal").attr(
-																	"disabled",
-																	"disabled");
-															$(
-																	"#btnRegisterGoal")
-																	.attr(
-																			"hidden",
-																			"hidden");
-														},
-														// ajax처리하는데 어떤 문제가 발생해서 제대로 수행 안된건지 확인하는 부분
-														error : function(
-																request,
-																status, error) {
-															alert("code:"
-																	+ request.status
-																	+ "\nerror:"
-																	+ error);
-														},
-														beforeSend : function() {
-															//alert($("#goal").val());
-														}
-													});
-										});
-
-						$("#textArea").on("click", function() {
-							$("#goal").removeAttr("disabled");
-							$("#goal").focus();
-							$("#btnRegisterGoal").removeAttr("hidden");
-						});
-
-					});
+	$(document).ready(function() {
+		/* 목표 관련 등록하는 부분 */
+		$("#btnRegisterGoal").on("click",function() {
+			$.ajax({
+				url : "${initParam.rootPath}/goal/login/applyDB.do",
+				type : "post",
+				data : {
+					"memberId" : "tester2", //  {sessionScope.login_info.memberId}, 
+					"yM" : $("#calendar").fullCalendar('getDate').format('YYYY-MM'), // 캘린더에서 현재 보고있는 년도와 달을 받아와야함.
+					"goal" : $("#goal").val()
+				},
+				dataType : "text",
+				success : function(obj) {
+					// 버튼을 비활성화 시킬 수 있게. textarea를 변경 불가능하게.
+					$("#goal").attr("disabled","disabled");
+					$("#btnRegisterGoal").attr("hidden","hidden");
+				},
+				// ajax처리하는데 어떤 문제가 발생해서 제대로 수행 안된건지 확인하는 부분
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\nerror:" + error);
+				},
+				beforeSend : function() {
+					//alert($("#goal").val());
+					if($("#goal").val().length > 333){
+						alert("목표는 333자 이하로 입력해주세요.");
+						$("#goal").focus();
+						return false;
+					}
+				}
+			});
+		});
+	
+		$("#textArea").on("click", function() {
+			$("#goal").removeAttr("disabled");
+			$("#goal").focus();
+			$("#btnRegisterGoal").removeAttr("hidden");
+		});
+	
+	});
 </script>
 
 

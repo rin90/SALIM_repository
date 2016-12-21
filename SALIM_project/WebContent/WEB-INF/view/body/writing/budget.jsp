@@ -236,7 +236,9 @@
 				<thead>
 					<tr>
 						<td>전월 수입</td>
-						<td>
+						<td colspan="3" align="left">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.monthIncome }"/>
 						</td>
 					</tr>
@@ -369,12 +371,10 @@
 				</tfoot>
 			</table>
 			
-			<input type="submit" value="저장하기" onclick="return check();" />
+			<input type="submit" value="저장하기" onclick="return check();" class="btn btn-md right"/>
 		</div>
 	</div>
 </form>		
-	<button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
-  Loading state
-</button>
+
 </body>
 </html>

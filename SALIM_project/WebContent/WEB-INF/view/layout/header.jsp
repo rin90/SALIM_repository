@@ -37,7 +37,7 @@
 	</c:when>
 	<c:otherwise>
 		<h2 align="left">
-			<a><font color="#ffffff">SALIM</font></a>
+			<a href="${initParam.rootPath }/main.do"><font color="#ffffff">SALIM</font></a>
 		</h2>
 	</c:otherwise>
 </c:choose>

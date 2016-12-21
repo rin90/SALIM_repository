@@ -29,18 +29,19 @@
  
 
 <style type="text/css">
-	header {
+header {
     background-color: #00001E;
     text-align: center;
     padding: 5px;
 } 
 
 footer {
-    background-color: skyblue;
+    background-color: #00001E;
     padding-top: 30px;
     text-align: center;
     height: 50px;
     clear: both;
+    padding-bottom: 10px;
 }
 
 .carousel-control.right {
@@ -63,7 +64,12 @@ footer {
 
 .glyphicon-chevron-right:before {
     content: "\e080";
-    color: #2A0066;
+    color: #00001E;
+}
+
+.glyphicon-chevron-left:before {
+    content: "\e079";
+    color: #00001E;
 }
 
 .left carousel-control{
@@ -90,7 +96,7 @@ footer {
 			</c:when>
 			<c:otherwise>
 				<h2 align="left">
-					<a><font color="#ffffff">SALIM</font></a>
+					<a href="${initParam.rootPath }/main.do"><font color="#ffffff">SALIM</font></a>
 				</h2>
 			</c:otherwise>
 		</c:choose>
@@ -157,19 +163,19 @@ footer {
 	 					<!-- 이미지 넣는 곳 -->
 	  					<div class="carousel-inner" role="listbox">
 	    					<div class="item active">
-	      						<img src="/SALIM_project_test/img/portfolio/pic1.PNG" width="820" alt="그림이 없을 때 나오는 설명">
+	      						<img src="/SALIM_project/img/portfolio/pic1.PNG" width="820" alt="그림이 없을 때 나오는 설명">
 	      						<div class="carousel-caption">
 	        						사진 위에 설명 나오게 하는 곳
 	      						</div>
 	    					</div>
 	   						<div class="item">
-	      						<img src="/SALIM_project_test/img/portfolio/pic2.PNG" width="358" alt="그림이 없을 때 나오는 설명">
+	      						<img src="/SALIM_project/img/portfolio/pic2.PNG" width="358" alt="그림이 없을 때 나오는 설명">
 	      						<div class="carousel-caption">
 	        						사진 위에 설명 나오게 하는 곳
 	      						</div>
 	    					</div>
 			    			<div class="item">
-			      				<img src="/SALIM_project_test/img/portfolio/pic3.PNG" width="817" alt="그림이 없을 때 나오는 설명">
+			      				<img src="/SALIM_project/img/portfolio/pic3.PNG" width="817" alt="그림이 없을 때 나오는 설명">
 			      				<div class="carousel-caption">
 			        				사진 위에 설명 나오게 하는 곳
 			      				</div>
@@ -199,8 +205,10 @@ footer {
 </body>
 
 <footer>
+<font style="color: white">
+	살림프로젝트&nbsp;&nbsp;&nbsp;&nbsp;담당자: SALIM 팀&nbsp;&nbsp;&nbsp;&nbsp;
+</font>
 
-살림프로젝트&nbsp;&nbsp;&nbsp;&nbsp;담당자: SALIM 팀&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="${initParam.rootPath }/inquiry.do">문의하기</a>
 
 </footer>

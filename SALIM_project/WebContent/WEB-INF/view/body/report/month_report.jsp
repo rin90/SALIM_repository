@@ -15,12 +15,19 @@
 	#monthpicker {
 		width: 60px;
 	}
+	select{
+		color:#000 !important;
+	}
+	.mtz-monthpicker-widgetcontainer{
+	
+		width: 115px !important;
+	}
+	
 </style>
 <script type="text/javascript" src="${initParam.rootPath }/lib/monthpicker/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${initParam.rootPath }/lib/monthpicker/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${initParam.rootPath }/lib/monthpicker/js/jquery.mtz.monthpicker.js"></script>
 <script>
-
 	var date = new Date();
 	var m = date.getMonth()+1;
 	var y = date.getFullYear();
@@ -37,7 +44,8 @@
 	
 	/* MonthPicker Set */
 	$('#monthpicker').monthpicker(options);
-
+	
+	
 	/* MonthPicker 선택 이벤트 */
 	$('#monthpicker').monthpicker().bind('monthpicker-click-month', function (e, month) {
 		var target = $('#monthpicker').monthpicker('getDate').getFullYear() + '-' + (month<10? '0'+month : month);
