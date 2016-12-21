@@ -31,31 +31,35 @@ public class MemberServiceImpl implements MemberService{
 	private BudgetDao budgetdao;
 	@Autowired
 	private BankDao bankdao;
-	
 	@Autowired 
 	private ScheduleDao scheduledao;
-	
 	@Autowired 
 	private GoalDao  goaldao;
-	
 	@Autowired
 	private NotesDao notesdao;
-	
 	@Autowired
 	private IncomeDao incomedao;
-	
 	@Autowired
 	private ExpenseDao expensedao;
-	
 	
 	
 	//회원가입 모듈
 	@Override
 	//@Transactional(rollbackFor={IOException.class})
-	public void joinMember(Member member)/*throws IOException*/ { 
+	public String joinMember(Member member)/*throws IOException*/ { 
 		System.out.println("joinMember");
-		//요청파라미터로 받아와서 member가 넘어올꺼니까 그냥 member로 받음
-		memberdao.insertMember(member); //Business logic 처리
+		//여기서 검증이 필요했던 것..ㄷㄷ
+		boolean b1=findMemberForIdCheck(member.getMemberId()); //아이디 중복 체크
+		boolean b2=findMemberForEmailCheck(member.getEmail());//이메일 중복 체크
+		System.out.println(b1 +":"+ b2);
+		if(b1&&b2)
+		{
+			memberdao.insertMember(member); //Business logic 처리 - 회원 저장	
+			return "";
+		}else
+		{
+			return "회원 가입 정보를 다시 확인하세요.";
+		}
 	}
 	
 	//회원 탈퇴
@@ -77,7 +81,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Member findMemberById(String memberId)
 	{
-		Member member=null;
+		Member member=new Member();
 		member=memberdao.selectMemberById(memberId);
 		return member;
 	}
@@ -117,20 +121,24 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public boolean findMemberForIdCheck(String memberId) {
 		
-		Member member=memberdao.selectMemberForIdCheck(memberId); 
+		Member member=new Member();
+		member=memberdao.selectMemberForIdCheck(memberId); 
+		System.out.println("findMemberForIdCheck"+member);
 		if(member==null)
 		{
-			return true; //중복된 아이디가 없는 경우.
+			return true; //중복된 아이디가 없는 경우.  -사용가능
 		}
 
-		return false; //중복된 아이디가 있는 경우.
+		return false; //중복된 아이디가 있는 경우. - 사용 불가능
 	}
 
 	//이메일 중복 체크 서비스!
 	@Override
 	public boolean findMemberForEmailCheck(String email)
 	{
-		Member member=memberdao.selectMemberByEmail(email);
+		Member member=new Member();
+		member=memberdao.selectMemberByEmail(email);
+		System.out.println("selectMemberByEmail"+member);
 		if(member==null)
 		{
 			return true; //중복된 이메일이 없는 경우
@@ -141,7 +149,9 @@ public class MemberServiceImpl implements MemberService{
 	//이메일로 회원 조회
 	@Override
 	public Member findMemberByEmail(String email) {
-		Member member=memberdao.selectMemberByEmail(email);
+		Member member=new Member();
+		member=memberdao.selectMemberByEmail(email);
+		
 		return member;
 	}
 	

@@ -27,7 +27,7 @@ import com.salim.vo.validator.LoginCheck;
 import com.salim.vo.validator.MemberModifyCheck;
 
 @Controller
-@RequestMapping("/member/")
+@RequestMapping("/member")
 public class MemberController {
 
 	@Autowired
@@ -36,9 +36,10 @@ public class MemberController {
 	private CollectionService collectionService;
 	
 	//회원 가입
-	@RequestMapping(value="join.do", method=RequestMethod.POST)
-	public String join(@ModelAttribute @Valid Member member , BindingResult error) //요청파라미터를 vo 객체로 생성하고, request에 자동 저장
+	@RequestMapping(value="/join.do", method=RequestMethod.POST)
+	public String join(@ModelAttribute @Valid Member member , BindingResult error,ModelMap map) //요청파라미터를 vo 객체로 생성하고, request에 자동 저장
 	{
+		//검증을 받아서 들어오면!
 		System.out.println(member);
 		//여기서 validator 검증을 해야함!
 		if(error.hasErrors())
@@ -46,36 +47,37 @@ public class MemberController {
 			return "body/join_form.tiles";
 		}
 		
-		service.joinMember(member); //여기까진 잘 온당..ㅎㅎ
-		
+		String str=service.joinMember(member); //여기까진 잘 온당..ㅎㅎ
+		map.addAttribute("joinFail",str);
 		return "body/join_success.tiles"; //잘 간다.
 	}
 	
 	
 	//아이디 중복 체크 - ajax 처리
 	//<!-- ajax-->
-	@RequestMapping("checkingDuplicatedId.do")
+	@RequestMapping("/checkingDuplicatedId.do")
 	@ResponseBody
 	public HashMap<String,Boolean> checkingDuplicatedId(String memberId)
 	{
+		System.out.println(memberId);
 		boolean flag=service.findMemberForIdCheck(memberId);
 		HashMap<String,Boolean> idCheckMap=new HashMap<String, Boolean>();
 		idCheckMap.put("flag", flag); //이 부분은 VO가 없어서 map의 형태로 만들어준 부분이다!
 		return idCheckMap;
 	}
 	//이메일 중복 체크- ajax 처리 
-	@RequestMapping("checkingDuplicatedEmail.do")
+	@RequestMapping("/checkingDuplicatedEmail.do")
 	@ResponseBody
 	public HashMap<String,Boolean> checkingDuplicatedEmail(String email)
 	{
 		boolean flag=service.findMemberForEmailCheck(email);
 		HashMap<String,Boolean> emailCheckMap=new HashMap<String, Boolean>();
-		emailCheckMap.put("flag", flag); //이 부분은 VO가 없어서 map의 형태로 만들어준 부분이다!
+		emailCheckMap.put("flag", flag);
 		return emailCheckMap;
 	}
 	
 	//비밀번호 입력 체크 - ajax 처리
-	@RequestMapping("passwordCheck.do")
+	@RequestMapping("/passwordCheck.do")
 	@ResponseBody
 	public HashMap<String,Boolean>passwordCheck(String password, String password2)
 	{
@@ -87,11 +89,17 @@ public class MemberController {
 		{
 			resultMap.put("passwordResult",true);
 		}
+		
+		if(password.length()<8)
+		{
+			resultMap.put("passwordResult", false);
+		}
+		
 		return resultMap;
 	}
 	
 	//생일 입력 시 - 나이 자동으로 생성 - ajax 처리
-	@RequestMapping("birthday.do")
+	@RequestMapping("/birthday.do")
 	@ResponseBody
 	public Map<String,Object> birthdayCheck(String birthday)
 	{
@@ -109,7 +117,7 @@ public class MemberController {
 
 	
 	//회원 탈퇴
-	@RequestMapping("leave.do")
+	@RequestMapping("/leave.do")
 	public String leaveMember(String memberId,HttpSession session)
 	{
 		session.invalidate();
@@ -128,12 +136,8 @@ public class MemberController {
 	
 	
 	
-	
-	
-	
-	
 	//로그인 -끝
-	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String login(@Valid LoginCheck login, BindingResult errors, HttpSession session, ModelMap map)
 	{
 		if(errors.hasErrors()) //에러가 있는 경우 전달 
@@ -173,7 +177,7 @@ public class MemberController {
 	}
 
 	//로그아웃-끝
-	@RequestMapping("logout.do")
+	@RequestMapping("/logout.do")
 	public String logout(HttpSession session)
 	{
 		session.invalidate();
@@ -184,7 +188,7 @@ public class MemberController {
 	//마이페이지는 일단 단순 view 이동으로 처리함
 	
 	//회원 정보 수정
-	@RequestMapping(value="modify.do", method=RequestMethod.POST)
+	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
 	public String modifyMember(@ModelAttribute @Valid MemberModifyCheck member, 
 			HttpSession session)
 	{
@@ -219,7 +223,7 @@ public class MemberController {
 	}
 	
 	//아이디 찾기 -끝
-	@RequestMapping(value="findId.do", method=RequestMethod.POST)
+	@RequestMapping(value="/findId.do", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> findId(String email)
 	{
@@ -237,7 +241,7 @@ public class MemberController {
 	}
 	
 	//비밀번호 찾기 -끝
-	@RequestMapping(value="findPassword.do", method=RequestMethod.POST)
+	@RequestMapping(value="/findPassword.do", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> findPassword(String id, String email, ModelMap map)
 	{ 

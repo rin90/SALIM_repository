@@ -16,7 +16,7 @@ public interface MemberService {
 
 	//MemberService 
 	//회원 가입 -join
-	public void joinMember(Member member)/*throws IOException*/;
+	public String joinMember(Member member)/*throws IOException*/;
 	
 	//회원 탈퇴 -leave
 	public void leaveMember(String memberId);

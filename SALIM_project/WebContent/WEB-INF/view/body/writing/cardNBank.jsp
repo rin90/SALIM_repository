@@ -6,8 +6,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style>
+table, td, th {    
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="/SALIM_project/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
+
 <script src="/SALIM_project/scripts/jquery.js"></script>
 <script>
 	$(document).ready(function() {
@@ -38,7 +56,7 @@
 			} 
 		
 		//카드&통장 설명 글자수 체크	
-		$(".explane").keyup(function(e){
+		$(".form-control").keyup(function(e){
 			var content = $(this).val();
 			if(content.length>20){
 				alert("30자 이내로 작성해주세요.");
@@ -154,40 +172,53 @@
 </head>
 <body>
 
-	<form action="${initParam.rootPath}/cardNBank/login//cardAdd.do"method="post">
-		<h2>카드 등록</h2>
-		<select name=bankList1  disabled="disabled" class="selectdisable">
-			<option value="기타">은행목록</option>
-			<c:forEach items="${requestScope.bankList }" var="bank">
-				<option value="${bank.code }">${bank.code }</option>
-			</c:forEach>
-		</select>&nbsp; 
-		<input type="text" name="cardNaming" id="namingCard" readonly="readonly" class="explane"/>&nbsp;&nbsp;
-		<input type="submit" value="등록" onclick="return cardAddCheck()" />
-	</form>
 
-	<form action="${initParam.rootPath}/cardNBank/login/bankAdd.do" method="post">
-		<h2>통장 등록</h2>
-		<select name=bankList2  disabled="disabled" class="selectdisable">
-			<option value="기타">은행목록</option>
+<div class="col-md-9 col-md-offset-2">
+<form action="${initParam.rootPath}/cardNBank/login/cardAdd.do"method="post">
+		<h2>카드 등록</h2>
+		<p><font color='gray'>사용하고 계신 신용 카드를 등록해주세요.</font></p><br>
+	<div class="form-group">
+		<label for="sel1">카드 목록</label>
+		<select name=bankList1  disabled="disabled" class="form-control">
+			<option value="기타">카드 선택</option>
 			<c:forEach items="${requestScope.bankList }" var="bank">
 				<option value="${bank.code }">${bank.code }</option>
 			</c:forEach>
-		</select>&nbsp; 
-		<input type="text" name="bankNaming" id="namingbank" readonly="readonly" class="explane"/>&nbsp;&nbsp;
-		<!-- bankNaming -->
-		<input type="submit" value="등록" onclick="return bankAddCheck()"/>
-	</form>
+		</select>&nbsp; <br>
+		<label for="sel1">카드 설명</label>
+		<input class="form-control" type="text" name="cardNaming" id="namingCard" readonly="readonly" />&nbsp;&nbsp;
+		<br>
+		<input type="submit" value="등록" onclick="return cardAddCheck()" class="btn btn-default btn-md  pull-right" />
+	</div>
+</form>
+
+<form action="${initParam.rootPath}/cardNBank/login/bankAdd.do" method="post">
+	
+		<h2>통장 등록</h2>
+		<p><font color='gray'>사용하고 계신 통장을 등록해주세요.</font></p><br>
+		<div class="form-group">
+		<label for="sel1">통장 목록</label>
+		<select name=bankList2  disabled="disabled" class="form-control">
+			<option value="기타">은행 선택</option>
+			<c:forEach items="${requestScope.bankList }" var="bank">
+				<option value="${bank.code }">${bank.code }</option>
+			</c:forEach>
+		</select>&nbsp; <br>
+		<input type="text" name="bankNaming" id="namingbank" readonly="readonly" class="form-control"/>&nbsp;&nbsp;
+		<!-- bankNaming --><br>
+		<input type="submit" value="등록" onclick="return bankAddCheck()" class="btn btn-default btn-md  pull-right"/>
+	</div>
+</form>
 
 	<form action="/SALIM_project/cardNBank/login/cardModify.do" method="post">
 		<h2>등록된 카드 목록</h2>
 		<p>
-		<table border='1' style="width: 500px;">
+		<table > <!--border='1' style="width: 700px;"  -->
 			<thead>
 				<tr>
 					<td><input type="checkbox" id="AllCheck"></td>
-					<td>은행명</td>
-					<td>카드명</td>
+					<td><h5>&nbsp;은행명</h5></td>
+					<td><h5>&nbsp;카드명</h5></td>
 				</tr>
 			</thead>
 			<tbody id="listTbodyCard">
@@ -200,7 +231,7 @@
 							<input type="hidden" name="cardList[${no.index}].memberId" value="${sessionScope.login_info.memberId }">
 						</td>
 						<td>
-							<select name="cardList[${no.index }].cardType" disabled="disabled" class="selectdisable">
+							<select name="cardList[${no.index }].cardType" disabled="disabled" class="form-control">
 								<option value="기타">은행목록</option>
 								<c:forEach items="${requestScope.bankList }" var="bank">
 									<c:choose>
@@ -215,20 +246,17 @@
 							</select>
 						</td>
 						<td>
-							<input type="text" name="cardList[${no.index}].cardDescription" value="${card.cardDescription}" readonly="readonly" placeholder="${card.cardDescription}" class="naming">
+							<input type="text" name="cardList[${no.index}].cardDescription" value="${card.cardDescription}" readonly="readonly" placeholder="${card.cardDescription}" class="form-control">
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="3">
-						<input type="submit" value="수정" onclick="return naming2()"> 
-						<input type="button" value="삭제" onclick="deleteCard()">
-					</td>
-				</tr>
-			</tfoot>
+			
 		</table>
+			
+			<input type="submit" value="수정" onclick="return naming2()" class="btn btn-primary pull-right">
+			<input type="button" value="삭제" onclick="deleteCard()" class="btn btn-danger pull-right">
+						
 	</form>
 	<br>
 	<br>
@@ -237,12 +265,12 @@
 	<form action="/SALIM_project/cardNBank/login/bankModify.do" method="post">
 		<h2>등록된 통장 목록</h2>
 		<p>
-		<table border='1' style="width: 500px;">
+		<table ><!-- border='1' style="width: 500px;" 원래사이즈 -->
 			<thead>
 				<tr>
 					<td><input type="checkbox" id="AllCheck2"></td>
-					<td>은행명</td>
-					<td>카드명</td>
+					<td><h5>&nbsp;은행명</h5></td>
+					<td><h5>&nbsp;카드명</h5></td>
 				</tr>
 			</thead>
 			<tbody id="listTbodyBank">
@@ -254,7 +282,7 @@
 							<input type="hidden" name="bankList[${no.index}].memberId" value="${sessionScope.login_info.memberId }">
 						</td>
 						<td>
-							<select name="bankList[${no.index }].bankType" disabled="disabled" class="selectdisable">
+							<select name="bankList[${no.index }].bankType" disabled="disabled" class="form-control">
 								<option value="기타">은행목록</option>
 								<c:forEach items="${requestScope.bankList }" var="bank2">
 									<c:choose>
@@ -269,22 +297,23 @@
 							</select>
 						</td>
 						<td>
-							<input type="text" name="bankList[${no.index}].bankDescription" value="${bank.bankDescription}" readonly="readonly" placeholder="${bank.bankDescription}" class="naming">
+							<input type="text" name="bankList[${no.index}].bankDescription" value="${bank.bankDescription}" readonly="readonly" placeholder="${bank.bankDescription}" class="form-control">
 						</td>
 					</tr>
 				</c:forEach>
 
 			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="3">
-						<input type="submit" value="수정" onclick="return naming2()"> 
-						<input type="button" value="삭제" onclick="deleteBankbook()">
-					</td>
-				</tr>
-			</tfoot>
+	
 		</table>
+		
+		<input type="submit" value="수정" onclick="return naming2()" class="btn btn-primary pull-right"> 
+	    <input type="button" value="삭제" onclick="deleteBankbook()" class="btn btn-danger pull-right">
+			
+					
 	</form>
 	<br>
 	<br>
+	</div> 
+
+
 </body>

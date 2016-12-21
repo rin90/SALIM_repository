@@ -11,10 +11,12 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -109,9 +111,17 @@ public class TipController {
 
 	// 글등록하는기능
 	@RequestMapping(value = "register", method = RequestMethod.POST)
-	public String insert(int page, @ModelAttribute TipBoard tipboard, HttpServletRequest request)
+	public String insert(ModelMap map,int page, @ModelAttribute @Valid TipBoard tipboard,BindingResult result, HttpServletRequest request)
 			throws IllegalStateException, IOException {
-
+		
+		if (result.hasErrors()) // 에러가 있는 경우 전달
+		{
+			map.addAttribute("page", page);
+			map.addAttribute("codes", codeService.findCode("분류"));
+			return "body/tipboard/tip_board_form.tiles";
+		}
+		
+		
 		MultipartFile file = tipboard.getFileRoot();
 
 		if (file != null && !file.isEmpty()) {
@@ -154,7 +164,11 @@ public class TipController {
 			HttpServletRequest request, ModelMap map) throws IllegalStateException, IOException {
 		
 			MultipartFile file = tipBoard.getFileRoot();
-		
+			
+			if(file == null){
+				tipBoard.setFileName(tipBoardService.selectByNo(tipBoard.getNo()).getFileName());
+			}
+			
 			if (file != null && !file.isEmpty()) {// 업로드 된 파일이 있다면
 			
 			tipBoard.setFileName(file.getOriginalFilename());// 파일명

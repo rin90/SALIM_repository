@@ -65,6 +65,24 @@ $(document).ready(function(){
 	
 	});
 	
+	$(".updateMethod").on("submit",function(){ // 수정폼 글자수 체크
+		if($(this).find("textarea").val().length == 0){
+			alert("수정할 내용을 입력해주세요");
+			return false;
+		}
+		
+	});
+	
+	$(".secondRegister").on("submit",function(){ //답글폼 글자수 체크
+		if($(this).find("textarea").val().length == 0){
+			alert("수정할 내용을 입력해주세요");
+			return false;
+		}
+		
+	});
+	
+	
+	
 	$(".secondRegister").on("submit",function(){ //답글 폼 글 체크
 		
 		var t=$(this).find("textarea").val()//form에서 자식인 textarea를 찾는다.
