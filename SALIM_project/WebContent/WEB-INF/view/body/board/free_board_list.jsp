@@ -70,7 +70,7 @@
 							[${page }]
 						</c:when>
 				<c:otherwise>
-					<li><a href="${initParam.rootPath }/free/login/list.do?page=${page }">${page }</a></li>
+					<a href="${initParam.rootPath }/free/login/list.do?page=${page }">${page }</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
