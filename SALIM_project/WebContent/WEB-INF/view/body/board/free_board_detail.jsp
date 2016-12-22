@@ -14,8 +14,7 @@
     /* overflow: auto; */
 }
 </style>
-<script type="text/javascript"
-   src="/SALIM_project/lib/scripts/jquery.js"></script>
+<script type="text/javascript" src="/SALIM_project/lib/scripts/jquery.js"></script>
 <script type="text/javascript">
 
 
