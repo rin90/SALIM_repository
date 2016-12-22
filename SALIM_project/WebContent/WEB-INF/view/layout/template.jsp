@@ -17,14 +17,14 @@ nav{
 	line-height: 50px;
 	background-color:lightgray;
 	padding: 15px;
-	min-height:700px;
+	min-height:100%;
 	width:15%;
 	float:left;
 }
 section{
 	padding: 15px;
 	background-color:white;
-	min-height:400px;
+	min-height:100%;
 	width:70%;
 	float:left;
 }
