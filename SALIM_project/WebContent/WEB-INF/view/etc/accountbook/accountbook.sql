@@ -6,7 +6,7 @@ create table notes(  --메모
 	no number primary key,
 	day_date date not null,   --날짜
 	content varchar2(3000) not null,--메모 1000자까지 쓸수 있게
-	member_id varchar2(50) not null
+	member_id varchar2(50) 
 );
 --member와 join 취소 : constraint nts_mem_fk references member not null
 
@@ -22,9 +22,9 @@ select seq_exp.nextval from dual  -- 조회
 drop sequence seq_exp--삭제
 
 create table expense(  --지출
-expense_id number primary key, 
+expense_id number primary key,
 member_id Varchar2(50) not null,
-code_id Number not null,  --코드 id (소분류)
+code_id Number not null,  --코드 id
 expense_date Date not null,  --지출일
 expense_explain Varchar2(60),  --사용내역
 cash_expense Number,  --현금지출액
@@ -51,7 +51,6 @@ income_date date not null, --수입일
 explanation Varchar2(60) not null,  --수입내역, 20자까지 쓸수있게
 income_money Number not null --수입금액
 );
-
 alter table income drop constraint inc_mem_fk ;
 
 select * from income;

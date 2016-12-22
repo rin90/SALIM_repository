@@ -8,17 +8,27 @@ create table member(  --회원
 );
 select * from member;
 drop table member;
-
+DROP TABLE member CASCADE CONSTRAINT
 alter table member add(email varchar2(50) not null); 
-
+DROP TABLE member CASCADE CONSTRAINT
 --테이블 삭제
 drop table member CASCADE CONSTRAINTS;
 
 
+-- 11.30 회원 가입 테스트
+
+--회원 가입 
+insert into member values('mem1','LJH1',20,'1991-04-15','password1','email1@naver.com');
+insert into member values('mem2','LJH2',20,'1991-04-16','password2','email2@naver.com');
+insert into member values('mem3','LJH3',20,'1991-04-17','password3','email3@naver.com');
+insert into member values('mem4','LJH4',20,'1991-04-18','password4','email4@naver.com');
+insert into member values('mem5','LJH5',20,'1991-04-19','password5','email5@naver.com');
 
 --회원 조회
 select * from member;
 --alter table member1 add(b)
+
+insert into member values ('tester2', '테스터2', 11, sysdate, 'tester');
 
 
 create sequence seq_col--sequence생성
@@ -35,7 +45,8 @@ grant_id varchar2(50) not null
 drop table collection CASCADE CONSTRAINTS;
 
 select * from collection;
-
+insert into collection values('g1','그룹이름','그룹 소개','mem1');
+insert into collection values('g2','그룹 이름','그룹 소개','mem2');
 
 
 
@@ -43,7 +54,7 @@ select * from collection;
 create table member_collection(--회원그룹
 member_id varchar2(50) constraint mco_col_fk references member ON DELETE CASCADE,
 collection_id varchar2(50) constraint mco_mem_fk references collection,
-invite varchar2(50) not null, --초대여부
+invite varchar2(50) not null,
 constraint mc_pk primary key(member_id,collection_id) 
 );
 
@@ -159,7 +170,7 @@ where Member.member_Id=memberId3
 	
 	
 	
-select * from Member
+	
 	
 	
 	

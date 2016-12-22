@@ -44,12 +44,12 @@ public class MemberController {
 		//여기서 validator 검증을 해야함!
 		if(error.hasErrors())
 		{
-			return "body/join_form.tiles";
+			return "/body/join_form.jsp";
 		}
 		
 		String str=service.joinMember(member); //여기까진 잘 온당..ㅎㅎ
 		map.addAttribute("joinFail",str);
-		return "body/join_success.tiles"; //잘 간다.
+		return "/body/join_success.jsp"; //잘 간다.
 	}
 	
 	
@@ -166,13 +166,13 @@ public class MemberController {
 			}else
 			{//비밀번호가 틀린 경우 - 다시 로그인 폼으로 돌아간다.
 				map.addAttribute("error", "Password가 틀렸습니다!");
-				return "body/login_form.tiles";
+				return "/body/login_form.jsp";
 			}
 			
 		}else //해당 아이디가 없는 경우
 		{
 			map.addAttribute("error","ID를 찾을 수 없습니다!");
-			return "body/login_form.tiles";
+			return "/body/login_form.jsp";
 		}
 	}
 

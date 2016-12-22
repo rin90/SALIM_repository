@@ -6,12 +6,12 @@ create table free_board( --자유게시판
  no number primary key,
  title varchar2(300) not null,
  content varchar2(4000) not null,
- file_root varchar2(3000),  --파일 이름
+ file_root varchar2(4000),  --파일 경로
  click	number not null,  --조회수
  register_time date not null, --작성일
  member_id varchar2(50) constraint fre_mem_fk references member ON DELETE CASCADE not null--inline방식
 );
-
+DROP TABLE free_board CASCADE CONSTRAINT
 select * from free_board;
 
 drop table free_board;
@@ -25,18 +25,18 @@ drop sequence seq_tip--삭제
 
 create table tip_board(  --tip게시판
 	no number primary key,
-	title varchar2(300) not null,
+	title varchar2(3000) not null,
 	content varchar2(4000) not null,
 	file_root varchar2(4000),  -- 파일 경로
 	click number not null,   -- 조회수 
+	good number not null,   -- 좋아요
 	classification varchar2(20) not null, --분류
 	register_time date not null, -- 작성일
 	member_id varchar2(50) constraint tip_mem_fk references member ON DELETE CASCADE not null--inline방식
 );
-
 select * from tip_board;
 drop table tip_board;
-
+DROP TABLE tip_board CASCADE CONSTRAINT
 
 
 
@@ -96,6 +96,33 @@ drop table tip_comments;
 
 
 
+
+create sequence seq_qaa--sequence생성
+select seq_qaa.nextval from dual  -- 조회 
+drop sequence seq_qaa  --삭제
+
+create table question_and_answer(  -- Q&A 게시판
+	id number primary key,
+	category varchar2(50) not null, -- 주제  ( 예, 로그인,홈페이지 ,게시판 등등
+	content varchar2(4000) not null,
+	title varchar2(300) not null,
+	member_id varchar2(50) constraint qaa_mem_fk references member not null
+);
+
+drop table question_and_answer;
+
+--나중에 시간남으면 하기 좋아요 영구 저장테이블
+create sequence seq_odt
+select seq_odt.nextval from dual
+drop sequence seq_odt
+
+create table good_t(
+	id number primary key,
+	no number not null,
+	good_whether number not null,
+	member_id varchar2(50) constant goo_mem_fk references member not null
+);
+drop table good_t
 
 
 

@@ -7,6 +7,13 @@
 <html>
 <head>
 
+<style type="text/css">
+header {
+    background-color: #00001E;
+    text-align: center;
+    padding: 5px;
+} 
+</style>
 
 </head>
 
@@ -20,6 +27,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/SALIM_project/scripts/jquery.number.min.js"></script>
 
 <!-- 부트스트랩 등록 -->
 <link href="/SALIM_project/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -31,12 +39,12 @@
  
   	<c:choose><%--SALIM 로고 -로그인 여부에 따라 다른 처리(링크의 유무) --%>
 	<c:when test="${not empty sessionScope.login_info.memberId}">
-		<h2 align="left" >
+		<h2 align="left"  style="margin-left: 50px; margin-top: 40px">
 			<a id="logo" href="${initParam.rootPath }/collection/findAllCollectionList.do"><font color="#ffffff">SALIM</font></a>
 		</h2>
 	</c:when>
 	<c:otherwise>
-		<h2 align="left">
+		<h2 align="left" style="margin-left: 50px; margin-top: 40px">
 			<a href="${initParam.rootPath }/main.do"><font color="#ffffff">SALIM</font></a>
 		</h2>
 	</c:otherwise>
@@ -63,7 +71,26 @@
 </form> --%>
 
 
-<div align="right">
+<%-- <div>
+	<c:if test="${sessionScope.login_info != null }">
+		
+			<option value="${sessionScope.login_info}">개인</option>
+			<c:forEach items="${sessionScope.groupList }" var="collection">
+				<c:choose>
+					<c:when test="${sessionScope.group_info.collectionId == collection.collectionId}">
+						<option value=${collection.collectionId } selected="selected">${collection.collectionName }</option>
+					</c:when>
+					<c:otherwise>
+						<option value="${collection.collectionId }">${collection.collectionName }</option>
+					</c:otherwise>
+				</c:choose>
+				
+			</c:forEach>
+	</c:if>
+</div> --%>
+
+
+<div align="right" style="margin-right:30px;">
 	<c:choose>
 	<c:when test='${sessionScope.login_info!=null}'>
 	<%-- 	<a href="${initParam.rootPath}/myPage.do" class="btn btn-success" role="button">마이페이지</a>&nbsp;&nbsp; --%>
