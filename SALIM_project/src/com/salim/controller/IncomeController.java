@@ -1,5 +1,7 @@
 package com.salim.controller;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,10 +43,20 @@ public class IncomeController {
 	public String saveIncome(@RequestParam ArrayList<Integer> incomeId, 
 						   @RequestParam ArrayList<String> explanation, 
 						   @RequestParam ArrayList<Integer> incomeMoney, 
+						  /* @RequestParam ArrayList<String> incomeMoney, */
 						   @RequestParam ArrayList<Integer> codeId, 
 						   @DateTimeFormat(pattern="yyyy-MM-dd") @RequestParam Date incomeDate, 
 						   HttpSession session,
 						   HttpServletRequest request){
+		/*ArrayList<Long> incomeMoneyFormat = new ArrayList<>();
+		DecimalFormat money = new DecimalFormat("#,###");
+		for(int i=0; i<incomeMoney.size(); i++){
+			try {
+				incomeMoneyFormat.add((Long)money.parse(incomeMoney.get(i)));
+			} catch (ParseException e) {
+			}
+		}*/
+		
 		service.saveIncome(checkMemberId(session), incomeId, explanation, incomeMoney, codeId, incomeDate, request.getParameter("notes"), Integer.parseInt(request.getParameter("notesNum")));				
 		return "redirect:/household/login/incomeSelect.do?incomeDate="+new SimpleDateFormat("yyyy-MM-dd").format(incomeDate);
 	}
