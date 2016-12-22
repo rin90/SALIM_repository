@@ -25,7 +25,6 @@
       <mapper resource="com/salim/dao/mapper/memberMapper.xml"/>
       <mapper resource="com/salim/dao/mapper/memberNCollectionMapper.xml"/>
       <mapper resource="com/salim/dao/mapper/notesMapper.xml"/>
-      <mapper resource="com/salim/dao/mapper/quenstionAndAnswerMapper.xml"/>
       <mapper resource="com/salim/dao/mapper/scheduleMapper.xml"/>
       <mapper resource="com/salim/dao/mapper/tipCommentMapper.xml"/>
       <mapper resource="com/salim/dao/mapper/tipMapper.xml"/>

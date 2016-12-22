@@ -72,6 +72,22 @@
 					$(this).parent().hide().next().next().next().show();
 
 				});
+				$(".updateMethod").on("submit",function(){ // 수정폼 글자수 체크
+					if($(this).find("textarea").val().length == 0){
+						alert("수정할 내용을 입력해주세요");
+						return false;
+					}
+					
+				});
+				
+				$(".secondRegister").on("submit",function(){ //답글폼 글자수 체크
+					if($(this).find("textarea").val().length == 0){
+						alert("수정할 내용을 입력해주세요");
+						return false;
+					}
+					
+				});
+				
 
 				$("#register").on("submit", function() { //댓글 폼 글 체크
 					alert("확인")

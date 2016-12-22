@@ -4,8 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script type="text/javascript"
-	src="/SALIM_project/lib/scripts/jquery.js"></script>
+<script type="text/javascript" src="/SALIM_project/lib/scripts/jquery.js"></script>
 <script type="text/javascript">
 	
 </script>
@@ -17,7 +16,7 @@
 	<p>안녕하세요 Tip게시판입니다</p>
 	<table class="table table-bordered">
 		<thead>
-			<tr>
+			<tr class="info">
 				<td>분류</td>
 				<td>번호</td>
 				<td>제목</td>
@@ -85,8 +84,7 @@
 
 	<form action="${initParam.rootPath }/tip/login/form.do">
 		<input type="hidden" name="page"
-			value="${requestScope.pageBean.page }"> &nbsp;&nbsp;&nbsp;<input
-			type="submit" value="글쓰기">
+			value="${requestScope.pageBean.page }"> &nbsp;&nbsp;&nbsp;
 	</form>
 
 	<p />
@@ -104,10 +102,10 @@
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
-		</select> <input type="hidden" name="page" value="1"> <input
-			type="text" name="search"> <input type="submit" value="검색"
-			class="btn btn-primary btn-sm Small">
+		</select>   
+			<input type="hidden" name="page" value="1">
+			<input type="text" name="search"> <input type="submit" value="검색"class= "btn btn-primary btn-sm Small"> <input type="submit" value="글쓰기" >
 	</form>
-	</table>
+	
 </div>
 

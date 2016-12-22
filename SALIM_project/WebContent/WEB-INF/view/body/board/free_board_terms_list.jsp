@@ -12,7 +12,7 @@
 	${requestScope.category }
 	<table border="1">
 		<thead>
-			<tr>
+			<tr class="info">
 				<td>번호</td>
 				<td>제목</td>
 				<td>작성자</td>

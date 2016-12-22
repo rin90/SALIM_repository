@@ -13,10 +13,10 @@
 
 <div class="container">
   <h2>Tip 게시판</h2>
-  <p>안녕하세요 Tip게시판입니다</p>            
+  <p><font color="blue">안녕하세요 Tip게시판입니다</font></p>            
   <table class="table table-bordered">
 		<thead>
-			<tr>
+			<tr  class="info">
 			    <td>분류</td>
 				<td>번호</td>
 				<td>제목</td>
@@ -46,7 +46,7 @@
 			</c:forEach>
 			
 		</tbody>	
-	
+	</table>
 			
 			
 			
@@ -83,20 +83,26 @@
 			
 			<form action="${initParam.rootPath }/tip/login/form.do">
 			<input type="hidden" name="page" value="${requestScope.pageBean.page }">
-			&nbsp;&nbsp;&nbsp;<input type="submit" value="글쓰기">
+			&nbsp;&nbsp;&nbsp;
 			</form>
 			
-			<p/>
+			
 			
 			<form action="${initParam.rootPath }/tip/login/keyword.do" method="post">
-			<select name="category" class="btn btn-primary dropdown-toggle">				
+			<select name="category" class="btn btn-primary dropdown-toggle" >				
 				<c:forEach items="${requestScope.codes }" var="code">
-					<option>${code.code }</option> 					
-				</c:forEach>
+				<c:choose>
+					<c:when test="${requestScope.category == code.code }">
+						<option selected="selected">${code.code }</option>
+					</c:when>
+					<c:otherwise>
+						<option>${code.code }</option>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
 			</select>   
 			<input type="hidden" name="page" value="1">
-			<input type="text" name="search"> <input type="submit" value="검색"class= "btn btn-primary btn-sm Small">
+			<input type="text" name="search"> <input type="submit" value="검색"class= "btn btn-primary btn-sm Small"> <input type="submit" value="글쓰기" >
 			
 			</form>
-  </table>
 </div>

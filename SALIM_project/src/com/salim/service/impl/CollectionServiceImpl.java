@@ -241,6 +241,7 @@ public class CollectionServiceImpl implements CollectionService{
 	public void inviteMemberInCollection(String email, String collectionId)
 	{
 		Member member=new Member();
+		//이메일이 있는 이메일인지?
 		member=memdao.selectMemberByEmail(email); //회원 아이디 알아내려고...
 		if(member!=null)
 		{

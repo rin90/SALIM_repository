@@ -65,6 +65,24 @@ $(document).ready(function(){
 	
 	});
 	
+	$(".updateMethod").on("submit",function(){ // 수정폼 글자수 체크
+		if($(this).find("textarea").val().length == 0){
+			alert("수정할 내용을 입력해주세요");
+			return false;
+		}
+		
+	});
+	
+	$(".secondRegister").on("submit",function(){ //답글폼 글자수 체크
+		if($(this).find("textarea").val().length == 0){
+			alert("수정할 내용을 입력해주세요");
+			return false;
+		}
+		
+	});
+	
+	
+	
 	$(".secondRegister").on("submit",function(){ //답글 폼 글 체크
 		
 		var t=$(this).find("textarea").val()//form에서 자식인 textarea를 찾는다.
@@ -233,15 +251,16 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
 			<c:if test="${requestScope.freeBoard.memberId== sessionScope.login_info.memberId }">
 			<a 
 			href="${initParam.rootPath }/free/login/updateForm.do?category=${requestScope.category }&search=${requestScope.search}&page=${requestScope.page}&no=${requestScope.freeBoard.no}">수정</a> &nbsp;&nbsp;
+			
 			<%--카테고리를 기준으로 해서 검색list에서 상세화면에서 삭제했을 때는 기본list 1페이지로 기본list에서 삭제했을 때는 현재 페이지로 이동 --%>
 			<c:choose>
 				<c:when test="${empty requestScope.category }">
-					<a 
-					href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>	<p/>
+					 
+					<a href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>	<p/>
 				</c:when>
 				<c:otherwise>
-					<a
-					href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=1">삭제</a>	<p/>					
+					
+					<a href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=1">삭제</a>	<p/>					
 				</c:otherwise>
 			</c:choose>
 			</c:if>
