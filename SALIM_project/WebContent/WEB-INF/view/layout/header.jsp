@@ -37,13 +37,13 @@
 	</c:when>
 	<c:otherwise>
 		<h2 align="left">
-			<a><font color="#ffffff">SALIM</font></a>
+			<a href="${initParam.rootPath }/main.do"><font color="#ffffff">SALIM</font></a>
 		</h2>
 	</c:otherwise>
 </c:choose>
 
 <!-- 로그인시 본인과 그룹 간을 이동할 수 있는 select박스 -->
-<form method="post" action="${initParam.rootPath }/collection/moving.do">
+<%-- <form method="post" action="${initParam.rootPath }/collection/moving.do">
 	<c:if test="${sessionScope.login_info != null }">
 		<select id="selectInfo" onchange="form.submit()" name="selectId">
 			<option value="${sessionScope.login_info}">개인</option>
@@ -60,15 +60,15 @@
 			</c:forEach>
 		</select>
 	</c:if>
-</form>
+</form> --%>
 
 
 <div align="right">
 	<c:choose>
 	<c:when test='${sessionScope.login_info!=null}'>
-		<a href="${initParam.rootPath}/myPage.do">마이페이지</a>&nbsp;&nbsp;
-		<a href="${initParam.rootPath}/member/logout.do">로그아웃</a>
-	
+		<a href="${initParam.rootPath}/myPage.do" class="btn btn-success" role="button">마이페이지</a>&nbsp;&nbsp;
+		<a href="${initParam.rootPath}/member/logout.do" class="btn btn-warning" role="button">로그아웃</a>
+		<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	</c:when>
 	<c:otherwise>
 		<a href="${initParam.rootPath}/loginMember.do" class="btn btn-success" role="button">로그인</a>&nbsp;&nbsp;

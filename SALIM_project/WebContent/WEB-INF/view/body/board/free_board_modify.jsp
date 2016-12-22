@@ -29,19 +29,23 @@ $(document).ready(function() {
 
 <form action="${initParam.rootPath }/free/login/update.do" method="post"
 	enctype="multipart/form-data">
-	<h4>자유게시판</h4>
-	제목:<input type="text" name="title"
+	
+	<div class="col-md-8 col-md-offset-2">
+	<h1>자유게시판 글 수정하기</h1>
+	<hr>
+	<label for="sel1">제목</label>
+	<input type="text" name="title" class="form-control"
 		value="${requestScope.freeBoard.title }"><br>
 
 	<c:if test="${requestScope.freeBoard.fileName != null }">
 		<img
 			src="${initParam.rootPath }/fileroute/${requestScope.freeBoard.fileName }">
 	</c:if>
-	<br> <input id="b" type="button" value="파일첨부 수정">
+	<br> <input id="b" type="button" class="btn btn-default btn-md  pull-right" value="파일첨부 수정">
 	<div id="t"></div>
 	<br>
 
-	<textarea rows="10" cols="50" name="content">${requestScope.freeBoard.content }</textarea>
+	<textarea class="form-control" rows="10" name="content">${requestScope.freeBoard.content }</textarea>
 
 	<br> <input type="hidden" name="memberId"
 		value="${requestScope.freeBoard.memberId }"> <input
@@ -50,12 +54,11 @@ $(document).ready(function() {
 	<input type="hidden" name="category" value="${requestScope.category }">
 	<input type="hidden" name="search" value="${requestScope.search }">
 
-
-	<input type="submit" value="수정완료"> <a
+	<br>
+	<input type="submit" class="btn btn-success btn-md  pull-right" value="수정완료"> <a class="btn btn-danger btn-md  pull-left"
 		href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>
+</div>
 </form>
-<p />
-
 
 <form action="${initParam.rootPath }/free/login/seleteDetail.do"
 	method="post">
@@ -63,6 +66,10 @@ $(document).ready(function() {
 	<input type="hidden" name="no" value="${requestScope.freeBoard.no }">
 	<input type="hidden" name="category" value="${requestScope.category }">
 	<input type="hidden" name="search" value="${requestScope.search }">
-	<input type="submit" value="뒤로">
+	<input type="submit"  class="btn btn-default btn-md  pull-right" value="뒤로">
 </form>
+
+<p />
+
+<br><br>
 

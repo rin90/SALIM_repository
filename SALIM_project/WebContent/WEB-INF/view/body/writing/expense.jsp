@@ -218,24 +218,18 @@
 				<div class="row">
 					<div class="col-md-12 " >
 						<!-- 지출입력란 -->
+						<ul class="nav nav-tabs">
+				  			<li class="active"><a href="${initParam.rootPath }/household/login/expenseSelect.do" style="background-color:#EAEAEA">지출</a></li>
+				 			<li><a href="${initParam.rootPath }/household/login/incomeSelect.do">수입</a></li>
+						</ul> 
 						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<td colspan="6" align="left"><a href="${initParam.rootPath }/household/login/expenseSelect.do">
-										<input type="button" value="지출" />
-									</a> 
-									<a href="${initParam.rootPath }/household/login/incomeSelect.do">
-										<input type="button" value="수입" /></a>
-									</td>
-								</tr>
-							</thead>
 							<tbody>
 								<tr>
 									<td><input type="checkbox" id="checkAll" />
 									<!--체크박스 체크하면 전체 선택  --></td>
-									<td  width="18">지출내역</td>
-									<td width="18">현금 지출금액</td>
-									<td width="18">카드 지출금액</td>
+									<td width="16">지출내역</td>
+									<td width="16">현금 지출금액</td>
+									<td width="16">카드 지출금액</td>
 									<td>통장/카드선택</td>
 									<!-- select로 뿌려주기 -->
 									<td>지출분류</td>
@@ -248,9 +242,9 @@
 											<td><input type="checkbox" name="expenseId" value="${expense.expenseId }" /> <!-- 체크박스 하나하나 --> 
 												<input type="hidden" name="expenseId" value="${expense.expenseId }" />
 											</td>
-											<td ><input size="18" type="text" class="explane" name="expenseExplain" value="${expense.expenseExplain}" readonly="readonly" placeholder="${expense.expenseExplain}"></td>
-											<td ><input size="18" type="text" class="element" name="cashExpense" value="${expense.cashExpense}" readonly="readonly" placeholder="${expense.cashExpense}"></td>
-											<td ><input size="18" type="text" class="element" name="cardExpense" value="${expense.cardExpense}" placeholder="${expense.cardExpense}"></td>
+											<td ><input size="16" type="text" class="explane" name="expenseExplain" value="${expense.expenseExplain}" readonly="readonly" placeholder="${expense.expenseExplain}"></td>
+											<td ><input size="16" type="text" class="element" name="cashExpense" value="${expense.cashExpense}" readonly="readonly" placeholder="${expense.cashExpense}"></td>
+											<td ><input size="16" type="text" class="element" name="cardExpense" value="${expense.cardExpense}" placeholder="${expense.cardExpense}"></td>
 											<td>
 												<!-- 통장/카드 선택하는거 나오게 하기 --> 
 												<select name="cardType" disabled="disabled">
@@ -287,19 +281,15 @@
 									</c:forEach>
 								</c:if>
 	
-	
-	
-	
-	
 								<!-- 아무 것도 안 뿌려준 입력창 -->
 								<c:forEach begin="1" end="5">
 									<tr>
 										<td><input type="checkbox" name="expenseId" value="0" /> <!-- 체크박스 하나하나 -->
 											<input type="hidden" name="expenseId" value="0" />
 										</td>
-										<td><input size="18" type="text" name="expenseExplain" class="explane" readonly="readonly" /></td>
-										<td ><input size="18" type="text" name="cashExpense" class="element" readonly="readonly" /></td>
-										<td><input size="18" type="text" name="cardExpense" class="element" readonly="readonly" /></td>
+										<td><input size="16" type="text" name="expenseExplain" class="explane" readonly="readonly" /></td>
+										<td ><input size="16" type="text" name="cashExpense" class="element" readonly="readonly" /></td>
+										<td><input size="16" type="text" name="cardExpense" class="element" readonly="readonly" /></td>
 										<td>
 											<!-- 통장/카드 선택 --> 
 											<select name="cardType" disabled="disabled">
@@ -326,20 +316,27 @@
 	
 							</tfoot>
 						</table>
+						<div class="col-md-12" align="right">
+							<!-- 저장버튼 -->
+							<input type="submit" value="저장" id="submitExpense" onclick="return checkFormat();" class="btn btn-md right"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="button" value="선택삭제" id="deleteExpense" onclick="checkevent();" class="btn btn-md pull-right"/>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-2" style="margin-top: 100px;">
+			<div class="col-md-2" style="margin-top: 220px;">
 				<!-- 메모장 -->
 				<h4>&lt;메 모 란&gt;</h4> 
-				<textarea rows="20" cols="45" name="notes" id="notes">${requestScope.notes.content }</textarea>
+				<textarea rows="20" cols="40" name="notes" id="notes">${requestScope.notes.content }</textarea>
 				<input type="hidden" name="notesNum" value="${empty requestScope.notes.no? 0:requestScope.notes.no }">
 			</div>
 		</div>
-		<div class="col-md-2" align="center">
-			<!-- 저장버튼 -->
-			<input type="submit" value="저장" id="submitExpense" onclick="return checkFormat();" /> <input type="button" value="선택삭제" id="deleteExpense" onclick="checkevent();" />
+		
+<!-- 		<div class="col-md-2" align="center">
+			저장버튼
+			<input type="submit" value="저장" id="submitExpense" onclick="return checkFormat();" class="btn btn-success btn-md  right"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" value="선택삭제" id="deleteExpense" onclick="checkevent();" class="btn btn-danger btn-md  pull-right"/>
 		</div>
-
+ -->
 	</div>
 </form>

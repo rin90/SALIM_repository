@@ -47,6 +47,7 @@ public class ReportController {
 		param.put("month", new SimpleDateFormat("yyyy-MM").format(today));
 		param.put("memberId", checkMemberId(session));
 		
+		// Graph에 뿌릴 내용 조회
 		List<Map> result = service.selectSpendEachCategory(param);
 		for(Map temp: result){
 			temp.replace("CATEGORY", "'"+temp.get("CATEGORY")+"'");
@@ -54,19 +55,34 @@ public class ReportController {
 		String str = result.toString().replaceAll("=", ":");
 		System.out.println(str);
 		
+		// 실제 카테고리에 값이 있는 경우만 조회 - 사용금액 많은 순서대로.
+		List<Map> alignMoney = service.selectSpendOrderByMoney(param);
+		for(Map temp: alignMoney){
+			temp.replace("BIG_CONTENT", "'"+temp.get("BIG_CONTENT")+"'");
+		}
+		String str2 = alignMoney.toString().replaceAll("=", ":");
+		System.out.println("Controller : " + alignMoney);
+		
+		// 전달값을 Request로 담기
 		map.addAttribute("result", str);
 		map.addAttribute("month", new SimpleDateFormat("yyyy-MM").format(today));
+		map.addAttribute("top5", str2);
+		
 		return "body/report/month_report.tiles";
 	}
 	
 	@RequestMapping("/updateMonth.do")
 	@ResponseBody
 //	public List<Map> updateMonth(String memberId, String month){
-	public List<Map> updateMonth(HttpSession session, String month){
+	public Map updateMonth(HttpSession session, String month){
 		Map<String, String> param = new HashMap();
 		param.put("month", month);
 		param.put("memberId", checkMemberId(session));
-		return service.selectSpendEachCategory(param);
+		
+		Map result = new HashMap();
+		result.put("list", service.selectSpendEachCategory(param));
+		result.put("top5", service.selectSpendOrderByMoney(param));
+		return result;
 	}
 	
 	@RequestMapping("/loadYear.do")

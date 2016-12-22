@@ -75,10 +75,21 @@ public class ExpenseDaoImpl implements ExpenseDao{
 		return session.selectOne("expenseMapper.selectForOneMonthExpense", map);
 	}
 
-	//memberId로 지출 삭제
+	/*============================================
+	 * memberId로 지출 삭제
+	 =============================================*/
 	@Override
 	public int deleteExpenseByMemberId(String memberId) {
 		return session.delete("expenseMapper.deleteExpenseByMemberId", memberId);
+	}
+
+	/*============================================
+	 * 1달동안 사용한 내역들 중 사용금액이 많은 순서대로 조회 (대분류 기준)
+	 =============================================*/
+	@Override
+	public List selectSpendOrderByMoney(Map map) {
+		System.out.println("param : " + map);
+		return session.selectList("expenseMapper.selectSpendOrderByMoney", map);
 	}
 	
 	

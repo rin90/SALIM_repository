@@ -26,8 +26,7 @@ body {
 <body>
 
 	<table summary="글쓰기 전체 테이블">
-		<form name="BoardWriteForm" method="post" action="Board_Write_action.jsp" 
-														onsubmit="return boardWriteCheck();" >
+		<form name="BoardWriteForm" method="post" action="Board_Write_action.jsp" onsubmit="return boardWriteCheck();" >
 		
    		<colgroup>
    			<col width="20%">

@@ -142,6 +142,8 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+
+
 <h2>개인정보 수정</h2>
 <form action="${initParam.rootPath}/member/modify.do" method="post">
 <table>
