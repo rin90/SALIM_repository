@@ -127,9 +127,9 @@
 			$("input[name=expenseId]:checked").each(function(idx) {
 				if ($(this).val() != 0) {
 					if ($("input[name=expenseId]:checked").length - 1 == idx) {
-						checkedArr += "expenseIdList =" + $(this).val();
+						checkedArr += "expenseIdList="+$(this).val();
 					} else {
-						checkedArr += "expenseIdList =" + $(this).val() + "&";
+						checkedArr += "expenseIdList="+$(this).val()+"&";
 					}
 				}
 			});
