@@ -15,7 +15,7 @@ header{
 }
 nav{
 	line-height: 50px;
-	min-height:800px; 
+	min-height:1000px; 
 	background-color:lightgray;
 	padding: 15px;
 	width:15%;
@@ -25,7 +25,7 @@ section{
 	padding: 15px;
 	margin-left: 3em;
 	background-color:white;
-	min-height:800px; 
+	min-height:1000px; 
 	width:70%;
 	float:left;
 }
