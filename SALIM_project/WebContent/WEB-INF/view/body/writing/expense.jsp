@@ -178,15 +178,19 @@
 
 	<div class="container text-center">
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-12">
 				<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
-					<div class="col-md-5">
+					<div class="col-md-4" style="width: 40%">
 						<!-- 날짜 선택창 -->
 						<p>
 							<input type="text" id="datepicker" name="expenseDate" value="${requestScope.expenseDate }" placeholder="${requestScope.expenseDate }">
 						</p>
+						<!-- 메모장 -->
+						<h4>&lt;메 모 란&gt;</h4> 
+						<textarea rows="10" cols="50" name="notes" id="notes">${requestScope.notes.content }</textarea>
+						<input type="hidden" name="notesNum" value="${empty requestScope.notes.no? 0:requestScope.notes.no }">
 					</div>
-					<div class="col-md-7">
+					<div class="col-md-8" style="width: 60%">
 						<!-- 오늘 수입, 지출 불러오기 -->
 						<table class="table table-bordered">
 							<thead>
@@ -208,8 +212,7 @@
 								</tr>
 								<tr>
 									<td>누계</td>
-									<td><fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.incomeSum - requestScope.expenseSum }" />
-									</td>
+									<td><fmt:formatNumber type="currency" currencySymbol="￦" value="${requestScope.incomeSum - requestScope.expenseSum }" /></td>
 								</tr>
 							</tbody>
 						</table>
@@ -324,12 +327,12 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-2" style="margin-top: 220px;">
+<%-- 			<div class="col-md-2" style="margin-top: 220px;">
 				<!-- 메모장 -->
 				<h4>&lt;메 모 란&gt;</h4> 
 				<textarea rows="20" cols="40" name="notes" id="notes">${requestScope.notes.content }</textarea>
 				<input type="hidden" name="notesNum" value="${empty requestScope.notes.no? 0:requestScope.notes.no }">
-			</div>
+			</div> --%>
 		</div>
 		
 <!-- 		<div class="col-md-2" align="center">

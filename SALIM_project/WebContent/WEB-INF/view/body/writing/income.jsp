@@ -185,18 +185,23 @@
 	
 <div class="container text-center">
 	<div class="row">
-    	<div class="col-md-10">
+    	<div style="width: 100%">	<!-- class="col-md-12" -->
         	<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
-            	<div class="col-md-5" >
+            	<div class="col-md-4" style="width: 40%">	<!--   -->
                 	<!-- 달력 - 날짜 선택 -->
 					<!-- <div class="row" style="margin-top: 30px; margin-bottom: 180px; margin-left:50px;"> -->
 					<p>
 					<input type="text" id="datepicker" name="incomeDate" value="${requestScope.incomeDate }" placeholder="${requestScope.incomeDate }">
 					</p>
+
+        				<!-- 메모장 -->
+        				<h4> &lt; 메 모 란 &gt;</h4>
+						<textarea rows="10" cols="50" name="notes" id="notes" >${requestScope.notes.content }</textarea>
+						<input type="hidden" name="notesNum" value="${empty requestScope.notes.no? 0:requestScope.notes.no }">
                 </div>
-                <div class="col-md-7" >
+                <div class="col-md-8" style="width: 60%">	<!--   -->
                 	<!-- 오늘 수입, 지출 불러오기 -->
-					<table class="table table-bordered">
+					<table class="table table-bordered" align="left">
 						<thead>
 							<tr>
 								<div style="margin-bottom: 30px">
@@ -229,7 +234,7 @@
                 </div>
             </div>
        
-            <div class="col-md-12">
+            <div style="width: 100%">	<!-- class="col-md-12" -->
 				<!-- 수입입력란 -->
 				<ul class="nav nav-tabs">
 				  <li><a href="${initParam.rootPath }/household/login/expenseSelect.do">지출</a></li>
@@ -309,19 +314,19 @@
 						
 					</tfoot>
 				</table>
-				<div class="col-md-12" align="right">
+				<div style="width: 100%" align="right">	<!-- class="col-md-12" -->
 					<!-- 저장버튼 -->
 					<input type="submit" value="저장" id="submitIncome" onclick="return checkFormat()" class="btn right"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="button" value="선택삭제" id="deleteIncome" onclick="checkevent()" class="btn btn-md  pull-right"/>
 				</div>
             </div>
         </div>
-        <div class="col-md-2" style="margin-top: 220px;">
+<%--         <div class="col-md-2" style="margin-top: 220px;">
         	<!-- 메모장 -->
         	<h4> &lt; 메 모 란 &gt;</h4>
 			<textarea rows="20" cols="40" name="notes" id="notes" >${requestScope.notes.content }</textarea>
 			<input type="hidden" name="notesNum" value="${empty requestScope.notes.no? 0:requestScope.notes.no }">
-        </div>
+        </div> --%>
     
     </div>
 <!--     
