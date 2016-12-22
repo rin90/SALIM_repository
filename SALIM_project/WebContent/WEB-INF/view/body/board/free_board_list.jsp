@@ -2,17 +2,25 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link href="/SALIM_project/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
 
 <script type="text/javascript" src="/SALIM_project/lib/scripts/jquery.js"></script>
 
 <script type="text/javascript">
 	
 </script>
-
+<div class="container">
+<br>
+  <h1>자유게시판</h1>
+  &nbsp;&nbsp;&nbsp;<p><font color="gray">자유롭게 발자취를 남겨보아요! :D </font></p>
+  <a class="btn btn-md btn-default  pull-right" href="${initParam.rootPath }/free/login/form.do?page=${requestScope.pageBean.page}">글쓰기</a>
+<br>
 <div>
+<br>
 	<table class="table table-condensed">
 		<thead>
-			<tr>
+			<tr class="info">
 				<td>번호</td>
 				<td>제목</td>
 				<td>작성자</td>
@@ -20,8 +28,9 @@
 				<td>조회</td>
 			</tr>
 		</thead>
-
+		
 		<tbody id="tbody">
+		
 			<!--  목록 뿌리기 -->
 
 			<c:forEach items="${requestScope.list }" var="freeBoard">
@@ -45,10 +54,10 @@
 	<c:choose>
 		<c:when test="${requestScope.pageBean.previousGroup }">
 			<a
-				href="${initParam.rootPath }/free/login/list.do?page=${requestScope.pageBean.beginPage-1}">◀&nbsp;</a>
+				href="${initParam.rootPath }/free/login/list.do?page=${requestScope.pageBean.beginPage-1}">Previous&nbsp;</a>
 		</c:when>
 		<c:otherwise>
-					◀&nbsp;
+					Previous&nbsp;
 				</c:otherwise>
 	</c:choose> 
 
@@ -71,28 +80,45 @@
 	<c:choose>
 		<c:when test="${requestScope.pageBean.nextGroup }">
 			<a
-				href="${initParam.rootPath }/free/login/list.do?page=${requestScope.pageBean.endPage+1 }">&nbsp;▶</a>
+				href="${initParam.rootPath }/free/login/list.do?page=${requestScope.pageBean.endPage+1 }">&nbsp;Next</a>
 		</c:when>
 		<c:otherwise>
-					&nbsp;▶				
+					&nbsp;Next			
 				</c:otherwise>
 	</c:choose>
 </div>
 
 <div>
-<form action="${initParam.rootPath }/free/login/keyword.do"
-	method="post">
-	<select name="category" class="btn btn-default dropdown-toggle">
-		<c:forEach items="${requestScope.codes }" var="code">
-			<option>${code.code }</option>
-		</c:forEach>
-	</select> 
-	<input type="hidden" name="page" value="1"> 
-	<input type="text" name="search" > 
-	<input class="btn btn-info btn-sm" type="submit" value="검색">
-	<a class="btn btn-default" href="${initParam.rootPath }/free/login/form.do?page=${requestScope.pageBean.page}">글쓰기</a>
+<form action="${initParam.rootPath }/free/login/keyword.do" method="post">
+		
+<table>
+	
+	
+		<tr>
+		<td></td>
+			<td>
+			<select name="category" class="btn btn-default dropdown-toggle">
+				<c:forEach items="${requestScope.codes }" var="code">
+					<option>${code.code }</option>
+			</c:forEach>
+			</select> 
+			</td>
+			<td>&nbsp;&nbsp;&nbsp;</td>
+			<td>
+			 	<input type="text" name="search"  class="form-control" > 
+			 	<input type="hidden" name="page" value="1">
+			</td>
+	<td>&nbsp;&nbsp;</td>
+		<td>
+		<button type="submit" class="btn btn-info">
+     	 <span class="glyphicon glyphicon-search"></span> Search
+		</button>
+		</td>
+		<tr>
+		
+	</table>
 </form>
 </div>
-
+</div>
 
 

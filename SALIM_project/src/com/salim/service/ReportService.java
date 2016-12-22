@@ -21,4 +21,11 @@ public interface ReportService {
 	 */
 	Map<String, List> selectYearReport(Map map);
 	
+	/**
+	 * 1달동안 사용한 내역들 중 사용금액이 많은 순서대로 조회 (대분류 기준)
+	 * @param map		대상ID(memberId), 
+	 * 					해당하는 달(month - 형식예: 2016-12)
+	 */
+	List selectSpendOrderByMoney(Map map);
+	
 }

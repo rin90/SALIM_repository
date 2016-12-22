@@ -29,7 +29,7 @@
 		<br> 
 		파일첨부:<input type="file" value="사진" name="fileRoot"><br>
 
-		<textarea rows="10" cols="50" name="content"></textarea><div class="errorMessage"><form:errors path="tipBoard.content" /></div>
+		<textarea class="form-control" rows="10"  name="content"></textarea><div class="errorMessage"><form:errors path="tipBoard.content" /></div>
 
 		<br>
 		<input type="hidden" name="page" value="${requestScope.page }">

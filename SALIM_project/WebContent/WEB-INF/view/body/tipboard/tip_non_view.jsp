@@ -40,8 +40,7 @@
 </div>
 
 	<form action="${initParam.rootPath }/tip/login/form.do">
-		<input type="hidden" name="page" value="1"> &nbsp;&nbsp;&nbsp;<input
-			type="submit" value="글쓰기">
+		   <a  href="${initParam.rootPath }/tip/login/form.do?page=${requestScope.pageBean.page}">글쓰기</a>
 	</form>
 	
 	<form action="${initParam.rootPath}/tip/login/keyword.do" method="post">

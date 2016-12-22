@@ -2,7 +2,12 @@
 <style>
     label, input { display:block; }
     input.text { margin-bottom:12px; width:95%; padding: .4em; }
-    fieldset { padding:0; border:0; margin-top:5px;  min-height:250px;  }
+    fieldset { padding:0; border:0; margin-top:5px;  min-height:240px;  }
+	/* .dia_check{	position: absolute !important;    margin: 0px 0 0 !important;	width: 100% !important;} */
+	.dia_check{width: 70% !important;  margin: 0px 0 0 0 !important;}
+	.input-sm {	height: 23px !important;	}
+	#dia_nav {	min-height: 43% !important; 	}
+	#dia_sec {	margin-left: 15px;	}	
 </style>
 
 <div id="dialog" title="Basic dialog" hidden="hidden">
@@ -13,7 +18,7 @@
 			<thead>
 				<tr>
 					<th hidden="hidden">일정번호</th>	
-					<th width="5%"><input type="checkbox" id="allClick" ></th>
+					<th width="5%"><input class="dia_check" type="checkbox" id="allClick" ></th>
 					<th width="20%">종료일</th>
 					<th width="30%">&nbsp;일정&nbsp;&nbsp;</th>
 					<th width="45%">상세내용</th>
@@ -26,7 +31,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<div align="right" id="dia_btnDiv"><button id="minusBtn" type="button">-</button>&nbsp;<button id="plusBtn" type="button">+</button></div>
+		<div align="right" id="dia_btnDiv"><button id="minusBtn" type="button">-</button> <button id="plusBtn" type="button">+</button></div>
 		
 		<!-- Dialog에서 셋팅한 버튼 -->
 		<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
@@ -34,11 +39,12 @@
 		
 		
 	<hr>
-	<nav style="width:30%; min-height:200px;line-height: 20px;">
-		<p>오늘의 내역</p>
-		<table id="dia_totalMoney" class="table table-condensed"></table>
+	<nav id="dia_nav" style="width:30%; min-height:200px;line-height: 20px;">
+		<b>오늘의 내역</b>
+		<p>
+		<table id="dia_totalMoney" class="table table-bordered"></table>
 	</nav>
-	<section style="width:65%;min-height:100px;">
+	<section id="dia_sec" style="width:65%;min-height:100px;">
 		<b>메모</b>
 		&nbsp;<textarea class="form-control" rows="10" id="dia_memo" name="dia_memo" placeholder="메모 등록하려면 이곳에 써주세여."></textarea>
 	</section>
@@ -57,21 +63,51 @@ function test(){
 /*=================== 일정 등록 및 수정에 관한 처리하는 부분 ===========================*/
 function updateSchedule(){
 	var queryString = "";
+	var input = true;
 	var go = false;
 	
+	
 	// 메모에 관한 부분은 추가적으로 확인
-	if($('#dia_memo').val().length>0 && $('#dia_memo').val()!=note){
+	if($('#dia_memo').val()!=note){
 		note = $('#dia_memo').val();
 		go = true;
+	}
+	
+	if($('#dia_memo').val().length > 1000){
+		alert("메모는 1000자 이하로 입력해주세요");
+		$(this).focus();
+		return false;
 	}
 	
 	// 변경된 내용이 있는지 여부 확인
 	if($('#dia_tbody tr.target input').length > 0){
 		$('#dia_tbody tr.target input').each(function(idx){
-			queryString += $(this).prop("name")+"="+$(this).prop("value")+"&";
+			var name = $(this).prop("name");
+			var value = $(this).prop("value").trim();
+			var message = '';
+			// input에 값이 없는 경우 저장해달라고 알림
+			if(value==''){	message = "입력되지 않은 부분이 있습니다. 확인해주세요.";	}
+			if(name=='title' && value.length > 20){
+				message = "20자 이내로 입력하세요.";
+			}
+			if(name=="detail" && value.length > 100){
+				message = "100자 이내로 입력하세요.";
+			}
+			if(message != ''){
+				alert(message);
+				$(this).val('');	
+				$(this).focus();
+				input = false; 		
+				return false;
+			}
+			queryString += name+"="+value+"&";
 		});
 		go = true;
 	//	$("#layer").text(queryString);
+	}
+	
+	if(!input){
+		return false;
 	}
 	
 	if(!go){	// tbody에 input태그가 존재하지 않으면 등록할 내용이 없다고 알림.
@@ -141,16 +177,17 @@ function loadDayCalendar(){
 		dataType:"json",
 		success:function(result){
 
-			$('#dia_totalMoney').html('<tr><td>수입</td><td>'+result.dayIncome+'</td></tr>'
-									 +'<tr><td>지출</td><td>'+result.dayExpense+'</td></tr>'
-									 +'<tr><td>총액</td><td>'+(result.dayIncome-result.dayExpense)+'</td></tr>');
-				
+			$('#dia_totalMoney').html('<tr><td>수입</td><td>'+result.dayIncome.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+' 원</td></tr>'
+									 +'<tr><td>지출</td><td>'+result.dayExpense.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+' 원</td></tr>'
+									 +'<tr><td>총액</td><td>'+(result.dayIncome-result.dayExpense).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+' 원</td></tr>');
+
+			
 			// 조회해온 값이 있는지를 확인하고 있으면 화면에 뿌리기
 			if(result.daySchedule.length != 0){	// 뿌려야 하는 위치 : dia_tbody
 				var turn = result.daySchedule.length;
 				var str = '';
 				for(var i=0; i<turn; i++){
-					str += '<tr><th hidden="hidden"><input type="hidden" name="no" value='+result.daySchedule[i].no+'></th><th width="5%"><input type="checkbox" name="minus"></th><td width="20%">'
+					str += '<tr><th hidden="hidden"><input type="hidden" name="no" value='+result.daySchedule[i].no+'></th><th width="5%"><input class="dia_check" type="checkbox" name="minus"></th><td width="20%">'
 								+result.daySchedule[i].end+'</td><td width="30%">'
 								+result.daySchedule[i].title+'</td><td width="45%">'
 								+result.daySchedule[i].detail+'</td></tr>';
@@ -174,7 +211,7 @@ function loadDayCalendar(){
 dialog = $("#dialog").dialog({
     autoOpen: false,
     height: 700,
-    width: 600,
+    width: 610,
     modal: true,
     title: "일정 등록 및 가계 내역 확인",
     resizable: false,
@@ -213,10 +250,10 @@ dialog = $("#dialog").dialog({
 $(document).ready(function(){
 	
 	$('#dia_btnDiv').on('click', '#plusBtn', function(){
-		var txt = '<tr class="target"><th hidden="hidden"><input type="hidden" name="no" value="0"></th><th width="5%"><input type="checkbox" name="minus"></th>'
+		var txt = '<tr class="target"><th hidden="hidden"><input type="hidden" name="no" value="0"></th><th width="5%"><input class="dia_check" type="checkbox" name="minus"></th>'
 					+'<td width="20%"><input type="text" size="10" class="datepicker" name="end" value='+$("#dia_end").val()+'></td>'
 					+'<td width="30%"><input type="text" size="20" name="title"></td>'
-					+'<td width="45%"><input type="text" size="35" name="detail"></td></tr>';
+					+'<td width="45%"><input type="text" size="33" name="detail"></td></tr>';
 		if($('#dia_tbody tr td:first').text()=='등록된 내용이 없습니다.'){
 			$('#dia_tbody').html(txt);
 		}else{
@@ -228,16 +265,15 @@ $(document).ready(function(){
 
 	$('#allClick').on('click', function(){
 		if($(this).is(":checked")){ 
-			alert("check");
+			//alert("check");
 			$("#dia_tbody input[name=minus]").prop("checked", true);
 		}else{ 
-			alert("uncheck")
+			//alert("uncheck")
 			$("#dia_tbody input[name=minus]").prop("checked", false);
 		}
 	});
 	
 	$('#dia_btnDiv').on('click', '#minusBtn', function(){
-		alert('삭제할 정보들 가져오는 작업 필요');
 		
 		// 삭제 대상 확인 및 대상들의 정보 가져오기
 		var queryString = "";
@@ -249,7 +285,7 @@ $(document).ready(function(){
 				//alert($(this).parent("th").prev().children('input').val());
 				queryString += "no"+"="+$(this).parent("th").prev().children('input').val()+"&";
 			});
-			$("#layer").text(queryString);
+			//$("#layer").text(queryString);
 		}
 		
 		// ajax를 통해 controller에 값을 전달해서 받아옴
@@ -259,7 +295,7 @@ $(document).ready(function(){
 			data:queryString,
 			dataType:"json",
 			success:function(no){
-				alert(no);
+				//alert(no);
 				
 				/*--------------------dialog에 적용----------------------*/
 				
@@ -305,7 +341,7 @@ $(document).ready(function(){
 			$(this).children('td').not('input')
 							.first().html('<input name="end" size="10" class="datepicker" value="'+end+'">')
 							.next().html('<input name="title"  size="20" value="'+title+'">')
-							.next().html('<input name="detail" size="35"  value="'+detail+'">');
+							.next().html('<input name="detail" size="33"  value="'+detail+'">');
 		}
 		
 		$("input").addClass("form-control input-sm");

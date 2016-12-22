@@ -50,14 +50,10 @@ jQuery의   Fullcalendar
 				center : 'prev, title, next',
 				right : 'month,listMonth'
 			},
-			//editable : true,
 			selectable : true,		// 달력에서 선택할 수 있게
 			selectHelper : true,	// 달력의 어느 부분이 선택되었는지 색으로 표시
 			select : function(start, end){	// 날짜 선택시 수행할 일
-//				alert(start.format('YYYY-MM-DD') + " ~ " + end.format('YYYY-MM-DD'));
-				
-//				alert(end.subtract(1, 'days').calendar());
-				
+
 				end.subtract(1, 'days').calendar();	// 해당하는 시점에서 1일 전을 의미.
 				
 				// 다이얼로그에서 사용할 수 있게 셋팅해준거지요~
@@ -72,19 +68,18 @@ jQuery의   Fullcalendar
 		
 		
 		
-		// 처음 달 기준으로 받아올 때 사용.
+		// 처음 달 기준으로 받아올 때 사용
 		 $.ajax({
 			"url":'${initParam.rootPath}/calendar/login/reload.do',
 			"dataType":"json",
 			"data":{"memberId":"tester2", "date":current},
 			"success":function(list){
-				
 				$("#calendar").fullCalendar("removeEvents");
 				displayCalendar(list);
-				//$("#calendar").fullCalendar("addEventSource", list);
 			}
 		}); 
 		
+		 
 		$('.fc-center').on("click", '.fc-prev-button, .fc-next-button', function(){			// 동적으로 변했을 때도 적용할 수 있게!
  			 $.ajax({
 				url:"${initParam.rootPath}/calendar/login/reload.do",
@@ -92,10 +87,7 @@ jQuery의   Fullcalendar
 				data:{"memberId":"tester2", "date":$('#calendar').fullCalendar('getDate').format('YYYY-MM')},
 				dataType:"json",
 				success:function(list){
-					//alert(list);
 					$('#calendar').fullCalendar('removeEvents');
-					//$('#calendar').fullCalendar('addEventSource', list);
-					
 					displayCalendar(list);
 				},
 				error:function(request, status, error){
@@ -105,8 +97,11 @@ jQuery의   Fullcalendar
 		});
 	});
 	
+	// '오늘' 버튼 눌렀을 때 처리
+	$('button')
+	
+	// event추가하는 부분.
 	function displayCalendar(list){
-		  
 		$('#calendar').fullCalendar('addEventSource', function(start, end, timezone, callback){
 			 var events=[];
 			 $.each(list, function(index, item){
@@ -120,7 +115,6 @@ jQuery의   Fullcalendar
 					 }); 
 				 }else{
 					 var endTime = $.fullCalendar.moment(item.end).add(1, 'days');
-					//alert(endTime.format('YYYY-MM-DD'));
 					 events.push({
 						 id:item.no,
 						 title:item.title,

@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="/SALIM_project/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
+
 <script type="text/javascript" src="${initParam.rootPath }/scripts/jquery.js"></script>
 
 <link rel="stylesheet"
@@ -142,6 +147,86 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<div class="col-md-10 col-md-offset-2">
+<h2>개인정보 수정</h2><br><br>
+<form action="${initParam.rootPath}/member/modify.do" method="post">
+<div class="form-group">
+    <h4><label class="control-label col-sm-2" >회원 아이디</label></h4>
+    <div class="col-sm-8">
+      ${sessionScope.login_info.memberId }
+		<input type="hidden" id='memberId' name='memberId' value='${sessionScope.login_info.memberId }'>
+      <br>
+    </div>
+  </div>
+  <br><br>
+  <div class="form-group">
+    <h4><label class="control-label col-sm-2" for="pwd">&nbsp;&nbsp;&nbsp;&nbsp;비밀번호</label></h4>
+    <div class="col-sm-10"> 
+    
+      <input type="password" class="form-control"  id="password" name="password" placeholder="********" value='${sessionScope.login_info.password}'>
+     <font color="gray">8~20자의 영문 대/소문자,숫자,특수문자 혼용가능</font>
+     <br><br>
+    </div>
+
+    <h4><label class="control-label col-sm-2" for="pwd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;재입력</label></h4>
+    <div class="col-sm-10"> 
+       
+          <input type="password" class="form-control"  id="password2" name="password2" placeholder="비밀번호를 다시 입력해주세요." value='${sessionScope.login_info.password2}'>
+		  <span id='passwordResult'></span><br>
+      
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <h4><label class="control-label col-sm-2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이름</label></h4>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="name" name="name" placeholder='${sessionScope.login_info.name }' value='${sessionScope.login_info.name }'>
+    	<br>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <h4><label class="control-label col-sm-2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;생일</label></h4>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="birthday" name="birthday" placeholder='<fmt:formatDate value="${sessionScope.login_info.birthday}" pattern="yyyyMMdd"/>'>
+		<span id='birthdayResult'></span>   	  
+    	<br>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <h4><label class="control-label col-sm-2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;나이</label></h4>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="age" name="age" placeholder='${sessionScope.login_info.age}' value='${sessionScope.login_info.age}'>
+    	<br>
+    </div>
+  </div>
+  
+   <div class="form-group">
+    <h4><label class="control-label col-sm-2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이메일</label></h4>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="email" name="email" placeholder='${sessionScope.login_info.email}' value='${sessionScope.login_info.email}'>
+      <span id='emailResult'></span><br>
+    </div>
+  </div>
+  
+ <!--  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label><input type="checkbox"> Remember me</label>
+      </div>
+    </div>
+  </div> -->
+  
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <br><button type="submit" id='modifyBtn' class="btn btn-lg btn-success pull-right">수정하기</button>
+    </div>
+  </div>
+
+</form>
+</div>
+<%-- 
 <h2>개인정보 수정</h2>
 <form action="${initParam.rootPath}/member/modify.do" method="post">
 <table>
@@ -160,13 +245,13 @@ $(document).ready(function(){
 	<tr>
 		<td>비밀번호</td>
 		<td>
-			<input type="password" id='password' name='password' <%-- value='${sessionScope.login_info.password}' --%>>
+			<input type="password" id='password' name='password' value='${sessionScope.login_info.password}'>
 		</td>
 	</tr>
 	<tr>
 		<td>비밀번호 재입력</td>
 		<td>
-			<input type="password" id='password2' name='password2' <%-- value='${sessionScope.login_info.password2}' --%>>
+			<input type="password" id='password2' name='password2' value='${sessionScope.login_info.password2}'>
 			<span id='passwordResult'></span>
 		</td>
 	</tr>
@@ -202,6 +287,6 @@ $(document).ready(function(){
 		<input type="submit" value='수정하기' id='modifyBtn' >
 	</span>
 	</p>
-</form>
+</form> --%>
 </body>
 </html>

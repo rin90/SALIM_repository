@@ -133,6 +133,7 @@ public class TipController {
 			File dest = new File(dir, file.getOriginalFilename());
 
 			file.transferTo(dest);
+			
 		}
 		tipBoardService.tipInsert(tipboard);
 		return "redirect:/tip/login/seleteDetail.do?no=" + tipboard.getNo() + "&page=" + page;
@@ -162,7 +163,7 @@ public class TipController {
 	@RequestMapping("update")
 	public String update(@ModelAttribute TipBoard tipBoard, String category, String search, int page,
 			HttpServletRequest request, ModelMap map) throws IllegalStateException, IOException {
-		
+	
 			MultipartFile file = tipBoard.getFileRoot();
 			
 			if(file == null){
