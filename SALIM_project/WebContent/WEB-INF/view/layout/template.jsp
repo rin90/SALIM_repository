@@ -15,9 +15,9 @@ header{
 }
 nav{
 	line-height: 50px;
+	min-height:1000px; 
 	background-color:lightgray;
 	padding: 15px;
-	min-height:1000px;
 	width:15%;
 	float:left;
 }
@@ -25,7 +25,7 @@ section{
 	padding: 15px;
 	margin-left: 3em;
 	background-color:white;
-	min-height:100%;
+	min-height:1000px; 
 	width:70%;
 	float:left;
 }
@@ -36,9 +36,13 @@ footer{
 	height:50px;
 	clear:both;
 }
-div.container {
+/* div.container {
     min-height: 100% !important;
-}
+} */
+/* #temp_container{
+	min-height: 1000px;
+	max-height: 100%;
+} */
 </style>
 </head>
 <body>
@@ -48,14 +52,15 @@ div.container {
 		<tiles:insertAttribute name="header"/>
 	</header>
 	
-	<nav>
-		<tiles:insertAttribute name="nav"/>	<!-- 이 자리에 include 시켜라 느낌. -->
-	</nav>
-	
-	<section>
-		<tiles:insertAttribute name="body"/>
-	</section>
-	
+	<div id="temp_container">
+		<nav>
+			<tiles:insertAttribute name="nav"/>	<!-- 이 자리에 include 시켜라 느낌. -->
+		</nav>
+		
+		<section>
+			<tiles:insertAttribute name="body"/>
+		</section>
+	</div>
 	<footer>
 		<tiles:insertAttribute name="footer"/>
 	</footer>
