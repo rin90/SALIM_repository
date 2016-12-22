@@ -89,7 +89,7 @@
 			
 			
 			<form action="${initParam.rootPath }/tip/login/keyword.do" method="post">
-			<select name="category" class="btn btn-primary dropdown-toggle" >				
+			<select name="category" class="btn btn-sm btn-primary dropdown-toggle" >				
 				<c:forEach items="${requestScope.codes }" var="code">
 				<c:choose>
 					<c:when test="${requestScope.category == code.code }">
@@ -103,7 +103,7 @@
 			</select>   
 			<input type="hidden" name="page" value="1">
 			<input type="text" name="search"> <input type="submit" value="검색"class= "btn btn-primary btn-sm Small"> 
-			  <a  href="${initParam.rootPath }/tip/login/form.do?page=${requestScope.pageBean.page}">글쓰기</a>
+			 <a class="btn btn-md btn-sm btn-default  pull-right" href="${initParam.rootPath }/tip/login/form.do?page=${requestScope.pageBean.page}">글쓰기</a>
 			
 			</form>
 </div>

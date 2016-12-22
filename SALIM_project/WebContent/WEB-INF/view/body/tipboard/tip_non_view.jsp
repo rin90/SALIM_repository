@@ -40,16 +40,15 @@
 </div>
 
 	<form action="${initParam.rootPath }/tip/login/form.do">
-		   <a  href="${initParam.rootPath }/tip/login/form.do?page=${requestScope.pageBean.page}">글쓰기</a>
+		   <a class="btn btn-md btn-default  pull-right" href="${initParam.rootPath }/tip/login/form.do?page=${requestScope.pageBean.page}">글쓰기</a>
 	</form>
 	
 	<form action="${initParam.rootPath}/tip/login/keyword.do" method="post">
-		<select name="category">
+		<select name="category"class="btn btn-primary dropdown-toggle">
 			<c:forEach items="${requestScope.codes }" var="code">
 				<option>${code.code }</option>
 			</c:forEach>
-		</select> <input type="hidden" name="page" value="1"> <input
-			type="text" name="search" value="${requestScope.search }"><input
-			type="submit" value="검색">
+		</select><input type="hidden" name="page" value="1">
+			<input type="text" name="search"> <input type="submit" value="검색"class= "btn btn-primary btn-sm Small"> 
 			
 	</form>

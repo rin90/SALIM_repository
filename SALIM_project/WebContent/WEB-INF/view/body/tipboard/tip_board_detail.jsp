@@ -5,9 +5,71 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+<style>
+	textarea {
+		width:100%;
+	}
+	
+	/* 
+	input[type=button], .update,  .delete {
+		padding: 5px 10px;
+	    font-size: 12px;
+	    line-height: 1.5;
+	    border-radius: 3px;
+	    color: #333;
+	    background-color: #fff;
+	    border-color: #ccc;
+    
+        display: inline-block;
+	    margin-bottom: 0;
+	    font-weight: 400;
+	    text-align: center;
+	    white-space: nowrap;
+	    vertical-align: middle;
+	    touch-action: manipulation;
+	    cursor: pointer;
+	    user-select: none;
+	    background-image: none;
+	    border: 1px solid transparent;
+	}
+	
+	 .update,  .delete, .updateCancel, .bto, .scodCancel {
+	   display: inline-block;
+	   zoom: 1; 
+	   display: inline;
+	   vertical-align: baseline;
+	   margin: 5px 8px;
+	   outline: none;
+	   cursor: pointer;
+	   text-align: center;
+	   text-decoration: none;
+	   font: 14px/100% Arial, Helvetica, sans-serif;
+	   padding: 10px 10px;
+	   text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+	   -webkit-border-radius: .5em;
+	   -moz-border-radius: .5em;
+	   border-radius: .5em;
+	   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+	   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+	   box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+	   color: #606060;
+	   border: solid 1px #b7b7b7;
+	   background: #fff;
+	   background: -webkit-gradient(linear, left top, left bottom, from(#fff),
+	      to(#ededed));
+	   background: -moz-linear-gradient(top, #fff, #ededed);
+	   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',
+	      endColorstr='#ededed');
+	}
+	
+	#time{
+	   text-align: center;
+	}
+ */	
+</style>
 
-<script type="text/javascript"
-	src="${initParam.rootPath }/lib/scripts/jquery.js"></script>
+
+<script type="text/javascript"	src="${initParam.rootPath }/lib/scripts/jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(
 			function() {
@@ -186,7 +248,7 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 						<span style="padding:5px" class="commentInfo">
 							<c:if test="${comment.commentMemberId ==sessionScope.login_info.memberId }">
 								<input class="update" type="button" value="수정 ">
-								<a href="${initParam.rootPath }/tip/comment/login/delete.do?id=${comment.id }&no=${comment.no}&page=${requestScope.page}&category=${requestScope.category}&search=${requestScope.search}">삭제</a>
+								<a href="${initParam.rootPath }/tip/comment/login/delete.do?id=${comment.id }&no=${comment.no}&page=${requestScope.page}&category=${requestScope.category}&search=${requestScope.search}"class="btn btn-sm btn-default  pull-right">삭제</a>
 							</c:if>
 								<br>
 								<c:if test="${comment.groupLevel ==1}">
@@ -257,28 +319,28 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 			<%--카테고리를 기준으로 해서 검색list 또는 기본 list로 이동 --%>
 			<c:choose>
 				<c:when test="${empty requestScope.category  }">
-					<a href="${initParam.rootPath }/tip/login/list.do?page=${requestScope.page }">목록</a>
+					  <a  class="btn btn-sm btn-default  pull-right" href="${initParam.rootPath }/tip/login/list.do?page=${requestScope.page }">목록</a>
 				</c:when>
 				<c:otherwise>
-					<a 
-					href="${initParam.rootPath }/tip/login/keyword.do?page=${requestScope.page }&&category=${requestScope.category}&search=${requestScope.search}">목록</a>
+					  <a  class="btn btn-sm btn-default  pull-left "
+               href="${initParam.rootPath }/tip/login/keyword.do?page=${requestScope.page }&&category=${requestScope.category}&search=${requestScope.search}">목록</a>
 				</c:otherwise>
 			</c:choose>
-			<p/>
+			
 			
 			<c:if test="${requestScope.tipBoard.memberId== sessionScope.login_info.memberId }">
 			<a 
-			href="${initParam.rootPath }/tip/login/updateForm.do?category=${requestScope.category }&search=${requestScope.search}&page=${requestScope.page}&no=${requestScope.tipBoard.no}">수정</a> &nbsp;&nbsp;
+			href="${initParam.rootPath }/tip/login/updateForm.do?category=${requestScope.category }&search=${requestScope.search}&page=${requestScope.page}&no=${requestScope.tipBoard.no}" class="btn btn-sm btn-default  pull-left ">수정</a> &nbsp;&nbsp;
 			<%--카테고리를 기준으로 해서 검색list에서 상세화면에서 삭제했을 때는 기본list 1페이지로 기본list에서 삭제했을 때는 현재 페이지로 이동 --%>
 			<c:choose>
 				<c:when test="${empty requestScope.category }">
-					<a 
-					href="${initParam.rootPath }/tip/login/delete.do?no=${requestScope.tipBoard.no}&page=${requestScope.page}">삭제</a>	<p/>
-				</c:when>
-				<c:otherwise>
-					<a
-					href="${initParam.rootPath }/tip/login/delete.do?no=${requestScope.tipBoard.no}&page=1">삭제</a>	<p/>					
-				</c:otherwise>
+					<a class="btn btn-sm btn-default  pull-left "
+               href="${initParam.rootPath }/tip/login/delete.do?no=${requestScope.tipBoard.no}&page=${requestScope.page}">삭제</a>   <p/>
+            </c:when>
+            <c:otherwise>
+               <a class="btn btn-sm btn-default  pull-left "
+               href="${initParam.rootPath }/tip/login/delete.do?no=${requestScope.tipBoard.no}&page=1">삭제</a>   <p/>               
+            </c:otherwise>
 			</c:choose>
 			</c:if>
 			
