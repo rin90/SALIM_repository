@@ -17,6 +17,7 @@ public class NotesDaoImpl implements NotesDao{
 
 	@Override
 	public int insertNotes(Notes notes) {
+		System.out.println(notes);
 		return session.insert("notesMapper.insertNotes", notes);
 	}
 

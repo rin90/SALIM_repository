@@ -55,12 +55,13 @@ public class CollectController {
 	}
 	//그룹 가계부 수락
 	@RequestMapping("/okay.do")
-	public String inviteOkay(String collectionId, String memberId)
+	public String inviteOkay(String collectionId, String memberId, HttpSession session)
 	{
 		
 		System.out.println("수락");
 		service.modifyByMemberIdAndCollectionId(collectionId,memberId,"true");
-		
+		List<Collect> groupList = service.selectByMemberIdNInvite(memberId);
+		session.setAttribute("groupList", groupList);
 		return "redirect:/collection/findAllCollectionList.do";
 	}
 	

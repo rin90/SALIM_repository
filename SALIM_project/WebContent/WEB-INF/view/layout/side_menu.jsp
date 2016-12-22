@@ -2,18 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="today" class="java.util.Date"/>
 
-<%-- 
-<!-- 그룹 환경 설정 -->
-<!-- 동적으로 생성되는 메뉴 - DB에서 collection의 grant_id와 현재 로그인한 회원의 member_id가 일치한 경우만 메뉴를 보여줌 -->
-<c:if test="${sessionScope.group_info.grantId==sessionScope.login_info.memberId}">
-	<a href="${initParam.rootPath }/collectionSetting.do">환경 설정</a><br>
-	<a href="${initParam.rootPath }/cardNBank/login/cardNBankSelect.do">그룹 통장 관리</a><br>
-	<a href="${initParam.rootPath }/collection/inviteSetting.do">그룹 멤버 관리</a><br>
-</c:if>
- --%>
-
-
-
 <div class="container" style="min-height: 1300px;">
 	<div class="panel-group" id="accordion">
 		
@@ -38,25 +26,6 @@
 					</div>
 				</div>
 			</div>
-
-				<%-- <form method="post" action="${initParam.rootPath }/collection/moving.do">
-				<c:if test="${sessionScope.login_info != null }">
-					<select id="selectInfo" onchange="form.submit()" name="selectId">
-						<option value="${sessionScope.login_info}">개인</option>
-						<c:forEach items="${sessionScope.groupList }" var="collection">
-							<c:choose>
-								<c:when test="${sessionScope.group_info.collectionId == collection.collectionId}">
-									<option value=${collection.collectionId } selected="selected">${collection.collectionName }</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${collection.collectionId }">${collection.collectionName }</option>
-								</c:otherwise>
-							</c:choose>
-							
-						</c:forEach>
-					</select>
-				</c:if>
-				</form> --%>
 		
 		<div style="width: 18%">
 			<div class="panel-heading">

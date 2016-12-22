@@ -291,8 +291,8 @@ $(document).ready(function(){
 <body>
 
 
-<div class="col-md-9 col-md-offset-3" style="padding-left: 4%">
-<h2 style="padding-left: 250px; padding-bottom: 20px; padding-top: 10px">새 계정 만들기</h2>
+<div class="col-md-9 col-md-offset-3" style="padding-left: 4%; margin-top: 2%; padding-bottom: 2.2%">
+<h2 style="padding-left: 17%; padding-bottom: 20px; padding-top: 10px">새 계정 만들기</h2>
 
 <%-- <c:if test="${not empty requestScope.joinFail}">
 	${requestScope.joinFail}

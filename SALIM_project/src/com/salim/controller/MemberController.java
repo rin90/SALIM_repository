@@ -146,7 +146,7 @@ public class MemberController {
 	{
 		if(errors.hasErrors()) //에러가 있는 경우 전달 
 		{
-			return "body/login_form.tiles";
+			return "/body/login_form.jsp";
 		}
 		
 		Member member= service.findMemberById(login.getMemberId());

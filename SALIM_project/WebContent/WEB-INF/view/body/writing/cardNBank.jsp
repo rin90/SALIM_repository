@@ -264,9 +264,10 @@ th, td {
 
 
 	<form action="/SALIM_project/cardNBank/login/bankModify.do" method="post">
+
 		<h2>등록된 통장 목록</h2>
 		<p>
-		<table ><!-- border='1' style="width: 500px;" 원래사이즈 -->
+		<table><!-- border='1' style="width: 500px;" 원래사이즈 -->
 			<thead>
 				<tr>
 					<td><input type="checkbox" id="AllCheck2"></td>
@@ -278,7 +279,7 @@ th, td {
 				<c:forEach items="${requestScope.bankBookList}" var="bank" varStatus="no">
 					<tr>
 						<td>
-							<input type="checkbox" name="bankId" value="${bank.bankId }"> 
+							<input type="checkbox" name="bankId" value="${bank.bankId }" > 
 							<input type="hidden" name="bankList[${no.index}].bankId" value="${bank.bankId }">
 							<input type="hidden" name="bankList[${no.index}].memberId" value="${sessionScope.login_info.memberId }">
 						</td>
@@ -310,7 +311,7 @@ th, td {
 		<input type="submit" value="수정" onclick="return naming2()" class="btn btn-primary pull-right"> 
 	    <input type="button" value="삭제" onclick="deleteBankbook()" class="btn btn-danger pull-right">
 			
-					
+		
 	</form>
 	<br>
 	<br>
