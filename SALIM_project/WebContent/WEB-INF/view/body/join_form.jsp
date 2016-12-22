@@ -266,7 +266,7 @@ $(document).ready(function(){
 			</c:if>
 		</form>
 	
-	<div align="right">
+	<div align="right" style="margin-right:30px">
 			<c:choose>
 			<c:when test='${sessionScope.login_info!=null}'>
 				<a href="${initParam.rootPath}/myPage.do">마이페이지</a>&nbsp;&nbsp;
