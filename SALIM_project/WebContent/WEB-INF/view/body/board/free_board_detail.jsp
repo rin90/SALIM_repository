@@ -42,7 +42,7 @@ $(document).ready(function(){
 	
 	$("#d").css("background","gray")
 	
-	$("#update").on("click",function(){// 댓글 수정 버튼 눌렀을시  누른 댓글만 텍스트에어리어 생김
+	$(".update").on("click",function(){// 댓글 수정 버튼 눌렀을시  누른 댓글만 텍스트에어리어 생김
 		
 		$("span.secondComment").show().next().next().next().hide()
 		
@@ -231,7 +231,7 @@ $(document).ready(function(){
 						<span style="padding:5px" class="commentInfo">
 							<c:if test="${comment.commentMemberId ==sessionScope.login_info.memberId }">
 								<a href="${initParam.rootPath }/comment/login/delete.do?id=${comment.id }&no=${comment.no}&page=${requestScope.page}&category=${requestScope.category}&search=${requestScope.search}" class="btn btn-sm btn-default  pull-right" >삭제</a>
-								<button id="update"  class="btn btn-sm btn-default  pull-right">수정22</button>
+								<button class="update"  class="btn btn-sm btn-default  pull-right">수정22</button>
 							</c:if>
 								<br>
 								<c:if test="${comment.groupLevel ==1}">
