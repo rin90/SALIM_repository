@@ -169,9 +169,7 @@ $(document).ready(function(){
 	            dateFormat:'yymmdd',
 	              onSelect: function(dateText , inst){
 	                 $("#birthday").text(dateText)
-	              	   // $(".incomeDateHidden").val(dateText) 
-	                // location.replace("/SALIM_project/household/login/incomeSelect.do?incomeDate="+dateText); 
-	             	
+	            
 	                $.ajax({
 	                 "url":"${initParam.rootPath}/member/birthday.do",
 	       			 "data":{"birthday":$('#birthday').val()},
@@ -351,14 +349,15 @@ $(document).ready(function(){
       <font color="gray" style="width: 40%">이메일은 그룹 초대를 받을 때 사용될 수 있습니다.</font><p id="emailResult" class="help-block" style="width: 40%"></p>
     </div>
   </div>
-  
- <!--  <div class="form-group"> 
+ <c:if test="${not empty requestScope.joinFail}">
+<div class="form-group"> 
     <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label><input type="checkbox"> Remember me</label>
+      <div>
+        <label class="help-block"><font color="red" >${requestScope.joinFail }</font></label>
       </div>
     </div>
-  </div> -->
+  </div>
+ </c:if>
   <div class="form-group" style="padding-bottom:30px"> 
     <div class="col-sm-offset-2 col-sm-10" >
       <button type="submit" class="btn btn-lg btn-success pull-right" style="margin-right: 60%; ">새 계정 만들기</button>
@@ -377,8 +376,6 @@ $(document).ready(function(){
 
 <footer>
 
-  <!--   <br><br><br><br><br><br><br><br><br><br>
-    <hr><div class="footer_left pull-left">Salim</div><div class="pull-right"><small>&copy; 2016-12.23 Salim.KOSTA</small></div> -->
 
 <font style="color: white">
 	살림프로젝트&nbsp;&nbsp;&nbsp;&nbsp;담당자: SALIM 팀&nbsp;&nbsp;&nbsp;&nbsp;
