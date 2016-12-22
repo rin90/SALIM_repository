@@ -16,6 +16,9 @@
 	
 	<script>
 		$(document).ready(function(){
+			
+			//$(".element").number(true);
+			
 		  /* 달력 */
 	      $("#datepicker").datepicker({
     	     showOtherMonths: true, 
@@ -158,12 +161,12 @@
 		var bigSelects = window.document.getElementsByClassName("bigCategory");
 		function checkFormat(){
 			for(var i=0; i<inputs.length; i++){
-				if(!(inputs[i].value=="") && !(regExp.test(inputs[i].value))){
+			 	if(!(inputs[i].value=="") && !(regExp.test(inputs[i].value))){
 					alert("숫자만 써주세요.");
 					inputs[i].focus();
 					return false;
 				} 
-			} 
+			}  
 			//소분류가 미분류이면 선택해달라고 하기
 			for(var i=0; i<selects.length; i++){
 				if(selects[i].value == 1 && bigSelects[i].value != 3){
