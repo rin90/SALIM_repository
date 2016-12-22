@@ -126,7 +126,7 @@ insert into FREE_COMMENTS values(seq_dummy_fc.nextval,'간다~~~.','test',seq_du
 ------------------------------------------------------------------------------------------------------------
 --더미 데이터에 사용할 sequence tip게시판 댓글
 create sequence seq_dummy_tc; 
-select seq_dummy_tc.nextval from dual
+select seq_dummy_tc.nextval from dual;
 insert into tip_COMMENTS values(seq_dummy_tc.nextval,'간다~~~.','test',seq_dummy_tc.nextval,seq_dummy_tc.nextval,0,'2016-01,'||seq_dummy_tc.nextval);
 insert into tip_COMMENTS values(seq_dummy_tc.nextval,'간다~~~.','test',seq_dummy_tc.nextval,seq_dummy_tc.nextval,0,'2016-01,'||seq_dummy_tc.nextval);
 insert into tip_COMMENTS values(seq_dummy_tc.nextval,'간다~~~.','test',seq_dummy_tc.nextval,seq_dummy_tc.nextval,0,'2016-01,'||seq_dummy_tc.nextval);
