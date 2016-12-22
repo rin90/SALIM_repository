@@ -85,8 +85,8 @@
 				</c:if>
 				</form> --%>
 
-		
-		<c:if test="${sessionScope.group_info.grantId==sessionScope.login_info.memberId}">
+		<c:choose>
+		<c:when test="${sessionScope.group_info.grantId==sessionScope.login_info.memberId}">
 			<!-- 그룹 관련 사이드 메뉴 -->
 			<div style="width: 18%">
 				<div class="panel-heading">
@@ -104,7 +104,28 @@
 					</div>
 				</div>
 			</div>
-		</c:if>
+		</c:when>
+		<c:otherwise>
+			<div style="width: 18%">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
+							마이페이지
+						</a>
+					</h4>
+				</div>
+				<div id="collapse7" class="panel-collapse collapse">
+					<div class="panel-body">
+						<a href="${initParam.rootPath}/myPage.do">내 정보 확인</a><br>
+						<a href="${initParam.rootPath }/myInfo_modify.do">개인 정보 수정</a><br>
+						<a href="${initParam.rootPath }/cardNBank/login/cardNBankSelect.do">카드/통장 관리</a><br>
+						<a href="${initParam.rootPath }/collection/findAllCollectionList.do">가계부 관리</a><br>
+						<a href="${initParam.rootPath }/leaveMember.do">회원 탈퇴</a>
+					</div>
+				</div>
+			</div>
+		</c:otherwise>
+		</c:choose>
 		
 		<div style="width: 18%">
 			<div class="panel-heading">
