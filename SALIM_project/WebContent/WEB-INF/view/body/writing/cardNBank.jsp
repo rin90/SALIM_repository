@@ -204,6 +204,7 @@ th, td {
 				<option value="${bank.code }">${bank.code }</option>
 			</c:forEach>
 		</select>&nbsp; <br>
+		<label for="sel2">통장 설명</label>
 		<input type="text" name="bankNaming" id="namingbank" readonly="readonly" class="form-control"/>&nbsp;&nbsp;
 		<!-- bankNaming --><br>
 		<input type="submit" value="등록" onclick="return bankAddCheck()" class="btn btn-default btn-md  pull-right"/>
@@ -270,7 +271,7 @@ th, td {
 				<tr>
 					<td><input type="checkbox" id="AllCheck2"></td>
 					<td><h5>&nbsp;은행명</h5></td>
-					<td><h5>&nbsp;카드명</h5></td>
+					<td><h5>&nbsp;통장명</h5></td>
 				</tr>
 			</thead>
 			<tbody id="listTbodyBank">

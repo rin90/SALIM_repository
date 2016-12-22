@@ -86,7 +86,7 @@ public class CollectController {
 		}
 
 		session.setAttribute("group_info",collect);
-		return "redirect:/household/login/incomeSelect.do";
+		return "redirect:/household/login/expenseSelect.do";
 	}
 
 
@@ -190,7 +190,7 @@ public class CollectController {
 			session.removeAttribute("group_info");
 		}
 
-		return "redirect:/household/login/incomeSelect.do";
+		return "redirect:/household/login/expenseSelect.do";
 	}
 	
 	//그룹 멤버 관리를 눌렀을 때 - 현재 회원 정보와 상태를 보여주는 곳 
