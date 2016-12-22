@@ -63,6 +63,28 @@ $("#modifyBtn").on("click",function(){
 </script>
 </head>
 <body>
+<div class="col-md-8 col-md-offset-2"><br><br>
+<h2>가계부 환경설정 </h2><br>
+<form action="" id='formTag' method="POST">
+<div class="form-group">
+<label for="email"> &nbsp;&nbsp;*권한자만 가계부 변경이 가능합니다 .&nbsp;&nbsp;&nbsp;&nbsp;</label><br><br>
+<br><label for="email"> &nbsp;&nbsp;그룹명&nbsp;&nbsp;&nbsp;&nbsp;</label>
+	&nbsp;&nbsp;&nbsp;<input type="text" class="form-control" id="collectionName" name="collectionName" placeholder='${sessionScope.group_info.collectionName }' value="${sessionScope.group_info.collectionName}">
+</div>
+  <div class="form-group">
+  <br><br>
+  <label for="email"> &nbsp;&nbsp;그룹 가계부 설명 &nbsp;&nbsp;&nbsp;&nbsp;</label>
+ 	&nbsp;&nbsp;&nbsp;<input type="text" class="form-control" id='collectionIntro' name="collectionIntro" placeholder='${sessionScope.group_info.collectionIntro }' value="${sessionScope.group_info.collectionIntro}">
+  </div>
+	
+	<div class="form-group">
+  <br><br>
+  <label for="email"> &nbsp;&nbsp;그룹 가계부 권한자 &nbsp;&nbsp;&nbsp;&nbsp;</label>
+  &nbsp;&nbsp;&nbsp;<input type="text" id='grantId' name='grantId' placeholder='${sessionScope.group_info.grantId}' value="${sessionScope.group_info.grantId}" >
+  </div>
+</form>
+</div>
+<%-- 
 <h2>가계부 환경설정 </h2><br>
 <h3>- 권한자만 가계부 변경이 가능합니다 !</h3>
 <form action="" id='formTag' method="POST">
@@ -115,5 +137,5 @@ $("#modifyBtn").on("click",function(){
 </form>
 
 <form id="collectionSetting" action="" method="get"></form>
-</body>
+</body> --%>
 </html>
