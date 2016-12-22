@@ -32,14 +32,14 @@
  
   	<c:choose><%--SALIM 로고 -로그인 여부에 따라 다른 처리(링크의 유무) --%>
 	<c:when test="${not empty sessionScope.login_info.memberId}">
-		<h2 align="left" >
+		<h1 align="left"  style="margin-left: 50px; margin-top: 40px">
 			<a id="logo" href="${initParam.rootPath }/collection/findAllCollectionList.do"><font color="#ffffff">SALIM</font></a>
-		</h2>
+		</h1>
 	</c:when>
 	<c:otherwise>
-		<h2 align="left">
+		<h1 align="left" style="margin-left: 50px; margin-top: 40px">
 			<a href="${initParam.rootPath }/main.do"><font color="#ffffff">SALIM</font></a>
-		</h2>
+		</h1>
 	</c:otherwise>
 </c:choose>
 
