@@ -14,9 +14,8 @@
 <link href="/SALIM_project/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 
-<title>jQuery UI Datepicker - Default functionality</title>
 
 <style type="text/css">
 .errorMessage{
@@ -305,7 +304,7 @@ $(document).ready(function(){
     <h4><label class="control-label col-sm-2" >아이디 입력</label></h4>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="memberId" id="memberId" placeholder="salim" style="width: 40%">
-      <p id="idResult" class="help-block"></p>
+      <p id="idResult" class="help-block" style="width: 40%"></p>
       
     </div>
   </div>
@@ -313,14 +312,14 @@ $(document).ready(function(){
     <h4><label class="control-label col-sm-2" for="pwd">비밀번호 입력</label></h4>
     <div class="col-sm-10"> 
       <input type="password" class="form-control"  id="password" name="password" placeholder="********"  style="width: 40%">
-     <font color="gray">8~20자의 영문 대/소문자,숫자,특수문자 혼용가능</font>
+     <font color="gray" style="width: 40%">8~20자의 영문 대/소문자,숫자,특수문자 혼용가능</font>
      <br><br>
     </div>
 
     <h4><label class="control-label col-sm-2" for="pwd">비밀번호 확인</label></h4>
     <div class="col-sm-10"> 
       <input type="password" class="form-control"  id="password2" name="password2" placeholder="비밀번호를 다시 입력해주세요." style="width: 40%">
-      <p id="passwordResult" class="help-block"></p>
+      <p id="passwordResult" class="help-block" style="width: 40%"></p>
     </div>
   </div>
   
@@ -349,7 +348,7 @@ $(document).ready(function(){
     <h4><label class="control-label col-sm-2" >이메일</label></h4>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="email" name="email" placeholder="salim@google.com" style="width: 40%">
-      <font color="gray">이메일은 그룹 초대를 받을 때 사용될 수 있습니다.</font><p id="emailResult" class="help-block"></p>
+      <font color="gray" style="width: 40%">이메일은 그룹 초대를 받을 때 사용될 수 있습니다.</font><p id="emailResult" class="help-block" style="width: 40%"></p>
     </div>
   </div>
   

@@ -39,7 +39,7 @@
 	
 	<!-- member -->
 	<mvc:view-controller path="/joinMember.do" view-name="/body/join_form.jsp"/>	
-	<mvc:view-controller path="/join_success.do" view-name="body/join_success.tiles"/>	
+	<mvc:view-controller path="/join_success.do" view-name="/body/join_success.jsp"/>	
 	<mvc:view-controller path="/loginMember.do" view-name="/body/login_form.jsp"/>
 	<mvc:view-controller path="/findId.do" view-name="body/findId.tiles"/>
 	<mvc:view-controller path="/findPassword.do" view-name="body/findPassword.tiles"/>

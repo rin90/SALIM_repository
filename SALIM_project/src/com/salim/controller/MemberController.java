@@ -44,12 +44,12 @@ public class MemberController {
 		//여기서 validator 검증을 해야함!
 		if(error.hasErrors())
 		{
-			return "body/join_form.tiles";
+			return "/body/join_form.jsp";
 		}
 		
 		String str=service.joinMember(member); //여기까진 잘 온당..ㅎㅎ
 		map.addAttribute("joinFail",str);
-		return "body/join_success.tiles"; //잘 간다.
+		return "/body/join_success.jsp"; //잘 간다.
 	}
 	
 	
