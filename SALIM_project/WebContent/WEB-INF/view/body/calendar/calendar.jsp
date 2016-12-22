@@ -65,5 +65,5 @@
 	</div>
 </div>
 
-<div id='calendar' style='margin: 3em 0; font-size: 13px'></div>
+<div id='calendar' style='margin-top: 30px; font-size: 13px'></div>
 

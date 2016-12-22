@@ -1,0 +1,13 @@
+'수입, 지출, 메모' 의 경우 
+2016년 10월 ~ 12월의
+	1, 4, 7, 10, 13, 16, 19, 22, 25, 28 일에 더미데이터 입력.
+	
+	
+[작업된 부분] -> 각각 해당하는 곳의 폴더 하위에 ~DummyData란 이름으로 존재.
+Member
+FreeBoard
+Code
+TipBoard
+Big_Category
+Small_Category
+Notes

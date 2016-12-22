@@ -35,6 +35,7 @@ footer {
 	color: red
 }
 
+
 </style>
 </head>
 
@@ -76,7 +77,7 @@ footer {
 			</c:if>
 		</form>
 	
-	<div align="right">
+	<div align="right" style="margin-right:30px">
 			<c:choose>
 			<c:when test='${sessionScope.login_info!=null}'>
 				<a href="${initParam.rootPath}/myPage.do">마이페이지</a>&nbsp;&nbsp;
@@ -112,7 +113,7 @@ footer {
       <span class="errorMessage">
 			<form:errors path="loginCheck.memberId"/>
 	</span>
-      <input type="text" class="form-control" id="email" name="memberId" placeholder="salim" style="width:60%">
+      <input type="text" class="form-control" id="email" name="memberId" placeholder="salim" style="width:60%;">
     </div>
     <br>
     <div class="form-group">
@@ -120,7 +121,7 @@ footer {
       <div class="errorMessage">
 		<form:errors path="loginCheck.password" />
 	 </div>	
-      <input type="password" class="form-control" id="pwd" name="password" placeholder="********" style="width:60%">
+      <input type="password" class="form-control" id="pwd" name="password" placeholder="********" style="width:60%;">
     </div>
     
     <hr>
