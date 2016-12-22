@@ -22,9 +22,9 @@ select seq_exp.nextval from dual  -- 조회
 drop sequence seq_exp--삭제
 
 create table expense(  --지출
-expense_id number primary key,
+expense_id number primary key, 
 member_id Varchar2(50) not null,
-code_id Number not null,  --코드 id
+code_id Number not null,  --코드 id (소분류)
 expense_date Date not null,  --지출일
 expense_explain Varchar2(60),  --사용내역
 cash_expense Number,  --현금지출액

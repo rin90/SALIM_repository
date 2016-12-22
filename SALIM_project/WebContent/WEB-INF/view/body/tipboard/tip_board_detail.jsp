@@ -69,7 +69,10 @@
 </style>
 
 
-<script type="text/javascript"	src="${initParam.rootPath }/lib/scripts/jquery.js"></script>
+
+
+<script type="text/javascript" src="${initParam.rootPath }/lib/scripts/jquery.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(
 			function() {
@@ -184,28 +187,23 @@
 					$(this).parent().hide().prev().prev().prev().show();
 				});
 
-				$(".updateCancel").on(
-						"click",
-						function() {//수정 취소 버튼
-							$(this).parent().find("textarea").val(
-									$(this).parent().find(".scope").val())
+				$(".updateCancel").on("click", function() {//수정 취소 버튼
+							$(this).parent().find("textarea").val($(this).parent().find(".scope").val())
 							$(this).parent().hide().prev().show();
 
-						});
+				});
 
 			});
 </script>
 
 
 ${requestScope.tipBoard.title } &nbsp;&nbsp;&nbsp;
-<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
-	value="${requestScope.tipBoard.registerTime }" />
+<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${requestScope.tipBoard.registerTime }" />
 <hr>
 ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 <p />
 <c:if test="${requestScope.tipBoard.fileName != null }">
-<img
-	src="${initParam.rootPath }/tipFileRoute/${requestScope.tipBoard.fileName }">
+	<img src="${initParam.rootPath }/tipFileRoute/${requestScope.tipBoard.fileName }">
 </c:if>
 <br>${requestScope.tipBoard.content }
 <p />
@@ -277,7 +275,7 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 				<!-- 답글Form -->
 				<form class="secondRegister" action="${initParam.rootPath }/tip/comment/login/insert.do" method="post" hidden="">
 					<hr><br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="scodCancel" type="button" value="답글 취소">└<br>&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="scodCancel" type="button" value="답글 취소"><br>&nbsp;&nbsp;
 					★&nbsp;&nbsp;&nbsp;
 					<textarea class="secondText" name="commentContent" rows="3" cols="50"></textarea>
 					<input type="hidden" name="commentMemberId" value="${sessionScope.login_info.memberId }">

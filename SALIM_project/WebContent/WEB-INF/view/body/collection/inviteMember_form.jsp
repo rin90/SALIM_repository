@@ -88,10 +88,12 @@ function a()
 </script>
 </head>
 <body>
-<h2>그룹 회원 관리</h2>
+<div class="col-md-8 col-md-offset-2"><br><br>
+
+<h2>그룹 회원 관리</h2><br><br>
 <!-- 여기서 회원 조회를 해서 뿌려주는 부분! -->
-<table border='1'>
-<tr>
+ <table class="table table-bordered">
+<tr class="warning">
 		<th>멤버 이름</th><th>멤버 이메일</th><th>멤버 생일</th><th>멤버 초대 상태</th>
 </tr>
 <c:if test="${sessionScope.login_info.memberId==sessionScope.group_info.grantId }">
@@ -137,7 +139,7 @@ function a()
 </table>
 
 <br>
-<h2>멤버 초대하기</h2>
+<h2>멤버 초대하기</h2><br>
  <c:if test="${not empty requestScope.deletefailMessage}">
 
 	alert(${requestScope.deletefailMessage});
@@ -147,27 +149,21 @@ function a()
 <table>
 <tr>
 	<td>
-	<h3>멤버 이메일 입력</h3>
+	  <h5><label >초대할 멤버의 이메일을 입력해주세요.</label></h5>
 	</td>
 </tr>
-<tr>
-	<td>
-
-
-		<input type="text" name="email" id='emailMessage' onblur="messageKeep();">&nbsp;&nbsp;
-
-	</td>
-	
-	<td>
-		<input type="submit" value="초대하기" id='emailMessageBtn'> 
-	</td>
-</tr>
-
-
 </table>
+
+		<input type="text" name="email" class="form-control" id='emailMessage' onblur="messageKeep();" placeholder="myMember@google.com"><br><br>
+		<input type="submit" value="초대하기" id='emailMessageBtn'class="btn btn-success btn-md  pull-right"> 
+
+
+
+
 
 </form>
 
-<form id='noInvited' action ="${initParam.rootPath }/invite.do" method="get"></form>
+<form id='noInvited' action ="${initParam.rootPath }/invite.do" method="get"></form> 
+</div>
 </body>
 </html>
