@@ -166,13 +166,13 @@ public class MemberController {
 			}else
 			{//비밀번호가 틀린 경우 - 다시 로그인 폼으로 돌아간다.
 				map.addAttribute("error", "Password가 틀렸습니다!");
-				return "body/login_form.tiles";
+				return "/body/login_form.jsp";
 			}
 			
 		}else //해당 아이디가 없는 경우
 		{
 			map.addAttribute("error","ID를 찾을 수 없습니다!");
-			return "body/login_form.tiles";
+			return "/body/login_form.jsp";
 		}
 	}
 
