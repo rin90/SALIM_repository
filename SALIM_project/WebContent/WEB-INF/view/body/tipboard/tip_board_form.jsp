@@ -17,6 +17,9 @@
 
 </style>
 
+
+
+
 	<form id="registerForm" action="${initParam.rootPath}/tip/login/register.do"
 		method="post" enctype="multipart/form-data">
 		<h4>Tip게시판</h4>

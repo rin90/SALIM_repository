@@ -251,6 +251,7 @@
 											<td>
 												<!-- 통장/카드 선택하는거 나오게 하기 --> 
 												<select name="cardType" disabled="disabled">
+													<option value="${expense.cardType}">${expense.cardType}</option>
 													<option value="미등록">미등록</option>
 													<c:forEach items="${requestScope.cardTypeList }" var="cnb">
 														<c:choose>
