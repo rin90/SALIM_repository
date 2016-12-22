@@ -8,7 +8,6 @@
 	.input-sm {	height: 23px !important;	}
 	#dia_nav {	min-height: 43% !important; 	}
 	#dia_sec {	margin-left: 15px;	}	
-	
 </style>
 
 <div id="dialog" title="Basic dialog" hidden="hidden">
@@ -41,8 +40,9 @@
 		
 	<hr>
 	<nav id="dia_nav" style="width:30%; min-height:200px;line-height: 20px;">
-		<p>오늘의 내역</p>
-		<table id="dia_totalMoney" class="table table-condensed"></table>
+		<b>오늘의 내역</b>
+		<p>
+		<table id="dia_totalMoney" class="table table-bordered"></table>
 	</nav>
 	<section id="dia_sec" style="width:65%;min-height:100px;">
 		<b>메모</b>
@@ -177,10 +177,11 @@ function loadDayCalendar(){
 		dataType:"json",
 		success:function(result){
 
-			$('#dia_totalMoney').html('<tr><td>수입</td><td>'+result.dayIncome+'</td></tr>'
-									 +'<tr><td>지출</td><td>'+result.dayExpense+'</td></tr>'
-									 +'<tr><td>총액</td><td>'+(result.dayIncome-result.dayExpense)+'</td></tr>');
-				
+			$('#dia_totalMoney').html('<tr><td>수입</td><td>'+result.dayIncome.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+' 원</td></tr>'
+									 +'<tr><td>지출</td><td>'+result.dayExpense.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+' 원</td></tr>'
+									 +'<tr><td>총액</td><td>'+(result.dayIncome-result.dayExpense).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+' 원</td></tr>');
+
+			
 			// 조회해온 값이 있는지를 확인하고 있으면 화면에 뿌리기
 			if(result.daySchedule.length != 0){	// 뿌려야 하는 위치 : dia_tbody
 				var turn = result.daySchedule.length;
@@ -210,7 +211,7 @@ function loadDayCalendar(){
 dialog = $("#dialog").dialog({
     autoOpen: false,
     height: 700,
-    width: 600,
+    width: 610,
     modal: true,
     title: "일정 등록 및 가계 내역 확인",
     resizable: false,
@@ -252,7 +253,7 @@ $(document).ready(function(){
 		var txt = '<tr class="target"><th hidden="hidden"><input type="hidden" name="no" value="0"></th><th width="5%"><input class="dia_check" type="checkbox" name="minus"></th>'
 					+'<td width="20%"><input type="text" size="10" class="datepicker" name="end" value='+$("#dia_end").val()+'></td>'
 					+'<td width="30%"><input type="text" size="20" name="title"></td>'
-					+'<td width="45%"><input type="text" size="35" name="detail"></td></tr>';
+					+'<td width="45%"><input type="text" size="33" name="detail"></td></tr>';
 		if($('#dia_tbody tr td:first').text()=='등록된 내용이 없습니다.'){
 			$('#dia_tbody').html(txt);
 		}else{
@@ -264,10 +265,10 @@ $(document).ready(function(){
 
 	$('#allClick').on('click', function(){
 		if($(this).is(":checked")){ 
-			alert("check");
+			//alert("check");
 			$("#dia_tbody input[name=minus]").prop("checked", true);
 		}else{ 
-			alert("uncheck")
+			//alert("uncheck")
 			$("#dia_tbody input[name=minus]").prop("checked", false);
 		}
 	});
@@ -340,7 +341,7 @@ $(document).ready(function(){
 			$(this).children('td').not('input')
 							.first().html('<input name="end" size="10" class="datepicker" value="'+end+'">')
 							.next().html('<input name="title"  size="20" value="'+title+'">')
-							.next().html('<input name="detail" size="35"  value="'+detail+'">');
+							.next().html('<input name="detail" size="33"  value="'+detail+'">');
 		}
 		
 		$("input").addClass("form-control input-sm");
