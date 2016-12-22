@@ -29,7 +29,7 @@ td, th {
 		<div class="row">
 			<div class="col-md-offset-3 col-md-8 ">
 				<div class="colspan" style="margin-top: 50px; margin-bottom: 50px;">
-					<h2>마이페이지</h2>
+					<h2>내 정보 확인</h2>
 				</div>
 				<br>
 				<table class="table table-bordered">
