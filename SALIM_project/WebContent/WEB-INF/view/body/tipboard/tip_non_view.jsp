@@ -18,7 +18,7 @@
 			<c:choose>
 				<c:when test="${empty requestScope.category }">
 					<tr>
-						<td>등록된 글이 없습니다.</td>
+						<td>등록된 글이 없습니다</td>
 						<td></td>
 						<td></td>
 						<td></td>
