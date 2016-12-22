@@ -17,12 +17,13 @@ nav{
 	line-height: 50px;
 	background-color:lightgray;
 	padding: 15px;
-	min-height:100%;
+	min-height:1000px;
 	width:15%;
 	float:left;
 }
 section{
 	padding: 15px;
+	margin-left: 3em;
 	background-color:white;
 	min-height:100%;
 	width:70%;
@@ -34,6 +35,9 @@ footer{
 	text-align:center;
 	height:50px;
 	clear:both;
+}
+div.container {
+    min-height: 100% !important;
 }
 </style>
 </head>
