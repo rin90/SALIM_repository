@@ -93,7 +93,7 @@
 	
 	<form action="${initParam.rootPath }/free/login/keyword.do" method="post">
 	<table>
-		<tr>
+		<tr><td>&nbsp;&nbsp;</td>
 			<td><select name="category" class="btn btn-default dropdown-toggle">
 			<c:forEach items="${requestScope.codes }" var="code">
 				<c:choose>
@@ -105,9 +105,14 @@
 					</c:otherwise>
 				</c:choose>	
 			</c:forEach>
-		</select> </td>
+		</select> </td><td>&nbsp;&nbsp;</td>
 			<td><input type="text" class="form-control" name="search" value="${requestScope.search}"></td>
-			<td><input type="submit" class="btn btn-info btn-sm" value="°Ë»ö"></td>
+			<td>&nbsp;&nbsp;</td>
+			<td>
+			<button type="submit" class="btn btn-info">
+     	 <span class="glyphicon glyphicon-search"></span> Search
+		</button>
+			</td>
 		</tr>
 	</table>
 		<input type="hidden" name="page" value="1"> 

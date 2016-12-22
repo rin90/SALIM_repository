@@ -66,7 +66,9 @@
 			</td>
 			<td>&nbsp;&nbsp;</td>
 			<td>
-			<input class="btn btn-info btn-sm" type="submit" value="°Ë»ö">
+			<button type="submit" class="btn btn-info">
+     	 <span class="glyphicon glyphicon-search"></span> Search
+		</button>
 			</td>
 		</table>
 		

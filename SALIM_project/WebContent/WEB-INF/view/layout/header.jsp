@@ -66,9 +66,9 @@
 <div align="right">
 	<c:choose>
 	<c:when test='${sessionScope.login_info!=null}'>
-		<a href="${initParam.rootPath}/myPage.do">마이페이지</a>&nbsp;&nbsp;
-		<a href="${initParam.rootPath}/member/logout.do">로그아웃</a>
-	
+		<a href="${initParam.rootPath}/myPage.do" class="btn btn-success" role="button">마이페이지</a>&nbsp;&nbsp;
+		<a href="${initParam.rootPath}/member/logout.do" class="btn btn-warning" role="button">로그아웃</a>
+		<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	</c:when>
 	<c:otherwise>
 		<a href="${initParam.rootPath}/loginMember.do" class="btn btn-success" role="button">로그인</a>&nbsp;&nbsp;
