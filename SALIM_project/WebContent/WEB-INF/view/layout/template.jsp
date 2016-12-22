@@ -15,7 +15,7 @@ header{
 }
 nav{
 	line-height: 50px;
-	min-height:1000px; 
+	min-height:800px; 
 	background-color:lightgray;
 	padding: 15px;
 	width:15%;
@@ -25,7 +25,7 @@ section{
 	padding: 15px;
 	margin-left: 3em;
 	background-color:white;
-	min-height:1000px; 
+	min-height:800px; 
 	width:70%;
 	float:left;
 }
@@ -36,13 +36,9 @@ footer{
 	height:50px;
 	clear:both;
 }
-/* div.container {
+div.container {
     min-height: 100% !important;
-} */
-/* #temp_container{
-	min-height: 1000px;
-	max-height: 100%;
-} */
+}
 </style>
 </head>
 <body>
