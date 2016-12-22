@@ -72,6 +72,22 @@
 					$(this).parent().hide().next().next().next().show();
 
 				});
+				$(".updateMethod").on("submit",function(){ // 수정폼 글자수 체크
+					if($(this).find("textarea").val().length == 0){
+						alert("수정할 내용을 입력해주세요");
+						return false;
+					}
+					
+				});
+				
+				$(".secondRegister").on("submit",function(){ //답글폼 글자수 체크
+					if($(this).find("textarea").val().length == 0){
+						alert("수정할 내용을 입력해주세요");
+						return false;
+					}
+					
+				});
+				
 
 				$("#register").on("submit", function() { //댓글 폼 글 체크
 					alert("확인")
@@ -229,7 +245,7 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 			<input type="hidden" name="page" value="${requestScope.page }">
 			<input type="hidden" name="category" value="${requestScope.category }">
 			<input type="hidden" name="search" value="${requestScope.search }">
-			<input type="submit" value="등록"class="btn btn-primary btn-sm Small">
+			<input type="submit" value="등록" class="btn btn-sm btn-default  pull-right">
 		</form>
 		
 		

@@ -72,7 +72,13 @@ public class IncomeController {
 			int day = now.getDate();
 			incomeDate = new Date(year, month, day);
 		}
+
+		
+		String memberId = checkMemberId(session);
+		modelMap.addAllAttributes(service.selectIncome(memberId, incomeDate));
+
 		modelMap.addAllAttributes(service.selectIncome(checkMemberId(session), incomeDate));
+
 		modelMap.addAttribute("incomeDate", new SimpleDateFormat("yyyy-MM-dd").format(incomeDate));
 		return "body/writing/income.tiles";
 	}
