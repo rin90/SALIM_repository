@@ -11,10 +11,9 @@ $(document).ready(function() {
 		var txt = "<input class='f' type='file'  value='사진' name='fileRoot'><input  id='fc' class='f'  type='button' value='파일 수정 취소'>"
 			$("#b").hide();
 			$("#t").html(txt);
-			$
 	});							
 	$("#t").on("click", "#fc", function() {
-		$(".f").hide();
+		$(".f").remove();
 		$("#b").show();
 	});																				
 });

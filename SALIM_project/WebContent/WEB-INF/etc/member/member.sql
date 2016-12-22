@@ -15,20 +15,10 @@ alter table member add(email varchar2(50) not null);
 drop table member CASCADE CONSTRAINTS;
 
 
--- 11.30 회원 가입 테스트
-
---회원 가입 
-insert into member values('mem1','LJH1',20,'1991-04-15','password1','email1@naver.com');
-insert into member values('mem2','LJH2',20,'1991-04-16','password2','email2@naver.com');
-insert into member values('mem3','LJH3',20,'1991-04-17','password3','email3@naver.com');
-insert into member values('mem4','LJH4',20,'1991-04-18','password4','email4@naver.com');
-insert into member values('mem5','LJH5',20,'1991-04-19','password5','email5@naver.com');
 
 --회원 조회
 select * from member;
 --alter table member1 add(b)
-
-insert into member values ('tester2', '테스터2', 11, sysdate, 'tester');
 
 
 create sequence seq_col--sequence생성
@@ -45,8 +35,7 @@ grant_id varchar2(50) not null
 drop table collection CASCADE CONSTRAINTS;
 
 select * from collection;
-insert into collection values('g1','그룹이름','그룹 소개','mem1');
-insert into collection values('g2','그룹 이름','그룹 소개','mem2');
+
 
 
 
