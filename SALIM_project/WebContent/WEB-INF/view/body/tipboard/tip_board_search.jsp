@@ -13,7 +13,7 @@
 
 <div class="container">
 	<h2>Tip 게시판</h2>
-	<p>안녕하세요 Tip게시판입니다</p>
+	<p>여러분들의 Tip을 공유해 훌륭한 살림꾼이 되어봅시다!</p>
 	<table class="table table-bordered">
 		<thead>
 			<tr class="info">
@@ -45,7 +45,7 @@
 	</table>
 
 
-
+<div align="center">
 	<!-- 이전페이지 -->
 	<c:choose>
 		<c:when test="${requestScope.pageBean.previousGroup }">
@@ -89,9 +89,9 @@
 
 	<p />
 
-	<form action="${initParam.rootPath }/tip/login/keyword.do"
-		method="post">
-		<select name="category" class="btn btn-primary dropdown-toggle">
+	<form action="${initParam.rootPath }/tip/login/keyword.do" method="post">
+		
+		<select name="category" class="btn btn-sm btn-primary dropdown-toggle ">
 			<c:forEach items="${requestScope.codes }" var="code">
 				<c:choose>
 					<c:when test="${requestScope.category == code.code }">
@@ -105,6 +105,7 @@
 		</select>   
 			<input type="hidden" name="page" value="1">
 			<input type="text" name="search"> <input type="submit" value="검색"class= "btn btn-primary btn-sm Small"> 
+			</div>
 			 <a class="btn btn-md btn-default  pull-right" href="${initParam.rootPath }/tip/login/form.do?page=${requestScope.pageBean.page}">글쓰기</a>
 	</form>
 	

@@ -13,7 +13,7 @@
 
 <div class="container">
   <h2>Tip 게시판</h2>
-  <p><font color="blue">안녕하세요 Tip게시판입니다</font></p>            
+  <p><font color="blue">여러분들의 Tip을 공유해 훌륭한 살림꾼이 되어봅시다!</font></p>            
   <table class="table table-bordered">
 		<thead>
 			<tr  class="info">
@@ -49,7 +49,7 @@
 	</table>
 			
 			
-			
+			<div align="center">
 			<!-- 이전페이지 -->
 			<c:choose>
 				<c:when test="${requestScope.pageBean.previousGroup }">
@@ -103,6 +103,7 @@
 			</select>   
 			<input type="hidden" name="page" value="1">
 			<input type="text" name="search"> <input type="submit" value="검색"class= "btn btn-primary btn-sm Small"> 
+			</div>
 			 <a class="btn btn-md btn-sm btn-default  pull-right" href="${initParam.rootPath }/tip/login/form.do?page=${requestScope.pageBean.page}">글쓰기</a>
 			
 			</form>
