@@ -80,9 +80,13 @@ $("#modifyBtn").on("click",function(){
 	<div class="form-group">
   <br><br>
   <label for="email"> &nbsp;&nbsp;그룹 가계부 권한자 &nbsp;&nbsp;&nbsp;&nbsp;</label>
-  &nbsp;&nbsp;&nbsp;<input type="text" id='grantId' name='grantId' placeholder='${sessionScope.group_info.grantId}' value="${sessionScope.group_info.grantId}" >
+  &nbsp;&nbsp;&nbsp;<input type="text" id='grantId' name='grantId' class="form-control" placeholder='${sessionScope.group_info.grantId}' value="${sessionScope.group_info.grantId}" >
   </div>
+  <br>
+    <input type="button" id="removeBtn" class="btn btn-md btn-danger pull-left" onclick="giveUrl('${initParam.rootPath}/collection/removeCollection.do');" value="삭제하기"/>
+    <input type="button" id="modifyBtn" class="btn btn-md btn-success pull-right" onclick="giveUrl('${initParam.rootPath}/collection/collectionModify.do');" value="수정하기"/>
 </form>
+<form id="collectionSetting" action="" method="get"></form>
 </div>
 <%-- 
 <h2>가계부 환경설정 </h2><br>
