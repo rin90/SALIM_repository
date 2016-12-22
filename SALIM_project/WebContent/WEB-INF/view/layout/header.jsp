@@ -43,7 +43,7 @@
 </c:choose>
 
 <!-- 로그인시 본인과 그룹 간을 이동할 수 있는 select박스 -->
-<form method="post" action="${initParam.rootPath }/collection/moving.do">
+<%-- <form method="post" action="${initParam.rootPath }/collection/moving.do">
 	<c:if test="${sessionScope.login_info != null }">
 		<select id="selectInfo" onchange="form.submit()" name="selectId">
 			<option value="${sessionScope.login_info}">개인</option>
@@ -60,7 +60,7 @@
 			</c:forEach>
 		</select>
 	</c:if>
-</form>
+</form> --%>
 
 
 <div align="right">

@@ -227,9 +227,9 @@
 								<tr>
 									<td><input type="checkbox" id="checkAll" />
 									<!--체크박스 체크하면 전체 선택  --></td>
-									<td  width="18">지출내역</td>
-									<td width="18">현금 지출금액</td>
-									<td width="18">카드 지출금액</td>
+									<td width="16">지출내역</td>
+									<td width="16">현금 지출금액</td>
+									<td width="16">카드 지출금액</td>
 									<td>통장/카드선택</td>
 									<!-- select로 뿌려주기 -->
 									<td>지출분류</td>
@@ -242,9 +242,9 @@
 											<td><input type="checkbox" name="expenseId" value="${expense.expenseId }" /> <!-- 체크박스 하나하나 --> 
 												<input type="hidden" name="expenseId" value="${expense.expenseId }" />
 											</td>
-											<td ><input size="18" type="text" class="explane" name="expenseExplain" value="${expense.expenseExplain}" readonly="readonly" placeholder="${expense.expenseExplain}"></td>
-											<td ><input size="18" type="text" class="element" name="cashExpense" value="${expense.cashExpense}" readonly="readonly" placeholder="${expense.cashExpense}"></td>
-											<td ><input size="18" type="text" class="element" name="cardExpense" value="${expense.cardExpense}" placeholder="${expense.cardExpense}"></td>
+											<td ><input size="16" type="text" class="explane" name="expenseExplain" value="${expense.expenseExplain}" readonly="readonly" placeholder="${expense.expenseExplain}"></td>
+											<td ><input size="16" type="text" class="element" name="cashExpense" value="${expense.cashExpense}" readonly="readonly" placeholder="${expense.cashExpense}"></td>
+											<td ><input size="16" type="text" class="element" name="cardExpense" value="${expense.cardExpense}" placeholder="${expense.cardExpense}"></td>
 											<td>
 												<!-- 통장/카드 선택하는거 나오게 하기 --> 
 												<select name="cardType" disabled="disabled">
@@ -287,9 +287,9 @@
 										<td><input type="checkbox" name="expenseId" value="0" /> <!-- 체크박스 하나하나 -->
 											<input type="hidden" name="expenseId" value="0" />
 										</td>
-										<td><input size="18" type="text" name="expenseExplain" class="explane" readonly="readonly" /></td>
-										<td ><input size="18" type="text" name="cashExpense" class="element" readonly="readonly" /></td>
-										<td><input size="18" type="text" name="cardExpense" class="element" readonly="readonly" /></td>
+										<td><input size="16" type="text" name="expenseExplain" class="explane" readonly="readonly" /></td>
+										<td ><input size="16" type="text" name="cashExpense" class="element" readonly="readonly" /></td>
+										<td><input size="16" type="text" name="cardExpense" class="element" readonly="readonly" /></td>
 										<td>
 											<!-- 통장/카드 선택 --> 
 											<select name="cardType" disabled="disabled">

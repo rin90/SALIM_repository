@@ -16,8 +16,78 @@
 
 <div class="container" style="min-height: 1300px;">
 	<div class="panel-group" id="accordion">
-	
+		
+
+		<!-- 로그인시 본인과 그룹 간을 이동할 수 있는 select박스 -->
+			<div style="width: 18%">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+							빠른 이동
+						</a>
+					</h4>
+				</div>
+				<div id="collapse6" class="panel-collapse collapse">
+					<div class="panel-body">
+						<c:if test="${sessionScope.login_info != null }">
+							<a href="${initParam.rootPath }/collection/moving.do?selectId=${sessionScope.login_info}">개인 가계부</a><br>
+								<c:forEach items="${sessionScope.groupList }" var="collection">
+									<a href="${initParam.rootPath }/collection/moving.do?selectId=${collection.collectionId }">${collection.collectionName }</a><br>
+								</c:forEach>
+						</c:if>
+					</div>
+				</div>
+			</div>
+
+				
+					<%-- <div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+								빠른 이동  
+							</a>
+						</h4>
+					</div>
+					<div id="collapse6" class="panel-collapse collapse">
+					<div class="panel-body">
+						<c:if test="${sessionScope.login_info != null }">
+							<a href="${initParam.rootPath }/collection/moving.do?selectId="+${sessionScope.login_info}>개인 가계부</a>
+								<c:forEach items="${sessionScope.groupList }" var="collection">
+									<c:choose>
+										<c:when test="${sessionScope.group_info.collectionId == collection.collectionId}">
+											<a href value=${collection.collectionId } selected="selected">${collection.collectionName }</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${collection.collectionId }">${collection.collectionName }</option>
+										</c:otherwise>
+									</c:choose>
+									
+								</c:forEach>
+						</c:if>
+					</div>
+				</div> --%>
+				</div>
+				<%-- <form method="post" action="${initParam.rootPath }/collection/moving.do">
+				<c:if test="${sessionScope.login_info != null }">
+					<select id="selectInfo" onchange="form.submit()" name="selectId">
+						<option value="${sessionScope.login_info}">개인</option>
+						<c:forEach items="${sessionScope.groupList }" var="collection">
+							<c:choose>
+								<c:when test="${sessionScope.group_info.collectionId == collection.collectionId}">
+									<option value=${collection.collectionId } selected="selected">${collection.collectionName }</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${collection.collectionId }">${collection.collectionName }</option>
+								</c:otherwise>
+							</c:choose>
+							
+						</c:forEach>
+					</select>
+				</c:if>
+				</form> --%>
+
+		
 		<c:if test="${sessionScope.group_info.grantId==sessionScope.login_info.memberId}">
+			<!-- 그룹 관련 사이드 메뉴 -->
 			<div style="width: 18%">
 				<div class="panel-heading">
 					<h4 class="panel-title">
@@ -61,7 +131,7 @@
 			</div>
 			<div id="collapse2" class="panel-collapse collapse">
 				<div class="panel-body">
-					<a href="${initParam.rootPath }/household/login/incomeSelect.do"> 수입 & 지출 등록</a><br>
+					<a href="${initParam.rootPath }/household/login/expenseSelect.do"> 수입 & 지출 등록</a><br>
 					<a href="${initParam.rootPath }/household/login/findbudget.do"> 예산 등록</a><br>
 					<c:if test="${sessionScope.group_info.grantId!=sessionScope.login_info.memberId}">
 						<a href="${initParam.rootPath }/cardNBank/login/cardNBankSelect.do">  개인 카드/통장 등록</a><br>
