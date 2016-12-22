@@ -237,7 +237,7 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 							</c:when>
 							<c:otherwise>	
 								<span style="padding:5px" class="secondComment">
-									<input class="second" type="button" value="답글">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input class="second btn btn-sm btn-default  "  type="button" value="답글" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</span>																						
 							</c:otherwise>
 						</c:choose>
@@ -245,7 +245,7 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 						
 						<span style="padding:5px" class="commentInfo">
 							<c:if test="${comment.commentMemberId ==sessionScope.login_info.memberId }">
-								<input class="update" type="button" value="수정 ">
+								<input class="update btn btn-sm btn-default" type="button" value="수정 ">
 								<a href="${initParam.rootPath }/tip/comment/login/delete.do?id=${comment.id }&no=${comment.no}&page=${requestScope.page}&category=${requestScope.category}&search=${requestScope.search}"class="btn btn-sm btn-default  pull-right">삭제</a>
 							</c:if>
 								<br>
@@ -275,7 +275,7 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 				<!-- 답글Form -->
 				<form class="secondRegister" action="${initParam.rootPath }/tip/comment/login/insert.do" method="post" hidden="">
 					<hr><br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="scodCancel" type="button" value="답글 취소"><br>&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="scodCancel btn btn-sm btn-default" type="button" value="답글 취소"><br>&nbsp;&nbsp;
 					★&nbsp;&nbsp;&nbsp;
 					<textarea class="secondText" name="commentContent" rows="3" cols="50"></textarea>
 					<input type="hidden" name="commentMemberId" value="${sessionScope.login_info.memberId }">
@@ -285,7 +285,7 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 					<input type="hidden" name="category" value="${requestScope.category }">
 					<input type="hidden" name="search" value="${requestScope.search }">
 					<input type="hidden" name="commentGroup" value="${comment.commentGroup }">
-					<input class="secondButton" type="submit" value="등록">
+					<input class="secondButton btn btn-sm btn-default" type="submit" value="등록">
 				</form>
 					
 
