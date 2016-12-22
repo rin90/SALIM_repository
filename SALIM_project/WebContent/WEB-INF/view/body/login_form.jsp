@@ -104,7 +104,7 @@ footer {
 
 
 <body>
-<div class="col-md-8 col-md-offset-2" style="padding-bottom: 124px; padding-left: 300px;"><br><br>
+<div class="col-md-8 col-md-offset-2" style="padding-bottom: 233px; padding-left: 300px; padding-top:80px "><br><br>
   <h1>로그인</h1><br><br><br>
  <form action="${initParam.rootPath}/member/login.do " method="post">
     <div class="form-group">
@@ -132,7 +132,7 @@ footer {
 						</span>
 		</c:if>
 		<br>
-    <button type="submit" class="btn btn-lg btn-success" style="margin-left: 330px">로그인</button>
+    <button type="submit" class="btn btn-lg btn-success" style="margin-left:51%">로그인</button>
  
   </form>
   
