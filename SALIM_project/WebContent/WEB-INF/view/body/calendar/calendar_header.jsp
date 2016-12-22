@@ -98,7 +98,7 @@ jQuery의   Fullcalendar
 	});
 	
 	// '오늘' 버튼 눌렀을 때 처리
-	$('button')
+//	$('button')
 	
 	// event추가하는 부분.
 	function displayCalendar(list){
