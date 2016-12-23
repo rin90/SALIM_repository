@@ -35,16 +35,16 @@
       <textarea class="form-control" rows="10"  name="content"></textarea><div class="errorMessage"><form:errors path="tipBoard.content" /></div>
 
       <br>
-      <input type="hidden" name="page" value="${requestScope.page }">
-      <input type="hidden" name="memberId" value="${sessionScope.login_info.memberId }">
-   
-      <input type="submit" value="확인">
-      
-   </form>
-   
-   <form action="${initParam.rootPath }/tip/login/list.do" method="post">
-      <input type="hidden" name="page" value="${requestScope.page }">
-      <input type="submit" value="취소">
+   	<input type="hidden" name="page" value="${requestScope.page }">
+			<input type="hidden" name="memberId" value="${sessionScope.login_info.memberId }"> 
+			<br><input type="submit" value="등록" class="btn btn-success btn-md  pull-right">
+			
+	</form>
+
+	<form action="${initParam.rootPath }/tip/login/list.do" method="post">
+		<input type="hidden" name="page" value="${requestScope.page }">
+		<input type="submit" value="취소" class="btn btn-danger btn-md  pull-right">
+	</form>
    </form>
 
 
