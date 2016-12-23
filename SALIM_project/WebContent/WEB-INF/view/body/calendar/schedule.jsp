@@ -183,28 +183,27 @@ function loadDayCalendar(){
 
 			
 			// 조회해온 값이 있는지를 확인하고 있으면 화면에 뿌리기
-			if(result.daySchedule.length != 0){	// 뿌려야 하는 위치 : dia_tbody
+			if(result.daySchedule.length != 0){			// 뿌려야 하는 위치 : dia_tbody
 				var turn = result.daySchedule.length;
 				var str = '';
 				for(var i=0; i<turn; i++){
-					str += '<tr><th hidden="hidden"><input type="hidden" name="no" value='+result.daySchedule[i].no+'></th><th width="5%"><input class="dia_check" type="checkbox" name="minus"></th><td width="20%">'
+					str += '<tr><th hidden="hidden"><input type="hidden" name="no" value='+result.daySchedule[i].no+'></th><th width="5%">'
+								+'<input class="dia_check" type="checkbox" name="minus"></th><td width="20%">'
 								+result.daySchedule[i].end+'</td><td width="30%">'
 								+result.daySchedule[i].title+'</td><td width="45%">'
 								+result.daySchedule[i].detail+'</td></tr>';
 				}
 				$('#dia_tbody').html(str);
 			}
-			if(result.dayNote != null){			// 뿌릴 위치 : dia_memo
+			if(result.dayNote != null){					// 뿌릴 위치 : dia_memo
 				$('#dia_memo').val(result.dayNote.content);
 				note = result.dayNote.content;
 			}
-			
 		},
 		error:function(request, status, error){		
 			alert("code:"+request.status+"\nerror:"+error);
 		}
 	});	
-	
 };
 
 /*=================== 다이얼로그 만들 때 디테일한 설정처리 ===========================*/

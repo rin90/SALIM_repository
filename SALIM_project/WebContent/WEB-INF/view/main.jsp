@@ -159,29 +159,36 @@ footer {
 	  					<ol class="carousel-indicators">
 	    					<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	    					<li data-target="#carousel-example-generic" data-slide-to="1"></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	   						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+	   						<li data-target="#carousel-example-generic" data-slide-to="2"></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   						<li data-target="#carousel-example-generic" data-slide-to="3"></li>
 	  					</ol>
 	
 	 					<!-- 이미지 넣는 곳 -->
 	  					<div class="carousel-inner" role="listbox">
 	    					<div class="item active">
 	      						<img src="/SALIM_project/img/portfolio/pic1.PNG" width="820" alt="그림이 없을 때 나오는 설명">
-	      						<div class="carousel-caption">
-	        						사진 위에 설명 나오게 하는 곳
-	      						</div>
+	      						<!-- <div class="carousel-caption">
+	        						SALIM 가계부 로고
+	      						</div> -->
 	    					</div>
 	   						<div class="item">
-	      						<img src="/SALIM_project/img/portfolio/pic2.PNG" width="358" alt="그림이 없을 때 나오는 설명">
-	      						<div class="carousel-caption">
-	        						사진 위에 설명 나오게 하는 곳
-	      						</div>
+	      						<img src="/SALIM_project/img/portfolio/pic2.PNG" width="820" alt="그림이 없을 때 나오는 설명">
+	      						<!-- <div class="carousel-caption">
+	        						지출 입력 화면
+	      						</div> -->
 	    					</div>
 			    			<div class="item">
-			      				<img src="/SALIM_project/img/portfolio/pic3.PNG" width="817" alt="그림이 없을 때 나오는 설명">
-			      				<div class="carousel-caption">
-			        				사진 위에 설명 나오게 하는 곳
-			      				</div>
+			      				<img src="/SALIM_project/img/portfolio/pic3.PNG" width="820" alt="그림이 없을 때 나오는 설명">
+			      				<!-- <div class="carousel-caption">
+			        				월간 보고서
+			      				</div> -->
 			    			</div>
+			    			<div class="item">
+	      						<img src="/SALIM_project/img/portfolio/pic4.PNG" width="820" alt="그림이 없을 때 나오는 설명">
+	      						<!-- <div class="carousel-caption">
+	        						가계부 관리
+	      						</div> -->
+	    					</div>
 			  			</div>
 			  		 	<!-- 화살표 누르면 바뀌는 곳 -->
 			  			<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -193,18 +200,19 @@ footer {
 			    			<span class="sr-only">Next</span>
 			  			</a>
 					</div>
-					
-					
                 </div>
+                <br>
+                	<br><font size="50px">SALIM&nbsp;&nbsp;WELCOME</font><br>
+	                <font>부자가 되는 지름길!&nbsp;&nbsp;최고의 재정관리 툴! <br>당신을 살림꾼으로 만들어드립니다.</font> 
             </div>
         </div> 
         
         
- 
+					
 	
 	
 	
-</body>
+</body>s
 
 <footer>
 <font style="color: white">

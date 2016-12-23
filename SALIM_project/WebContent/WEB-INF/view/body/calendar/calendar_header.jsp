@@ -50,11 +50,11 @@ jQuery의   Fullcalendar
 				center : 'prev, title, next',
 				right : 'month,listMonth'
 			},
-			selectable : true,		// 달력에서 선택할 수 있게
-			selectHelper : true,	// 달력의 어느 부분이 선택되었는지 색으로 표시
+			selectable : true,				// 달력에서 선택할 수 있게
+			selectHelper : true,			// 달력의 어느 부분이 선택되었는지 색으로 표시
 			select : function(start, end){	// 날짜 선택시 수행할 일
 
-				end.subtract(1, 'days').calendar();	// 해당하는 시점에서 1일 전을 의미.
+				end.subtract(1, 'days').calendar();		// 해당하는 시점에서 1일 전을 의미.
 				
 				// 다이얼로그에서 사용할 수 있게 셋팅해준거지요~
  				$('#selectDate').text(start.format('YYYY-MM-DD')+' 기준');

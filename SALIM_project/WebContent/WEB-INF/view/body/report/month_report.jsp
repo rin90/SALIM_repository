@@ -6,6 +6,7 @@
 </h2>
 <br>
 <div id="chart" style="width=1000px"></div>
+<div align="right">* 총 지출 합계 : <label id="monthSpend"></label>&nbsp;&nbsp;</div>
 <hr>
 <br>
 <div align="center">
@@ -71,6 +72,7 @@
 			dataType:"json",
 			success:function(result){
 				graph(result.list);
+				spendMonthMoney(result.list);
 				spendMoneyTop5(result.top5);
 			},
 			error:function(request, status, error){
@@ -121,8 +123,18 @@ function graph(arr){
 
 $(document).ready(function(){
 	graph(${requestScope.result});
+	spendMonthMoney(${requestScope.result});
 	spendMoneyTop5(${requestScope.top5});
 });
+
+// sum Money
+function spendMonthMoney(list){
+	var result = 0;
+	for(var i=0; i<list.length; i++){
+		result += list[i].SPEND_MONEY;
+	}
+	$("#monthSpend").text(result.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+' 원');
+}
 
 // request에 있는 내용을 바탕으로 Table구성
 function spendMoneyTop5(list){
