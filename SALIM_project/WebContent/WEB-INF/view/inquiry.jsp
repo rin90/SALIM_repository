@@ -36,26 +36,34 @@ function emailFormCheck(email){
 	}
 } */
 </script>
-</head>
-<body>
+
+<style>
+	#inquiry_table td{
+		padding-bottom: 10px;
+	}
+</style>
+
+<div align="center">
 <form action="${initParam.rootPath }/sendMail.do" method="post" onsubmit="return checkInput(this);">
 		<input type="hidden" name="from" value="${sessionScope.login_info.email }">
 		<input type="hidden" name="to" value="dlwocks1234@naver.com">
-	<table>
-		<tr>
-		<td><h2>문의하기</h2></td>
-		</tr>
-		<tr>
-			<td>제목</td><td><input type="text" size="30" name="subject"></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<textarea rows="20" cols="70" name="content"></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="submit" value="메일전송">
-			</td>
-	</table>
+		
+		<h2>문의하기</h2><br>
+	
+		<table class="table-hover" id="inquiry_table">
+			<tr>
+				<td align="center"><b>제목</b></td><td><input class="form-control" type="text" size="30" name="subject"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<textarea class="form-control" rows="20" cols="70" name="content"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">
+					<input type="submit" class="btn btn-success" value="메일전송">
+				</td>
+		</table>
+		
 </form>
+</div>
