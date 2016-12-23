@@ -149,7 +149,7 @@ footer {
 	<!-- 사진 나오는 부분 -->
 	<body id="page-top" class="index">
 	
-       <div class="container" align="center" style="margin-top: 80px; padding-bottom: 108px">
+       <div class="container" align="center" style="margin-top: 80px; padding-bottom: 72px">
             <div class="row"style="min-height: 553px;">
                 <div class="col-lg-12">
                     

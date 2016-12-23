@@ -114,7 +114,7 @@
 
 				});   근데 이런 보안은 오용이랍니다. 그래서 cooki를 이용합시다.*/
 
-				$("#a").css("background", "gray")
+				$("#a").css("background", "#FFFF99")
 
 				$(".update").on("click", function() {// 댓글 수정 버튼 눌렀을시  누른 댓글만 텍스트에어리어 생김
 

@@ -79,4 +79,3 @@ insert into expense values(seq_dummy_e.nextval,'test',19,'2016-10,'||seq_dummy_n
 
 
 
-
