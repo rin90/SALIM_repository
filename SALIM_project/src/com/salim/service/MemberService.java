@@ -1,13 +1,11 @@
 package com.salim.service;
 
-import java.io.IOException;
 import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
-
-import com.salim.dao.MemberDao;
 
 import com.salim.vo.Member;
 import com.salim.vo.validator.MemberModifyCheck;
@@ -43,7 +41,7 @@ public interface MemberService {
 	public Member findMemberByEmail(String email);
 
 	//회원 정보 수정
-	public String modifyMember(MemberModifyCheck member);
+	   public String modifyMember(MemberModifyCheck member, HttpSession session);
 	
 	
 }

@@ -155,7 +155,7 @@
 				
 
 				$("#register").on("submit", function() { //댓글 폼 글 체크
-					alert("확인")
+					
 					if ($("#comment0").val().length == 0) {
 						alert("내용을입력해주세요");
 						return false;
@@ -276,7 +276,7 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 				<form class="secondRegister" action="${initParam.rootPath }/tip/comment/login/insert.do" method="post" hidden="">
 					<hr><br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="scodCancel btn btn-sm btn-default" type="button" value="답글 취소"><br>&nbsp;&nbsp;
-					★&nbsp;&nbsp;&nbsp;
+					<h5>답글</h5>&nbsp;&nbsp;&nbsp;
 					<textarea class="secondText" name="commentContent" rows="3" cols="50"></textarea>
 					<input type="hidden" name="commentMemberId" value="${sessionScope.login_info.memberId }">
 					<input type="hidden" name="no" value="${requestScope.tipBoard.no }">
@@ -299,7 +299,7 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 	
 		<form id="register" action="${initParam.rootPath }/tip/comment/login/insert.do" method="post">
 		
-			★&nbsp;&nbsp;<textarea id="comment0" name="commentContent" rows="2" cols="140"></textarea>
+			<h3>댓글</h3>&nbsp;&nbsp;<textarea id="comment0" name="commentContent" rows="2" cols="140"></textarea>
 			<input type="hidden" name="commentMemberId" value="${sessionScope.login_info.memberId }">
 			<input type="hidden" name="no" value="${requestScope.tipBoard.no }">
 			<input type="hidden" name="groupLevel" value="0">

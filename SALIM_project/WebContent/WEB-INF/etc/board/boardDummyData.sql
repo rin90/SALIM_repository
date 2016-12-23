@@ -51,7 +51,7 @@ create sequence seq_dummy_t;
 
 
 --tip게시판
-insert into TIP_BOARD values(seq_dummy_t.nextval,'SALIM','바이바이','images719TZLL3.jpg',0,'생활','2016-01,'||seq_dummy_t.nextval,'test');
+insert into TIP_BOARD values(100+seq_dummy_t.nextval,'SALIM','바이바이','images719TZLL3.jpg',0,'생활','2016-01,'||seq_dummy_t.nextval,'test');
 insert into TIP_BOARD values(seq_dummy_t.nextval,'SALIM','바이바이','images719TZLL3.jpg',0,'생활','2016-01,'||seq_dummy_t.nextval,'test');
 insert into TIP_BOARD values(seq_dummy_t.nextval,'SALIM','바이바이','images719TZLL3.jpg',0,'생활','2016-01,'||seq_dummy_t.nextval,'test');
 insert into TIP_BOARD values(seq_dummy_t.nextval,'SALIM','바이바이','images719TZLL3.jpg',0,'생활','2016-01,'||seq_dummy_t.nextval,'test');

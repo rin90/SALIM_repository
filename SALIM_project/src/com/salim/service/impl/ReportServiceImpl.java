@@ -40,7 +40,7 @@ public class ReportServiceImpl implements ReportService{
 			result.put("total", wrapSinglePotation(edao.selectTotalMonthReport(map), "MONTH"));
 			// 달별 대분류에 따른 내용 받아오는 부분
 			for(int i=1; i<=12; i++){	
-				map.put("month", year+(i<9? "-0"+i:"-"+i));
+				map.put("month", year+(i<=9? "-0"+i:"-"+i));
 				// 수입
 				detailImport.add(wrapSinglePotation(idao.selectImportEachCategory(map), "CATEGORY").toString().replace("=", ":"));
 				// 지출

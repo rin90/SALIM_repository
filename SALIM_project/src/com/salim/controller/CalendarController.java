@@ -118,14 +118,16 @@ public class CalendarController {
 	
 	@RequestMapping("/updateSchedule")
 	@ResponseBody 
-	Map updateSchedule(@ModelAttribute ScheduleSet list, String memo, HttpSession session) throws UnsupportedEncodingException{
+	Map updateSchedule(@ModelAttribute ScheduleSet list, String memo, HttpSession session) throws Exception{
 		Map map = new HashMap();
 		list.setMemberId(checkMemberId(session));
 		
 		//메모 관련 처리 -> 다시 작업해야함.
 		Map<String, Object> param = new HashMap();
 		param.put("memberId", list.getMemberId());
-		param.put("dayDate", java.sql.Date.valueOf(list.getStart()));		// note용
+		System.out.println(list.getStart());
+		Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(list.getStart());
+		param.put("dayDate", startDate);		// note용
 		Notes note = nservice.findNotes(param);		// 객체가 있는지 여부를 확인하고
 		if(note==null)								// 없으면 만듬
 			note = new Notes(0, java.sql.Date.valueOf(list.getStart()), memo, list.getMemberId());

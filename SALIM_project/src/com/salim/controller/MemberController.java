@@ -173,34 +173,7 @@ public class MemberController {
 	}
 	
 	
-	//회원 정보 수정
-	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
-	public String modifyMember(@ModelAttribute @Valid MemberModifyCheck member, 
-			HttpSession session)
-	{
 	
-		service.modifyMember(member);
-		session.setAttribute("login_info", member);
-		
-		return "redirect:/myInfo_modify.do"; //이걸 왜 해? 읭 .... 회원 정보 수정 페이지로 그냥 가면 되는데..?
-	}
-	
-	//아이디 찾기 -끝
-	@RequestMapping(value="/findId.do", method=RequestMethod.POST)
-	@ResponseBody
-	public HashMap<String,String> findId(String email)
-	{
-		HashMap<String,String> hmap=new HashMap<String,String>();
-			Member member=service.findMemberByEmail(email); 
-			if(member!=null)
-			{	
-				String id=member.getMemberId();
-				hmap.put("id", id);
-			}else{
-				hmap.put("emailError","일치하는 이메일 주소가 없습니다.");
-			}
-		return hmap;
-	}
 	
 	//비밀번호 찾기 -끝
 	@RequestMapping(value="/findPassword.do", method=RequestMethod.POST)
@@ -234,5 +207,47 @@ public class MemberController {
 		
 		return hmap;
 	}
+	
+
+	   //회원 정보 수정
+	   @RequestMapping(value="/modify.do", method=RequestMethod.POST)
+	   public String modifyMember(@ModelAttribute @Valid MemberModifyCheck member, 
+	         HttpSession session)
+	   {
+	     //널일 경우 이 부분을 채워준다.
+	      Member m=new Member();
+	      m=service.findMemberById(member.getMemberId()); //입력받은 멤버의 아이디로 멤버 가져오기!
+	      //만약 생일이 없을 경우!
+	      if(member.getBirthday()==null)
+	      {
+	         member.setBirthday(m.getBirthday());
+	         member.setAge(m.getAge());
+	         //생일이 널일 경우!
+	      }
+	      
+	      //password가 널일 경우!
+	      if(member.getPassword()==null||member.getPassword().equals(""))
+	      {
+	         member.setPassword(m.getPassword());
+	         member.setPassword2(m.getPassword2());
+	      }
+	      
+	      if(member.getEmail()==null)
+	      {
+	         member.setEmail(m.getEmail());
+	      }
+	      
+	      if(member.getName()==null)
+	      {
+	         member.setName(m.getName());
+	      }
+	      
+	      String s=service.modifyMember(member,session);
+	      /*if(s.equals("success"))
+	      {
+	      session.setAttribute("login_info", member);
+	      }*/
+	      return "redirect:/myInfo_modify.do"; //이걸 왜 해? 읭 .... 회원 정보 수정 페이지로 그냥 가면 되는데..?
+	   }
 	
 }
