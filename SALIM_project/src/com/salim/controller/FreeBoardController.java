@@ -55,7 +55,7 @@ public class FreeBoardController {
 		Map map = service.getFreeBoardList(page); //PagingBean객체와 현재페이지 리스트가 들어가 있는 map을 반환
 				
 		List<FreeBoard> list = (List<FreeBoard>) map.get("list");  // 현재페이지 리스트를 가져옴
-		
+		System.out.println(list);
 		//현재페이지에 대한 리스트가 없을 경우 전 페이지로 이동( 예) 3페이지에서 목록을 다 삭제 했을 경우 2페이지로 이동해서 2페이지 목록을 보여주기 위해)
 		if(list.size() == 0){
 			page= page-1;
@@ -137,18 +137,26 @@ public class FreeBoardController {
 			map.addAttribute("page", page);
 			return "body/board/free_board_form.tiles";
 		}
+		
+		//사용자가 첨부한 파일은 FreeBoard클래스의 instance인 데이터타입이 MultipartFile클래스인 fileRoot가 첨부파일을 입력 받는다.
+		
+		MultipartFile file = freeBoard.getFileRoot();//입력 받은 file을 get해서 file이라는 변수에 대입한다. 
 
-		MultipartFile file = freeBoard.getFileRoot();
+		if (file != null && !file.isEmpty()) {// 사용자가 첨부파일을 입력했는지 안했는지 체크한다. true -입력했다면, false-입력 안함
 
-		if (file != null && !file.isEmpty()) {// 업로드 된 파일이 있다면
-
-			freeBoard.setFileName(file.getOriginalFilename());// 파일명
+			//getOriginalFilename()메소드로 파일명을 가져온다. 그 파일명을 FreeBoard클래스의 파일 명을 저장하는 fileName변수의 대입한다.
+			freeBoard.setFileName(file.getOriginalFilename()); 
 			
-			String dir = request.getServletContext().getRealPath("/fileroute");// 파일 저장되는 곳
-																				
+			//getServletContext()메소드를 통해 현재 프로젝의 경로를 가져온다.( /SALIM_project ) 
+			//getRealPath()메소드를 통해 임시 파일 저장소 위치를 지정해준다.
+			// 즉,최종 경로는 /SALIM_project/fileroute 입니다.
+			String dir = request.getServletContext().getRealPath("/fileroute");
+														
+			//파일이 저장되 있는 경로와 파일명을 통하여 File클래스를 생성한다.
 			File dest = new File(dir, file.getOriginalFilename());
 
-			file.transferTo(dest);// 파일이동
+			//사용자가 업로드 한 파일 데이터를 지정한 파일에 저장한다. 
+			file.transferTo(dest);
 		}
 
 		service.insertFree(freeBoard);
