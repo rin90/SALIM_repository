@@ -113,6 +113,7 @@ public class CollectController {
 			String message=service.modifyCollection(collect, memberIdforGrant);
 			if(message.equals("success"))
 			{
+				System.out.println("수정 성공");
 				session.setAttribute("group_info", collect);
 				List<Collect> groupList = service.selectByMemberIdNInvite(((Member)session.getAttribute("login_info")).getMemberId());
 				session.setAttribute("groupList", groupList);	
