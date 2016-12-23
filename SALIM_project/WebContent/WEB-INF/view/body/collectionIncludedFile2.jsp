@@ -2,9 +2,9 @@
 
 <tr>
 		 <%-- 그룹 가계부 : ${collection.collectionName }-${collection.collectionIntro }-${collection.grantId} --%>
-		 <td><font color="gray" style="margin-left: 20px">${collection.collectionName }</font></td>
-		 <td><font color="gray" style="margin-left: 20px">${collection.grantId}</font></td>
-		 <td><font color="gray" style="margin-left: 20px">${collection.collectionIntro }</font></td>
+		 <td><font color="gray" style="margin-left: 1px">${collection.collectionName }</font></td>
+		 <td><font color="gray" style="margin-left: 1px">${collection.grantId}</font></td>
+		 <td><font color="gray" style="margin-left: 1px">${collection.collectionIntro }</font></td>
 		 <td align="right">	<button  id="okayClick" type="submit" class="btn btn-primary" >수락  </button></td>
 		 <td align="right"	 >
 		 

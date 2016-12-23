@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
+
 <script type="text/javascript" src="/SALIM_project/lib/scripts/jquery.js"></script>
 <script type="text/javascript">
 
@@ -11,118 +12,99 @@
 
 
 <div class="container">
-<br>
-  <h1>Tip Í≤åÏãúÌåê</h1>
-  &nbsp;&nbsp;&nbsp;<p><font color="gray">ÏïàÎÖïÌïòÏÑ∏Ïöî TipÍ≤åÏãúÌåêÏûÖÎãàÎã§</font></p>
-  <a class="btn btn-md btn-default  pull-right" href="${initParam.rootPath }/tip/login/form.do?page=${requestScope.pageBean.page}">Í∏ÄÏì∞Í∏∞</a>
-<br>
-<div>
-  <br>
-  
-        
+  <h2>Tip ∞‘Ω√∆«</h2>
+  <p><font color="blue">ø©∑Ø∫–µÈ¿« Tip¿ª ∞¯¿Ø«ÿ »«∏¢«— ªÏ∏≤≤€¿Ã µ«æÓ∫æΩ√¥Ÿ!</font></p>            
   <table class="table table-bordered">
-		<thead>
-			<tr class="info">
-			    <td>Î∂ÑÎ•ò</td>
-				<td>Î≤àÌò∏</td>
-				<td>Ï†úÎ™©</td>
-				<td>ÏûëÏÑ±Ïûê</td>
-				<td>ÏûëÏÑ±Ïùº</td>
-				<td>Ï°∞Ìöå</td>
-			</tr>
-		</thead>
+      <thead>
+         <tr  class="info">
+             <td>∫–∑˘</td>
+            <td>π¯»£</td>
+            <td>¡¶∏Ò</td>
+            <td>¿€º∫¿⁄</td>
+            <td>¿€º∫¿œ</td>
+            <td>¡∂»∏</td>
+         </tr>
+      </thead>
+      
+      
+ 
 
-		<tbody id="tbody">
-			<!--  Î™©Î°ù ÎøåÎ¶¨Í∏∞ -->
-			<c:forEach items="${requestScope.list }" var="tipBoard">
-				<tr>
-				   <td>${tipBoard.classification }</td>
-					<td>${tipBoard.no }</td>
-					<td> 
-					<a href="${initParam.rootPath }/tip/login/seleteDetail.do?no=${tipBoard.no}&page=${requestScope.pageBean.page}">${tipBoard.title }</a></td>
-					<td>${tipBoard.memberId }</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${tipBoard.registerTime }"/></td>
-					<td>${tipBoard.click }</td> 
-				</tr>
-			</c:forEach>
-		</tbody>	
-	</table>		
-</div>			
+      
 
-<div align="center">
-	<!-- Ïù¥Ï†ÑÌéòÏù¥ÏßÄ -->
-	<c:choose>
-		<c:when test="${requestScope.pageBean.previousGroup }">
-			<a href="${initParam.rootPath }/tip/login/list.do?page=${requestScope.pageBean.beginPage-1}">‚óÄ&nbsp;</a>
-		</c:when>
-		<c:otherwise>
-			‚óÄ&nbsp;
-		</c:otherwise>
-	</c:choose>
-			
-	<!-- ÌéòÏù¥ÏßÄ ÎøåÎ¶¨Í∏∞ -->
-	<c:forEach begin="${requestScope.pageBean.beginPage }" end="${requestScope.pageBean.endPage }" var="page">
-		<c:choose>
-			<c:when test="${requestScope.pageBean.page == page }">
-				[${page }]
-			</c:when>
-			<c:otherwise>
-				<a href="${initParam.rootPath }/tip/login/list.do?page=${page }">${page }</a>				
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-	<!-- Îã§ÏùåÌéòÏù¥ÏßÄ -->
-	<c:choose>
-		<c:when test="${requestScope.pageBean.nextGroup }">
-			<a href="${initParam.rootPath }/tip/login/list.do?page=${requestScope.pageBean.endPage+1 }">&nbsp;‚ñ∂</a>
-		</c:when>
-		<c:otherwise>
-			&nbsp;‚ñ∂				
-		</c:otherwise>
-	</c:choose>
-</div>			
-
-
-	<form action="${initParam.rootPath }/tip/login/form.do">
-		<input type="hidden" name="page" value="${requestScope.pageBean.page }">
-		&nbsp;&nbsp;&nbsp;
-	</form>
-			
-			
-			
-	<form action="${initParam.rootPath }/tip/login/keyword.do" method="post">
-		<table>
-			<tr>
-				<td>
-					<select name="category" class="btn btn-default dropdown-toggle" >				
-						<c:forEach items="${requestScope.codes }" var="code">
-							<c:choose>
-								<c:when test="${requestScope.category == code.code }">
-									<option selected="selected">${code.code }</option>
-								</c:when>
-								<c:otherwise>
-									<option>${code.code }</option>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</select> 
-				</td>
-				<td>&nbsp;&nbsp;&nbsp;</td>
-				<td>
-					<input type="hidden" name="page" value="1">
-			 		<input type="text" name="search" class="form-control">					
-				</td>
-				<td>&nbsp;&nbsp;</td>
-				<td>
-				<!-- 	<input type="submit" value="Í≤ÄÏÉâ"class= "btn btn-primary btn-sm Small">  -->
-					<button type="submit" class="btn btn-info">
-			     		<span class="glyphicon glyphicon-search">Í≤ÄÏÉâ</span>
-					</button>
-				</td>
-			</tr>
-		</table>
-		  
-
-		
-	</form>
+      <tbody id="tbody">
+         <!--  ∏Ò∑œ ª—∏Æ±‚ -->
+         <c:forEach items="${requestScope.list }" var="tipBoard">
+            <tr>
+               <td>${tipBoard.classification }</td>
+               <td>${tipBoard.no }</td>
+               <td> 
+               <a href="${initParam.rootPath }/tip/login/seleteDetail.do?no=${tipBoard.no}&page=${requestScope.pageBean.page}">${tipBoard.title }</a></td>
+               <td>${tipBoard.memberId }</td>
+               <td><fmt:formatDate pattern="yyyy-MM-dd" value="${tipBoard.registerTime }"/></td>
+               <td>${tipBoard.click }</td> 
+            </tr>
+         </c:forEach>
+         
+      </tbody>   
+   </table>
+         
+         
+         <div align="center">
+         <!-- ¿Ã¿¸∆‰¿Ã¡ˆ -->
+         <c:choose>
+            <c:when test="${requestScope.pageBean.previousGroup }">
+               <a href="${initParam.rootPath }/tip/login/list.do?page=${requestScope.pageBean.beginPage-1}">¢∏&nbsp;</a>
+            </c:when>
+            <c:otherwise>
+               ¢∏&nbsp;
+            </c:otherwise>
+         </c:choose>
+         
+         <!-- ∆‰¿Ã¡ˆ ª—∏Æ±‚ -->
+         <c:forEach begin="${requestScope.pageBean.beginPage }" end="${requestScope.pageBean.endPage }" var="page">
+            <c:choose>
+               <c:when test="${requestScope.pageBean.page == page }">
+                  [${page }]
+               </c:when>
+               <c:otherwise>
+                  <a href="${initParam.rootPath }/tip/login/list.do?page=${page }">${page }</a>            
+               </c:otherwise>
+            </c:choose>
+         </c:forEach>
+         <!-- ¥Ÿ¿Ω∆‰¿Ã¡ˆ -->
+         <c:choose>
+            <c:when test="${requestScope.pageBean.nextGroup }">
+               <a href="${initParam.rootPath }/tip/login/list.do?page=${requestScope.pageBean.endPage+1 }">&nbsp;¢∫</a>
+            </c:when>
+            <c:otherwise>
+               &nbsp;¢∫            
+            </c:otherwise>
+         </c:choose>
+         
+         <form action="${initParam.rootPath }/tip/login/form.do">
+         <input type="hidden" name="page" value="${requestScope.pageBean.page }">
+         &nbsp;&nbsp;&nbsp;
+         </form>
+         
+         
+         
+         <form action="${initParam.rootPath }/tip/login/keyword.do" method="post">
+         <select name="category" class="btn btn-sm btn-primary dropdown-toggle" >            
+            <c:forEach items="${requestScope.codes }" var="code">
+            <c:choose>
+               <c:when test="${requestScope.category == code.code }">
+                  <option selected="selected">${code.code }</option>
+               </c:when>
+               <c:otherwise>
+                  <option>${code.code }</option>
+               </c:otherwise>
+            </c:choose>
+         </c:forEach>
+         </select>   
+         <input type="hidden" name="page" value="1">
+         <input type="text" name="search"> <input type="submit" value="∞Àªˆ"class= "btn btn-primary btn-sm Small"> 
+         </div>
+          <a class="btn btn-md btn-sm btn-default  pull-right" href="${initParam.rootPath }/tip/login/form.do?page=${requestScope.pageBean.page}">±€æ≤±‚</a>
+         
+         </form>
 </div>

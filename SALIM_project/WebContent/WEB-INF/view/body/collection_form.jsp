@@ -19,6 +19,7 @@
       
     </div>
 </div>
+<br><br>
  <div class="form-group">
     <h4><label class="control-label col-sm-2" for="pwd">그룹 소개</label></h4>
     <div class="col-sm-10"> 

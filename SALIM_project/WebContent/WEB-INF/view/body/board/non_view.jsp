@@ -5,11 +5,12 @@
 <link href="/SALIM_project/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
 
-<div class="container">
+<div class="container" align="center" style="font-size: 120%">
 	<br>
  	 <h1>글 찾기</h1>
  	 <hr>
  	 <a class="btn btn-md btn-default  pull-right" href="${initParam.rootPath }/free/login/form.do?page=1">글쓰기</a><br><br>
+
 	<table class="table table-condensed">
 		<thead>
 			 <tr class="info">
@@ -21,34 +22,29 @@
 			</tr>
 		</thead>
 		<tbody id="tbody">
+			
 			<c:choose>
 				<c:when test="${empty requestScope.category }">
 					<tr align="center">
-						<td>등록된 글이 없습니다.</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td align="center" colspan="5">등록된 글이 없습니다.</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
 					<tr align="center">
-						<td>검색결과가없습니다.</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td align="center" colspan="5">검색결과가없습니다.</td>
 					</tr>
 				</c:otherwise>
 			</c:choose>
+			
 		</tbody>
 	</table>
+
 </div>
 
 
 
 
-
+<div align="center">
 	<form action="${initParam.rootPath }/free/login/keyword.do" method="post">
 	&nbsp;&nbsp;&nbsp;<table>
 		<tr>
@@ -73,3 +69,4 @@
 		</table>
 		
 	</form>
+</div>

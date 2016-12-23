@@ -119,10 +119,10 @@ $(document).ready(function(){
    });
    
    
-   
+  /*  
    $(".secondRegister").on("submit",function(){ //답글 폼 글 체크
       
-      var t=$(this).find("textarea").val()//form에서 자식인 textarea를 찾는다.
+      var t=$(this).find("textarea").val()//form에서 자식인 textarea를 찾는다. */
       //event소스에서 찾는게 좋다.
       
       /* if($(".secondText").val().length == 0){ //이것은 secondText라는 이름을 가진 클래스를 다 가지고와서 배열로 갖고있는다.
@@ -131,12 +131,12 @@ $(document).ready(function(){
          return false;
       } */
       
-      if(t.length == 0){
+   /*    if(t.length == 0){
          alert("내용을 입력해주세요");
          return false;
       }
       
-   });
+   }); */
 
    
    $(".scodCancel").on("click",function(){ //답글 취소 버튼 처리
@@ -335,4 +335,3 @@ $(document).ready(function(){
          <p/>
 
 
-         
