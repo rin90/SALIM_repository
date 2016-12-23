@@ -117,6 +117,7 @@ $(document).ready(function(){
 		 changeMonth: true,
 	      changeYear: true,
 	 		yearRange:"1900:2016",
+	 		showMonthAfterYear:true,
             showOtherMonths: true, /* 다른 달도 보여줌 */
             selectOtherMonths: true,   /* 다른 달도 선택할 수 있게 해줌 */
              yearSuffix:'년',   /* 달력에 년도를 표시 */
@@ -162,8 +163,7 @@ $(document).ready(function(){
   <div class="form-group">
     <h4><label class="control-label col-sm-2" for="pwd">&nbsp;&nbsp;&nbsp;&nbsp;비밀번호</label></h4>
     <div class="col-sm-10"> 
-    
-      <input type="password" class="form-control"  id="password" name="password" placeholder="********" value='${sessionScope.login_info.password}'>
+      <input type="password" class="form-control"  id="password" name="password" placeholder="비밀번호를 변경할 수 있습니다."> <%-- value='${sessionScope.login_info.password}' --%>
      <font color="gray">8~20자의 영문 대/소문자,숫자,특수문자 혼용가능</font>
      <br><br>
     </div>
@@ -171,7 +171,7 @@ $(document).ready(function(){
     <h4><label class="control-label col-sm-2" for="pwd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;재입력</label></h4>
     <div class="col-sm-10"> 
        
-          <input type="password" class="form-control"  id="password2" name="password2" placeholder="비밀번호를 다시 입력해주세요." value='${sessionScope.login_info.password2}'>
+          <input type="password" class="form-control"  id="password2" name="password2" placeholder="비밀번호를 다시 입력해주세요." ><%-- value='${sessionScope.login_info.password2}'> --%>
 		  <span id='passwordResult'></span><br>
       
     </div>

@@ -8,26 +8,24 @@
 <title>Insert title here</title>
 <link href="/SALIM_project/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
-
-
 <script type="text/javascript" src="/SALIM_project/scripts/jquery.js"></script>
 <script type="text/javascript">
 var err;
 $(document).ready(function(){
+	
 	$("#findIdBtn").on("click", function(){
 		$("#result").empty();
-		$("#sarea").empty();
-		$.ajax({
 			
-			"url":"/SALIM_project/member/findId.do",
+		$.ajax({
+			"url":"${initParam.rootPath}/member/findId.do",
 			"type":"post",
 			"data" :"email="+$("#email").val(),
-			"dataType":"JSON",
+			"dataType":"json",
 			"beforeSend":function(){
 				
 				if(!$("#email").val())
 				{
-					$("#sarea").html("<font color='red' size='2'>&nbsp;&nbsp;&nbsp;이메일을 입력하세요.<font>");
+					alert("이메일을 입력하세요.");
 					return false;
 				}
 				
@@ -36,18 +34,17 @@ $(document).ready(function(){
 			
 				var resultMemberId=object.id;
 				var err=object.emailError;
+				
 				if(resultMemberId!=null)
 				{	
-					$("#result").html("<font color='blue' size='4'> 아이디는 "+resultMemberId+"입니다.</font>");
-				}else
-				{
-					$("#result").html("");
+					$("#result").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color='gray' size='3'> 아이디는 "+resultMemberId+"입니다.</font>");
 				}
 				
 				if(err!=null)
 				{
-					$("#result").html("<font color='red' size='4'>"+err+"</font>");
-				}
+					$("#result").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color='red' size='3'>"+err+"</font>");
+				} 
+				
 			},
 			"error":function()
 			{
@@ -74,8 +71,7 @@ $(document).ready(function(){
    
 	<br>
     <button id="findIdBtn" type="submit" class="btn btn-lg btn-success pull-right">아이디 찾기</button>
-    <div id="result">	
-			</div>
+    <div id="result"></div>
     <br><br><br><br><br><br><br><br><br><br>
     <hr><div class="footer_left pull-left">Salim</div><div class="pull-right"><small>&copy; 2016-12.23 Salim.KOSTA</small></div>
  
