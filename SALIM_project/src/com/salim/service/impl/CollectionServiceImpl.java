@@ -73,27 +73,22 @@ public class CollectionServiceImpl implements CollectionService{
 		}
 	}
 	
-	public String modifyCollection(Collect collect,String memberIdforGrant)
+	public String modifyCollection(Collect collect, String memberIdforGrant)
 	{
 		//1. memberIdforGrant를 비교해야되니까.
-		Collect dbCollect=new Collect();
-		Member member=new Member();
-		
 
-		dbCollect=dao.selectCollectionByCollectionId(collect.getCollectionId());
+		Collect collection=new Collect();
+		collection=dao.selectCollectionByCollectionId(collect.getCollectionId());
 		
-		
-		if(memberIdforGrant.equals(dbCollect.getGrantId()))
-		{
-			//권한 있는 사람 - 수정 가능
+		if(collection!=null) //널이 아닌 경우
+		{		
+			//정상!
 			dao.updateCollection(collect);
-		}
-		else
+			return "success";
+		}else //널인 경우
 		{
-			//권한 없는 사람의 접근
-			return "접근 권한이 없습니다.";
+			return "fail";
 		}
-		return "";
 	}
 	
 	//가계부 삭제 부분

@@ -68,7 +68,7 @@ $("#modifyBtn").on("click",function(){
 <h2>가계부 환경설정 </h2><br>
 <form action="" id='formTag' method="POST">
 <input type="hidden" name="memberIdforGrant" value='${sessionScope.login_info.memberId }'>
-
+<input type="hidden" id='collectionId' name="collectionId" value='${sessionScope.group_info.collectionId}'>
 
 <div class="form-group">
 <label for="email"> &nbsp;&nbsp;*권한자만 가계부 변경이 가능합니다 .&nbsp;&nbsp;&nbsp;&nbsp;</label><br><br>
