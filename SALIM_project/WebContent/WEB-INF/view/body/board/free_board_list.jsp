@@ -35,11 +35,9 @@
 			<c:forEach items="${requestScope.list }" var="freeBoard">
 				<tr>
 					<td>${freeBoard.no }</td>
-					<td><a
-						href="${initParam.rootPath }/free/login/seleteDetail.do?no=${freeBoard.no}&page=${requestScope.pageBean.page}&category=${requestScope.category}">${freeBoard.title }</a></td>
+					<td><a href="${initParam.rootPath }/free/login/seleteDetail.do?no=${freeBoard.no}&page=${requestScope.pageBean.page}&category=${requestScope.category}">${freeBoard.title }</a></td>
 					<td>${freeBoard.memberId }</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd"
-							value="${freeBoard.registerTime }" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${freeBoard.registerTime }" /></td>
 					<td>${freeBoard.click }</td>
 				</tr>
 			</c:forEach>
@@ -52,8 +50,7 @@
 	<!-- 이전페이지 -->
 	<c:choose>
 		<c:when test="${requestScope.pageBean.previousGroup }">
-			<a
-				href="${initParam.rootPath }/free/login/list.do?page=${requestScope.pageBean.beginPage-1}">Previous&nbsp;</a>
+			<a href="${initParam.rootPath }/free/login/list.do?page=${requestScope.pageBean.beginPage-1}">Previous&nbsp;</a>
 		</c:when>
 		<c:otherwise>
 					Previous&nbsp;
@@ -110,7 +107,7 @@
 	<td>&nbsp;&nbsp;</td>
 		<td>
 		<button type="submit" class="btn btn-info">
-     	 <span class="glyphicon glyphicon-search"></span> Search
+     		<span class="glyphicon glyphicon-search"></span> Search
 		</button>
 		</td>
 		<tr>

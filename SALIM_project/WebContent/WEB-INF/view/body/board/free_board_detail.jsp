@@ -3,7 +3,44 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<style>
+.update, .second, .delete, .updateCancel, .bto, .scodCancel {
+   display: inline-block;
+   zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+   *display: inline;
+   vertical-align: baseline;
+   margin: 5px 8px;
+   outline: none;
+   cursor: pointer;
+   text-align: center;
+   text-decoration: none;
+   font: 14px/100% Arial, Helvetica, sans-serif;
+   padding: 10px 10px;
+   text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+   -webkit-border-radius: .5em;
+   -moz-border-radius: .5em;
+   border-radius: .5em;
+   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+   box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+   color: #606060;
+   border: solid 1px #b7b7b7;
+   background: #fff;
+   background: -webkit-gradient(linear, left top, left bottom, from(#fff),
+      to(#ededed));
+   background: -moz-linear-gradient(top, #fff, #ededed);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',
+      endColorstr='#ededed');
+}
 
+img{
+   width: 20%;
+   height: 20%;
+   
+}
+
+
+</style>
 
 <script type="text/javascript"
    src="/SALIM_project/lib/scripts/jquery.js"></script>
@@ -29,7 +66,7 @@ $(document).ready(function(){
 
    });   근데 이런 보안은 오용이랍니다. 그래서 cooki를 이용합시다.*/ 
    
-   $("#d").css("background","gray")
+   $("#d").css("background","#FFFF99")
    
    $(".update").on("click",function(){// 댓글 수정 버튼 눌렀을시  누른 댓글만 텍스트에어리어 생김
       
@@ -57,7 +94,7 @@ $(document).ready(function(){
    
    
    $("#register").on("submit",function(){ //댓글 폼 글 체크
-      alert("확인")
+     
       if($("#comment0").val().length == 0){
          alert("내용을입력해주세요");
          return false;
@@ -121,22 +158,77 @@ $(document).ready(function(){
 </script>
 
 
-${requestScope.freeBoard.title } &nbsp;&nbsp;&nbsp;
-<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
-   value="${requestScope.freeBoard.registerTime }" />
+<h3>${requestScope.freeBoard.title } &nbsp;&nbsp;&nbsp;</h3>
 <hr>
-${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
+<div class="row" style="margin: 0 0 1%; font-family: Serif; font-size: 20px;font-weight: bold;"> <%-- row:한줄 (한줄이 12칸임) --%>
+<div class="col-md-4" > <%-- col-md-4 :부트스트랩에 있는 것,4칸을 가지라는 것 --%>
+ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
+</div>
+
+<div class="col-md-offset-4 col-md-4" align="right"> <%-- col-md-offset-4 4칸을 밀어라  --%>
+   <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
+      value="${requestScope.freeBoard.registerTime }" />
+</div>
+</div>
+
+<br>
+
 <p />
+<div>
 <c:if test="${requestScope.freeBoard.fileName != null }">
 <img
    src="${initParam.rootPath }/fileroute/${requestScope.freeBoard.fileName }">
 </c:if>
-<br>${requestScope.freeBoard.content }
+</div>
+<br><div style="font-family: 맑은고딕; font-size: 20px; font-weight:lighter">${requestScope.freeBoard.content }</div><br>
 <p />
 댓글 &nbsp;${requestScope.commentTotal }&nbsp;&nbsp;조회&nbsp;${requestScope.freeBoard.click }&nbsp;&nbsp;
    
    
       <hr> <br>
+      
+       <input type="hidden" name="page" value="${requestScope.page }">
+      
+      
+      <div align="right">        
+         <%--카테고리를 기준으로 해서 검색list 또는 기본 list로 이동 --%>
+         <c:choose>
+            <c:when test="${empty requestScope.category  }">
+               <a class="btn btn-default" style="margin: 0 3%" href="${initParam.rootPath }/free/login/list.do?page=${requestScope.page }">목록</a>
+            </c:when>
+            <c:otherwise>
+               <a class="btn btn-default" style="margin: 0 3%"
+               href="${initParam.rootPath }/free/login/keyword.do?page=${requestScope.page }&&category=${requestScope.category}&search=${requestScope.search}">목록</a>
+            </c:otherwise>
+         </c:choose>
+        
+         
+         <c:if test="${requestScope.freeBoard.memberId== sessionScope.login_info.memberId }">
+         <a class="btn btn-default"
+         href="${initParam.rootPath }/free/login/updateForm.do?category=${requestScope.category }&search=${requestScope.search}&page=${requestScope.page}&no=${requestScope.freeBoard.no}">수정</a> &nbsp;&nbsp;
+         <%--카테고리를 기준으로 해서 검색list에서 상세화면에서 삭제했을 때는 기본list 1페이지로 기본list에서 삭제했을 때는 현재 페이지로 이동 --%>
+         <c:choose>
+            <c:when test="${empty requestScope.category }">
+               <a class="btn btn-default" style="margin: 0 1%"
+               href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>   <p/>
+           
+            </c:when>
+            <c:otherwise>
+               <a class="btn btn-default" style="margin: 0 1%"
+               href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=1">삭제</a>   <p/>               
+            
+            </c:otherwise>
+         </c:choose>
+         </c:if>
+    </div>
+<hr>
+<br>  
+      
+      
+      
+      
+      
+      
    
       <div id="d">
       <c:forEach  items="${requestScope.freeComment }" var="comment">
@@ -168,7 +260,7 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
                   <span style="padding:5px" class="commentInfo">
                      <c:if test="${comment.commentMemberId ==sessionScope.login_info.memberId }">
                         <input class="update" type="button" value="수정 ">
-                        <a href="${initParam.rootPath }/comment/login/delete.do?id=${comment.id }&no=${comment.no}&page=${requestScope.page}&category=${requestScope.category}&search=${requestScope.search}">삭제</a>
+                        <a class="delete" href="${initParam.rootPath }/comment/login/delete.do?id=${comment.id }&no=${comment.no}&page=${requestScope.page}&category=${requestScope.category}&search=${requestScope.search}">삭제</a>
                      </c:if>
                         <br>
                         <c:if test="${comment.groupLevel ==1}">
@@ -191,7 +283,7 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
                <input type="hidden" name="page" value="${requestScope.page }">
                <input type="hidden" name="category" value="${requestScope.category }">
                <input type="hidden" name="search" value="${requestScope.search}">
-               <input type="submit" value="수정">
+               <input class="bto" type="submit" value="수정">
             </form>
             
             <!-- 답글Form -->
@@ -207,7 +299,7 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
                <input type="hidden" name="category" value="${requestScope.category }">
                <input type="hidden" name="search" value="${requestScope.search }">
                <input type="hidden" name="commentGroup" value="${comment.commentGroup }">
-               <input class="secondButton" type="submit" value="등록">
+               <input class="bto" type="submit" value="등록">
             </form>
                
 
@@ -220,14 +312,21 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
       <!-- 댓글 -->
       <form id="register" action="${initParam.rootPath }/comment/login/insert.do" method="post">
       
-         ★&nbsp;&nbsp;<textarea id="comment0" name="commentContent" rows="2" cols="10"></textarea>
+       <h2 style="coller: white">댓글</h2>
+   <div align="center">
+      
+      
+         &nbsp;&nbsp;<textarea class="form-control" style="width: 95%; border-bottom: 10%" id="comment0" name="commentContent" rows="2" cols="10"></textarea>
+         </div>
          <input type="hidden" name="commentMemberId" value="${sessionScope.login_info.memberId }">
          <input type="hidden" name="no" value="${requestScope.freeBoard.no }">
          <input type="hidden" name="groupLevel" value="0">
          <input type="hidden" name="page" value="${requestScope.page }">
          <input type="hidden" name="category" value="${requestScope.category }">
          <input type="hidden" name="search" value="${requestScope.search }">
-         <input type="submit" value="등록">
+         <div align="right">
+         <input class="bto" type="submit" value="등록">
+         </div>
       </form>
       
       
@@ -235,32 +334,5 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
       
          <p/>
 
-         <input type="hidden" name="page" value="${requestScope.page }">
-         <%--카테고리를 기준으로 해서 검색list 또는 기본 list로 이동 --%>
-         <c:choose>
-            <c:when test="${empty requestScope.category  }">
-               <a href="${initParam.rootPath }/free/login/list.do?page=${requestScope.page }">목록</a>
-            </c:when>
-            <c:otherwise>
-               <a 
-               href="${initParam.rootPath }/free/login/keyword.do?page=${requestScope.page }&&category=${requestScope.category}&search=${requestScope.search}">목록</a>
-            </c:otherwise>
-         </c:choose>
-         <p/>
-         
-         <c:if test="${requestScope.freeBoard.memberId== sessionScope.login_info.memberId }">
-         <a 
-         href="${initParam.rootPath }/free/login/updateForm.do?category=${requestScope.category }&search=${requestScope.search}&page=${requestScope.page}&no=${requestScope.freeBoard.no}">수정</a> &nbsp;&nbsp;
-         <%--카테고리를 기준으로 해서 검색list에서 상세화면에서 삭제했을 때는 기본list 1페이지로 기본list에서 삭제했을 때는 현재 페이지로 이동 --%>
-         <c:choose>
-            <c:when test="${empty requestScope.category }">
-               <a 
-               href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=${requestScope.page}">삭제</a>   <p/>
-            </c:when>
-            <c:otherwise>
-               <a
-               href="${initParam.rootPath }/free/login/delete.do?no=${requestScope.freeBoard.no}&page=1">삭제</a>   <p/>               
-            </c:otherwise>
-         </c:choose>
-         </c:if>
+
          

@@ -14,10 +14,15 @@
 <br>
   <h1>Tip 게시판</h1>
   &nbsp;&nbsp;&nbsp;<p><font color="gray">안녕하세요 Tip게시판입니다</font></p>
-  <p><font color="blue">안녕하세요 Tip게시판입니다</font></p>            
+  <a class="btn btn-md btn-default  pull-right" href="${initParam.rootPath }/tip/login/form.do?page=${requestScope.pageBean.page}">글쓰기</a>
+<br>
+<div>
+  <br>
+  
+        
   <table class="table table-bordered">
 		<thead>
-			<tr  class="info">
+			<tr class="info">
 			    <td>분류</td>
 				<td>번호</td>
 				<td>제목</td>
@@ -26,11 +31,6 @@
 				<td>조회</td>
 			</tr>
 		</thead>
-		
-		
- 
-
-		
 
 		<tbody id="tbody">
 			<!--  목록 뿌리기 -->
@@ -45,66 +45,84 @@
 					<td>${tipBoard.click }</td> 
 				</tr>
 			</c:forEach>
-			
 		</tbody>	
-	</table>
+	</table>		
+</div>			
+
+<div align="center">
+	<!-- 이전페이지 -->
+	<c:choose>
+		<c:when test="${requestScope.pageBean.previousGroup }">
+			<a href="${initParam.rootPath }/tip/login/list.do?page=${requestScope.pageBean.beginPage-1}">◀&nbsp;</a>
+		</c:when>
+		<c:otherwise>
+			◀&nbsp;
+		</c:otherwise>
+	</c:choose>
+			
+	<!-- 페이지 뿌리기 -->
+	<c:forEach begin="${requestScope.pageBean.beginPage }" end="${requestScope.pageBean.endPage }" var="page">
+		<c:choose>
+			<c:when test="${requestScope.pageBean.page == page }">
+				[${page }]
+			</c:when>
+			<c:otherwise>
+				<a href="${initParam.rootPath }/tip/login/list.do?page=${page }">${page }</a>				
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	<!-- 다음페이지 -->
+	<c:choose>
+		<c:when test="${requestScope.pageBean.nextGroup }">
+			<a href="${initParam.rootPath }/tip/login/list.do?page=${requestScope.pageBean.endPage+1 }">&nbsp;▶</a>
+		</c:when>
+		<c:otherwise>
+			&nbsp;▶				
+		</c:otherwise>
+	</c:choose>
+</div>			
+
+
+	<form action="${initParam.rootPath }/tip/login/form.do">
+		<input type="hidden" name="page" value="${requestScope.pageBean.page }">
+		&nbsp;&nbsp;&nbsp;
+	</form>
 			
 			
 			
-			<!-- 이전페이지 -->
-			<c:choose>
-				<c:when test="${requestScope.pageBean.previousGroup }">
-					<a href="${initParam.rootPath }/tip/login/list.do?page=${requestScope.pageBean.beginPage-1}">◀&nbsp;</a>
-				</c:when>
-				<c:otherwise>
-					◀&nbsp;
-				</c:otherwise>
-			</c:choose>
-			
-			<!-- 페이지 뿌리기 -->
-			<c:forEach begin="${requestScope.pageBean.beginPage }" end="${requestScope.pageBean.endPage }" var="page">
-				<c:choose>
-					<c:when test="${requestScope.pageBean.page == page }">
-						[${page }]
-					</c:when>
-					<c:otherwise>
-						<a href="${initParam.rootPath }/tip/login/list.do?page=${page }">${page }</a>				
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			<!-- 다음페이지 -->
-			<c:choose>
-				<c:when test="${requestScope.pageBean.nextGroup }">
-					<a href="${initParam.rootPath }/tip/login/list.do?page=${requestScope.pageBean.endPage+1 }">&nbsp;▶</a>
-				</c:when>
-				<c:otherwise>
-					&nbsp;▶				
-				</c:otherwise>
-			</c:choose>
-			
-			<form action="${initParam.rootPath }/tip/login/form.do">
-			<input type="hidden" name="page" value="${requestScope.pageBean.page }">
-			&nbsp;&nbsp;&nbsp;
-			</form>
-			
-			
-			
-			<form action="${initParam.rootPath }/tip/login/keyword.do" method="post">
-			<select name="category" class="btn btn-sm btn-primary dropdown-toggle" >				
-				<c:forEach items="${requestScope.codes }" var="code">
-				<c:choose>
-					<c:when test="${requestScope.category == code.code }">
-						<option selected="selected">${code.code }</option>
-					</c:when>
-					<c:otherwise>
-						<option>${code.code }</option>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			</select>   
-			<input type="hidden" name="page" value="1">
-			<input type="text" name="search"> <input type="submit" value="검색"class= "btn btn-primary btn-sm Small"> 
-			 <a class="btn btn-md btn-sm btn-default  pull-right" href="${initParam.rootPath }/tip/login/form.do?page=${requestScope.pageBean.page}">글쓰기</a>
-			
-			</form>
+	<form action="${initParam.rootPath }/tip/login/keyword.do" method="post">
+		<table>
+			<tr>
+				<td>
+					<select name="category" class="btn btn-default dropdown-toggle" >				
+						<c:forEach items="${requestScope.codes }" var="code">
+							<c:choose>
+								<c:when test="${requestScope.category == code.code }">
+									<option selected="selected">${code.code }</option>
+								</c:when>
+								<c:otherwise>
+									<option>${code.code }</option>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</select> 
+				</td>
+				<td>&nbsp;&nbsp;&nbsp;</td>
+				<td>
+					<input type="hidden" name="page" value="1">
+			 		<input type="text" name="search" class="form-control">					
+				</td>
+				<td>&nbsp;&nbsp;</td>
+				<td>
+				<!-- 	<input type="submit" value="검색"class= "btn btn-primary btn-sm Small">  -->
+					<button type="submit" class="btn btn-info">
+			     		<span class="glyphicon glyphicon-search">검색</span>
+					</button>
+				</td>
+			</tr>
+		</table>
+		  
+
+		
+	</form>
 </div>

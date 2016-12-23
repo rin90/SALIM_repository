@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -24,8 +23,7 @@
 	<hr>
 	&nbsp;&nbsp;&nbsp;<p><font color="gray">남을 비방하는 글은 싫어요! :( </font></p>
 	<hr><br>
-	<form id="registerForm" action="${initParam.rootPath}/free/login/register.do"
-		method="post" enctype="multipart/form-data">
+	<form id="registerForm" action="${initParam.rootPath}/free/login/register.do" method="post" enctype="multipart/form-data">
 
 		
 	 		<label for="sel1">글 제목</label><input type="text"class="form-control" name="title"><br><div class="errorMessage"><form:errors path="freeBoard.title" /></div>
