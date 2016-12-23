@@ -8,6 +8,7 @@
 <script type="text/javascript"
    src="/SALIM_project/lib/scripts/jquery.js"></script>
 <script type="text/javascript">
+$(#g.css backgrund.ffff99){
 $(document).ready(function(){
 
    
@@ -139,7 +140,7 @@ ${requestScope.freeBoard.memberId } &nbsp;&nbsp;&nbsp;
       <hr> <br>
    
       <div id="d">
-      <c:forEach  items="${requestScope.freeComment }" var="comment">
+      <c:forEach  items="${requestScope.freeComment }" var="comment" >
          <div id="tom" style="border-bottom: 1px solid white">
                
                <c:if test="${comment.groupLevel ==1}">

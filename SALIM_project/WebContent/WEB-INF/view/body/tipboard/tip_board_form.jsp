@@ -45,6 +45,6 @@
 		<input type="hidden" name="page" value="${requestScope.page }">
 		<input type="submit" value="취소" class="btn btn-danger btn-md  pull-right">
 	</form>
-   </form>
+   
 
 
