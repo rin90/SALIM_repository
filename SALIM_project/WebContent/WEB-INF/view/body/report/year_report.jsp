@@ -114,6 +114,10 @@ function display(totalList, importList, spendList){
 				sresult += '<th>'+spendList[i][j].CATEGORY+'</th>';
 			}
 			sresult += '<td>'+spendList[i][j].SPEND_MONEY.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+' </td>';
+			
+			if(i==8 && j==0){
+				alert(spendList[i][j].SPEND_MONEY);
+			} 
 		}
 		sresult += '</tr>';
 	}

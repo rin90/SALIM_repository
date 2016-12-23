@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.salim.dao.impl.MemberNCollectionDaoImpl;
 import com.salim.service.impl.CollectionServiceImpl;
 import com.salim.service.impl.MemberServiceImpl;
 import com.salim.vo.Collect;
 import com.salim.vo.Member;
+import com.salim.vo.MemberNCollection;
 
 @Controller
 @RequestMapping("/collection")
@@ -26,7 +28,8 @@ public class CollectController {
 	private CollectionServiceImpl service;
 	@Autowired
 	private MemberServiceImpl memberService;
-
+	@Autowired
+	private MemberNCollectionDaoImpl mncService;
 
 	//가계부 추가 
 	@RequestMapping("/collection_add.do")
@@ -99,19 +102,27 @@ public class CollectController {
 		// 맞으면 수정, 틀리면 ajax로 화면에 alert 창 띄우고 'ㅅ' 그럼 되겠다.
 	
 		//1.memberIdforGrant가 참/거짓 
-		System.out.println("수정!!!!!!!!!!!!!!!");
-		String grantMessage=service.modifyCollection(collect, memberIdforGrant);
-		if(!grantMessage.equals(""))
+		System.out.println("수정!!!!!!!!!!!!!!!"+collect);
+		Member m=new Member();
+		if(!collect.getGrantId().equals(memberIdforGrant))
 		{
-			map.addAttribute("grantMessage",grantMessage);
+			map.addAttribute("grantMessage","접근 권한이 없습니다.");
 		}
-		else
+		else //접근 권한이 있는 경우!
 		{
-			session.setAttribute("group_info", collect);
-			List<Collect> groupList = service.selectByMemberIdNInvite(((Member)session.getAttribute("login_info")).getMemberId());
-			session.setAttribute("groupList", groupList);
+			String message=service.modifyCollection(collect, memberIdforGrant);
+			if(message.equals("success"))
+			{
+				System.out.println("수정 성공");
+				session.setAttribute("group_info", collect);
+				List<Collect> groupList = service.selectByMemberIdNInvite(((Member)session.getAttribute("login_info")).getMemberId());
+				session.setAttribute("groupList", groupList);	
+			}else
+			{
+				map.addAttribute("grantMessage","해당 컬랙션이 없습니다.");
+			}
+			
 		}
-		System.out.println("grantMessage =  "+grantMessage);
 		
 		return "body/collection/collectionSettingMain.tiles";
 	}
@@ -156,21 +167,43 @@ public class CollectController {
 	
 	//초대하기
 	@RequestMapping(value="/inviteMember.do", method=RequestMethod.POST)
-	public String inviteMember(String email, String collectionId, ModelMap map)
+	public String inviteMember(String email, String collectionId, ModelMap map )
 	{
 		//2.비지니스 로직 호출! 'ㅅ'
 		System.out.println("inviteMember()"+email+collectionId);
-		//
-		if(!(email==null||email.equals("")))
+		Member m=new Member();
+		m=memberService.findMemberByEmail(email);
+		if(m!=null&&email!=null) //널이 아닌 경우
 		{
-			service.inviteMemberInCollection(email, collectionId);
-			//return "body/collection/setting/settings/inviteMember_form.tiles";	
-			//return "redirect:/invite.do";
-		}else
+			String id=m.getMemberId(); //회원의 아이디를 받아옴
+			MemberNCollection mncRow=new MemberNCollection();
+			HashMap<String,String> map2=new HashMap<String,String>();
+			map2.put("memberId",id);
+			map2.put("collectionId", collectionId);
+			mncRow=mncService.selectByMemberIdAndCollectionId(map2);
+			if(mncRow!=null)
+			{
+				map.put("message", "이미 초대한 회원입니다.");
+				
+			}else
+			{
+				if(!(email==null||email.equals("")))
+				{
+					service.inviteMemberInCollection(email, collectionId);		
+					
+				}else
+				{
+					map.addAttribute("inviteMessage", "해당하는 이메일이 없습니다.");
+				}
+				
+			}
+			
+		}else //널인 경우
 		{
-			map.addAttribute("inviteMessage", "해당하는 이메일이 없습니다.");
-			//return "body/collection/setting/settings/inviteMember_form.tiles";
+			map.put("message",  "없는 회원입니다.");
+			
 		}
+	
 		return "redirect:/collection/inviteSetting.do";
 	}
 	

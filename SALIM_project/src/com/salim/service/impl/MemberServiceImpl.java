@@ -3,6 +3,8 @@ package com.salim.service.impl;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -165,59 +167,67 @@ public class MemberServiceImpl implements MemberService{
 		return member;
 	}
 	
-	public String modifyMember(MemberModifyCheck member)
+	public String modifyMember(MemberModifyCheck member, HttpSession session)
 	{
+		//이메일 중복 체크를 해야하는데!
+		//이메일을 입력했는데, 그 값이 혹시 다른 사람의 이메일과 같다면 그렇게 바꾸면 안 돼!
 		
-		Member modifiedmember=new Member();	//최종으로 들어갈 멤버
-		Member tempMember=new Member();//임시 저장
-		tempMember=findMemberById(member.getMemberId());
-		
-		//일단, 이메일 체크부터 해야한다. 
-		//이메일이 기존의 다른 회원의 이메일과 중복이라면 아예 ㄴㄴ, 하지만 그렇지 않은 경우?
-		
-		//만약에 tempMember의 아이디랑 , 현재 작성한 이메일을 가진 회원의 아이디랑 같은 경우 
-		
-		if(findMemberForEmailCheck(member.getEmail())) //받아온 이메일 기준으로 멤버가 있는지 없는 경우!
-		{ //이메일 바꿀 수 있음!
-		//비밀번호 체크
-			if(member.getPassword().equals("")||member.getPassword()==null||member.getPassword().length()<8||member.getPassword().length()>16)
+		Member eTest,resultMember=new Member();
+		eTest=findMemberByEmail(member.getEmail()); //입력한 이메일로 멤버를 뽑아옴! ->없으면 null이잖아!!
+		if(eTest==null) //회원이 없는 경우!
+		{
+			//비밀번호 같은지 체크!
+			if(member.getPassword().equals(member.getPassword2()))
 			{
-				modifiedmember.setPassword(tempMember.getPassword());
-				modifiedmember.setPassword2(tempMember.getPassword());
-			}else
-			{
-				modifiedmember.setPassword(member.getPassword());
-				modifiedmember.setPassword2(member.getPassword2());
-			}
-		
-				//생년월일 체크
-			if(member.getBirthday()==null)
-			{
-				modifiedmember.setBirthday(tempMember.getBirthday());
-				modifiedmember.setAge(tempMember.getAge());
-			}else
-			{
-				modifiedmember.setBirthday(member.getBirthday());
-				modifiedmember.setAge(member.getAge());
-			}
-		}else{ //받아온 이메일을 기준으로 멤버가 있는 경우인데, 이때, 다른 사람이랑 같은 경우가 있고, 내 아이디랑 같은 경우가 있음!
-			
-			/*if()
-			{
+				//비밀번호의 길이 체크!!
+				if(member.getPassword().length()>7&& member.getPassword().length()<16)
+				{
+					System.out.println("바꾸는 부분?????????수정ㅈ전!!!"+member);
+					BeanUtils.copyProperties(member,resultMember);
+					memberdao.updateMember(resultMember);
+					
+					session.setAttribute("login_info", resultMember);
+					
+				}else
+				{
+					return "비밀번호는 8~15자로 만드세요.";
+				}
 				
-			}*/
+			}else
+			{
+				return "비밀번호가 일치하지 않습니다.";
+			}
 			
-			return "이미 사용중인 이메일입니다.";
+		}else //null이 아닌 경우 있다는거! 
+		{
+			if(!eTest.getMemberId().equals(member.getMemberId())) //다른 사람인 경우!
+			{
+				return "이미 사용중인 이메일입니다. 다른 이메일을 입력하세요!";
+			}else //그게 나인 경우
+			{
+				if(member.getPassword().equals(member.getPassword2()))
+				{
+					//비밀번호의 길이 체크!!
+					if(member.getPassword().length()>7&& member.getPassword().length()<16)
+					{
+						System.out.println("바꾸는 부분?????????수정ㅈ전!!!"+member);
+						BeanUtils.copyProperties(member,resultMember);
+						memberdao.updateMember(resultMember);
+						return "success";
+					}else
+					{
+						return "비밀번호는 8~15자로 만드세요.";
+					}
+					
+				}else
+				{
+					return "비밀번호가 일치하지 않습니다.";
+				}
+			}
 		}
+		return "";	
+
 		
-		//이름 추가.
-		modifiedmember.setName(member.getName());
-		
-		/*BeanUtils.copyProperties(member,resultMember);
-		System.out.println("resultMember"+resultMember);
-		*/
-		//memberdao.updateMember(modifiedmember);
-		return null;
 	}
 	
 	

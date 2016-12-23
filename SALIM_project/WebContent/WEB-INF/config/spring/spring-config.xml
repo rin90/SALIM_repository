@@ -48,7 +48,7 @@
 	<mvc:view-controller path="/myPage.do" view-name="body/my/page/myPage.tiles"/>
 	<mvc:view-controller path="/leaveMember.do" view-name="body/my/page/leave_member.tiles"/>
 	<mvc:view-controller path="/myInfo_modify.do" view-name="body/my/page/myInfo_modify.tiles"/>
-
+	
 <!-- collection 그룹 추가 부분 -->
 	<mvc:view-controller path="/collection.do" view-name="body/collection_form.tiles"/> 
 <!-- collection 환경설정 -->
@@ -99,7 +99,7 @@
 		p:host="smtp.gmail.com"
 		p:port="587"
 		p:username="dlwocks1234@gmail.com"
-		p:password="zxc7539510"
+		p:password="zx7539510c"
 		p:javaMailProperties-ref="mailProperty"/>
 		
 	<util:properties id="mailProperty"> 
