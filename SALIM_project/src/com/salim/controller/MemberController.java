@@ -39,21 +39,18 @@ public class MemberController {
 	@RequestMapping(value="/join.do", method=RequestMethod.POST)
 	public String join(@ModelAttribute @Valid Member member , BindingResult error,ModelMap map) //요청파라미터를 vo 객체로 생성하고, request에 자동 저장
 	{
-		//검증을 받아서 들어오면!
-		System.out.println(member);
-		//여기서 validator 검증을 해야함!
 		if(error.hasErrors())
 		{
 			map.addAttribute("joinFail","회원가입을 실패했습니다.  가입 조건을 확인하세요!");
 			return "/body/join_form.jsp";
 		}
 		
-		if(service.joinMember(member,map).equals("fail")) //여기까진 잘 온당..ㅎㅎ
+		if(service.joinMember(member,map).equals("fail")) 
 		{
 			return "/body/join_form.jsp";
 		}
 		
-		return "/body/join_success.jsp"; //잘 간다.
+		return "/body/join_success.jsp"; 
 	}
 	
 	
@@ -66,7 +63,7 @@ public class MemberController {
 		System.out.println(memberId);
 		boolean flag=service.findMemberForIdCheck(memberId);
 		HashMap<String,Boolean> idCheckMap=new HashMap<String, Boolean>();
-		idCheckMap.put("flag", flag); //이 부분은 VO가 없어서 map의 형태로 만들어준 부분이다!
+		idCheckMap.put("flag", flag); 
 		return idCheckMap;
 	}
 	//이메일 중복 체크- ajax 처리 
@@ -119,26 +116,16 @@ public class MemberController {
 		return resultMap;
 	}
 
-	
 	//회원 탈퇴
 	@RequestMapping("/leave.do")
 	public String leaveMember(String memberId,HttpSession session)
 	{
 		session.invalidate();
-		service.leaveMember(memberId); //member_collection 테이블에서도 삭제해줘야 한다.
+		service.leaveMember(memberId); 
 		
 		return "redirect:/main.do";
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	//로그인 -끝
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
@@ -147,8 +134,7 @@ public class MemberController {
 		if(errors.hasErrors()) //에러가 있는 경우 전달 
 		{
 			return "/body/login_form.jsp";
-		}
-		
+		}	
 		Member member= service.findMemberById(login.getMemberId());
 		java.util.List<ObjectError> list = errors.getAllErrors();
 	      for(ObjectError e : list){
@@ -164,15 +150,12 @@ public class MemberController {
 				 //로그인 성공시 회원 아이디로 개인과 그룹 목록 보여줌
 				 List<Collect> groupList = collectionService.selectByMemberIdNInvite(member.getMemberId());
 				 session.setAttribute("groupList", groupList);
-				 System.out.println("그룹  조회......"+groupList);
-				 
-				return "redirect:/collection/findAllCollectionList.do"; //로그인 성공화면
+				return "redirect:/collection/findAllCollectionList.do"; 
 			}else
-			{//비밀번호가 틀린 경우 - 다시 로그인 폼으로 돌아간다.
+			{
 				map.addAttribute("error", "Password가 틀렸습니다!");
 				return "/body/login_form.jsp";
 			}
-			
 		}else //해당 아이디가 없는 경우
 		{
 			map.addAttribute("error","ID를 찾을 수 없습니다!");
@@ -189,41 +172,17 @@ public class MemberController {
 		return "redirect:/main.do";
 	}
 	
-	//마이페이지는 일단 단순 view 이동으로 처리함
 	
 	//회원 정보 수정
 	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
 	public String modifyMember(@ModelAttribute @Valid MemberModifyCheck member, 
 			HttpSession session)
 	{
-		System.out.println(member.getBirthday());
-		Member tempMember=null, resultMember=new Member();
-		//회원 비밀번호가 공백으로 가면 ""로 값이 들어가니까, 그거 체크해서 공백인 경우
+	
+		service.modifyMember(member);
+		session.setAttribute("login_info", member);
 		
-		System.out.println(member.getPassword()+member.getPassword2()+"여기 오류?");
-		if(member.getPassword().equals("")||member.getPassword()==null)
-		{
-			System.out.println("password"+member.getPassword());
-			tempMember=service.findMemberById(member.getMemberId());
-			System.out.println("tempMember"+tempMember);
-			member.setPassword(tempMember.getPassword());
-			member.setPassword2(member.getPassword());
-		}
-		
-		
-		if(member.getBirthday()==null)
-		{
-			tempMember=service.findMemberById(member.getMemberId());
-			member.setBirthday(tempMember.getBirthday());
-		}
-		
-		
-		BeanUtils.copyProperties(member,resultMember);
-		System.out.println("resultMember"+resultMember);
-		service.modifyMember(resultMember);
-		session.setAttribute("login_info", resultMember);
-		
-		return "redirect:/myInfo_modify.do";
+		return "redirect:/myInfo_modify.do"; //이걸 왜 해? 읭 .... 회원 정보 수정 페이지로 그냥 가면 되는데..?
 	}
 	
 	//아이디 찾기 -끝
@@ -232,13 +191,12 @@ public class MemberController {
 	public HashMap<String,String> findId(String email)
 	{
 		HashMap<String,String> hmap=new HashMap<String,String>();
-			Member member=service.findMemberByEmail(email); //member로 받아왔는데, 
-			//map.addAttribute("id", member.getMemberId()); //아이디 걸어주기!
+			Member member=service.findMemberByEmail(email); 
 			if(member!=null)
 			{	
-				hmap.put("id", member.getMemberId());
-			}else
-			{
+				String id=member.getMemberId();
+				hmap.put("id", id);
+			}else{
 				hmap.put("emailError","일치하는 이메일 주소가 없습니다.");
 			}
 		return hmap;
@@ -255,15 +213,15 @@ public class MemberController {
 		{
 			if(member.getEmail().equals(email)) //이메일이 일치하는 경우 - 정상의 경우
 			{
-				String pass=member.getPassword().substring(0, 4); //0-4까지의 문자들을 temp에 넣기.
-				for(int i=4; i<member.getPassword().length(); i++) //총 길이만큼 돌린다.
+				String pass=member.getPassword().substring(0, 4); 
+				for(int i=4; i<member.getPassword().length(); i++) 
 				{
-					pass=pass+"*"; // 결과값 만들기! 이걸 보내줘야 한다.
+					pass=pass+"*"; 
 				}
 				System.out.println(pass);
 				hmap.put("password", pass);
 			
-			}else //이메일이 일치하지 않는 경우!
+			}else //이메일이 일치하지 않는 경우
 			{
 				hmap.put("emailError", "이메일을 잘못입력하셨습니다.");
 			}

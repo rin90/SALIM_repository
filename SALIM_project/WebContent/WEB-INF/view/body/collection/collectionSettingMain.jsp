@@ -11,6 +11,7 @@ function giveUrl(url)
 	$("#formTag").prop("action",url);
 	$("#formTag").submit();
 }
+
 $(document).ready(function(){
 	
 	
@@ -66,6 +67,9 @@ $("#modifyBtn").on("click",function(){
 <div class="col-md-8 col-md-offset-2"><br><br>
 <h2>가계부 환경설정 </h2><br>
 <form action="" id='formTag' method="POST">
+<input type="hidden" name="memberIdforGrant" value='${sessionScope.login_info.memberId }'>
+
+
 <div class="form-group">
 <label for="email"> &nbsp;&nbsp;*권한자만 가계부 변경이 가능합니다 .&nbsp;&nbsp;&nbsp;&nbsp;</label><br><br>
 <br><label for="email"> &nbsp;&nbsp;그룹명&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -83,8 +87,14 @@ $("#modifyBtn").on("click",function(){
   &nbsp;&nbsp;&nbsp;<input type="text" id='grantId' name='grantId' class="form-control" placeholder='${sessionScope.group_info.grantId}' value="${sessionScope.group_info.grantId}" >
   </div>
   <br>
-    <input type="button" id="removeBtn" class="btn btn-md btn-danger pull-left" onclick="giveUrl('${initParam.rootPath}/collection/removeCollection.do');" value="삭제하기"/>
-    <input type="button" id="modifyBtn" class="btn btn-md btn-success pull-right" onclick="giveUrl('${initParam.rootPath}/collection/collectionModify.do');" value="수정하기"/>
+    
+    <input type="button" id="removeBtn" class="btn btn-md btn-danger pull-left" 
+    onclick="giveUrl('${initParam.rootPath}/collection/removeCollection.do');" value="삭제하기"/>
+    
+    <input type="button" id="modifyBtn" class="btn btn-md btn-success pull-right" 
+    onclick="giveUrl('${initParam.rootPath}/collection/collectionModify.do');" value="수정하기"/>
+    
+    
 </form>
 <form id="collectionSetting" action="" method="get"></form>
 </div>
