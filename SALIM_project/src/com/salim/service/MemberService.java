@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 
 import com.salim.dao.MemberDao;
 
@@ -16,7 +17,7 @@ public interface MemberService {
 
 	//MemberService 
 	//회원 가입 -join
-	public String joinMember(Member member)/*throws IOException*/;
+	public String joinMember(Member member,ModelMap map)/*throws IOException*/;
 	
 	//회원 탈퇴 -leave
 	public void leaveMember(String memberId);

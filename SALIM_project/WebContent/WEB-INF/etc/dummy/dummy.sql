@@ -109,7 +109,10 @@ insert into FREE_COMMENTS values(700+seq_dummy.nextval,'dd','id-3',5,1,3,'2016-0
 
 
 		
-		
+select nvl(sum(nvl(cash_expense, 0)+nvl(card_expense, 0)), 0) expenseSum
+		from expense
+		where member_id=1
+		and to_char(expense_date, 'YYYY-MM')=#{monthday}		
 		
 		
 		

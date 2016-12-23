@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 
 import com.salim.dao.BankDao;
 import com.salim.dao.BudgetDao;
@@ -46,20 +47,27 @@ public class MemberServiceImpl implements MemberService{
 	//회원가입 모듈
 	@Override
 	//@Transactional(rollbackFor={IOException.class})
-	public String joinMember(Member member)/*throws IOException*/ { 
-		System.out.println("joinMember");
-		//여기서 검증이 필요했던 것..ㄷㄷ
+	public String joinMember(Member member,ModelMap map)/*throws IOException*/ { 
+		System.out.println("아이디 중복, 이메일 중복,비번 8글자 이상");
 		boolean b1=findMemberForIdCheck(member.getMemberId()); //아이디 중복 체크
 		boolean b2=findMemberForEmailCheck(member.getEmail());//이메일 중복 체크
 		System.out.println(b1 +":"+ b2);
-		if(b1&&b2)
+		if((b1==true)&&(b2==true))
 		{
-			memberdao.insertMember(member); //Business logic 처리 - 회원 저장	
-			return "";
-		}else
-		{
-			return "회원 가입 정보를 다시 확인하세요.";
+			if(member.getPassword().length()>7&&member.getPassword().length()<16)
+			{
+				memberdao.insertMember(member); //Business logic 처리 - 회원 저장
+				return "true";
+			}else
+			{
+				map.addAttribute("joinFail","회원가입을 실패했습니다.  비밀번호 조건을 확인하세요!");
+			}
 		}
+		else
+		{
+			map.addAttribute("joinFail","이미 사용 중인 아이디 or 이메일을 입력하셨습니다.");
+		}
+		return "fail";	
 	}
 	
 	//회원 탈퇴

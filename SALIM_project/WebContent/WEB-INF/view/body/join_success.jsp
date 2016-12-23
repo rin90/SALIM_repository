@@ -106,7 +106,7 @@ footer {
 
 
 <body>
-<div style="padding-left:34%; padding-top: 6%; padding-bottom:6.8%">
+<div style="padding-left:34%; padding-top: 7%; padding-bottom:13%">
 <h1>자수성가의 표본!</h1>
 <h3>&nbsp;&nbsp;살림꾼이 되신 것을 축하합니다.</h3>
 <table style="width:500px" class="table"> 
