@@ -206,9 +206,11 @@ public class MemberController {
 			member.setName(m.getName());
 		}
 		
-		service.modifyMember(member);
+		String s=service.modifyMember(member,session);
+		/*if(s.equals("success"))
+		{
 		session.setAttribute("login_info", member);
-		
+		}*/
 		return "redirect:/myInfo_modify.do"; //이걸 왜 해? 읭 .... 회원 정보 수정 페이지로 그냥 가면 되는데..?
 	}
 	
