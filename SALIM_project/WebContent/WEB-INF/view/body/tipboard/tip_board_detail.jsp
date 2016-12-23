@@ -215,7 +215,7 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 	
 
 		<hr> <br>
-	
+		
 		<div id="a">
 		<c:forEach  items="${requestScope.tipComment }" var="comment">
 			<div id="tom" style="border-bottom: 1px solid white">
@@ -296,6 +296,7 @@ ${requestScope.tipBoard.memberId } &nbsp;&nbsp;&nbsp;
 		
 		
 		<!-- ´ñ±Û -->
+	
 		<form id="register" action="${initParam.rootPath }/tip/comment/login/insert.do" method="post">
 		
 			¡Ú&nbsp;&nbsp;<textarea id="comment0" name="commentContent" rows="2" cols="140"></textarea>
