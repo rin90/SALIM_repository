@@ -4,9 +4,9 @@
 <input type="hidden" name="collectionId" value="${collection.collectionId }">
 
 <tr>
-		<td><font color="gray" style="margin-left: 20px">${collection.collectionName }</font></td>
-		<td><font color="gray" style="margin-left: 20px">${collection.grantId}</font></td>
-		<td><font color="gray" style="margin-left: 20px">${collection.collectionIntro }</font></td>
+		<td><font color="gray" style="margin-left: 1px">${collection.collectionName }</font></td>
+		<td><font color="gray" style="margin-left: 1px">${collection.grantId}</font></td>
+		<td><font color="gray" style="margin-left: 1px">${collection.collectionIntro }</font></td>
 		<td align="right"><div class="col-md-3"></div></td>	
 		<td>
 			<!-- <input type='submit' value="이동"> -->

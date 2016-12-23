@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import com.salim.dao.MemberDao;
 
 import com.salim.vo.Member;
+import com.salim.vo.validator.MemberModifyCheck;
 
 
 @Service
@@ -42,7 +43,7 @@ public interface MemberService {
 	public Member findMemberByEmail(String email);
 
 	//회원 정보 수정
-	public void modifyMember(Member member);
+	public String modifyMember(MemberModifyCheck member);
 	
 	
 }

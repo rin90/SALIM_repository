@@ -3,6 +3,7 @@ package com.salim.service.impl;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ import com.salim.dao.NotesDao;
 import com.salim.dao.ScheduleDao;
 import com.salim.service.MemberService;
 import com.salim.vo.Member;
+import com.salim.vo.validator.MemberModifyCheck;
 
 
 @Service
@@ -163,9 +165,59 @@ public class MemberServiceImpl implements MemberService{
 		return member;
 	}
 	
-	public void modifyMember(Member member)
+	public String modifyMember(MemberModifyCheck member)
 	{
-		memberdao.updateMember(member);
+		
+		Member modifiedmember=new Member();	//최종으로 들어갈 멤버
+		Member tempMember=new Member();//임시 저장
+		tempMember=findMemberById(member.getMemberId());
+		
+		//일단, 이메일 체크부터 해야한다. 
+		//이메일이 기존의 다른 회원의 이메일과 중복이라면 아예 ㄴㄴ, 하지만 그렇지 않은 경우?
+		
+		//만약에 tempMember의 아이디랑 , 현재 작성한 이메일을 가진 회원의 아이디랑 같은 경우 
+		
+		if(findMemberForEmailCheck(member.getEmail())) //받아온 이메일 기준으로 멤버가 있는지 없는 경우!
+		{ //이메일 바꿀 수 있음!
+		//비밀번호 체크
+			if(member.getPassword().equals("")||member.getPassword()==null||member.getPassword().length()<8||member.getPassword().length()>16)
+			{
+				modifiedmember.setPassword(tempMember.getPassword());
+				modifiedmember.setPassword2(tempMember.getPassword());
+			}else
+			{
+				modifiedmember.setPassword(member.getPassword());
+				modifiedmember.setPassword2(member.getPassword2());
+			}
+		
+				//생년월일 체크
+			if(member.getBirthday()==null)
+			{
+				modifiedmember.setBirthday(tempMember.getBirthday());
+				modifiedmember.setAge(tempMember.getAge());
+			}else
+			{
+				modifiedmember.setBirthday(member.getBirthday());
+				modifiedmember.setAge(member.getAge());
+			}
+		}else{ //받아온 이메일을 기준으로 멤버가 있는 경우인데, 이때, 다른 사람이랑 같은 경우가 있고, 내 아이디랑 같은 경우가 있음!
+			
+			/*if()
+			{
+				
+			}*/
+			
+			return "이미 사용중인 이메일입니다.";
+		}
+		
+		//이름 추가.
+		modifiedmember.setName(member.getName());
+		
+		/*BeanUtils.copyProperties(member,resultMember);
+		System.out.println("resultMember"+resultMember);
+		*/
+		//memberdao.updateMember(modifiedmember);
+		return null;
 	}
 	
 	
