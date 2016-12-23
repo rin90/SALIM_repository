@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="com.salim.vo.Schedule" project="SALIM_project" 
     file="/SALIM_project/src/com/salim/vo/Schedule.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="150" y="845"/>    
+    <position height="-1" width="-1" x="170" y="688"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="com.salim.vo.ScheduleSet" project="SALIM_project" 
     file="/SALIM_project/src/com/salim/vo/ScheduleSet.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="155" y="273"/>    
+    <position height="-1" width="-1" x="149" y="226"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <interface id="3" language="java" name="com.salim.dao.ScheduleDao" project="SALIM_project" 
     file="/SALIM_project/src/com/salim/dao/ScheduleDao.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2212" y="391"/>    
+    <position height="-1" width="-1" x="1675" y="619"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <interface id="6" language="java" name="com.salim.dao.NotesDao" project="SALIM_project" 
     file="/SALIM_project/src/com/salim/dao/NotesDao.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="771" y="430"/>    
+    <position height="-1" width="-1" x="622" y="513"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </interface>  
   <class id="8" language="java" name="com.salim.dao.impl.ScheduleDaoImpl" project="SALIM_project" 
     file="/SALIM_project/src/com/salim/dao/impl/ScheduleDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1594" y="449"/>    
+    <position height="-1" width="-1" x="1327" y="608"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="com.salim.dao.impl.NotesDaoImpl" project="SALIM_project" 
     file="/SALIM_project/src/com/salim/dao/impl/NotesDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1187" y="430"/>    
+    <position height="-1" width="-1" x="1055" y="524"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -93,7 +93,7 @@
   </class>  
   <interface id="11" language="java" name="com.salim.service.ScheduleService" project="SALIM_project" 
     file="/SALIM_project/src/com/salim/service/ScheduleService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1715" y="120"/>    
+    <position height="-1" width="-1" x="1301" y="355"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -102,7 +102,7 @@
   </interface>  
   <interface id="12" language="java" name="com.salim.service.NotesService" project="SALIM_project" 
     file="/SALIM_project/src/com/salim/service/NotesService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1044" y="717"/>    
+    <position height="-1" width="-1" x="901" y="728"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -120,7 +120,7 @@
   </interface>  
   <class id="14" language="java" name="com.salim.service.impl.ScheduleServiceImpl" project="SALIM_project" 
     file="/SALIM_project/src/com/salim/service/impl/ScheduleServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2223" y="115"/>    
+    <position height="-1" width="-1" x="1673" y="347"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -129,7 +129,7 @@
   </class>  
   <class id="15" language="java" name="com.salim.service.impl.NotesServiceImpl" project="SALIM_project" 
     file="/SALIM_project/src/com/salim/service/impl/NotesServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="764" y="686"/>    
+    <position height="-1" width="-1" x="621" y="697"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -156,67 +156,83 @@
   </class>  
   <class id="18" language="java" name="com.salim.controller.CollectController" project="SALIM_project" 
     file="/SALIM_project/src/com/salim/controller/CollectController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2631" y="279"/>    
+    <position height="-1" width="-1" x="1990" y="503"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="19">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="20" name="dao"/>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="22">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="6"/>  
-  </realization>  
-  <realization id="23">    
+  <realization id="19">    
     <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="7"/>  
   </realization>  
-  <realization id="24">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <realization id="25">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="12"/>  
-  </realization>  
-  <association id="26">    
+  <association id="20">    
     <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="27" name="dao"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
+      <attribute id="21" name="dao">        
+        <position height="0" width="0" x="-537" y="228"/>      
+      </attribute>      
+      <multiplicity id="22" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-537" y="228"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="29">    
+  <realization id="23">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="24">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="11"/>  
   </realization>  
-  <realization id="30">    
+  <association id="25">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="26" name="dao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="27" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="28">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="29">    
     <end type="SOURCE" refId="16"/>    
     <end type="TARGET" refId="13"/>  
   </realization>  
-  <association id="31">    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="32" name="service"/>      
-      <multiplicity id="33" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="34">    
+  <association id="30">    
     <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="35" name="dao"/>      
-      <multiplicity id="36" minimum="0" maximum="1"/>    
+      <attribute id="31" name="dao">        
+        <position height="0" width="0" x="-149" y="83"/>      
+      </attribute>      
+      <multiplicity id="32" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-149" y="83"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="33">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <association id="34">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="35" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="36" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
