@@ -10,7 +10,7 @@
 <script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="/SALIM_project/scripts/jquery.js"></script>
 <script type="text/javascript">
-var err;
+
 $(document).ready(function(){
 	
 	$("#findIdBtn").on("click", function(){
@@ -30,10 +30,10 @@ $(document).ready(function(){
 				}
 				
 			},
-			"success":function(object){
+			"success":function(obj){
 			
-				var resultMemberId=object.id;
-				var err=object.emailError;
+				var resultMemberId=obj.id;
+				var err=obj.emailError;
 				
 				if(resultMemberId!=null)
 				{	
@@ -62,7 +62,7 @@ $(document).ready(function(){
 
 <div class="col-md-8 col-md-offset-2"><br><br>
   <h1>아이디를 잊으셨나요?</h1><br><br><br>
- <form action="${initParam.rootPath}/member/findId.do" method="post">
+ 
     <div class="form-group">
     
       <label for="email">계정 생성시 사용한 이메일 주소를 입력해주세요.&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -75,8 +75,6 @@ $(document).ready(function(){
     <br><br><br><br><br><br><br><br><br><br>
     <hr><div class="footer_left pull-left">Salim</div><div class="pull-right"><small>&copy; 2016-12.23 Salim.KOSTA</small></div>
  
-  </form>
-  
 </div>
 <%-- <form action="${initParam.rootPath}/member/findId.do" method="post"> --%>
 

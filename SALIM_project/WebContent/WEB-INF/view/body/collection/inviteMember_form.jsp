@@ -90,7 +90,7 @@ function a()
 <body>
 <div class="col-md-8 col-md-offset-2"><br><br>
 
-<h2>그룹 회원 관리</h2><br><br>
+<h2>그룹 멤버 관리</h2><br><br>
 <!-- 여기서 회원 조회를 해서 뿌려주는 부분! -->
  <table class="table table-bordered">
 <tr class="warning">
