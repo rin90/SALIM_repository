@@ -99,7 +99,7 @@
 		p:host="smtp.gmail.com"
 		p:port="587"
 		p:username="dlwocks1234@gmail.com"
-		p:password="zxc7539510"
+		p:password="zx7539510c"
 		p:javaMailProperties-ref="mailProperty"/>
 		
 	<util:properties id="mailProperty"> 
