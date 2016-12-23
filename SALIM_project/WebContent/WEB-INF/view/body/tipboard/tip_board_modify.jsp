@@ -38,10 +38,10 @@ $(document).ready(function() {
 		<img
 			src="${initParam.rootPath }/tipFileRoute/${requestScope.freeBoard.fileName }">
 		</c:if>
-		  <input id="b" type="button" class="btn btn-default btn-md  pull-right" value="파일첨부 수정">
+		  <input id="b" type="button" class="btn btn-default btn-md  pull-left" value="파일첨부 수정">
 		 <div id="t"></div><br>
 		
-		<textarea rows="10" cols="50" name="content">${requestScope.tipBoard.content }</textarea>
+		<textarea class="form-control" rows="10"  name="content">${requestScope.tipBoard.content }</textarea>
 		
 	
 		
@@ -55,12 +55,12 @@ $(document).ready(function() {
 	</form>
 	
 	<form action="${initParam.rootPath }/tip/login/seleteDetail.do" method="post">
-		 <a class="btn btn-danger btn-md  pull-left"
+		 <a class="btn btn-danger btn-md  pull-right"
 		href="${initParam.rootPath }/tip/login/delete.do?no=${requestScope.tipBoard.no}&page=${requestScope.page}">삭제</a>
 		<input type="hidden" name="search" value="${requestScope.search }">
 		<input type="hidden" name="category" value="${requestScope.category }">
 		<input type="hidden" name="no" value="${requestScope.tipBoard.no }">
 		<input type="hidden" name="page" value="${requestScope.page }">
-		<input type="submit"  class="btn btn-default btn-md  pull-right" value="뒤로">
+		<input type="submit"  class="btn btn-default btn-md  pull-left" value="뒤로">
 	</form>
 	
