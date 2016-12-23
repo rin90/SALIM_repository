@@ -14,23 +14,26 @@
 var err;
 $(document).ready(function(){
 	$("#emailBtn").on("click", function(){
+		
 		$("#sarea").empty();
 		$("#sarea2").empty();
 		$("#result").empty();
 		
 		$.ajax({
+			
 			"url":"${initParam.rootPath}/member/findPassword.do",
 			"type":"post",
 			"data":{"id":$('#id').val(),"email":$('#email').val()},
 			"dataType":"JSON",
 			"beforeSend":function(){
-				
 				if(!$("#id").val())
 				{
-					$("#sarea").html("<font color='red' size='2'>아이디를 입력하세요.<font>");
+					alert("아이디를 입력하세요!");
+					/* $("#sarea").html("<font color='red' size='2'>아이디를 입력하세요.<font>"); */
 					if(!$("#email").val())
 					{	
-						$("#sarea2").html("<font color='red' size='2'>이메일을 입력하세요.<font>");
+						alert("이메일을 입력하세요!");
+						/* $("#sarea2").html("<font color='red' size='2'>이메일을 입력하세요.<font>"); */
 						
 					}
 					return false;
@@ -39,7 +42,8 @@ $(document).ready(function(){
 				{
 					if(!$("#email").val())
 					{	
-						$("#sarea2").html("<font color='red' size='2'>이메일을 입력하세요.<font>");
+						alert("이메일을 입력하세요!");
+						/* $("#sarea2").html("<font color='red' size='2'>이메일을 입력하세요.<font>"); */
 						return false;
 					}
 					
@@ -55,7 +59,7 @@ $(document).ready(function(){
 				if(resultPassword!=null)
 				{	
 					alert("비밀번호 4자리 : "+resultPassword);
-					$("#result").html("<font color='blue' size='4'> 비밀번호는 "+resultPassword+"입니다.</font>");
+					 $("#result").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color='gray' size='3'> 비밀번호는 "+resultPassword+"입니다.</font>");
 					
 				}else /* 결과 비밀번호가 null인 경우?  */
 				{
@@ -64,21 +68,17 @@ $(document).ready(function(){
 				}
 				if(errId!=null)
 				{
-					$("#result").html("<font color='red' size='4'>"+errId+"</font>");
+					$("#result").html("&nbsp;&nbsp;&nbsp;<font color='red' size='3'>"+errId+"</font>");
 					
 				}
 				if(errEmail!=null)
 				{
-					$("#result").html("<font color='red' size='4'>"+errEmail+"</font>");
+					$("#result").html("&nbsp;&nbsp;&nbsp;<font color='red' size='3'>"+errEmail+"</font>");
 				
 				}
-	
 				
-			},
-			"error":function()
-			{
-				alert("실패");
 			}
+		
 		});
 		
 	});
@@ -98,15 +98,15 @@ $(document).ready(function(){
     <br>
     <div class="form-group">
       <label for="pwd">계정 생성시 사용한 이메일을 입력해주세요.&nbsp;&nbsp;</label>      
-      <input type="password" class="form-control" name="email" id="email" placeholder="salim@google.com">
+      <input type="text" class="form-control" name="email" id="email" placeholder="salim@google.com">
     </div>
     
-    <hr>
-    
-		<br>
-    <button type="submit" class="btn btn-lg btn-success pull-right">비밀번호 찾기</button>
-    
-    <br><br><br><br><br><br><br><br><br><br>
+    <hr><br>
+    <button type="submit" id="emailBtn" class="btn btn-lg btn-success pull-right">비밀번호 찾기</button>
+    <br><br>
+    <div id="result"></div>	
+			
+    <br><br><br><br><br><br><br><br>
     <hr><div class="footer_left pull-left">Salim</div><div class="pull-right"><small>&copy; 2016-12.23 Salim.KOSTA</small></div>
  
 
@@ -176,8 +176,9 @@ $(document).ready(function(){
 		</td>
 	</tr>
 
-</table> --%>
-<!-- </form> -->
+</table> 
+</form>--%>
+
 
 </body>
 </html>

@@ -127,9 +127,9 @@
 			$("input[name=expenseId]:checked").each(function(idx) {
 				if ($(this).val() != 0) {
 					if ($("input[name=expenseId]:checked").length - 1 == idx) {
-						checkedArr += "expenseIdList =" + $(this).val();
+						checkedArr += "expenseIdList="+$(this).val();
 					} else {
-						checkedArr += "expenseIdList =" + $(this).val() + "&";
+						checkedArr += "expenseIdList="+$(this).val()+"&";
 					}
 				}
 			});
@@ -141,7 +141,7 @@
 				var expenseIdList = {
 					"expenseIdList" : checkedArr
 				};
-				location.href = "/SALIM_project/household/login/expenseDelete.do?"+ checkedArr;
+				location.href = "/SALIM_project/household/login/expenseDelete.do?expenseDate="+$("#datepicker").val()+"&"+ checkedArr;
 			}
 		}
 	}
@@ -218,7 +218,7 @@
 						</table>
 					</div>
 				</div>
-				<div class="row">
+				
 					<div class="col-md-12 " >
 						<!-- 지출입력란 -->
 						<ul class="nav nav-tabs">
@@ -251,6 +251,7 @@
 											<td>
 												<!-- 통장/카드 선택하는거 나오게 하기 --> 
 												<select name="cardType" disabled="disabled">
+													<option value="${expense.cardType}">${expense.cardType}</option>
 													<option value="미등록">미등록</option>
 													<c:forEach items="${requestScope.cardTypeList }" var="cnb">
 														<c:choose>
@@ -327,19 +328,7 @@
 					</div>
 				</div>
 			</div>
-<%-- 			<div class="col-md-2" style="margin-top: 220px;">
-				<!-- 메모장 -->
-				<h4>&lt;메 모 란&gt;</h4> 
-				<textarea rows="20" cols="40" name="notes" id="notes">${requestScope.notes.content }</textarea>
-				<input type="hidden" name="notesNum" value="${empty requestScope.notes.no? 0:requestScope.notes.no }">
-			</div> --%>
 		</div>
 		
-<!-- 		<div class="col-md-2" align="center">
-			저장버튼
-			<input type="submit" value="저장" id="submitExpense" onclick="return checkFormat();" class="btn btn-success btn-md  right"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" value="선택삭제" id="deleteExpense" onclick="checkevent();" class="btn btn-danger btn-md  pull-right"/>
-		</div>
- -->
-	</div>
+
 </form>

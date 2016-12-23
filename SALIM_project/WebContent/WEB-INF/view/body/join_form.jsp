@@ -10,10 +10,12 @@
 <head>
 
 <meta charset="utf-8">
+<title>SALIM에 오신 것을 환영합니다.</title>
+<link href="/SALIM_project/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/SALIM_project/bootstrap/js/bootstrap.js"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 
-<title>jQuery UI Datepicker - Default functionality</title>
 
 <style type="text/css">
 .errorMessage{
@@ -23,6 +25,23 @@
 
 .smallerror{color:red;}
 .smallokay{color:blue;}
+
+
+ header {
+    background-color: #00001E;
+    text-align: center;
+    padding: 5px;
+} 
+
+footer {
+    background-color: #00001E;
+    padding-top: 30px;
+    text-align: center;
+    height: 50px;
+    clear: both;
+    padding-bottom: 50px;
+}
+
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -150,9 +169,7 @@ $(document).ready(function(){
 	            dateFormat:'yymmdd',
 	              onSelect: function(dateText , inst){
 	                 $("#birthday").text(dateText)
-	              	   // $(".incomeDateHidden").val(dateText) 
-	                // location.replace("/SALIM_project/household/login/incomeSelect.do?incomeDate="+dateText); 
-	             	
+	            
 	                $.ajax({
 	                 "url":"${initParam.rootPath}/member/birthday.do",
 	       			 "data":{"birthday":$('#birthday').val()},
@@ -209,93 +226,73 @@ $(document).ready(function(){
 
 </head>
 
-<body>
-<%-- <h2>새 계정 만들기</h2>
-<form method="post" action="${initParam.rootPath}/member/join.do" method="POST">
-	<table style="width:1000px"  >
-		<tr>
-			<td width="200">ID</td>
-			<td>
-				<input type="text" name="memberId" id="memberId" size='21' >&nbsp;&nbsp;&nbsp;
-				
-					<span id='idResult'></span>
-					<span class="errorMessage">
-						<form:errors path="member.memberId"/>
-					</span>
-			</td>
-			
-		</tr>
-		<tr>
-			<td>Password</td>
-			<td>
-				<input type="password" id="password" name="password" size='22'>
-				<span class="errorMessage">
-						<form:errors path="member.password"/>
-				</span>
-			</td>
-		</tr>
-		<tr>
-			<td>Password 재입력</td>
-			<td>
-				<input type="password" id="password2" name="password2" size='22'>&nbsp;&nbsp;&nbsp;
-				<span id='passwordResult'></span>
-				<span class="errorMessage">
-						<form:errors path="member.password2"/>
-				</span>
-			
-			</td>
-			
-		</tr>
-		<tr>
-			<td>이름</td>
-			<td>
-				<input type="text" id="name" name="name" size='21'>
-				<span class="errorMessage">
-						<form:errors path="member.name"/>
-				</span>
-			</td>
-		</tr>
-		<tr>
-			<td>생일</td>
-			<td>
-				<input type="text" id="birthday" name="birthday" size='21'>
-				<span id='birthdayResult'></span>
-				<span id='birthdayResult2'></span>
-				<span class="errorMessage">
-						<form:errors path="member.birthday"/>
-				</span>
-			</td>
-		</tr>
-		<tr>
-			<td>나이</td>
-			<td>
-				<input type="text" id="age" name="age" size='21'>
-			
-			</td>
-		</tr>
-		<tr>
-			<td>이메일</td>
-			<td>
-				<input type="text" id="email" name="email" size='21'>&nbsp;&nbsp;&nbsp;
-				<span id="emailResult"></span>
-				<span class="errorMessage">
-						<form:errors path="member.email"/>
-					</span>
-			</td>
-		</tr>
-		
-				
-	</table>
-	<br>
-	<p style="text-align:center">
-	<input type="reset" value="다시작성" id='reset'>&nbsp;&nbsp;
-	<input type="submit" value="회원가입">
-	
-	<p>
-</form> --%>
 
-<div class="col-md-10 col-md-offset-2">
-<h2>새 계정 만들기</h2>
+<header>
+	
+	<!--여기, 로그인 여부에 따라서 header가 달라진다.-->
+ 
+		  <c:choose><%--SALIM 로고 -로그인 여부에 따라 다른 처리(링크의 유무) --%>
+			<c:when test="${not empty sessionScope.login_info.memberId}">
+				<h2 align="left" style="margin-left: 50px; margin-top: 40px">
+					<a id="logo" href="${initParam.rootPath }/collection/findAllCollectionList.do"><font color="#ffffff">SALIM</font></a>
+				</h2>
+			</c:when>
+			<c:otherwise>
+				<h2 align="left" style="margin-left: 50px; margin-top: 40px">
+					<a href="${initParam.rootPath }/main.do"><font color="#ffffff">SALIM</font></a>
+				</h2>
+			</c:otherwise>
+		</c:choose>
+		
+		<!-- 로그인시 본인과 그룹 간을 이동할 수 있는 select박스 -->
+		<form method="post" action="${initParam.rootPath }/collection/moving.do">
+			<c:if test="${sessionScope.login_info != null }">
+				<select id="selectInfo" onchange="form.submit()" name="selectId">
+					<option value="${sessionScope.login_info}">개인</option>
+					<c:forEach items="${sessionScope.groupList }" var="collection">
+						<c:choose>
+							<c:when test="${sessionScope.group_info.collectionId == collection.collectionId}">
+								<option value=${collection.collectionId } selected="selected">${collection.collectionName }</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${collection.collectionId }">${collection.collectionName }</option>
+							</c:otherwise>
+						</c:choose>
+						
+					</c:forEach>
+				</select>
+			</c:if>
+		</form>
+	
+	<div align="right" style="margin-right:30px">
+			<c:choose>
+			<c:when test='${sessionScope.login_info!=null}'>
+				<a href="${initParam.rootPath}/myPage.do">마이페이지</a>&nbsp;&nbsp;
+				<a href="${initParam.rootPath}/member/logout.do">로그아웃</a>
+			
+			</c:when>
+			<c:otherwise>
+				<a href="${initParam.rootPath}/loginMember.do" class="btn btn-success" role="button">로그인</a>&nbsp;&nbsp;
+				<a href="${initParam.rootPath }/joinMember.do" class="btn btn-warning" role="button">회원가입</a>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			</c:otherwise>
+		</c:choose>
+		
+		</div>
+	
+	
+	
+</header>
+
+
+
+
+
+<body>
+
+
+<div class="col-md-9 col-md-offset-3" style="padding-left: 4%; margin-top: 2%; padding-bottom: 2.2%">
+<h2 style="padding-left: 17%; padding-bottom: 20px; padding-top: 10px">새 계정 만들기</h2>
 
 <%-- <c:if test="${not empty requestScope.joinFail}">
 	${requestScope.joinFail}
@@ -304,65 +301,66 @@ $(document).ready(function(){
   <div class="form-group">
     <h4><label class="control-label col-sm-2" >아이디 입력</label></h4>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="memberId" id="memberId" placeholder="salim">
-      <p id="idResult" class="help-block"></p>
+      <input type="text" class="form-control" name="memberId" id="memberId" placeholder="salim" style="width: 40%">
+      <p id="idResult" class="help-block" style="width: 40%"></p>
       
     </div>
   </div>
   <div class="form-group">
     <h4><label class="control-label col-sm-2" for="pwd">비밀번호 입력</label></h4>
     <div class="col-sm-10"> 
-      <input type="password" class="form-control"  id="password" name="password" placeholder="********">
-     <font color="gray">8~20자의 영문 대/소문자,숫자,특수문자 혼용가능</font>
+      <input type="password" class="form-control"  id="password" name="password" placeholder="********"  style="width: 40%">
+     <font color="gray" style="width: 40%">8~20자의 영문 대/소문자,숫자,특수문자 혼용가능</font>
      <br><br>
     </div>
 
     <h4><label class="control-label col-sm-2" for="pwd">비밀번호 확인</label></h4>
     <div class="col-sm-10"> 
-      <input type="password" class="form-control"  id="password2" name="password2" placeholder="비밀번호를 다시 입력해주세요.">
-      <p id="passwordResult" class="help-block"></p>
+      <input type="password" class="form-control"  id="password2" name="password2" placeholder="비밀번호를 다시 입력해주세요." style="width: 40%">
+      <p id="passwordResult" class="help-block" style="width: 40%"></p>
     </div>
   </div>
   
   <div class="form-group">
     <h4><label class="control-label col-sm-2" >이름</label></h4>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="name" name="name" placeholder="홍길동">
+      <input type="text" class="form-control" id="name" name="name" placeholder="홍길동" style="width: 40%">
     </div>
   </div>
   
   <div class="form-group">
     <h4><label class="control-label col-sm-2" >생일</label></h4>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="birthday" name="birthday" placeholder="clik">
+      <input type="text" class="form-control" id="birthday" name="birthday" placeholder="clik" style="width: 40%">
     </div>
   </div>
   
   <div class="form-group">
     <h4><label class="control-label col-sm-2" >나이</label></h4>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="age" name="age" placeholder="생년월일 입력 시 자동으로 입력되오니 나이를 확인해주세요.">
+      <input type="text" class="form-control" id="age" name="age" placeholder="생년월일 입력 시 자동으로 입력되오니 나이를 확인해주세요." style="width: 40%">
     </div>
   </div>
   
    <div class="form-group">
     <h4><label class="control-label col-sm-2" >이메일</label></h4>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="email" name="email" placeholder="salim@google.com">
-      <font color="gray">이메일은 그룹 초대를 받을 때 사용될 수 있습니다.</font><p id="emailResult" class="help-block"></p>
+      <input type="text" class="form-control" id="email" name="email" placeholder="salim@google.com" style="width: 40%">
+      <font color="gray" style="width: 40%">이메일은 그룹 초대를 받을 때 사용될 수 있습니다.</font><p id="emailResult" class="help-block" style="width: 40%"></p>
     </div>
   </div>
-  
- <!--  <div class="form-group"> 
+ <c:if test="${not empty requestScope.joinFail}">
+<div class="form-group"> 
     <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label><input type="checkbox"> Remember me</label>
+      <div>
+        <label class="help-block"><font color="red" >${requestScope.joinFail }</font></label>
       </div>
     </div>
-  </div> -->
-  <div class="form-group"> 
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-lg btn-success pull-right">새 계정 만들기</button>
+  </div>
+ </c:if>
+  <div class="form-group" style="padding-bottom:30px"> 
+    <div class="col-sm-offset-2 col-sm-10" >
+      <button type="submit" class="btn btn-lg btn-success pull-right" style="margin-right: 60%; ">새 계정 만들기</button>
     </div>
   </div>
 </form>
@@ -372,6 +370,22 @@ $(document).ready(function(){
 
 
 </body>
+
+
+
+
+<footer>
+
+
+<font style="color: white">
+	살림프로젝트&nbsp;&nbsp;&nbsp;&nbsp;담당자: SALIM 팀&nbsp;&nbsp;&nbsp;&nbsp;
+</font>
+
+<a href="${initParam.rootPath }/inquiry.do">문의하기</a>
+
+</footer>
+
+
 
 </html>
 

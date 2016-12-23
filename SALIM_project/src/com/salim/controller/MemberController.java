@@ -44,12 +44,16 @@ public class MemberController {
 		//여기서 validator 검증을 해야함!
 		if(error.hasErrors())
 		{
-			return "body/join_form.tiles";
+			map.addAttribute("joinFail","회원가입을 실패했습니다.  가입 조건을 확인하세요!");
+			return "/body/join_form.jsp";
 		}
 		
-		String str=service.joinMember(member); //여기까진 잘 온당..ㅎㅎ
-		map.addAttribute("joinFail",str);
-		return "body/join_success.tiles"; //잘 간다.
+		if(service.joinMember(member,map).equals("fail")) //여기까진 잘 온당..ㅎㅎ
+		{
+			return "/body/join_form.jsp";
+		}
+		
+		return "/body/join_success.jsp"; //잘 간다.
 	}
 	
 	
@@ -142,7 +146,7 @@ public class MemberController {
 	{
 		if(errors.hasErrors()) //에러가 있는 경우 전달 
 		{
-			return "body/login_form.tiles";
+			return "/body/login_form.jsp";
 		}
 		
 		Member member= service.findMemberById(login.getMemberId());
@@ -166,13 +170,13 @@ public class MemberController {
 			}else
 			{//비밀번호가 틀린 경우 - 다시 로그인 폼으로 돌아간다.
 				map.addAttribute("error", "Password가 틀렸습니다!");
-				return "body/login_form.tiles";
+				return "/body/login_form.jsp";
 			}
 			
 		}else //해당 아이디가 없는 경우
 		{
 			map.addAttribute("error","ID를 찾을 수 없습니다!");
-			return "body/login_form.tiles";
+			return "/body/login_form.jsp";
 		}
 	}
 
@@ -225,9 +229,9 @@ public class MemberController {
 	//아이디 찾기 -끝
 	@RequestMapping(value="/findId.do", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> findId(String email)
+	public HashMap<String,String> findId(String email)
 	{
-		HashMap<String,Object> hmap=new HashMap<String,Object>();
+		HashMap<String,String> hmap=new HashMap<String,String>();
 			Member member=service.findMemberByEmail(email); //member로 받아왔는데, 
 			//map.addAttribute("id", member.getMemberId()); //아이디 걸어주기!
 			if(member!=null)

@@ -8,7 +8,6 @@ public class BankForm {
 
 	public BankForm() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public BankForm(ArrayList<Bank> bankList) {

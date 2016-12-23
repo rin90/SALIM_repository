@@ -7,12 +7,16 @@
 <br>
 <div id="chart" style="width=1000px"></div>
 <hr>
-
-<table id="spend_top5_table"></table>
+<br>
+<div align="center">
+<h3 style="margin-bottom: 20px;">지출 Top5<small>카테고리별 </small></h3>
+<table id="spend_top5_table" class="table table-condensed"></table>
+</div>
 
 <%--=================================  MonthPicker 처리하는 부분 ================================= --%>
 <!-- monthpicker설정을 위한 script부분 -->
 <link href="${initParam.rootPath }/lib/monthpicker/css/jquery-ui.css" rel="stylesheet" type="text/css">
+
 <style>
 	#monthpicker {
 		width: 60px;
@@ -21,14 +25,21 @@
 		color:#000 !important;
 	}
 	.mtz-monthpicker-widgetcontainer{
-	
 		width: 115px !important;
 	}
-	
+	#spend_top5_table{
+		width: 50%;
+	}
+	#spend_top5_table td{
+		padding: 10px;
+	}
 </style>
 <script type="text/javascript" src="${initParam.rootPath }/lib/monthpicker/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${initParam.rootPath }/lib/monthpicker/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${initParam.rootPath }/lib/monthpicker/js/jquery.mtz.monthpicker.js"></script>
+
+
+
 <script>
 	var date = new Date();
 	var m = date.getMonth()+1;
@@ -117,14 +128,14 @@ $(document).ready(function(){
 function spendMoneyTop5(list){
 	//alert(list.length);
 	if(list.length == 0){
-		$('#spend_top5_table').html('<tr><td>아직 등록된 정보가 없습니다.</td></tr>');
+		$('#spend_top5_table').html('<tr align="center"><td>아직 등록된 정보가 없습니다.</td></tr>');
 		return false;
 	}
 	//alert(list.length);
 	var turn = list.length<5 ? list.length:5;
 	var row = '';
 	for(var i=0; i<turn; i++){
-		row += '<tr><th>'+(i+1)+'위</th><td>'+list[i].BIG_CONTENT+'</td><td>'+list[i].TOTAL+'</td></tr>';
+		row += '<tr align="center"><th>'+(i+1)+'위</th><td>'+list[i].BIG_CONTENT+'</td><td>'+list[i].TOTAL.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')+'원</td></tr>';
 	}
 	$('#spend_top5_table').html(row);
 }

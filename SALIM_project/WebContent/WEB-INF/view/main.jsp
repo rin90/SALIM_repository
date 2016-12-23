@@ -41,8 +41,10 @@ footer {
     text-align: center;
     height: 50px;
     clear: both;
-    padding-bottom: 10px;
+    padding-bottom: 50px;
 }
+
+
 
 .carousel-control.right {
     right: 0;
@@ -90,12 +92,12 @@ footer {
  
 		  <c:choose><%--SALIM 로고 -로그인 여부에 따라 다른 처리(링크의 유무) --%>
 			<c:when test="${not empty sessionScope.login_info.memberId}">
-				<h2 align="left" >
+				<h2 align="left" style="margin-left: 50px; margin-top: 40px">
 					<a id="logo" href="${initParam.rootPath }/collection/findAllCollectionList.do"><font color="#ffffff">SALIM</font></a>
 				</h2>
 			</c:when>
 			<c:otherwise>
-				<h2 align="left">
+				<h2 align="left" style="margin-left: 50px; margin-top: 40px">
 					<a href="${initParam.rootPath }/main.do"><font color="#ffffff">SALIM</font></a>
 				</h2>
 			</c:otherwise>
@@ -121,7 +123,7 @@ footer {
 			</c:if>
 		</form>
 	
-	<div align="right">
+	<div align="right" style="margin-right:30px;">
 			<c:choose>
 			<c:when test='${sessionScope.login_info!=null}'>
 				<a href="${initParam.rootPath}/myPage.do">마이페이지</a>&nbsp;&nbsp;
@@ -147,7 +149,7 @@ footer {
 	<!-- 사진 나오는 부분 -->
 	<body id="page-top" class="index">
 	
-       <div class="container" align="center" style="margin-top: 50px">
+       <div class="container" align="center" style="margin-top: 80px; padding-bottom: 108px">
             <div class="row"style="min-height: 553px;">
                 <div class="col-lg-12">
                     
