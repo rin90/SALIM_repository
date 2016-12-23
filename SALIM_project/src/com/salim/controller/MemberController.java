@@ -178,7 +178,34 @@ public class MemberController {
 	public String modifyMember(@ModelAttribute @Valid MemberModifyCheck member, 
 			HttpSession session)
 	{
-	
+	  //널일 경우 이 부분을 채워준다.
+		Member m=new Member();
+		m=service.findMemberById(member.getMemberId()); //입력받은 멤버의 아이디로 멤버 가져오기!
+		//만약 생일이 없을 경우!
+		if(member.getBirthday()==null)
+		{
+			member.setBirthday(m.getBirthday());
+			member.setAge(m.getAge());
+			//생일이 널일 경우!
+		}
+		
+		//password가 널일 경우!
+		if(member.getPassword()==null||member.getPassword().equals(""))
+		{
+			member.setPassword(m.getPassword());
+			member.setPassword2(m.getPassword2());
+		}
+		
+		if(member.getEmail()==null)
+		{
+			member.setEmail(m.getEmail());
+		}
+		
+		if(member.getName()==null)
+		{
+			member.setName(m.getName());
+		}
+		
 		service.modifyMember(member);
 		session.setAttribute("login_info", member);
 		
